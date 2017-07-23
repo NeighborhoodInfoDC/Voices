@@ -16,8 +16,7 @@
  Modifications:
 **************************************************************************/
 
-/*%include "L:\SAS\Inc\StdLocal.sas";*/
-%include "C:\DCData\SAS\Inc\StdLocal.sas";
+%include "L:\SAS\Inc\StdLocal.sas";
 
 ** Define libraries **;
 %DCData_lib( Voices )
@@ -25,6 +24,24 @@
 data VoicesDMVSurvey2017_07_20;
 
   set Voices.VoicesDMVSurvey2017_07_20;
+
+  retain total 1;
+
+  array a{*} q3_: q4_: q5_:;
+
+  do i = 1 to dim( a );
+    if a{i} = -1 then a{i} = .r;
+  end;
+
+  Q3_Years_months_recode = Q3_years + ( Q3_months / 12 );
+  Q4_Years_months_recode = Q4_years + ( Q5_months / 12 );
+  Q5_Years_months_recode = Q5_years + ( Q5_months / 12 );
+
+  label
+    Q3_Years_months_recode = "How long have you lived in the Washington area? (years, recode)"
+    Q4_Years_months_recode = "How long have you lived in [dov_urban]? (years, recode)"
+	Q5_Years_months_recode = "How long have you lived in your current home? (years, recode)";
+
 
    format dov_urban DOV_URBAN.;
    format Q1_Refused Q1_REFUSED.;
@@ -242,9 +259,110 @@ data VoicesDMVSurvey2017_07_20;
    format   PPT18OV PPT18OV.;
    format    PPWORK PPWORK.;
 
+  drop i;
+
 run;
 
-%File_info( data=VoicesDMVSurvey2017_07_20, printobs=0,
-  freqvars=
-    q1--q79
-)
+
+  proc format;
+    value years_lived
+	 0 = '0'
+	 0 <-< 1 = '< 1 year'
+	 1 -< 2 = '1 year'
+	 2 -< 3 = '2 years'
+	 3 -< 4 = '3 years'
+	 4 -< 5 = '4 years'
+	 5 -< 6 = '5 years'
+	 6 -< 7 = '6 years'
+	 7 -< 8 = '7 years'
+	 8 -< 9 = '8 years'
+	 9 -< 10 = '9 years'
+	 10 -< 15 = '10 - 14 years'
+	 15 -< 20 = '15 - 19 years'
+	 20 - high = '20+ years';
+value duration 
+  0 -< 5 = 'Under 5 mins'
+  5 -< 10 = '5 - 10 mins'
+  10 -< 15 = '10 - 15 mins'
+  15 -< 20 = '15 - 20 mins'
+  20 -< 25 = '20 - 25 mins'
+  25 -< 30 = '25 - 30 mins'
+  30 -< 35 = '30 - 35 mins'
+  35 -< 40 = '35 - 40 mins'
+  40 -< 45 = '40 - 45 mins'
+  45 -< 50 = '45 - 50 mins'
+  50 -< 55 = '50 - 55 mins'
+  55 -< 60 = '55 - 60 mins'
+  60 - high = '60 mins or more';
+
+run;
+
+
+** Output tabulations **;
+
+ods listing close;
+ods rtf body="&_dcdata_default_path\Voices\Prog\Voices_soft_test.rtf" style=minimal;
+
+title2 'VoicesDMV Survey Soft Launch, 7/20/2017';
+title3 'NOT FOR CITATION OR RELEASE';
+
+proc freq data=VoicesDMVSurvey2017_07_20 (drop=ppage PPMSACAT ppreg4 ppreg9 ppt:);
+  tables 
+    duration 
+    dov_urban 
+	Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode
+    q6--q79 
+	dov_ideo dov_rel1 deviceType 
+	pp: student 
+    qzip 
+   / missing;
+  format Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode years_lived.
+    duration duration.;
+run;
+
+%File_info( data=VoicesDMVSurvey2017_07_20, printobs=0 )
+
+run;
+
+ods rtf close;
+ods listing;
+
+** Questions 1 and 2 by area **;
+
+proc sort data=VoicesDMVSurvey2017_07_20;
+  by dov_urban q1;
+run;
+
+ods tagsets.excelxp file="&_dcdata_default_path\Voices\Prog\Voices_soft_test_q1.xls"  options(embedded_titles='yes');
+ods listing close;
+
+title2 'VoicesDMV Survey Soft Launch, 7/20/2017';
+title3 'NOT FOR CITATION OR RELEASE';
+
+proc print data=VoicesDMVSurvey2017_07_20 noobs label;
+  by dov_urban;
+  var q1 caseid;
+run;
+
+ods tagsets.excelxp close;
+ods listing;
+
+proc sort data=VoicesDMVSurvey2017_07_20;
+  by dov_urban q2;
+run;
+
+ods tagsets.excelxp file="&_dcdata_default_path\Voices\Prog\Voices_soft_test_q2.xls" options(embedded_titles='yes');
+ods listing close;
+
+title2 'VoicesDMV Survey Soft Launch, 7/20/2017';
+title3 'NOT FOR CITATION OR RELEASE';
+
+proc print data=VoicesDMVSurvey2017_07_20 noobs label;
+  by dov_urban;
+  var q2 caseid;
+run;
+
+ods tagsets.excelxp close;
+ods listing;
+
+title2;
