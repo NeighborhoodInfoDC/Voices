@@ -1,8 +1,24 @@
-/* ENCODING WINDOWS-1252 */
+/**************************************************************************
+ Program:  Formats_VoicesDMVSurvey2017_07_20.sas
+ Library:  Voices
+ Project:  NeighborhoodInfo DC
+ Author:   P. Tatian
+ Created:  07/20/17
+ Version:  SAS 9.2
+ Environment:  Local Windows session (desktop)
+ 
+ Description:  Create formats for VoicesDMV survey soft launch test file.
+ 
+ Format code provided by GfK.
 
+ Modifications:
+**************************************************************************/
 
+%include "L:\SAS\Inc\StdLocal.sas";
 
-**libname library 'K:\ClientServices\Urban Institute\310.209.01444.1 VoicesDMV Survey 2017\Data\' ;
+** Define libraries **;
+%DCData_lib( Voices )
+
 
 proc format library = Voices ;
    value DOV_URBAN
@@ -1238,6 +1254,12 @@ proc format library = Voices ;
       5 = 'Not working - retired'  
       6 = 'Not working - disabled'  
       7 = 'Not working - other' ;
+run;
+
+proc catalog catalog=Voices.Formats;
+  contents;
+quit;
+
 
 /****
 proc datasets library = Voices ;
