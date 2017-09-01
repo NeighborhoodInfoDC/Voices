@@ -11,7 +11,9 @@ log using "L:\Libraries\Voices\Prog\survey data table generation.log", replace
 
 global data "L:\Libraries\Voices\Raw\UrbanInstitute_VoicesDMVSurvey2017_Client_08292017\"
 global tables "L:\Libraries\Voices\Tables\"
-global varlist "Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK"
+global vartab "Q4_cat Q5_cat Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q13_count Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q14_count Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 phy_health Q38 ment_health Q39A satisf Q39B worth Q39C happy Q39D anxious Q40 Q41A ladder_now Q41B ladder_5yr Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK"
+global meantab "Q4_total Q5_total Q6 Q7 Q8 Q9 Q10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q24 Q25 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q41A Q41B Q43 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q56 Q58 Q60 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q78 Q79"
+
 ** Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q14_Text Q15_Text1 Q15_Text2 Q15_Text3 Q15_Text1_Refused Q15_Text2_Refused Q15_Text3_Refused Q16_Text1 Q16_Text2 Q16_Text3 Q16_Text1_Refused Q16_Text2_Refused Q16_Text3_Refused Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q20_Text Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6 Q23_Refused Q23_Text Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10 Q28_Refused Q28_Text Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n Q44_Text Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i Q45_Text Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j Q61_Text Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q63_Text Q77 Q78 Q79 Q79_Text student DeviceType QZIP DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPMSACAT PPREG4 ppreg9 PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK
 ** no text entry: Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPMSACAT PPREG4 ppreg9 PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK
 
@@ -38,6 +40,10 @@ gen age = "18-34" if PPAGE >=18 & PPAGE <=34
 replace age = "35-64" if PPAGE >=35 & PPAGE <=64
 replace age = "65+" if PPAGE >=65
 
+**gender
+gen gender = "Male" if PPGENDER==1
+replace gender = "Female" if PPGENDER==2
+
 **Homeowner
 gen homeown = "Homeowner" if PPRENT ==1
 replace homeown = "Not homeowner" if PPRENT ==2 | PPRENT ==3
@@ -57,7 +63,7 @@ replace geo2 = "Fairfax County" if dov_urban ==4 | dov_urban ==7 |dov_urban ==8
 replace geo2 = "Northern VA" if dov_urban ==5 | dov_urban ==6
 
 **change refused to missing
-foreach x in Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPMSACAT PPREG4 ppreg9 PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK{
+foreach x in Q3_Years Q3_Months Q4_Years Q4_Months Q5_Years Q5_Months Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPMSACAT PPREG4 ppreg9 PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK{
 replace `x' = . if `x' ==-1
 }
 
@@ -74,6 +80,42 @@ forvalues x = 1/10{
 replace Q14_count = Q14_count +1 if Q14_`x'==1
 }
 label var Q14_count "Count of civic org memberships (0-10)"
+
+**length of time 
+gen Q3_total = Q3_Years + (Q3_Months/12)
+label var Q3_total "How long (years) have you lived in the Washington area?"
+
+gen Q4_total = Q4_Years + (Q4_Months/12)
+label var Q4_total "How long (years) have you lived in [county/place]?"
+
+gen Q5_total = Q5_Years + (Q5_Months/12)
+label var Q5_total "How long (years) have you lived in your current home?"
+
+**Round decimal to avoid tabout error
+replace Q3_total=round(Q3_total, .01)
+replace Q4_total=round(Q4_total, .01)
+replace Q5_total=round(Q5_total, .01)
+
+gen Q3_cat = "0-5" if Q3_total>=0 & Q3_total<=5
+replace Q3_cat = "5-10" if Q3_total>5 & Q3_total<=10
+replace Q3_cat = "10-20" if Q3_total>10 & Q3_total<=20
+replace Q3_cat = "20-40" if Q3_total>20 & Q3_total<=40
+replace Q3_cat = "40+" if Q3_total>40 & Q3_total!=.
+label var Q3_cat "Category: How long (years) have you lived in the Washington area?"
+
+gen Q4_cat = "0-5" if Q4_total>=0 & Q4_total<=5
+replace Q4_cat = "5-10" if Q4_total>5 & Q4_total<=10
+replace Q4_cat = "10-20" if Q4_total>10 & Q4_total<=20
+replace Q4_cat = "20-40" if Q4_total>20 & Q4_total<=40
+replace Q4_cat = "40+" if Q4_total>40 & Q4_total!=.
+label var Q4_cat "Category: How long (years) have you lived in [county/place]?"
+
+gen Q5_cat = "0-1" if Q5_total>=0 & Q5_total<=1
+replace Q5_cat = "1-2" if Q5_total>1 & Q5_total<=2
+replace Q5_cat = "2-5" if Q5_total>2 & Q5_total<=5
+replace Q5_cat = "5-10" if Q5_total>5 & Q5_total<=10
+replace Q5_cat = "10+" if Q5_total>10 & Q5_total!=.
+label var Q5_cat "Category: How long (years) have you lived in your current home?"
 
 **Recode to match CDC BRFSS breaks 0, 1-13 days, 14-30 days
 gen phy_health = "Zero days" if Q37==0
@@ -121,107 +163,121 @@ replace ladder_5yr = "Thriving  (8-10)" if Q41B>=8 & Q41B<=10
 label var ladder_5yr "On which step do you think you will stand about 5 years from now?"
 
 
-svyset [pw=weight]
-
 save "${data}UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", replace
 set more off
+svyset [pw=weight]
 
 **Create tables
 **All
-tabout Q6 using "${tables}tables all.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat using "${tables}tables all.xls", replace  c(col  se) svy percent npos(row) f(3p)
 
-foreach x in "${varlist}" {
+foreach x in Q4_cat Q5_cat Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q13_count Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q14_count Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 phy_health Q38 ment_health Q39A satisf Q39B worth Q39C happy Q39D anxious Q40 Q41A ladder_now Q41B ladder_5yr Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK{
 tabout `x' using "${tables}tables all.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
-**County totals
-tabout Q6 geo using "${tables}tables geographies.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${varlist}" {
+/*tabout Q3_total using "${tables}tables all mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in /*Q4_total Q5_total*/ Q6 Q7 Q8 Q9 Q10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q24 Q25 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q41A Q41B Q43 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q56 Q58 Q60 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q78 Q79{
+tabout `x' using "${tables}tables all mean.xls", append  c(mean  Q3_total) svy sum npos(row) f(5)
+}
+*/
+**County totals
+tabout Q3_cat geo using "${tables}tables geographies.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartab}" {
 tabout `x' geo using "${tables}tables geographies.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
-**Gender
-tabout Q6 PPGENDER [aw=weight] using "${tables}tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+/*tabout Q3_total geo using "${tables}tables geographies mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
 
-foreach x in "${varlist}" {
-tabout `x' PPGENDER [aw=weight] using "${tables}tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${varmean}" {
+tabout `x' geo using "${tables}tables geographies mean.xls", append  c(mean  Q3_total) svy sum npos(row) f(5)
+}
+*/
+
+**Gender
+tabout Q3_cat gender using "${tables}tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartab}" {
+tabout `x' gender using "${tables}tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
 **Race
-tabout Q6 race [aw=weight] using "${tables}tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat race using "${tables}tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${varlist}" {
-tabout `x' race [aw=weight] using "${tables}tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' race using "${tables}tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
 **Education
-tabout Q6 educ [aw=weight] using "${tables}tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat educ using "${tables}tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${varlist}" {
-tabout `x' educ [aw=weight] using "${tables}tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' educ using "${tables}tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 **Income
-tabout Q6 income [aw=weight] using "${tables}tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat income using "${tables}tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${varlist}" {
-tabout `x' income [aw=weight] using "${tables}tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' income using "${tables}tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 **Age
-tabout Q6 age [aw=weight] using "${tables}tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat age using "${tables}tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${varlist}" {
-tabout `x' age [aw=weight] using "${tables}tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' age using "${tables}tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 **Homeowner
-tabout Q6 homeown [aw=weight] using "${tables}tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat homeown using "${tables}tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${varlist}" {
-tabout `x' homeown [aw=weight] using "${tables}tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' homeown using "${tables}tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
 
 **tab at the individual geography
 foreach y in /*"Washington DC"*/ "Prince George's County" "Montgomery County" "Fairfax County" "Northern VA"{
 use "${data}UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", clear
+svyset [pw=weight]
 keep if geo=="`y'"
 
 **Gender
-tabout Q6 PPGENDER [aw=weight] using "${tables}`y' tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat gender using "${tables}`y' tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK  {
-tabout `x' PPGENDER [aw=weight] using "${tables}`y' tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' gender using "${tables}`y' tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
 **Race
-tabout Q6 race [aw=weight] using "${tables}`y'\tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat race using "${tables}`y' tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK  {
-tabout `x' race [aw=weight] using "${tables}`y'\tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' race using "${tables}`y' tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
 **Education
-tabout Q6 educ [aw=weight] using "${tables}`y'\tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat educ using "${tables}`y' tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK  {
-tabout `x' educ [aw=weight] using "${tables}`y'\tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' educ using "${tables}`y' tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 **Income
-tabout Q6 income [aw=weight] using "${tables}`y'\tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat income using "${tables}`y' tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK  {
-tabout `x' income [aw=weight] using "${tables}`y'\tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' income using "${tables}`y'\tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 **Age
-tabout Q6 age [aw=weight] using "${tables}`y'\tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat age using "${tables}`y' tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK  {
-tabout `x' age [aw=weight] using "${tables}`y'\tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' age using "${tables}`y' tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 **Homeowner
-tabout Q6 homeown [aw=weight] using "${tables}`y'\tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat homeown using "${tables}`y' tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK  {
-tabout `x' homeown [aw=weight] using "${tables}`y'\tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartab}" {
+tabout `x' homeown using "${tables}`y' tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
 }
