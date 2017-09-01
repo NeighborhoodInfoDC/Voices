@@ -12,7 +12,12 @@ log using "L:\Libraries\Voices\Prog\survey data table generation.log", replace
 global data "L:\Libraries\Voices\Raw\UrbanInstitute_VoicesDMVSurvey2017_Client_08292017\"
 global tables "L:\Libraries\Voices\Tables\"
 global vartab "Q4_cat Q5_cat Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q13_count Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q14_count Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 phy_health Q38 ment_health Q39A satisf Q39B worth Q39C happy Q39D anxious Q40 Q41A ladder_now Q41B ladder_5yr Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK"
-global meantab "Q4_total Q5_total Q6 Q7 Q8 Q9 Q10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q24 Q25 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q41A Q41B Q43 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q56 Q58 Q60 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q78 Q79"
+global meantab "Q4_Years Q5_Years Q6 Q7 Q8 Q9 Q10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q24 Q25 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q41A Q41B Q43 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q56 Q58 Q60 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q78 Q79"
+global vartabDC "Q4_cat Q5_cat Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q13_count Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q14_count Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 phy_health Q38 ment_health Q39A satisf Q39B worth Q39C happy Q39D anxious Q40 Q41A ladder_now Q41B ladder_5yr Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK"
+global vartabGEO "Q4_cat Q5_cat Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q13_count Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q14_count Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 phy_health Q38 ment_health Q39A satisf Q39B worth Q39C happy Q39D anxious Q40 Q41A ladder_now Q41B ladder_5yr Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPRENT PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK"
+global meantabDC "Q4_Years Q5_Years Q6 Q7 Q8 Q9 Q10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q24 Q25 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q41A Q41B Q43 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q56 Q58 Q60 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q78 Q79"
+
+
 
 ** Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q14_Text Q15_Text1 Q15_Text2 Q15_Text3 Q15_Text1_Refused Q15_Text2_Refused Q15_Text3_Refused Q16_Text1 Q16_Text2 Q16_Text3 Q16_Text1_Refused Q16_Text2_Refused Q16_Text3_Refused Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q20_Text Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6 Q23_Refused Q23_Text Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10 Q28_Refused Q28_Text Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n Q44_Text Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i Q45_Text Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j Q61_Text Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q63_Text Q77 Q78 Q79 Q79_Text student DeviceType QZIP DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPMSACAT PPREG4 ppreg9 PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK
 ** no text entry: Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q23_1 Q23_2 Q23_3 Q23_4 Q23_5 Q23_6   Q24 Q25 Q26 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10   Q29 Q30_a Q30_b Q31 Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q40 Q41A Q41B Q42 Q43 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n  Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i  Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q55 Q56 Q57 Q58 Q59 Q60 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j  Q62 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h  Q77 Q78 Q79 student DeviceType DOV_REL1 DOV_IDEO ppracem PPAGE ppagecat ppagect4 PPEDUC PPEDUCAT PPETHM PPGENDER PPHHHEAD PPHHSIZE PPHOUSE PPINCIMP PPMARIT PPMSACAT PPREG4 ppreg9 PPRENT PPSTATEN PPT01 PPT25 PPT612 PPT1317 PPT18OV PPWORK
@@ -91,7 +96,7 @@ label var Q4_total "How long (years) have you lived in [county/place]?"
 gen Q5_total = Q5_Years + (Q5_Months/12)
 label var Q5_total "How long (years) have you lived in your current home?"
 
-**Round decimal to avoid tabout error
+**Round decimal to avoid tabout error -- NOTE: still having issues with this variable displaying in tabout out. used the "QX_Years" for mean as placeholder.
 replace Q3_total=round(Q3_total, .01)
 replace Q4_total=round(Q4_total, .01)
 replace Q5_total=round(Q5_total, .01)
@@ -175,12 +180,12 @@ foreach x in Q4_cat Q5_cat Q6 Q7 Q8 Q9 Q10 Q11 Q12 Q13_1 Q13_2 Q13_3 Q13_4 Q13_5
 tabout `x' using "${tables}tables all.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
-/*tabout Q3_total using "${tables}tables all mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+tabout Q3_Years using "${tables}tables all mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
 
-foreach x in /*Q4_total Q5_total*/ Q6 Q7 Q8 Q9 Q10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q24 Q25 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q41A Q41B Q43 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q56 Q58 Q60 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q78 Q79{
-tabout `x' using "${tables}tables all mean.xls", append  c(mean  Q3_total) svy sum npos(row) f(5)
+foreach x in Q4_Years Q4_Years Q6 Q7 Q8 Q9 Q10 Q17 Q18 Q19 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q22 Q24 Q25 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q37 Q38 Q39A Q39B Q39C Q39D Q41A Q41B Q43 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q47_a Q47_b Q47_c Q48 Q49 Q50 Q51 Q52 Q53 Q54 Q56 Q58 Q60 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q78 Q79{
+tabout `x' using "${tables}tables all mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
 }
-*/
+
 **County totals
 tabout Q3_cat geo using "${tables}tables geographies.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
@@ -188,18 +193,23 @@ foreach x in "${vartab}" {
 tabout `x' geo using "${tables}tables geographies.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
-/*tabout Q3_total geo using "${tables}tables geographies mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+tabout Q3_Years geo using "${tables}tables geographies mean.xls", replace  c(mean  Q3_total se) svy sum npos(row) f(5)
 
-foreach x in "${varmean}" {
-tabout `x' geo using "${tables}tables geographies mean.xls", append  c(mean  Q3_total) svy sum npos(row) f(5)
+foreach x in "${meantab}" {
+tabout `x' geo using "${tables}tables geographies mean.xls", append  c(mean `x') svy sum npos(row) f(5)
 }
-*/
 
 **Gender
 tabout Q3_cat gender using "${tables}tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
 foreach x in "${vartab}" {
 tabout `x' gender using "${tables}tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years gender using "${tables}tables gender mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' gender using "${tables}tables gender mean.xls", append  c(mean `x') svy sum npos(row) f(5)
 }
 
 **Race
@@ -209,24 +219,51 @@ foreach x in "${vartab}" {
 tabout `x' race using "${tables}tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
+tabout Q3_Years race using "${tables}tables race mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' race using "${tables}tables race mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
 **Education
 tabout Q3_cat educ using "${tables}tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
 foreach x in "${vartab}" {
 tabout `x' educ using "${tables}tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
+
+tabout Q3_Years educ using "${tables}tables education mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' educ using "${tables}tables education mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
 **Income
 tabout Q3_cat income using "${tables}tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
 foreach x in "${vartab}" {
 tabout `x' income using "${tables}tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
+
+tabout Q3_Years income using "${tables}tables income mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' income using "${tables}tables income mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
 **Age
 tabout Q3_cat age using "${tables}tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
 foreach x in "${vartab}" {
 tabout `x' age using "${tables}tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
+
+tabout Q3_Years age using "${tables}tables age mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' age using "${tables}tables age mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
 **Homeowner
 tabout Q3_cat homeown using "${tables}tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
@@ -234,52 +271,422 @@ foreach x in "${vartab}" {
 tabout `x' homeown using "${tables}tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
+tabout Q3_Years homeown using "${tables}tables homeowner mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' homeown using "${tables}tables homeowner mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
 
 **tab at the individual geography
-foreach y in /*"Washington DC"*/ "Prince George's County" "Montgomery County" "Fairfax County" "Northern VA"{
+
+**Washington DC
+**foreach y in /*"Washington DC"*/ "Prince George's County" "Montgomery County" "Fairfax County" "Northern VA"{
 use "${data}UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", clear
 svyset [pw=weight]
-keep if geo=="`y'"
+keep if geo=="Washington DC"
 
 **Gender
-tabout Q3_cat gender using "${tables}`y' tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat gender using "${tables}\Washington DC\tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${vartab}" {
-tabout `x' gender using "${tables}`y' tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartabDC}" {
+tabout `x' gender using "${tables}\Washington DC\tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years gender using "${tables}\Washington DC\tables gender mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantabDC}" {
+tabout `x' gender using "${tables}\Washington DC\tables gender mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
 }
 
 **Race
-tabout Q3_cat race using "${tables}`y' tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat race using "${tables}\Washington DC\tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${vartab}" {
-tabout `x' race using "${tables}`y' tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartabDC}" {
+tabout `x' race using "${tables}\Washington DC\tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years race using "${tables}\Washington DC\tables race mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantabDC}" {
+tabout `x' race using "${tables}\Washington DC\tables race mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
 }
 
 **Education
-tabout Q3_cat educ using "${tables}`y' tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat educ using "${tables}\Washington DC\tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${vartab}" {
-tabout `x' educ using "${tables}`y' tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartabDC}" {
+tabout `x' educ using "${tables}\Washington DC\tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
+
+tabout Q3_Years educ using "${tables}\Washington DC\tables education mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantabDC}" {
+tabout `x' educ using "${tables}\Washington DC\tables education mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
 **Income
-tabout Q3_cat income using "${tables}`y' tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat income using "${tables}\Washington DC\tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${vartab}" {
-tabout `x' income using "${tables}`y'\tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartabDC}" {
+tabout `x' income using "${tables}\Washington DC\tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
+
+tabout Q3_Years income using "${tables}\Washington DC\tables income mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantabDC}" {
+tabout `x' income using "${tables}\Washington DC\tables income mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
 **Age
-tabout Q3_cat age using "${tables}`y' tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat age using "${tables}\Washington DC\tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${vartab}" {
-tabout `x' age using "${tables}`y' tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartabDC}" {
+tabout `x' age using "${tables}\Washington DC\tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
+
+tabout Q3_Years age using "${tables}\Washington DC\tables age mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantabDC}" {
+tabout `x' age using "${tables}\Washington DC\tables age mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
 **Homeowner
-tabout Q3_cat homeown using "${tables}`y' tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+tabout Q3_cat homeown using "${tables}\Washington DC\tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
 
-foreach x in "${vartab}" {
-tabout `x' homeown using "${tables}`y' tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+foreach x in "${vartabDC}" {
+tabout `x' homeown using "${tables}\Washington DC\tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
 }
 
+tabout Q3_Years homeown using "${tables}\Washington DC\tables homeowner mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantabDC}" {
+tabout `x' homeown using "${tables}\Washington DC\tables gender homeowner mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+
+**Prince George's County
+**foreach y in /*"Washington DC"*/ "Prince George's County" "Montgomery County" "Fairfax County" "Northern VA"{
+use "${data}UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", clear
+svyset [pw=weight]
+keep if geo=="Prince George's County"
+
+**Gender
+tabout Q3_cat gender using "${tables}\Prince George's County\tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' gender using "${tables}\Prince George's County\tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years gender using "${tables}\Prince George's County\tables gender mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' gender using "${tables}\Prince George's County\tables gender mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Race
+tabout Q3_cat race using "${tables}\Prince George's County\tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' race using "${tables}\Prince George's County\tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years race using "${tables}\Prince George's County\tables race mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' race using "${tables}\Prince George's County\tables race mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+
+**Education
+tabout Q3_cat educ using "${tables}\Prince George's County\tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' educ using "${tables}\Prince George's County\tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years educ using "${tables}\Prince George's County\tables education mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' educ using "${tables}\Prince George's County\tables education mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Income
+tabout Q3_cat income using "${tables}\Prince George's County\tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' income using "${tables}\Prince George's County\tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years income using "${tables}\Prince George's County\tables income mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' income using "${tables}\Prince George's County\tables gender income.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Age
+tabout Q3_cat age using "${tables}\Prince George's County\tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' age using "${tables}\Prince George's County\tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years age using "${tables}\Prince George's County\tables age mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' age using "${tables}\Prince George's County\tables age mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Homeowner
+tabout Q3_cat homeown using "${tables}\Prince George's County\tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' homeown using "${tables}\Prince George's County\tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years homeown using "${tables}\Prince George's County\tables homeowner mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' homeown using "${tables}\Prince George's County\tables homeowner mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+
+**Montgomery County
+**foreach y in /*"Washington DC"*/ "Prince George's County" "Montgomery County" "Fairfax County" "Northern VA"{
+use "${data}UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", clear
+svyset [pw=weight]
+keep if geo=="Montgomery County"
+
+**Gender
+tabout Q3_cat gender using "${tables}\Montgomery County\tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' gender using "${tables}\Montgomery County\tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years gender using "${tables}\Montgomery County\tables gender mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' gender using "${tables}\Montgomery County\tables gender mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Race
+tabout Q3_cat race using "${tables}\Montgomery County\tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' race using "${tables}\Montgomery County\tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+
+tabout Q3_Years race using "${tables}\Montgomery County\tables race mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' race using "${tables}\Montgomery County\tables race mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Education
+tabout Q3_cat educ using "${tables}\Montgomery County\tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' educ using "${tables}\Montgomery County\tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years educ using "${tables}\Montgomery County\tables education mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' educ using "${tables}\Montgomery County\tables education mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Income
+tabout Q3_cat income using "${tables}\Montgomery County\tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' income using "${tables}\Montgomery County\tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years income using "${tables}\Montgomery County\tables income mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' income using "${tables}\Montgomery County\tables income mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Age
+tabout Q3_cat age using "${tables}\Montgomery County\tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' age using "${tables}\Montgomery County\tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years age using "${tables}\Montgomery County\tables age mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' age using "${tables}\Montgomery County\tables age mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Homeowner
+tabout Q3_cat homeown using "${tables}\Montgomery County\tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' homeown using "${tables}\Montgomery County\tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years homeown using "${tables}\Montgomery County\tables homeowner mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' homeown using "${tables}\Montgomery County\tables homeowner mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+
+
+**Fairfax County
+**foreach y in /*"Washington DC"*/ "Prince George's County" "Montgomery County" "Fairfax County" "Northern VA"{
+use "${data}UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", clear
+svyset [pw=weight]
+keep if geo=="Fairfax County"
+
+**Gender
+tabout Q3_cat gender using "${tables}\Fairfax County\tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' gender using "${tables}\Fairfax County\tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years gender using "${tables}\Fairfax County\tables gender mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' gender using "${tables}\Fairfax County\tables gender mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Race
+tabout Q3_cat race using "${tables}\Fairfax County\tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' race using "${tables}\Fairfax County\tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years race using "${tables}\Fairfax County\tables race mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' race using "${tables}\Fairfax County\tables race mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+
+**Education
+tabout Q3_cat educ using "${tables}\Fairfax County\tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' educ using "${tables}\Fairfax County\tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years educ using "${tables}\Fairfax County\tables education mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' educ using "${tables}\Fairfax County\tables education mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Income
+tabout Q3_cat income using "${tables}\Fairfax County\tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' income using "${tables}\Fairfax County\tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years income using "${tables}\Fairfax County\tables income mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' income using "${tables}\Fairfax County\tables income mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Age
+tabout Q3_cat age using "${tables}\Fairfax County\tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' age using "${tables}\Fairfax County\tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years age using "${tables}\Fairfax County\tables age mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' age using "${tables}\Fairfax County\tables age mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Homeowner
+tabout Q3_cat homeown using "${tables}\Fairfax County\tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' homeown using "${tables}\Fairfax County\tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years homeown using "${tables}\Fairfax County\tables homeowner mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' homeown using "${tables}\Fairfax County\tables homeowner mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+
+**Northern VA
+use "${data}UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", clear
+svyset [pw=weight]
+keep if geo=="Northern VA"
+
+**Gender
+tabout Q3_cat gender using "${tables}\Northern VA\tables gender.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' gender using "${tables}\Northern VA\tables gender.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years gender using "${tables}\Northern VA\tables gender mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' gender using "${tables}\Northern VA\tables race gender.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Race
+tabout Q3_cat race using "${tables}\Northern VA\tables race.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' race using "${tables}\Northern VA\tables race.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years race using "${tables}\Northern VA\tables race mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' race using "${tables}\Northern VA\tables race mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Education
+tabout Q3_cat educ using "${tables}\Northern VA\tables education.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' educ using "${tables}\Northern VA\tables education.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years educ using "${tables}\Northern VA\tables education mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' educ using "${tables}\Northern VA\tables education mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Income
+tabout Q3_cat income using "${tables}\Northern VA\tables income.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' income using "${tables}\Northern VA\tables income.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years income using "${tables}\Northern VA\tables income mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' income using "${tables}\Northern VA\tables income mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Age
+tabout Q3_cat age using "${tables}\Northern VA\tables age.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' age using "${tables}\Northern VA\tables age.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years age using "${tables}\Northern VA\tables age mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' age using "${tables}\Northern VA\tables age mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
+}
+
+**Homeowner
+tabout Q3_cat homeown using "${tables}\Northern VA\tables homeowner.xls", replace  c(col  se) svy percent pop npos(row) f(3p)
+
+foreach x in "${vartabGEO}" {
+tabout `x' homeown using "${tables}\Northern VA\tables homeowner.xls", append  c(col  se) svy percent pop npos(row) f(3p)
+}
+tabout Q3_Years homeown using "${tables}\Northern VA\tables homeowner mean.xls", replace  c(mean  Q3_total) svy sum npos(row) f(5)
+
+foreach x in "${meantab}" {
+tabout `x' homeown using "${tables}\Northern VA\tables homeowner mean.xls", append  c(mean  `x') svy sum npos(row) f(5)
 }
 
 log close 
