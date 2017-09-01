@@ -1,13 +1,27 @@
-/* *****************************************************************************
-* 
-* PROGRAM WRITTEN AND EXECUTED BY CARL HEDMAN, 8/2017
-
-* *****************************************************************************/
 
 clear
 set more off
 
-log using "L:\Libraries\Voices\Prog\survey data table generation.log", replace 
+*log using "L:\Libraries\Voices\Prog\survey data table generation.log", replace 
+log using "D:\DCDATA\Libraries\Voices\Prog\survey data table generation.log", replace 
+
+/* *****************************************************************************
+* 
+* Program: Survey data table generation.do
+* Library: Voices 
+* Project: VoicesDMV 2017
+* Author: CARL HEDMAN
+* Created: 9/1/2017
+* Version: Stata/MP 15
+* Environment: Windows:
+* Description: 
+*
+* Modifications: 
+
+* *****************************************************************************/
+
+di c(current_date)
+di c(current_time)
 
 global data "L:\Libraries\Voices\Raw\UrbanInstitute_VoicesDMVSurvey2017_Client_08292017\"
 global tables "L:\Libraries\Voices\Tables\"
