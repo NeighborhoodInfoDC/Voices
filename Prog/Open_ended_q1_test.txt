@@ -1,0 +1,335 @@
+Python 3.6.0 (v3.6.0:41df79263a11, Dec 23 2016, 08:06:12) [MSC v.1900 64 bit (AMD64)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> 
+========== RESTART: C:\DCData\Libraries\Voices\Prog\Temp\CSVread.py ==========
+
+Warning (from warnings module):
+  File "C:\Users\Peter\AppData\Local\Programs\Python\Python36\lib\site-packages\fuzzywuzzy\fuzz.py", line 35
+    warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+------------------------------
+SE DC
+     7 SE DC
+------------------------------
+New York
+     2 New York
+------------------------------
+I am from Washington, DC. I was born here, raised here, graduated from DC Public Schools, went away for college, and came back immediately upon graduation. I've been here ever since.
+     2 Washington, DC
+     7 college
+     4 graduation
+     3 DC Public Schools
+------------------------------
+I live in Arlington from until I was 13, then lived in Woodbridge until I was 24. Currently live in SW Waterfront since mid-2012.
+     2 Arlington
+     2 Woodbridge
+     2 SW Waterfront
+------------------------------
+DC
+     2 DC
+------------------------------
+Originally from the smallest one-stoplight town in Pennsylvania
+     2 town
+     2 Pennsylvania
+------------------------------
+I live near Howard university
+     2 Howard university
+------------------------------
+I am from XXXXXXXXXX NE Washington DC
+     2 St NE Washington DC
+------------------------------
+Maryland
+     2 Maryland
+------------------------------
+Michigan
+     2 Michigan
+------------------------------
+Illinois
+     2 Illinois
+------------------------------
+Washingtion dc
+     7 Washingtion dc
+------------------------------
+I am a native Washingtonian from Washington, DC proper. It was called Chocolate City when I was growing up. That is no longer the case.
+     2 Washingtonian
+     2 Washington, DC
+     2 Chocolate City
+     7 case
+------------------------------
+DC
+     2 DC
+------------------------------
+Washington D.C.
+     2 Washington D.C.
+------------------------------
+West Virginia
+     2 West Virginia
+------------------------------
+Washington, DC.
+     2 Washington, DC
+------------------------------
+South Florida
+     3 South Florida
+------------------------------
+SE
+------------------------------
+The hood
+     7 hood
+------------------------------
+The area
+     2 area
+------------------------------
+DC
+     2 DC
+------------------------------
+Los Angeles
+     2 Los Angeles
+------------------------------
+Rockville, Maryland
+     2 Rockville
+     2 Maryland
+------------------------------
+The fact I have a
+     7 fact
+------------------------------
+I am an American citizen and I have lived in Washington DC for 10 years.  Before that I lived in North Carolina.
+     1 citizen
+     2 American
+     2 Washington DC
+     2 North Carolina
+------------------------------
+Northern Virginia
+     2 Northern Virginia
+------------------------------
+I live in the southeast side of dc and it not pretty but I love my city.
+     1 dc
+     2 side
+     2 city
+------------------------------
+DC
+     2 DC
+------------------------------
+Washington DC
+     2 Washington DC
+------------------------------
+im from here !!!
+     7 im
+------------------------------
+I am from Washington DC
+     2 Washington DC
+------------------------------
+Washington  dc
+     2 Washington dc
+------------------------------
+Va
+     7 Va
+------------------------------
+DC
+     2 DC
+------------------------------
+Pittsburgh
+     2 Pittsburgh
+------------------------------
+northwest dc uptown
+     2 northwest dc uptown
+------------------------------
+I grew up in Jacksonville, Florida, but I've lived here for almost 20 years.
+     2 Jacksonville
+     2 Florida
+------------------------------
+dc
+     1 dc
+------------------------------
+Washington DC
+     2 Washington DC
+------------------------------
+DC
+     2 DC
+------------------------------
+dc
+     1 dc
+------------------------------
+The Midwest
+     2 Midwest
+------------------------------
+Colorado originally but I've lived here almost 20 years.
+     2 Colorado
+------------------------------
+dc
+     1 dc
+------------------------------
+Chevy Chase
+     7 Chevy Chase
+------------------------------
+Washington, DC
+     2 Washington, DC
+------------------------------
+Maryland
+     2 Maryland
+------------------------------
+The South
+     2 South
+------------------------------
+capitol hill
+     2 capitol hill
+------------------------------
+Sw dc
+     7 Sw dc
+------------------------------
+Chicago
+     2 Chicago
+------------------------------
+I would say that I am from Upstate New York but currently live in DC
+     2 Upstate New York
+     2 DC
+------------------------------
+North east DC
+     2 North east
+     2 DC
+------------------------------
+Dc
+     1 Dc
+------------------------------
+I am from Washington DC
+     2 Washington DC
+------------------------------
+DC
+     2 DC
+------------------------------
+Washington,USA,Olympia
+     2 Washington
+     2 USA
+     2 Olympia
+------------------------------
+Northeast
+     3 Northeast
+------------------------------
+NYC
+     2 NYC
+------------------------------
+NJ
+     2 NJ
+------------------------------
+i am from washingtonn
+     7 washingtonn
+------------------------------
+Spain
+     2 Spain
+------------------------------
+washington dc
+     2 washington dc
+------------------------------
+Dc
+     1 Dc
+------------------------------
+my mother
+     1 mother
+------------------------------
+Florida
+     2 Florida
+------------------------------
+Northwest
+     2 Northwest
+------------------------------
+Texas
+     2 Texas
+------------------------------
+from DC
+     2 DC
+------------------------------
+originally from NC
+     2 NC
+------------------------------
+"I was born in Moscow but grew up in Alabama. I've lived in DC for going on 14 years now."
+     2 Moscow
+     2 Alabama
+     2 DC
+------------------------------
+NJ originally
+     2 NJ
+------------------------------
+I'm from southeast
+------------------------------
+Chevy Chase
+     7 Chevy Chase
+------------------------------
+I am a native Washingtonian born and raised.
+     2 Washingtonian
+------------------------------
+DC
+     2 DC
+------------------------------
+Dc
+     1 Dc
+------------------------------
+New York
+     2 New York
+------------------------------
+Foggy Bottom
+     3 Foggy Bottom
+------------------------------
+Florida
+     2 Florida
+------------------------------
+WASHINGTON DC
+     2 WASHINGTON DC
+------------------------------
+Columbia Heights , CHV , OUTBACK
+     2 Columbia Heights
+     3 CHV
+     3 OUTBACK
+------------------------------
+I'm from District of Columbia
+     2 District of Columbia
+------------------------------
+Outside Syracuse
+     2 Syracuse
+------------------------------
+DC
+     2 DC
+------------------------------
+Atlanta
+     2 Atlanta
+------------------------------
+usa
+     2 usa
+------------------------------
+Charlotte, NC
+     2 Charlotte
+     2 NC
+------------------------------
+DC
+     2 DC
+------------------------------
+Washington DC and West Africa
+     2 Washington DC
+     2 West Africa
+------------------------------
+New York
+     2 New York
+------------------------------
+From here.
+------------------------------
+Western New York State
+     3 Western New York State
+------------------------------
+DC (Friendship Heights) and Budapest
+     2 DC
+     2 Friendship Heights
+     2 Budapest
+------------------------------
+Washington, DC!
+     2 Washington, DC
+------------------------------
+Southwest DC
+     7 Southwest DC
+------------------------------
+Connecticut
+     2 Connecticut
+------------------------------
+DC
+     2 DC
+------------------------------
+Washington dc SE
+     3 Washington dc SE
+>>> 
