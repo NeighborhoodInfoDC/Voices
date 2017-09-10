@@ -194,7 +194,7 @@ label var happy "Overall, how happy did you feel yesterday?"
 
 gen anxious = 1 if Q39D==0 | Q39D==1
 replace anxious = 2 if Q39D==2 | Q39D==3
-replace anxious = 3 Q39D==4 | Q39D==5
+replace anxious = 3 if Q39D==4 | Q39D==5
 replace anxious = 4 if Q39D>=6 & Q39D<=10
 label var anxious "Overall, how anxious did you feel yesterday?"
 
@@ -217,7 +217,7 @@ replace struggling=0 if Q41A!=. & Q41B !=.
 replace struggling=1 if suffering==0 & thriving==0
 label var thriving "Respondent is thriving (self evaluation)"
 label var suffering "Respondent is suffering (self evaluation)" 
-label var stuggling "Respondent is struggling (self evaluation)" 
+label var struggling "Respondent is struggling (self evaluation)" 
 
 
 
