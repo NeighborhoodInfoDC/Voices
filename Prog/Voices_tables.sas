@@ -62,9 +62,9 @@ data VoicesDMVSurvey2017_recode;
     Q4_Years_months_recode = "How long have you lived in [dov_urban]? (years, recode)"
     Q5_Years_months_recode = "How long have you lived in your current home? (years, recode)";
 
-  ** Recode questions with 1,2 response codes **;
+  ** Recode questions with 1,2,-1 response codes **;
 
-  array v12{*} Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8;
+  array v12{*} Q13: ;
 
   do i = 1 to dim( v12 );
   
