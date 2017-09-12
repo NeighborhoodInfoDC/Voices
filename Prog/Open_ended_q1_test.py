@@ -14,21 +14,50 @@ from fuzzywuzzy import fuzz
 
 class cDatrow:
 
-    def __init__(self):
-        self.caseid = []
-        self.text = []
-        self.dc = []
+    def __init__(self, caseid, text, matches ):
+        self.caseid = caseid
+        self.text = text
+        self.dc = matches
+
+class cPlacemapitem:
+
+    def __init__(self, label, alt):
+        self.label = label
+        self.alt = alt
+
+class cPlacematchitem:
+
+    def __init__(self, label):
+        self.label = label
+        self.found = False
+
+Placemap = [
+    cPlacemapitem( "DC", [ "DC", "WASHINGTON DC" ] ),
+    cPlacemapitem( "PG", [ "PG", "PRINCE GEORGES" ] ),
+    cPlacemapitem( "MC", [ "MONTGOMERY COUNTY" ] )
+]
+
+for x in Placemap:
+    print( x.label, x.alt )
+
+Placematch = [
+    cPlacematchitem( "DC" ),
+    cPlacematchitem( "PG" ),
+    cPlacematchitem( "MC" )
+]
+
+for x in Placematch:
+    print( x.label, x.found )
+
 
 Mydat = []
 
-with open('C:\DCData\Libraries\Voices\Raw\Q1dat_100obs.csv', newline='') as f:
+with open('L:\Libraries\Voices\Raw\Q1dat_10obs.csv', newline='') as f:
     dialect = 'excel'
     reader = csv.reader(f)
     next(reader)    # Skip header row
     for row in reader:
-        Datrow = cDatrow()
-        Datrow.caseid = row[0]
-        Datrow.text = row[1]
+        Datrow = cDatrow(row[0],row[1],Placematch)
         Mydat.append(Datrow)
         # print(row[1])
         # Mydat.caseid.append(row[0])
@@ -38,12 +67,12 @@ with open('C:\DCData\Libraries\Voices\Raw\Q1dat_100obs.csv', newline='') as f:
 client = language.LanguageServiceClient()
 
 # Translate table to strip out punctuation 
-trantab = str.maketrans( "", "", "." )
+trantab = str.maketrans( "", "", ".'" )
 
 for d in Mydat:
 
     print( '-'*30 )
-    print( d.text )
+    print( d.caseid, d.text )
             
     document = language.types.Document(
         content=d.text,
@@ -56,10 +85,8 @@ for d in Mydat:
     )
 
     for entity in response.entities:
-        if 1: # entity.type == 2 or entity.type == 1 or entity.type == 7:
-            # print(entity.type, entity.name, fuzz.ratio( str.upper(entity.name).translate(trantab), "DC") )
-            print("    ", entity.type, entity.name )
-        
+        print(entity.type, entity.name, fuzz.ratio( str.upper(entity.name).translate(trantab), "DC") )
+ 
         
     
     # print( d.caseid, d.text, d.dc )
