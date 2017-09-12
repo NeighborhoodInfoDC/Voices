@@ -105,9 +105,8 @@ proc format;
     0 = 'Struggling'  
     1 = 'Struggling';
 
-    
-options mprint symbolgen=y;
-
+ options mprint symbolgen=y;
+%let NUM_LEVELS = 5; 
 data VoicesDMVSurvey2017_recode;
 
   set Voices.VoicesDMVSurvey2017 (OBS=100);  ** Make the OBS= value smaller for testing **;
@@ -176,9 +175,9 @@ data VoicesDMVSurvey2017_recode;
     homeown = "Respondent's homeownership status";
 
   Q13_count =0;
-   array q13{*} Q13_ ;
-  do j=1 to 8;
-    if q13{j}=1 then Q13_count=Q13_count+1; 
+   array q13{8} Q13_1-Q13_8 ;
+  	do j=1 to 8;
+    	if q13{j}=1 then Q13_count=Q13_count+1; 
     end;
   IF (Q13_1=-1) and (Q13_2=-1) and (Q13_3=-1) and (Q13_4=-1) and (Q13_5=-1) and (Q13_6=-1) and (Q13_7=-1) and (Q13_8=-1) THEN Q13_count = .;
 drop j;
