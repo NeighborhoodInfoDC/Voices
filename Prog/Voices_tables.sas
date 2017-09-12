@@ -107,6 +107,7 @@ proc format;
 
     
 options mprint symbolgen=y;
+%let NUM_LEVELS = 5; 
 
 data VoicesDMVSurvey2017_recode;
 
@@ -176,15 +177,15 @@ data VoicesDMVSurvey2017_recode;
     homeown = "Respondent's homeownership status";
 
   Q13_count =0;
-   array q13{*} Q13_ ;
-  do j=1 to 8;
-    if q13{j}=1 then Q13_count=Q13_count+1; 
+   array q13{8} Q13_1-Q13_8;
+ 	do j=1 to 8;
+    	if q13{j}=1 then Q13_count=Q13_count+1; 
     end;
   IF (Q13_1=-1) and (Q13_2=-1) and (Q13_3=-1) and (Q13_4=-1) and (Q13_5=-1) and (Q13_6=-1) and (Q13_7=-1) and (Q13_8=-1) THEN Q13_count = .;
 drop j;
 
   Q14_count =0;
-     array q14{*} Q14_ ;
+     array q14{10} Q14_1-Q14_10;
   do j=1 to 10;
     if q14{j}=1 then Q14_count=Q14_count+1; 
     end;
@@ -331,12 +332,13 @@ drop j;
       when ( 1 ) v12{i} = 1;
       when ( 2 ) v12{i} = 0;
       when ( -1 ) v12{i} = .;
+	  otherwise;
     end;
     
   end;
 
   drop i;
-
+run;
 **Peter's recodes;
   array Q35{*} Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l;
   array sQ35{*} sQ35_a sQ35_b sQ35_c sQ35_d sQ35_e sQ35_f sQ35_g sQ35_h sQ35_i sQ35_j sQ35_k sQ35_l;
@@ -430,6 +432,7 @@ drop j;
    format     Q21_f Q21_F.;
 
   keep caseid weight q21_: sq21_: dq21_:;
+
 
 /*recode 2 response to 0,1. Q28_X already recoded
 
