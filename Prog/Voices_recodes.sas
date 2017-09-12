@@ -17,6 +17,95 @@
 ** Define libraries **;
 %DCData_lib( Voices )
 
+
+proc format;
+  value region
+    1 = 'Washington Area';
+  value geo
+    1 = 'DC'  
+    2 = 'Prince George''s Co'  
+    3 = 'Montgomery Co'  
+    4 = 'Fairfax Co'  
+    5 = 'Other NoVA';
+	value race
+    1 = 'N.H. white'  
+    2 = 'N.H. black'  
+    3 = 'Hispanic'  
+    4 = 'N.H. Asian or P.I.'  
+    5 = 'N.H. other';
+	value educ
+    0 = 'Less than Bachelors'  
+    1 = 'Bachelors or higher';
+	value income
+    1 = '$0 - $50K'  
+    2 = '$50 - $100K'
+    3 = '$100K+';
+	value age
+    1 = '18-34'  
+    2 = '35-64'
+    3 = '65+';
+	value gender
+    0 = 'Male'  
+    1 = 'Female';
+	value homeown
+    0 = 'Homeowner'  
+    1 = 'Not homeowner';
+	value Q3_cat
+    1 = '0-5'  
+    2 = '5-10'
+    3 = '10-20'  
+    4 = '20-40'
+    5 = '40+';
+	value Q4_cat
+    1 = '0-5'  
+    2 = '5-10'
+    3 = '10-20'  
+    4 = '20-40'
+    5 = '40+';
+	value Q5_cat
+    1 = '0-1'  
+    2 = '1-2'
+    3 = '2-5'  
+    4 = '5-10'
+    5 = '10+';
+	value phy_health
+    1 = '0 days'  
+    2 = '1-13 days'
+    3 = '14-30 days';
+	value ment_health
+    1 = '0 days'  
+    2 = '1-13 days'
+    3 = '14-30 days';
+	value satisf
+    1 = 'Low (0-4)'  
+    2 = 'Medium (5-6)'
+    3 = 'High (7-8)'
+    4 = 'Very high (9-10)';
+	value worth
+    1 = 'Low (0-4)'  
+    2 = 'Medium (5-6)'
+    3 = 'High (7-8)'
+    4 = 'Very high (9-10)';
+	value happy
+    1 = 'Low (0-4)'  
+    2 = 'Medium (5-6)'
+    3 = 'High (7-8)'
+    4 = 'Very high (9-10)';
+	value anxious
+    1 = 'Low (0-1)'  
+    2 = 'Medium (2-3)'
+    3 = 'High (4-5)'
+    4 = 'Very high (6-10)';
+	value thriving
+    0 = 'Not thriving'  
+    1 = 'Thriving';
+	value suffering
+    0 = 'Not suffering'  
+    1 = 'Suffering';
+	value struggling
+    0 = 'Struggling'  
+    1 = 'Struggling';
+
 data VoicesDMVSurvey2017;
 
   set Voices.VoicesDMVSurvey2017;
@@ -31,8 +120,8 @@ data VoicesDMVSurvey2017;
   IF (PPETHM=3) or (PPETHM=5) THEN race = 5;
 
   educ =.;
-  IF (PPEDUCAT=1) or(PPEDUCAT=2) or (PPEDUCAT=3) THEN educ = 1;
-  IF (PPEDUCAT=4) THEN educ =2;
+  IF (PPEDUCAT=1) or(PPEDUCAT=2) or (PPEDUCAT=3) THEN educ = 0;
+  IF (PPEDUCAT=4) THEN educ =1;
 
   income =.;
   IF (1 <= PPINCIMP <= 11) THEN income = 1;
@@ -45,12 +134,12 @@ data VoicesDMVSurvey2017;
   IF (PPAGE >= 65) THEN age = 3;
 
   gender =.;
-  IF (PPGENDER=1) THEN gender = 1;
-  IF (PPGENDER=2) THEN gender = 2;
+  IF (PPGENDER=1) THEN gender = 0;
+  IF (PPGENDER=2) THEN gender = 1;
 
   homeown =.;
-  IF (PPRENT=1) THEN homeown = 1;
-  IF (PPRENT=2) or (PPRENT=3) THEN homeown = 2;
+  IF (PPRENT=1) THEN homeown = 0;
+  IF (PPRENT=2) or (PPRENT=3) THEN homeown = 1;
 
   geo =.;
   IF (dov_urban=1) THEN geo = 1;
@@ -58,6 +147,14 @@ data VoicesDMVSurvey2017;
   IF (dov_urban=3) THEN geo = 3;
   IF (dov_urban=4) THEN geo = 4;
   IF (dov_urban=5) or (dov_urban=6) or (dov_urban=7) or (dov_urban=8) THEN geo = 5;
+
+  label
+    race = "Respondent's Race/Ethnicity"
+    educ = "Respondent's educational attainment"
+    income = "Respondent's HH income"
+	age = "Respondent's age"
+    gender = "Respondent's gender"
+    homeown = "Respondent's homeownership status";
 
   **Q13_count =.;
 
