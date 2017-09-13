@@ -105,12 +105,8 @@ proc format;
     0 = 'Struggling'  
     1 = 'Struggling';
 
-<<<<<<< HEAD
     
 options mprint symbolgen=y;
-
-=======
- options mprint symbolgen=y;
 %let NUM_LEVELS = 5; 
 
 data VoicesDMVSurvey2017_recode;
@@ -306,7 +302,7 @@ drop j;
   IF (thriving=0) and (suffering=0) THEN struggling = 1;
   format struggling struggling.;
 
-  label
+  label 
     thriving = "Respondent is thriving (self evaluation)"
     suffering = "Respondent is suffering (self evaluation)" 
 	struggling = "Respondent is struggling (self evaluation)";
@@ -642,8 +638,14 @@ run;
   ** List all of the variables to be used in the tables here **;
 
   %let full_var_list = 
-    Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode 
-    Q13: /*add vars*/
+    Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode Q3_cat_: Q4_cat_: Q5_cat_:
+    Q6_: Q7_: Q8_: Q9_: Q10_: Q11_: Q12_: Q13_: Q14_: Q17_: Q18_: Q19_: Q20_:  Q21_: Q22_: Q23_: Q24_: 
+	Q25_: Q26_: Q27_: Q28_: Q29_: Q30_: Q31_: Q32_: Q33_: Q34_: Q35_: Q36_: phy_health_: ment_health_: 
+	satisf_: worth_: happy_: anxious_: Q39_: Q40_: thriving suffering struggling Q41_: Q42_: Q43_: Q44_: 
+	Q45_: Q46_: Q47_: Q48_: Q49_: Q50_: Q51_: Q52_: Q53_: Q54_: Q55_: Q56_: Q57_: Q58_: Q59_: Q60_: Q61_: 
+	Q62_: Q63_: Q77_: Q78_: Q79_: DOV_REL1_: DOV_REL1_: PPEDUC_: DOV_IDEO_: DOV_URBAN_: ppagecat_: PPWORK_: 
+	PPRENT_: PPEDUCAT_: ppagect4_: PPREG4_: PPHOUSE_: PPETHM_: PPHISPAN_: ppracem_: PPMARIT_: DOV_IDEO_: 
+	ppagecat_: PPWORK_: race_:
   ;
 
   proc summary data=VoicesDMVSurvey2017_recode nway;
@@ -701,13 +703,207 @@ run;
     col=&col, 
     fmt=comma10.1,
     var=Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode, 
-    text="How long have you lived in..." 
+    text="Q3. How long have you lived in..." 
   )
 
   %Make_one_table( 
     col=&col, 
-    var=Q13:, 
+    fmt=comma10.1,
+    var=Q3_cat_: Q4_cat_: Q5_cat_:, 
+    text="Q3. How long have you lived in..." 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    fmt=comma10.1,
+    var=Q6_:, 
+    text="Q6. How often do you talk to or visit with your immediate neighbors?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    fmt=comma10.1,
+    var=Q7_:, 
+    text="Q7. In the place that you live, how much do you feel like you fit in?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    fmt=comma10.1,
+    var=Q8_:, 
+    text="Q8. How would you rate the Washington area in general as a place to live?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    fmt=comma10.1,
+    var=Q9_:, 
+    text="Q9. How likely are you to recommend [City/County]to a friend or co-worker as a place to live?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    fmt=comma10.1,
+    var=Q10_:, 
+    text="Q10. If you had the choice of where to live, would you rather…" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    fmt=comma10.1,
+    var=Q11_:, 
+    text="Q11. In the next 12 months, are you likely to move away from the area where you live?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    fmt=comma10.1,
+    var=Q12_:, 
+    text="Q12. Are you registered to vote?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q13_:, 
     text="Q13. Have you, yourself, done any of the following in the last 12 months?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q14_:, 
+    text="Q14. Could you tell me whether you are a member of each type?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q17_:, 
+    text="Q17. ...do you think living conditions in the Washington area will be better than they are today, worse, or about the same as today?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q18_:, 
+    text="Q18. ...Would you say: very safe, somewhat safe, not very safe, or not safe at all?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q19_:, 
+    text="Q19. How safe do you feel the place where you live is for children?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q20_:, 
+    text="Q20. In the past year, how often have you had trouble getting to where you need to go because:" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q21_:, 
+    text="Q21. How would you rate these aspects of life in the place where you live?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q22_:, 
+    text="Q22. How often do you use services provided by nongovernmental, nonprofit organizations?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q23_:, 
+    text="Q23. Why do you never use services provided by nongovernmental, nonprofit organizations?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q24_:, 
+    text="Q24. How satisfied are you that the services you receive from nongovernmental, nonprofit organizations meet your needs?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q25_:, 
+    text="Q25. When you think about the place where you live now, do you think that it is changing a lot, changing  a little, or not changing much at all? " 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q26_:, 
+    text="Q26. ...those changes mostly benefit you or people like you, mostly benefit people different than you, generally benefit everyone, or generally benefit no one?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q27_:, 
+    text="Q27. ...move from the place where they lived in [City/County] to somewhere else for a reason other than their own choice?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q28_:, 
+    text="Q28. For what reason(s) did this person have to move?..." 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q29_:, 
+    text="Q29. Do you know where this person moved to?..." 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q30_:, 
+    text="Q30. How would you rate the following in [City/County]?..." 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q31_:, 
+    text="Q31. Do you live in a place that has elected city officials, in addition to county officials?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q32_:, 
+    text="Q32. How would you rate the following in the city where you live?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q33_:, 
+    text="Q33. How would you describe your ability to influence local-government decision-making?..." 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q34_:, 
+    text="Q34. How much trust and confidence do you have in the local government in the place where you live when it comes to handling local problems?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q35_:, 
+    text="Q35. ...priority do you think each of the following should be for the local government in the place where you live?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q36_:, 
+    text="Q36. How would you rate your overall health?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=phy_health_:, 
+    text="Q37. ...for how many days during the past 30 days was your physical health not good?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=ment_health_:, 
+    text="Q38. ...for how many days during the past 30 days was your mental health not good?" 
   )
 
   /*add each var*/
