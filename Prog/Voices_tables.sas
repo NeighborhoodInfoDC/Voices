@@ -639,13 +639,13 @@ run;
 
   %let full_var_list = 
     Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode Q3_cat_: Q4_cat_: Q5_cat_:
-    Q6_: Q7_: Q8_: Q9_: Q10_: Q11_: Q12_: Q13_: Q14_: Q17_: Q18_: Q19_: Q20_:  Q21_: Q22_: Q23_: Q24_: 
-	Q25_: Q26_: Q27_: Q28_: Q29_: Q30_: Q31_: Q32_: Q33_: Q34_: Q35_: Q36_: phy_health_: ment_health_: 
-	satisf_: worth_: happy_: anxious_: Q39_: Q40_: thriving suffering struggling Q41_: Q42_: Q43_: Q44_: 
-	Q45_: Q46_: Q47_: Q48_: Q49_: Q50_: Q51_: Q52_: Q53_: Q54_: Q55_: Q56_: Q57_: Q58_: Q59_: Q60_: Q61_: 
-	Q62_: Q63_: Q77_: Q78_: Q79_: DOV_REL1_: DOV_REL1_: PPEDUC_: DOV_IDEO_: DOV_URBAN_: ppagecat_: PPWORK_: 
+    Q6_: Q7_: Q8_: Q9_: Q10_: Q11 Q12 Q13_: Q14_: Q17_: Q18_: Q19_: Q20_:  Q21_: Q22_: Q23_: Q24_: 
+	Q25_: Q26_: Q27 Q28_: Q29_: Q30_: Q31 Q32_: Q33_: Q34_: Q35_: Q36_: phy_health_: ment_health_: 
+	satisf_: worth_: happy_: anxious_: Q39_: Q40 thriving suffering struggling Q41_: Q42 Q43_: Q44_: 
+	Q45_: Q46_: Q47_: Q48_: Q49_: Q50_: Q51_: Q52_: Q53_: Q54_: Q55 Q56_: Q57 Q58_: Q59 Q60_: Q61_: 
+	Q62_: Q63_: Q77 Q78_: Q79_: DOV_REL1_: DOV_REL1_: PPEDUC_: DOV_IDEO_: DOV_URBAN_: ppagecat_: PPWORK_: 
 	PPRENT_: PPEDUCAT_: ppagect4_: PPREG4_: PPHOUSE_: PPETHM_: PPHISPAN_: ppracem_: PPMARIT_: DOV_IDEO_: 
-	ppagecat_: PPWORK_: race_:
+	ppagecat_: PPWORK_: race_: geo 
   ;
 
   proc summary data=VoicesDMVSurvey2017_recode nway;
@@ -751,14 +751,14 @@ run;
   %Make_one_table( 
     col=&col, 
     fmt=comma10.1,
-    var=Q11_:, 
+    var=Q11, 
     text="Q11. In the next 12 months, are you likely to move away from the area where you live?" 
   )
 
   %Make_one_table( 
     col=&col, 
     fmt=comma10.1,
-    var=Q12_:, 
+    var=Q12, 
     text="Q12. Are you registered to vote?" 
   )
 
@@ -836,7 +836,7 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q27_:, 
+    var=Q27, 
     text="Q27. ...move from the place where they lived in [City/County] to somewhere else for a reason other than their own choice?" 
   )
 
@@ -860,7 +860,7 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q31_:, 
+    var=Q31, 
     text="Q31. Do you live in a place that has elected city officials, in addition to county officials?" 
   )
 
@@ -904,6 +904,210 @@ run;
     col=&col, 
     var=ment_health_:, 
     text="Q38. ...for how many days during the past 30 days was your mental health not good?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=satisf_:, 
+    text="Q39A. Overall, how satisfied are you with your life nowadays?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=worth_:, 
+    text="Q39B. Overall, to what extent do you feel the things you do in your life are worthwhile?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=happy_:, 
+    text="Q39C. Overall, how happy did you feel yesterday?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=anxious_:, 
+    text="Q39D. Overall, how anxious did you feel yesterday?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q40_:, 
+    text="Q40. Do you have relatives or friends who you can count on to help you when you need them?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=thriving suffering struggling, 
+    text="Q41. On which step of the ladder would you say you personally feel you stand at this time/five years from now?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q42, 
+    text="Q42. In the past year, have you ever felt discriminated against while in the Washington area?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q42, 
+    text="Q42. In the past year, have you ever felt discriminated against while in the Washington area?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q43_:, 
+    text="Q43. In the past year, how often have you felt discriminated against?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q44_:, 
+    text="Q44. For what reasons did you feel discriminated against?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q45_:, 
+    text="Q45. In which systems or situations did you experience discrimination?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_:, 
+    text="Q46. How good is the place where you live for different groups of people?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q47_:, 
+    text="Q47. How would you rate the relations among different racial or ethnic groups..." 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q48_:, 
+    text="Q48. How much is your daily life affected by the fear that you or a loved one would be arrested or questioned by the police?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q49_:, 
+    text="Q49. Do you think the police in your community treat people of color less favorably, more favorably, or equally to white people?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q50_:, 
+    text="Q50. How would you rate the economic conditions in the Washington area today?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q51_:, 
+    text="Q51. Do you think the economic conditions in the Washington area are getting better, getting worse, or staying about the same?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q52_:, 
+    text="Q52. How well would you say you are managing financially these days? Would you say you are…" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q53_:, 
+    text="Q53. Think of your parents when they were your age. Would you say you are better off financially than they were?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q54_:, 
+    text="Q54. If you lost all your current sources of household income... about how long do you think you could continue to live as you live today? " 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q55, 
+    text="Q55. Have there been times in the past 12 months when you did not have enough money to buy food that you or your family needed?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q56_:, 
+    text="Q56. How often in the past 12 months did you not have enough money to buy food that you or your family needed?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q57, 
+    text="Q57. ...did not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q58_:, 
+    text="Q58. ...did you not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q59, 
+    text="Q59. Are you currently working at a paid job?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q60_:, 
+    text="Q60. How strongly do you agree that your current job or jobs provide you with the income needed to support you and your family?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q61_:, 
+    text="Q61. Does your current job(s) offer any of the following benefits?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q62, 
+    text="Q62. Are you currently looking for work or do you want to find a job?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q63_:, 
+    text="Q63. How important for you are the following as barriers in finding or keeping a good job?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q77, 
+    text="Q77. Were you born in the United States?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q78_:, 
+    text="Q78. [citizenship status] Are you...?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q79_:, 
+    text="Q79. How would you describe your sexual orientation?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=DOV_REL1_:, 
+    text="Q80. What is your religion?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=DOV_IDEO_:, 
+    text="Q81. In general, do you think of yourself as…" 
   )
 
   /*add each var*/
