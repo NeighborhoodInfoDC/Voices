@@ -95,15 +95,6 @@ proc format;
     2 = 'Medium (2-3)'
     3 = 'High (4-5)'
     4 = 'Very high (6-10)';
-	value thriving
-    0 = 'Not thriving'  
-    1 = 'Thriving';
-	value suffering
-    0 = 'Not suffering'  
-    1 = 'Suffering';
-	value struggling
-    0 = 'Struggling'  
-    1 = 'Struggling';
 
     
 options mprint symbolgen=y;
@@ -208,7 +199,7 @@ data VoicesDMVSurvey2017_recode_0 ;
 
   retain total 1 region 1;
   
-  format region region.;
+  format region region. geo geo.;
   
   ** Reporting areas **;
   
@@ -217,7 +208,6 @@ data VoicesDMVSurvey2017_recode_0 ;
     otherwise geo = dov_urban;
   end;
   
-  format geo geo.;
   
   race =.;
   IF (PPETHM=1) THEN race = 1;
@@ -348,28 +338,26 @@ drop j;
   IF (Q39A=5) or (Q39A=6) THEN satisf = 2;
   IF (Q39A=7) or (Q39A=8) THEN satisf = 3;
   IF (Q39A=9) or (Q39A=10) THEN satisf = 4;
-  format satisf satisf.;
 
   worth =.;
   IF (0 <= Q39B <= 4) THEN worth = 1;
   IF (Q39B=5) or (Q39B=6) THEN worth = 2;
   IF (Q39B=7) or (Q39B=8) THEN worth = 3;
   IF (Q39B=9) or (Q39B=10) THEN worth = 4;
-  format worth worth.;
 
   happy =.;
   IF (0 <= Q39C <= 4) THEN happy = 1;
   IF (Q39C=5) or (Q39C=6) THEN happy = 2;
   IF (Q39C=7) or (Q39C=8) THEN happy = 3;
   IF (Q39C=9) or (Q39C=10) THEN happy = 4;
-  format happy happy.;
 
   anxious =.;
   IF (Q39D=0) or (Q39D=1) THEN anxious = 1;
   IF (Q39D=2) or (Q39D=3) THEN anxious = 2;
   IF (Q39D=4) or (Q39D=5) THEN anxious = 3;
   IF (Q39D=6) or (Q39D=7) or (Q39D=8) or (Q39D=9) or (Q39D=10) THEN anxious = 4;
-  format anxious anxious.;
+
+format anxious anxious. happy happy. worth worth. satisf satisf.;
 
   label
     satisf = "Overall, how satisfied are you with your life nowadays?"
@@ -380,17 +368,14 @@ drop j;
   thriving =.;
   IF (Q41A~=.) and (Q41B~=.) THEN thriving = 0;
   IF (Q41A>=7) and (Q41B>=8) THEN thriving = 1;
-  format thriving thriving.;
-
+ 
   suffering =.;
   IF (Q41A~=.) and (Q41B~=.) THEN suffering = 0;
   IF (Q41A<=4) and (Q41B<=4) THEN suffering = 1;
-  format suffering suffering.;
 
   struggling =.;
   IF (Q41A~=.) and (Q41B~=.) THEN struggling = 0;
   IF (thriving=0) and (suffering=0) THEN struggling = 1;
-  format struggling struggling.;
 
   label 
     thriving = "Respondent is thriving (self evaluation)"
