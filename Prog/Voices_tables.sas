@@ -108,10 +108,103 @@ proc format;
     
 options mprint symbolgen=y;
 %let NUM_LEVELS = 5; 
+%macro dummies;
 
-data VoicesDMVSurvey2017_recode;
+*2: PPHHHEAD Q11 Q12  Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10 Q31 Q40  Q42 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i Q55 Q57  Q59 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j Q62 Q77
+*3: PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h
+*4: PPEDUCAT ppagect4 PPREG4 satisf worth happy anxious Q8 Q10 Q18 Q19  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q24 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q43 Q47_a Q47_b Q47_c Q48 Q78
+*5: PPHOUSE PPETHM PPHISPAN race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q22 Q29 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q50 Q52 Q60 
+*6:  ppracem Q23 Q54 Q79 PPMARIT
+*7: DOV_IDEO DOV_URBAN ppagecat PPWORK
+*8:
+*9:
+*10:Q39A  Q39B Q39C Q39D Q41A Q41B (already recoded)
+*13: DOV_REL1
+*14: PPEDUC 
+*/
 
-  set Voices.VoicesDMVSurvey2017 (OBS=100);  ** Make the OBS= value smaller for testing **;
+*3 categories;
+array var3{*} PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h;
+%do j=1 %to 3; 
+array new3_&j. {*} PPRENT_&j. income_&j. age_&j. phy_health_&j. ment_health_&j. Q17_&j. Q25_&j. Q49_&j. Q51_&j. Q53_&j. Q56_&j. Q58_&j. Q63_a_&j. Q63_b_&j. Q63_c_&j. Q63_d_&j. Q63_e_&j. Q63_f_&j. Q63_g_&j. Q63_h_&j.;
+      do k=1 to dim( var3 );
+                  if var3{k}=&j. then new3_&j.{k}=1; 
+                  else if var3{k}~=-1 then new3_&j.{k}=0; 
+      end;
+%end; 
+drop k;
+
+*4 categories;
+array var4{*} PPEDUCAT ppagect4 PPREG4 satisf worth happy anxious Q8 Q10 Q18 Q19  /*Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f*/ Q24 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q43 Q47_a Q47_b Q47_c Q48 Q78;
+%do j=1 %to 4; 
+array new4_&j. {*} PPEDUCAT_&j. ppagect4_&j. PPREG4_&j. satisf_&j. worth_&j. happy_&j. anxious_&j. Q8_&j. Q10_&j. Q18_&j. Q19_&j.  Q21_a_&j. Q21_b_&j. Q21_c_&j. Q21_d_&j. Q21_e_&j. Q21_f_&j. Q24_&j. Q26_&j. Q30_a_&j. Q30_b_&j. Q32_a_&j. Q32_b_&j. Q33_&j. Q34_&j. Q43_&j. Q47_a_&j. Q47_b_&j. Q47_c_&j. Q48_&j. Q78_&j.;
+      do k=1 to dim( var4 );
+                  if var4{k}=&j. then new4_&j.{k}=1; 
+                  else if var4{k}~=-1 then new4_&j.{k}=0; 
+      end;
+%end; 
+drop k;
+
+*5 categories;
+array var5{*} PPHOUSE PPETHM PPHISPAN race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q22 Q29 /*Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l*/ Q36 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q50 Q52 Q60;
+%do j=1 %to 5; 
+array new5_&j. {*} PPHOUSE_&j. PPETHM_&j. PPHISPAN_&j. race_&j. geo_&j. Q7_&j. Q9_&j. Q20_a_&j. Q20_b_&j. Q20_c_&j. Q20_d_&j. Q20_e_&j. Q20_f_&j. Q20_g_&j. Q20_h_&j. Q20_i_&j. Q22_&j. Q29_&j. Q35_a_&j. Q35_b_&j. Q35_c_&j. Q35_d_&j. Q35_e_&j. Q35_f_&j. Q35_g_&j. Q35_h_&j. Q35_i_&j. Q35_j_&j. Q35_k_&j. Q35_l_&j. Q36_&j. Q46_a_&j. Q46_b_&j. Q46_c_&j. Q46_d_&j. Q46_e_&j. Q46_f_&j. Q46_g_&j. Q46_h_&j. Q46_i_&j. Q46_j_&j. Q46_k_&j. Q46_l_&j. Q46_m_&j. Q46_n_&j. Q46_o_&j. Q46_p_&j. Q50_&j. Q52_&j. Q60_&j.; 
+      do k=1 to dim( var5 );
+                  if var5{k}=&j. then new5_&j.{k}=1; 
+                  else if var5{k}~=-1 then new5_&j.{k}=0; 
+      end;
+%end; 
+drop k;
+
+*6 categories;
+array var6{*} ppracem Q23 Q54 Q79 PPMARIT;
+%do j=1 %to 6; 
+array new6_&j. {*} ppracem_&j. Q23_&j. Q54_&j. Q79_&j. PPMARIT_&j.; 
+      do k=1 to dim( var6 );
+                  if var6{k}=&j. then new6_&j.{k}=1; 
+                  else if var6{k}~=-1 then new6_&j.{k}=0; 
+      end;
+%end; 
+drop k;
+
+*7 categories;
+array var7{*} DOV_IDEO DOV_URBAN ppagecat PPWORK;
+%do j=1 %to 7; 
+array new7_&j. {*} DOV_IDEO_&j. DOV_URBAN_&j. ppagecat_&j. PPWORK_&j.; 
+      do k=1 to dim( var7 );
+                  if var7{k}=&j. then new7_&j.{k}=1; 
+                  else if var7{k}~=-1 then new7_&j.{k}=0; 
+      end;
+%end; 
+drop k;
+
+*13 categories;
+array var13{*} DOV_REL1;
+%do j=1 %to 13; 
+array new13_&j. {*} DOV_REL1_&j.; 
+      do k=1 to dim( var13 );
+                  if var13{k}=&j. then new13_&j.{k}=1; 
+                  else if var13{k}~=-1 then new13_&j.{k}=0; 
+      end;
+%end; 
+drop k;
+
+*14 categories;
+array var14{*} PPEDUC;
+%do j=1 %to 14; 
+array new14_&j. {*} PPEDUC_&j.; 
+      do k=1 to dim( var14 );
+                  if var14{k}=&j. then new14_&j.{k}=1; 
+                  else if var14{k}~=-1 then new14_&j.{k}=0; 
+      end;
+%end; 
+drop k;
+
+%mend; 
+
+data VoicesDMVSurvey2017_recode_0 ;
+
+  set Voices.VoicesDMVSurvey2017 ; 
 
   retain total 1 region 1;
   
@@ -180,12 +273,9 @@ data VoicesDMVSurvey2017_recode;
    array q13{8} Q13_1-Q13_8;
  	do j=1 to 8;
     	if q13{j}=1 then Q13_count=Q13_count+1; 
-   array q13{*} Q13_ ;
-  do j=1 to 8;
-    if q13{j}=1 then Q13_count=Q13_count+1; 
-    end;
+     end;
   IF (Q13_1=-1) and (Q13_2=-1) and (Q13_3=-1) and (Q13_4=-1) and (Q13_5=-1) and (Q13_6=-1) and (Q13_7=-1) and (Q13_8=-1) THEN Q13_count = .;
-drop j;
+
 
   Q14_count =0;
      array q14{10} Q14_1-Q14_10;
@@ -394,7 +484,7 @@ drop j;
    format     Q35_k Q35_K.;
    format     Q35_l Q35_L.;
 
-  keep caseid weight Q35_: sQ35_: dQ35_:;
+  *keep caseid weight Q35_: sQ35_: dQ35_:;
 
   array q21{*} Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f;
   array sq21{*} sQ21_a sQ21_b sQ21_c sQ21_d sQ21_e sQ21_f;
@@ -417,12 +507,12 @@ drop j;
    
       sq21{i} = 4 - q21{i};
        
-      do j = 1 to 4;
+      	do j = 1 to 4;
       
         if q21{i} = j then dq21{i,j} = 1;
         else dq21{i,j} = 0;
         
-      end;
+     	 end;
       
     end;
    
@@ -434,7 +524,7 @@ drop j;
    format     Q21_e Q21_E.;
    format     Q21_f Q21_F.;
 
-  keep caseid weight q21_: sq21_: dq21_:;
+  *keep caseid weight q21_: sq21_: dq21_:;
 
 /*recode 2 response to 0,1. Q28_X already recoded
 
@@ -447,107 +537,17 @@ end;
 
 run;
 */
+
 run;
 
-%macro dummies;
 
-*2: PPHHHEAD Q11 Q12  Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10 Q31 Q40  Q42 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i Q55 Q57  Q59 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j Q62 Q77
-*3: PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h
-*4: PPEDUCAT ppagect4 PPREG4 satisf worth happy anxious Q8 Q10 Q18 Q19  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q24 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q43 Q47_a Q47_b Q47_c Q48 Q78
-*5: PPHOUSE PPETHM PPHISPAN race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q22 Q29 Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q50 Q52 Q60 
-*6:  ppracem Q23 Q54 Q79 PPMARIT
-*7: DOV_IDEO DOV_URBAN ppagecat PPWORK
-*8:
-*9:
-*10:Q39A  Q39B Q39C Q39D Q41A Q41B (already recoded)
-*13: DOV_REL1
-*14: PPEDUC 
-*/
-
-*3 categories;
-array var3{*} PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h;
-%do j=1 %to 3; 
-array new3_&j. {*} PPRENT_&j. income_&j. age_&j. phy_health_&j. ment_health_&j. Q17_&j. Q25_&j. Q49_&j. Q51_&j. Q53_&j. Q56_&j. Q58_&j. Q63_a_&j. Q63_b_&j. Q63_c_&j. Q63_d_&j. Q63_e_&j. Q63_f_&j. Q63_g_&j. Q63_h_&j.;
-      do k=1 to dim( var3 );
-                  if var3{k}=&j. then new3_&j.{k}=1; 
-                  else if var3{k}~=-1 then new3_&j.{k}=0; 
-      end;
-%end; 
-drop k;
-
-*4 categories;
-array var4{*} PPEDUCAT ppagect4 PPREG4 satisf worth happy anxious Q8 Q10 Q18 Q19  /*Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f*/ Q24 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q43 Q47_a Q47_b Q47_c Q48 Q78;
-%do j=1 %to 4; 
-array new4_&j. {*} PPEDUCAT_&j. ppagect4_&j. PPREG4_&j. satisf_&j. worth_&j. happy_&j. anxious_&j. Q8_&j. Q10_&j. Q18_&j. Q19_&j.  Q21_a_&j. Q21_b_&j. Q21_c_&j. Q21_d_&j. Q21_e_&j. Q21_f_&j. Q24_&j. Q26_&j. Q30_a_&j. Q30_b_&j. Q32_a_&j. Q32_b_&j. Q33_&j. Q34_&j. Q43_&j. Q47_a_&j. Q47_b_&j. Q47_c_&j. Q48_&j. Q78_&j.;
-      do k=1 to dim( var4 );
-                  if var4{k}=&j. then new4_&j.{k}=1; 
-                  else if var4{k}~=-1 then new4_&j.{k}=0; 
-      end;
-%end; 
-drop k;
-
-*5 categories;
-array var5{*} PPHOUSE PPETHM PPHISPAN race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q22 Q29 /*Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l*/ Q36 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q50 Q52 Q60;
-%do j=1 %to 5; 
-array new5_&j. {*} PPHOUSE_&j. PPETHM_&j. PPHISPAN_&j. race_&j. geo_&j. Q7_&j. Q9_&j. Q20_a_&j. Q20_b_&j. Q20_c_&j. Q20_d_&j. Q20_e_&j. Q20_f_&j. Q20_g_&j. Q20_h_&j. Q20_i_&j. Q22_&j. Q29_&j. Q35_a_&j. Q35_b_&j. Q35_c_&j. Q35_d_&j. Q35_e_&j. Q35_f_&j. Q35_g_&j. Q35_h_&j. Q35_i_&j. Q35_j_&j. Q35_k_&j. Q35_l_&j. Q36_&j. Q46_a_&j. Q46_b_&j. Q46_c_&j. Q46_d_&j. Q46_e_&j. Q46_f_&j. Q46_g_&j. Q46_h_&j. Q46_i_&j. Q46_j_&j. Q46_k_&j. Q46_l_&j. Q46_m_&j. Q46_n_&j. Q46_o_&j. Q46_p_&j. Q50_&j. Q52_&j. Q60_&j.; 
-      do k=1 to dim( var5 );
-                  if var5{k}=&j. then new5_&j.{k}=1; 
-                  else if var5{k}~=-1 then new5_&j.{k}=0; 
-      end;
-%end; 
-drop k;
-
-*6 categories;
-array var6{*} ppracem Q23 Q54 Q79 PPMARIT;
-%do j=1 %to 6; 
-array new6_&j. {*} ppracem_&j. Q23_&j. Q54_&j. Q79_&j. PPMARIT_&j.; 
-      do k=1 to dim( var6 );
-                  if var6{k}=&j. then new6_&j.{k}=1; 
-                  else if var6{k}~=-1 then new6_&j.{k}=0; 
-      end;
-%end; 
-drop k;
-
-*7 categories;
-array var7{*} DOV_IDEO DOV_URBAN ppagecat PPWORK;
-%do j=1 %to 7; 
-array new7_&j. {*} DOV_IDEO_&j. DOV_URBAN_&j. ppagecat_&j. PPWORK_&j.; 
-      do k=1 to dim( var7 );
-                  if var7{k}=&j. then new7_&j.{k}=1; 
-                  else if var7{k}~=-1 then new7_&j.{k}=0; 
-      end;
-%end; 
-drop k;
-
-*13 categories;
-array var13{*} DOV_REL1;
-%do j=1 %to 13; 
-array new13_&j. {*} DOV_REL1_&j.; 
-      do k=1 to dim( var13 );
-                  if var13{k}=&j. then new13_&j.{k}=1; 
-                  else if var13{k}~=-1 then new13_&j.{k}=0; 
-      end;
-%end; 
-drop k;
-
-*14 categories;
-array var14{*} PPEDUC;
-%do j=1 %to 14; 
-array new14_&j. {*} PPEDUC_&j.; 
-      do k=1 to dim( var14 );
-                  if var14{k}=&j. then new14_&j.{k}=1; 
-                  else if var14{k}~=-1 then new14_&j.{k}=0; 
-      end;
-%end; 
-drop k;
-
-%mend; 
-
-data test;
-set raw.VoicesDMVSurvey2017;
-count=1;
+data VoicesDMVSurvey2017_recode;
+set VoicesDMVSurvey2017_recode_0;
 
 %dummies; 
+
+drop Q44_Text Q45_Text; 
+
 run;
 
 options nolabel;
