@@ -115,9 +115,9 @@ options mprint symbolgen=y;
 */
 
 *3 categories;
-array var3{*} PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h;
+array var3{*} PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h ;
 %do j=1 %to 3; 
-array new3_&j. {*} PPRENT_&j. income_&j. age_&j. phy_health_&j. ment_health_&j. Q17_&j. Q25_&j. Q49_&j. Q51_&j. Q53_&j. Q56_&j. Q58_&j. Q63_a_&j. Q63_b_&j. Q63_c_&j. Q63_d_&j. Q63_e_&j. Q63_f_&j. Q63_g_&j. Q63_h_&j.;
+array new3_&j. {*} PPRENT_&j. income_&j. age_&j. phy_health_&j. ment_health_&j. Q17_&j. Q25_&j. Q49_&j. Q51_&j. Q53_&j. Q56_&j. Q58_&j. Q63_a_&j. Q63_b_&j. Q63_c_&j. Q63_d_&j. Q63_e_&j. Q63_f_&j. Q63_g_&j. Q63_h_&j. ;
       do k=1 to dim( var3 );
                   if var3{k}=&j. then new3_&j.{k}=1; 
                   else if var3{k}~=-1 then new3_&j.{k}=0; 
@@ -126,9 +126,9 @@ array new3_&j. {*} PPRENT_&j. income_&j. age_&j. phy_health_&j. ment_health_&j. 
 drop k;
 
 *4 categories;
-array var4{*} PPEDUCAT ppagect4 PPREG4 satisf worth happy anxious Q8 Q10 Q18 Q19  /*Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f*/ Q24 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q43 Q47_a Q47_b Q47_c Q48 Q78;
+array var4{*} PPEDUCAT ppagect4 PPREG4 satisf worth happy anxious Q8 Q10 Q18 Q19  /*Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f*/ Q24 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q43 Q47_a Q47_b Q47_c Q48 Q78 ;
 %do j=1 %to 4; 
-array new4_&j. {*} PPEDUCAT_&j. ppagect4_&j. PPREG4_&j. satisf_&j. worth_&j. happy_&j. anxious_&j. Q8_&j. Q10_&j. Q18_&j. Q19_&j.  Q21_a_&j. Q21_b_&j. Q21_c_&j. Q21_d_&j. Q21_e_&j. Q21_f_&j. Q24_&j. Q26_&j. Q30_a_&j. Q30_b_&j. Q32_a_&j. Q32_b_&j. Q33_&j. Q34_&j. Q43_&j. Q47_a_&j. Q47_b_&j. Q47_c_&j. Q48_&j. Q78_&j.;
+array new4_&j. {*} PPEDUCAT_&j. ppagect4_&j. PPREG4_&j. satisf_&j. worth_&j. happy_&j. anxious_&j. Q8_&j. Q10_&j. Q18_&j. Q19_&j.  Q21_a_&j. Q21_b_&j. Q21_c_&j. Q21_d_&j. Q21_e_&j. Q21_f_&j. Q24_&j. Q26_&j. Q30_a_&j. Q30_b_&j. Q32_a_&j. Q32_b_&j. Q33_&j. Q34_&j. Q43_&j. Q47_a_&j. Q47_b_&j. Q47_c_&j. Q48_&j. Q78_&j. ;
       do k=1 to dim( var4 );
                   if var4{k}=&j. then new4_&j.{k}=1; 
                   else if var4{k}~=-1 then new4_&j.{k}=0; 
@@ -137,20 +137,21 @@ array new4_&j. {*} PPEDUCAT_&j. ppagect4_&j. PPREG4_&j. satisf_&j. worth_&j. hap
 drop k;
 
 *5 categories;
-array var5{*} PPHOUSE PPETHM PPHISPAN race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q22 Q29 /*Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l*/ Q36 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q50 Q52 Q60;
+array var5{*} Q3_cat Q4_cat Q5_cat PPHOUSE PPETHM PPHISPAN race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q22 Q29 /*Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l*/ Q36 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q50 Q52 Q60 ;
 %do j=1 %to 5; 
-array new5_&j. {*} PPHOUSE_&j. PPETHM_&j. PPHISPAN_&j. race_&j. geo_&j. Q7_&j. Q9_&j. Q20_a_&j. Q20_b_&j. Q20_c_&j. Q20_d_&j. Q20_e_&j. Q20_f_&j. Q20_g_&j. Q20_h_&j. Q20_i_&j. Q22_&j. Q29_&j. Q35_a_&j. Q35_b_&j. Q35_c_&j. Q35_d_&j. Q35_e_&j. Q35_f_&j. Q35_g_&j. Q35_h_&j. Q35_i_&j. Q35_j_&j. Q35_k_&j. Q35_l_&j. Q36_&j. Q46_a_&j. Q46_b_&j. Q46_c_&j. Q46_d_&j. Q46_e_&j. Q46_f_&j. Q46_g_&j. Q46_h_&j. Q46_i_&j. Q46_j_&j. Q46_k_&j. Q46_l_&j. Q46_m_&j. Q46_n_&j. Q46_o_&j. Q46_p_&j. Q50_&j. Q52_&j. Q60_&j.; 
+array new5_&j. {*} Q3_cat_&j. Q4_cat_&j. Q5_cat_&j. PPHOUSE_&j. PPETHM_&j. PPHISPAN_&j. race_&j. geo_&j. Q7_&j. Q9_&j. Q20_a_&j. Q20_b_&j. Q20_c_&j. Q20_d_&j. Q20_e_&j. Q20_f_&j. Q20_g_&j. Q20_h_&j. Q20_i_&j. Q22_&j. Q29_&j. Q35_a_&j. Q35_b_&j. Q35_c_&j. Q35_d_&j. Q35_e_&j. Q35_f_&j. Q35_g_&j. Q35_h_&j. Q35_i_&j. Q35_j_&j. Q35_k_&j. Q35_l_&j. Q36_&j. Q46_a_&j. Q46_b_&j. Q46_c_&j. Q46_d_&j. Q46_e_&j. Q46_f_&j. Q46_g_&j. Q46_h_&j. Q46_i_&j. Q46_j_&j. Q46_k_&j. Q46_l_&j. Q46_m_&j. Q46_n_&j. Q46_o_&j. Q46_p_&j. Q50_&j. Q52_&j. Q60_&j. ; 
       do k=1 to dim( var5 );
-                  if var5{k}=&j. then new5_&j.{k}=1; 
-                  else if var5{k}~=-1 then new5_&j.{k}=0; 
+				  new5_&j.{k}=0; 
+				  if var5{k}=&j. then new5_&j.{k}=1; 
+				  if var5{k} in(. -1) then new5_&j.{k}=.;
       end;
 %end; 
 drop k;
 
 *6 categories;
-array var6{*} ppracem Q23 Q54 Q79 PPMARIT;
+array var6{*} ppracem Q23 Q54 Q79 PPMARIT ;
 %do j=1 %to 6; 
-array new6_&j. {*} ppracem_&j. Q23_&j. Q54_&j. Q79_&j. PPMARIT_&j.; 
+array new6_&j. {*} ppracem_&j. Q23_&j. Q54_&j. Q79_&j. PPMARIT_&j. ; 
       do k=1 to dim( var6 );
                   if var6{k}=&j. then new6_&j.{k}=1; 
                   else if var6{k}~=-1 then new6_&j.{k}=0; 
@@ -159,9 +160,9 @@ array new6_&j. {*} ppracem_&j. Q23_&j. Q54_&j. Q79_&j. PPMARIT_&j.;
 drop k;
 
 *7 categories;
-array var7{*} DOV_IDEO DOV_URBAN ppagecat PPWORK;
+array var7{*} Q6 DOV_IDEO DOV_URBAN ppagecat PPWORK ;
 %do j=1 %to 7; 
-array new7_&j. {*} DOV_IDEO_&j. DOV_URBAN_&j. ppagecat_&j. PPWORK_&j.; 
+array new7_&j. {*} Q6_&j. DOV_IDEO_&j. DOV_URBAN_&j. ppagecat_&j. PPWORK_&j. ; 
       do k=1 to dim( var7 );
                   if var7{k}=&j. then new7_&j.{k}=1; 
                   else if var7{k}~=-1 then new7_&j.{k}=0; 
@@ -170,9 +171,9 @@ array new7_&j. {*} DOV_IDEO_&j. DOV_URBAN_&j. ppagecat_&j. PPWORK_&j.;
 drop k;
 
 *13 categories;
-array var13{*} DOV_REL1;
+array var13{*} DOV_REL1 ;
 %do j=1 %to 13; 
-array new13_&j. {*} DOV_REL1_&j.; 
+array new13_&j. {*} DOV_REL1_&j. ; 
       do k=1 to dim( var13 );
                   if var13{k}=&j. then new13_&j.{k}=1; 
                   else if var13{k}~=-1 then new13_&j.{k}=0; 
@@ -181,9 +182,9 @@ array new13_&j. {*} DOV_REL1_&j.;
 drop k;
 
 *14 categories;
-array var14{*} PPEDUC;
+array var14{*} PPEDUC ;
 %do j=1 %to 14; 
-array new14_&j. {*} PPEDUC_&j.; 
+array new14_&j. {*} PPEDUC_&j. ; 
       do k=1 to dim( var14 );
                   if var14{k}=&j. then new14_&j.{k}=1; 
                   else if var14{k}~=-1 then new14_&j.{k}=0; 
@@ -531,7 +532,7 @@ set VoicesDMVSurvey2017_recode_0;
 
 %dummies; 
 
-drop Q44_Text Q45_Text; 
+drop Q14_Text Q23_Text Q23_Refused Q28_Refused Q28_Text Q20_Text Q44_Text Q45_Text Q61_Text Q63_Text Q79_Text; 
 
 run;
 
@@ -626,11 +627,11 @@ run;
     Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode Q3_cat_: Q4_cat_: Q5_cat_:
     Q6_: Q7_: Q8_: Q9_: Q10_: Q11 Q12 Q13_: Q14_: Q17_: Q18_: Q19_: Q20_:  Q21_: Q22_: Q23_: Q24_: 
 	Q25_: Q26_: Q27 Q28_: Q29_: Q30_: Q31 Q32_: Q33_: Q34_: Q35_: Q36_: phy_health_: ment_health_: 
-	satisf_: worth_: happy_: anxious_: Q39_: Q40 thriving suffering struggling Q41_: Q42 Q43_: Q44_: 
+	satisf_: worth_: happy_: anxious_: Q39a Q39b Q39c Q39d Q40 thriving suffering struggling Q41a Q41b Q42 Q43_: Q44_: 
 	Q45_: Q46_: Q47_: Q48_: Q49_: Q50_: Q51_: Q52_: Q53_: Q54_: Q55 Q56_: Q57 Q58_: Q59 Q60_: Q61_: 
-	Q62_: Q63_: Q77 Q78_: Q79_: DOV_REL1_: DOV_REL1_: PPEDUC_: DOV_IDEO_: DOV_URBAN_: ppagecat_: PPWORK_: 
+	Q62 Q63_: Q77 Q78_: Q79_: DOV_REL1_: DOV_REL1_: PPEDUC_: DOV_IDEO_: DOV_URBAN_: ppagecat_: PPWORK_: 
 	PPRENT_: PPEDUCAT_: ppagect4_: PPREG4_: PPHOUSE_: PPETHM_: PPHISPAN_: ppracem_: PPMARIT_: DOV_IDEO_: 
-	ppagecat_: PPWORK_: race_: geo 
+	ppagecat_: PPWORK_: race_:  
   ;
 
   proc summary data=VoicesDMVSurvey2017_recode nway;
@@ -693,70 +694,76 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    fmt=comma10.1,
     var=Q3_cat_: Q4_cat_: Q5_cat_:, 
     text="Q3. How long have you lived in..." 
   )
 
   %Make_one_table( 
     col=&col, 
-    fmt=comma10.1,
     var=Q6_:, 
     text="Q6. How often do you talk to or visit with your immediate neighbors?" 
   )
 
   %Make_one_table( 
     col=&col, 
-    fmt=comma10.1,
     var=Q7_:, 
     text="Q7. In the place that you live, how much do you feel like you fit in?" 
   )
 
   %Make_one_table( 
     col=&col, 
-    fmt=comma10.1,
     var=Q8_:, 
     text="Q8. How would you rate the Washington area in general as a place to live?" 
   )
 
   %Make_one_table( 
     col=&col, 
-    fmt=comma10.1,
     var=Q9_:, 
     text="Q9. How likely are you to recommend [City/County]to a friend or co-worker as a place to live?" 
   )
 
   %Make_one_table( 
     col=&col, 
-    fmt=comma10.1,
     var=Q10_:, 
     text="Q10. If you had the choice of where to live, would you rather…" 
   )
 
   %Make_one_table( 
     col=&col, 
-    fmt=comma10.1,
     var=Q11, 
     text="Q11. In the next 12 months, are you likely to move away from the area where you live?" 
   )
 
   %Make_one_table( 
     col=&col, 
-    fmt=comma10.1,
     var=Q12, 
     text="Q12. Are you registered to vote?" 
   )
 
   %Make_one_table( 
     col=&col, 
-    var=Q13_:, 
+    var=Q13_1-Q13_8, 
     text="Q13. Have you, yourself, done any of the following in the last 12 months?" 
   )
 
   %Make_one_table( 
     col=&col, 
-    var=Q14_:, 
+	fmt=comma10.1,
+    var=Q13_count,
+    text="Q13. Count: Have you, yourself, done any of the following in the last 12 months?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q14_1-Q14_10, 
     text="Q14. Could you tell me whether you are a member of each type?" 
+  )
+ 
+  %Make_one_table( 
+    col=&col, 
+	fmt=comma10.1,
+    var=Q14_count,
+    text="Q14. Count: Could you tell me whether you are a member of each type?" 
   )
 
   %Make_one_table( 
@@ -779,13 +786,13 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q20_:, 
+    var=Q20_a_: Q20_b_: Q20_c_: Q20_d_: Q20_e_: Q20_f_: Q20_g_: Q20_h_: Q20_i_: , 
     text="Q20. In the past year, how often have you had trouble getting to where you need to go because:" 
   )
 
   %Make_one_table( 
     col=&col, 
-    var=Q21_:, 
+    var=Q21_a_1-Q21_a_4 Q21_b_1-Q21_b_4 Q21_c_1-Q21_c_4 Q21_d_1-Q21_d_4 Q21_e_1-Q21_e_4 Q21_f_1-Q21_f_4, 
     text="Q21. How would you rate these aspects of life in the place where you live?" 
   )
 
@@ -795,6 +802,7 @@ run;
     text="Q22. How often do you use services provided by nongovernmental, nonprofit organizations?" 
   )
 
+/*check table*/
   %Make_one_table( 
     col=&col, 
     var=Q23_:, 
@@ -839,7 +847,7 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q30_:, 
+    var=Q30_a_1-Q30_a_4 Q30_b_1-Q30_b_4, 
     text="Q30. How would you rate the following in [City/County]?..." 
   )
 
@@ -851,7 +859,7 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q32_:, 
+    var=Q32_a_1-Q32_a_4 Q32_b_1-Q32_b_4, 
     text="Q32. How would you rate the following in the city where you live?" 
   )
 
@@ -869,7 +877,7 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q35_:, 
+    var=Q35_a_1-Q35_a_5 Q35_b_1-Q35_b_5 Q35_c_1-Q35_c_5 Q35_d_1-Q35_d_5 Q35_e_1-Q35_e_5 Q35_f_1-Q35_f_5 Q35_g_1-Q35_g_5 Q35_h_1-Q35_h_5 Q35_i_1-Q35_i_5 Q35_j_1-Q35_j_5 Q35_k_1-Q35_k_5 , 
     text="Q35. ...priority do you think each of the following should be for the local government in the place where you live?" 
   )
 
@@ -932,13 +940,7 @@ run;
     var=Q42, 
     text="Q42. In the past year, have you ever felt discriminated against while in the Washington area?" 
   )
-
-  %Make_one_table( 
-    col=&col, 
-    var=Q42, 
-    text="Q42. In the past year, have you ever felt discriminated against while in the Washington area?" 
-  )
-
+/*look into this*/
   %Make_one_table( 
     col=&col, 
     var=Q43_:, 
@@ -957,15 +959,17 @@ run;
     text="Q45. In which systems or situations did you experience discrimination?" 
   )
 
+  /*look into*/
   %Make_one_table( 
     col=&col, 
-    var=Q46_:, 
+    var=Q46_a_1-Q46_a_5 Q46_b_1-Q46_b_5 Q46_c_1-Q46_c_5 Q46_d_1-Q46_d_5 Q46_e_1-Q46_e_5 Q46_f_1-Q46_f_5 Q46_g_1-Q46_g_5 Q46_h_1-Q46_h_5 Q46_i_1-Q46_i_5 Q46_j_1-Q46_j_5 Q46_k_1-Q46_k_5  Q46_l_1-Q46_l_5  Q46_m_1-Q46_m_5  Q46_n_1-Q46_n_5  Q46_o_1-Q46_o_5  Q46_p_1-Q46_p_5, 
     text="Q46. How good is the place where you live for different groups of people?" 
   )
 
+  /*look into*/
   %Make_one_table( 
     col=&col, 
-    var=Q47_:, 
+    var=Q47_a_: Q47_b_: Q47_c_:, 
     text="Q47. How would you rate the relations among different racial or ethnic groups..." 
   )
 
@@ -981,6 +985,7 @@ run;
     text="Q49. Do you think the police in your community treat people of color less favorably, more favorably, or equally to white people?" 
   )
 
+  /*look into*/
   %Make_one_table( 
     col=&col, 
     var=Q50_:, 
@@ -993,6 +998,7 @@ run;
     text="Q51. Do you think the economic conditions in the Washington area are getting better, getting worse, or staying about the same?" 
   )
 
+    /*look into*/
   %Make_one_table( 
     col=&col, 
     var=Q52_:, 
@@ -1017,6 +1023,7 @@ run;
     text="Q55. Have there been times in the past 12 months when you did not have enough money to buy food that you or your family needed?" 
   )
 
+    /*look into*/
   %Make_one_table( 
     col=&col, 
     var=Q56_:, 
@@ -1028,7 +1035,7 @@ run;
     var=Q57, 
     text="Q57. ...did not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
   )
-
+    /*look into*/
   %Make_one_table( 
     col=&col, 
     var=Q58_:, 
@@ -1040,7 +1047,7 @@ run;
     var=Q59, 
     text="Q59. Are you currently working at a paid job?" 
   )
-
+    /*look into*/
   %Make_one_table( 
     col=&col, 
     var=Q60_:, 
@@ -1061,7 +1068,7 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q63_:, 
+    var=Q63_a_: Q63_b_: Q63_c_: Q63_d_: Q63_e_: Q63_f_: Q63_g_: Q63_h_:, 
     text="Q63. How important for you are the following as barriers in finding or keeping a good job?" 
   )
 
@@ -1070,7 +1077,7 @@ run;
     var=Q77, 
     text="Q77. Were you born in the United States?" 
   )
-
+    /*look into*/
   %Make_one_table( 
     col=&col, 
     var=Q78_:, 
