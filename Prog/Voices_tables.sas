@@ -91,10 +91,10 @@ proc format;
     3 = 'High (7-8)'
     4 = 'Very high (9-10)';
 	value anxious
-    1 = 'Low (0-1)'  
-    2 = 'Medium (2-3)'
-    3 = 'High (4-5)'
-    4 = 'Very high (6-10)';
+    1 = 'Very low (0-1)'  
+    2 = 'Low (2-3)'
+    3 = 'Medium (4-5)'
+    4 = 'High (6-10)';
 
     
 options mprint symbolgen=y;
@@ -118,9 +118,10 @@ options mprint symbolgen=y;
 array var3{*} PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h ;
 %do j=1 %to 3; 
 array new3_&j. {*} PPRENT_&j. income_&j. age_&j. phy_health_&j. ment_health_&j. Q17_&j. Q25_&j. Q49_&j. Q51_&j. Q53_&j. Q56_&j. Q58_&j. Q63_a_&j. Q63_b_&j. Q63_c_&j. Q63_d_&j. Q63_e_&j. Q63_f_&j. Q63_g_&j. Q63_h_&j. ;
-      do k=1 to dim( var3 );
-                  if var3{k}=&j. then new3_&j.{k}=1; 
-                  else if var3{k}~=-1 then new3_&j.{k}=0; 
+			do k=1 to dim( var3 );
+				  new3_&j.{k}=0; 
+				  if var3{k}=&j. then new3_&j.{k}=1; 
+				  if var3{k} in(. -1) then new3_&j.{k}=.;
       end;
 %end; 
 drop k;
@@ -130,8 +131,9 @@ array var4{*} PPEDUCAT ppagect4 PPREG4 satisf worth happy anxious Q8 Q10 Q18 Q19
 %do j=1 %to 4; 
 array new4_&j. {*} PPEDUCAT_&j. ppagect4_&j. PPREG4_&j. satisf_&j. worth_&j. happy_&j. anxious_&j. Q8_&j. Q10_&j. Q18_&j. Q19_&j.  Q21_a_&j. Q21_b_&j. Q21_c_&j. Q21_d_&j. Q21_e_&j. Q21_f_&j. Q24_&j. Q26_&j. Q30_a_&j. Q30_b_&j. Q32_a_&j. Q32_b_&j. Q33_&j. Q34_&j. Q43_&j. Q47_a_&j. Q47_b_&j. Q47_c_&j. Q48_&j. Q78_&j. ;
       do k=1 to dim( var4 );
-                  if var4{k}=&j. then new4_&j.{k}=1; 
-                  else if var4{k}~=-1 then new4_&j.{k}=0; 
+				  new4_&j.{k}=0; 
+				  if var4{k}=&j. then new4_&j.{k}=1; 
+				  if var4{k} in(. -1) then new4_&j.{k}=.;
       end;
 %end; 
 drop k;
@@ -153,8 +155,9 @@ array var6{*} ppracem Q23 Q54 Q79 PPMARIT ;
 %do j=1 %to 6; 
 array new6_&j. {*} ppracem_&j. Q23_&j. Q54_&j. Q79_&j. PPMARIT_&j. ; 
       do k=1 to dim( var6 );
-                  if var6{k}=&j. then new6_&j.{k}=1; 
-                  else if var6{k}~=-1 then new6_&j.{k}=0; 
+				  new6_&j.{k}=0; 
+				  if var6{k}=&j. then new6_&j.{k}=1; 
+				  if var6{k} in(. -1) then new6_&j.{k}=.;
       end;
 %end; 
 drop k;
@@ -164,8 +167,9 @@ array var7{*} Q6 DOV_IDEO DOV_URBAN ppagecat PPWORK ;
 %do j=1 %to 7; 
 array new7_&j. {*} Q6_&j. DOV_IDEO_&j. DOV_URBAN_&j. ppagecat_&j. PPWORK_&j. ; 
       do k=1 to dim( var7 );
-                  if var7{k}=&j. then new7_&j.{k}=1; 
-                  else if var7{k}~=-1 then new7_&j.{k}=0; 
+				  new7_&j.{k}=0; 
+				  if var7{k}=&j. then new7_&j.{k}=1; 
+				  if var7{k} in(. -1) then new7_&j.{k}=.;
       end;
 %end; 
 drop k;
@@ -175,8 +179,9 @@ array var13{*} DOV_REL1 ;
 %do j=1 %to 13; 
 array new13_&j. {*} DOV_REL1_&j. ; 
       do k=1 to dim( var13 );
-                  if var13{k}=&j. then new13_&j.{k}=1; 
-                  else if var13{k}~=-1 then new13_&j.{k}=0; 
+				  new13_&j.{k}=0; 
+				  if var13{k}=&j. then new13_&j.{k}=1; 
+				  if var13{k} in(. -1) then new13_&j.{k}=.;
       end;
 %end; 
 drop k;
@@ -186,8 +191,9 @@ array var14{*} PPEDUC ;
 %do j=1 %to 14; 
 array new14_&j. {*} PPEDUC_&j. ; 
       do k=1 to dim( var14 );
-                  if var14{k}=&j. then new14_&j.{k}=1; 
-                  else if var14{k}~=-1 then new14_&j.{k}=0; 
+				  new14_&j.{k}=0; 
+				  if var14{k}=&j. then new14_&j.{k}=1; 
+				  if var14{k} in(. -1) then new14_&j.{k}=.;
       end;
 %end; 
 drop k;
@@ -531,6 +537,7 @@ data VoicesDMVSurvey2017_recode;
 set VoicesDMVSurvey2017_recode_0;
 
 %dummies; 
+%labels_var;
 
 drop Q14_Text Q23_Text Q23_Refused Q28_Refused Q28_Text Q20_Text Q44_Text Q45_Text Q61_Text Q63_Text Q79_Text; 
 
@@ -578,22 +585,76 @@ data DEFF_geo;
 
 run;
 
-/*data DEFF_geo;
+data DEFF_race;
 
-  input geo deff;
+  input race deff;
   
   datalines;
-  1 1.323
-  2 1.595
-  3 1.397
-  4 1.416
-  5 1.276
+  1 1.268
+  2 1.344
+  3 1.628
+  4 1.463
+  5 1.478
   ;
 
 run;
 
-*/
+data DEFF_educ;
 
+  input educ deff;
+  
+  datalines;
+  0 1.601
+  1 1.242
+  ;
+
+run;
+
+data DEFF_income;
+
+  input income deff;
+  
+  datalines;
+  1 1.282
+  2 1.335
+  3 1.512
+  ;
+
+run;
+
+data DEFF_age;
+
+  input age deff;
+  
+  datalines;
+  1 1.421
+  2 1.454
+  3 1.310
+  ;
+
+run;
+
+data DEFF_gender;
+
+  input gender deff;
+  
+  datalines;
+  0 1.526
+  1 1.325
+  ;
+
+run;
+
+data DEFF_homeown;
+
+  input homeown deff;
+  
+  datalines;
+  0 1.452
+  1 1.365
+  ;
+
+run;
 ** Macros for table creation **;
 
 /** Macro Make_one_table - Start Definition **/
@@ -1119,5 +1180,10 @@ run;
 
 %Make_all_tables( col=region, title=Tables for Entire Region )
 %Make_all_tables( col=geo, title=Tables by Jurisdiction )
-/*%Make_all_tables( col=race, title=Tables by Race )*/
+%Make_all_tables( col=race, title=Tables by Race )
+%Make_all_tables( col=educ, title=Tables by Education )
+%Make_all_tables( col=income, title=Tables by Income )
+%Make_all_tables( col=age, title=Tables by Age )
+%Make_all_tables( col=gender, title=Tables by Gender )
+%Make_all_tables( col=homeown, title=Tables by Homeownership Status )
 
