@@ -47,8 +47,8 @@ proc format;
     0 = 'Male'  
     1 = 'Female';
 	value homeown
-    0 = 'Homeowner'  
-    1 = 'Not homeowner';
+    0 = 'Not homeowner'  
+    1 = 'Homeowner';
 	value Q3_cat
     1 = '0-5'  
     2 = '5-10'
@@ -247,8 +247,8 @@ data VoicesDMVSurvey2017_recode_0 ;
   format gender gender.;
 
   homeown =.;
-  IF (PPRENT=1) THEN homeown = 0;
-  IF (PPRENT=2) or (PPRENT=3) THEN homeown = 1;
+  IF (PPRENT=2) or (PPRENT=3)  THEN homeown = 0;
+  IF (PPRENT=1) THEN homeown = 1;
   format homeown homeown.;
 /*
   geo =.;
@@ -653,8 +653,8 @@ data DEFF_homeown;
   input homeown deff;
   
   datalines;
-  0 1.452
-  1 1.365
+  0 1.365
+  1 1.452
   ;
 
 run;
