@@ -545,7 +545,7 @@ drop Q14_Text Q23_Text Q23_Refused Q28_Refused Q28_Text Q20_Text Q44_Text Q45_Te
 
 run;
 
-options nolabel;
+
 /*
 proc means data=VoicesDMVSurvey2017_recode;
   var age ;
