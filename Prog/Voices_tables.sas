@@ -151,9 +151,9 @@ array new5_&j. {*} Q3_cat_&j. Q4_cat_&j. Q5_cat_&j. PPHOUSE_&j. PPETHM_&j. PPHIS
 drop k;
 
 *6 categories;
-array var6{*} ppracem Q23 Q54 Q79 PPMARIT ;
+array var6{*} ppracem Q54 Q79 PPMARIT ;
 %do j=1 %to 6; 
-array new6_&j. {*} ppracem_&j. Q23_&j. Q54_&j. Q79_&j. PPMARIT_&j. ; 
+array new6_&j. {*} ppracem_&j. Q54_&j. Q79_&j. PPMARIT_&j. ; 
       do k=1 to dim( var6 );
 				  new6_&j.{k}=0; 
 				  if var6{k}=&j. then new6_&j.{k}=1; 
@@ -295,34 +295,7 @@ drop j;
     Q4_total = "How long have you lived in [dov_urban]? (years, recode)"
 	Q5_total = "How long have you lived in your current home? (years, recode)";
 */
-  Q3_cat =.;
-  IF (0 <= Q3_total <= 5) THEN Q3_cat = 1;
-  IF (5 < Q3_total <= 10) THEN Q3_cat = 2;
-  IF (10 < Q3_total <= 20) THEN Q3_cat = 3;
-  IF (20 < Q3_total <= 40) THEN Q3_cat = 4;
-  IF (Q3_total > 40) THEN Q3_cat = 5;
-  format Q3_cat Q3_cat.;
-
-  Q4_cat =.;
-  IF (0 <= Q4_total <= 5) THEN Q4_cat = 1;
-  IF (5 < Q4_total <= 10) THEN Q4_cat = 2;
-  IF (10 < Q4_total <= 20) THEN Q4_cat = 3;
-  IF (20 < Q4_total <= 40) THEN Q4_cat = 4;
-  IF (Q4_total > 40) THEN Q4_cat = 5;
-  format Q4_cat Q4_cat.;
  
-  Q5_cat =.;
-  IF (0 <= Q5_total <= 1) THEN Q5_cat = 1;
-  IF (1 < Q5_total <= 2) THEN Q5_cat = 2;
-  IF (2 < Q5_total <= 5) THEN Q5_cat = 3;
-  IF (5 < Q5_total <= 10) THEN Q5_cat = 4;
-  IF (Q5_total > 10) THEN Q5_cat = 5;
-  format Q5_cat Q5_cat.;
- 
-  label
-    Q3_cat = "Category: How long (years) have you lived in the Washington area?"
-    Q4_cat = "Category: How long (years) have you lived in [county/place]?"
-	Q5_cat = "Category: How long (years) have you lived in your current home?";
 
   phy_health =.;
   IF (Q37=0) THEN phy_health = 1;
@@ -406,6 +379,35 @@ format anxious anxious. happy happy. worth worth. satisf satisf.;
     Q3_Years_months_recode = "How long have you lived in the Washington area? (years, recode)"
     Q4_Years_months_recode = "How long have you lived in [dov_urban]? (years, recode)"
     Q5_Years_months_recode = "How long have you lived in your current home? (years, recode)";
+
+ Q3_cat =.;
+  IF (0 <= Q3_Years_months_recode <= 5) THEN Q3_cat = 1;
+  IF (5 < Q3_Years_months_recode <= 10) THEN Q3_cat = 2;
+  IF (10 < Q3_Years_months_recode <= 20) THEN Q3_cat = 3;
+  IF (20 < Q3_Years_months_recode <= 40) THEN Q3_cat = 4;
+  IF (Q3_Years_months_recode > 40) THEN Q3_cat = 5;
+  format Q3_cat Q3_cat.;
+
+  Q4_cat =.;
+  IF (0 <= Q4_Years_months_recode <= 5) THEN Q4_cat = 1;
+  IF (5 < Q4_Years_months_recode <= 10) THEN Q4_cat = 2;
+  IF (10 < Q4_Years_months_recode <= 20) THEN Q4_cat = 3;
+  IF (20 < Q4_Years_months_recode <= 40) THEN Q4_cat = 4;
+  IF (Q4_Years_months_recode > 40) THEN Q4_cat = 5;
+  format Q4_cat Q4_cat.;
+ 
+  Q5_cat =.;
+  IF (0 <= Q5_Years_months_recode <= 1) THEN Q5_cat = 1;
+  IF (1 < Q5_Years_months_recode <= 2) THEN Q5_cat = 2;
+  IF (2 < Q5_Years_months_recode <= 5) THEN Q5_cat = 3;
+  IF (5 < Q5_Years_months_recode <= 10) THEN Q5_cat = 4;
+  IF (Q5_Years_months_recode > 10) THEN Q5_cat = 5;
+  format Q5_cat Q5_cat.;
+ 
+  label
+    Q3_cat = "Category: How long (years) have you lived in the Washington area?"
+    Q4_cat = "Category: How long (years) have you lived in [county/place]?"
+	Q5_cat = "Category: How long (years) have you lived in your current home?";
 
   ** Recode questions with 1,2,-1 response codes **;
 
@@ -544,10 +546,11 @@ drop Q14_Text Q23_Text Q23_Refused Q28_Refused Q28_Text Q20_Text Q44_Text Q45_Te
 run;
 
 options nolabel;
-
+/*
 proc means data=VoicesDMVSurvey2017_recode;
   var age ;
 run;
+*/
 /*
 %Finalize_data_set( 
                                 data=profile_acs_&state._&geo2.,
@@ -686,8 +689,8 @@ run;
 
   %let full_var_list = 
     Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode Q3_cat_: Q4_cat_: Q5_cat_:
-    Q6_: Q7_: Q8_: Q9_: Q10_: Q11 Q12 Q13_: Q14_: Q17_: Q18_: Q19_: Q20_:  Q21_: Q22_: Q23_: Q24_: 
-	Q25_: Q26_: Q27 Q28_: Q29_: Q30_: Q31 Q32_: Q33_: Q34_: Q35_: Q36_: phy_health_: ment_health_: 
+    Q6_: Q7_: Q8_: Q9_: Q10_: Q11 Q12 Q13_: Q14_: Q17_: Q18_: Q19_: Q20_:  dQ21_: Q22_: Q23_: Q24_: 
+	Q25_: Q26_: Q27 Q28_: Q29_: Q30_: Q31 Q32_: Q33_: Q34_: dQ35_: Q36_: phy_health_: ment_health_: 
 	satisf_: worth_: happy_: anxious_: Q39a Q39b Q39c Q39d Q40 thriving suffering struggling Q41a Q41b Q42 Q43_: Q44_: 
 	Q45_: Q46_: Q47_: Q48_: Q49_: Q50_: Q51_: Q52_: Q53_: Q54_: Q55 Q56_: Q57 Q58_: Q59 Q60_: Q61_: 
 	Q62 Q63_: Q77 Q78_: Q79_: DOV_REL1_: DOV_REL1_: PPEDUC_: DOV_IDEO_: DOV_URBAN_: ppagecat_: PPWORK_: 
@@ -853,7 +856,7 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q21_a_1-Q21_a_4 Q21_b_1-Q21_b_4 Q21_c_1-Q21_c_4 Q21_d_1-Q21_d_4 Q21_e_1-Q21_e_4 Q21_f_1-Q21_f_4, 
+    var=dQ21:, 
     text="Q21. How would you rate these aspects of life in the place where you live?" 
   )
 
@@ -938,7 +941,7 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q35_a_1-Q35_a_5 Q35_b_1-Q35_b_5 Q35_c_1-Q35_c_5 Q35_d_1-Q35_d_5 Q35_e_1-Q35_e_5 Q35_f_1-Q35_f_5 Q35_g_1-Q35_g_5 Q35_h_1-Q35_h_5 Q35_i_1-Q35_i_5 Q35_j_1-Q35_j_5 Q35_k_1-Q35_k_5 , 
+    var=dQ35: , 
     text="Q35. ...priority do you think each of the following should be for the local government in the place where you live?" 
   )
 
