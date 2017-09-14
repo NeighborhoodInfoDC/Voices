@@ -14,41 +14,37 @@ from fuzzywuzzy import fuzz
 
 class cDatrow:
 
-    def __init__(self, caseid, text, matches ):
+    def __init__(self, caseid, text ):
         self.caseid = caseid
         self.text = text
-        self.dc = matches
+        self.matches = { "DC": False, "MC": False, "PG": False, "FC": False, "NV": False, "OT": False }
 
-class cPlacemapitem:
+class cPlacealtitem:
 
     def __init__(self, label, alt):
         self.label = label
-        self.alt = alt
+        self.alt = alt        
 
-class cPlacematchitem:
-
-    def __init__(self, label):
-        self.label = label
-        self.found = False
-
-Placemap = [
-    cPlacemapitem( "DC", [ "DC", "WASHINGTON DC" ] ),
-    cPlacemapitem( "PG", [ "PG", "PRINCE GEORGES" ] ),
-    cPlacemapitem( "MC", [ "MONTGOMERY COUNTY" ] )
+# Define place name alternates
+Placealt = [
+    cPlacealtitem( "DC", [ "DC", "WASHINGTON DC" ] ),
+    cPlacealtitem( "PG", [ "PG", "PRINCE GEORGES" ] ),
+    cPlacealtitem( "MC", [ "MONTGOMERY COUNTY" ] ),
+    cPlacealtitem( "FC", [ "FAIRFAX COUNTY" ] ),
+    cPlacealtitem( "NV", [ "NORTHERN VIRGINA", "NOVA", "ARLINGTON", "ALEXANDRIA" ] )
 ]
 
-for x in Placemap:
+for x in Placealt:
     print( x.label, x.alt )
 
-Placematch = [
-    cPlacematchitem( "DC" ),
-    cPlacematchitem( "PG" ),
-    cPlacematchitem( "MC" )
-]
 
-for x in Placematch:
-    print( x.label, x.found )
+# Instantiates a Google language services client
+client = language.LanguageServiceClient()
 
+# Translate table to strip out punctuation 
+trantab = str.maketrans( "", "", ".'" )
+
+# Read in responses
 
 Mydat = []
 
@@ -57,22 +53,18 @@ with open('L:\Libraries\Voices\Raw\Q1dat_10obs.csv', newline='') as f:
     reader = csv.reader(f)
     next(reader)    # Skip header row
     for row in reader:
-        Datrow = cDatrow(row[0],row[1],Placematch)
+        Datrow = cDatrow(row[0],row[1])
         Mydat.append(Datrow)
         # print(row[1])
         # Mydat.caseid.append(row[0])
         # Mydat.text.append(row[1])
 
-# Instantiates a Google language services client
-client = language.LanguageServiceClient()
-
-# Translate table to strip out punctuation 
-trantab = str.maketrans( "", "", ".'" )
+# Check place name matches for each response
 
 for d in Mydat:
 
     print( '-'*30 )
-    print( d.caseid, d.text )
+    print( d.text )
             
     document = language.types.Document(
         content=d.text,
@@ -85,9 +77,27 @@ for d in Mydat:
     )
 
     for entity in response.entities:
-        print(entity.type, entity.name, fuzz.ratio( str.upper(entity.name).translate(trantab), "DC") )
- 
+
+        foundmatch = False;
+
+        for place in Placealt:
+            for alt in place.alt:
+                if fuzz.ratio( str.upper(entity.name).translate(trantab), alt) > 65:
+                    d.matches[place.label] = True
+                    foundmatch = True
+                    print( entity.name, " // ", place.label, alt, fuzz.ratio( str.upper(entity.name).translate(trantab), alt) )
+                    
+        if not foundmatch:
+            d.matches["OT"] = True
+            print( entity.name, " // ", "OT" )
+
+    print( d.caseid, d.matches )
+
+    
         
+print( '='*30 )
+for d in Mydat:
+    print( d.caseid, d.matches )
     
     # print( d.caseid, d.text, d.dc )
     # print( response.entities )
