@@ -376,9 +376,9 @@ format anxious anxious. happy happy. worth worth. satisf satisf.;
   Q5_Years_months_recode = Q5_years + ( Q5_months / 12 );
 
   label
-    Q3_Years_months_recode = "How long have you lived in the Washington area? (years, recode)"
-    Q4_Years_months_recode = "How long have you lived in [dov_urban]? (years, recode)"
-    Q5_Years_months_recode = "How long have you lived in your current home? (years, recode)";
+    Q3_Years_months_recode = 'How long have you lived in the Washington area? (years, recode)'
+    Q4_Years_months_recode = 'How long have you lived in [city/county]? (years, recode)'
+    Q5_Years_months_recode = 'How long have you lived in your current home? (years, recode)';
 
  Q3_cat =.;
   IF (0 <= Q3_Years_months_recode <= 5) THEN Q3_cat = 1;
