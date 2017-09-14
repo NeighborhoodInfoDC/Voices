@@ -17,7 +17,6 @@ class cDatrow:
     def __init__(self, caseid, text ):
         self.caseid = caseid
         self.text = text
-        self.matches = { "DC": False, "MC": False, "PG": False, "FC": False, "NV": False, "OT": False }
 
 class cPlacealtitem:
 
@@ -27,7 +26,7 @@ class cPlacealtitem:
 
 # Define place name alternates
 Placealt = [
-    cPlacealtitem( "DC", [ "DC", "WASHINGTON DC" ] ),
+    cPlacealtitem( "DC", [ "DC", "WASHINGTON DC", "DISTRICT OF COLUMBIA" ] ),
     cPlacealtitem( "PG", [ "PG", "PRINCE GEORGES" ] ),
     cPlacealtitem( "MC", [ "MONTGOMERY COUNTY" ] ),
     cPlacealtitem( "FC", [ "FAIRFAX COUNTY" ] ),
@@ -48,57 +47,62 @@ trantab = str.maketrans( "", "", ".'" )
 
 Mydat = []
 
-with open('L:\Libraries\Voices\Raw\Q1dat_10obs.csv', newline='') as f:
-    dialect = 'excel'
-    reader = csv.reader(f)
+with open('L:\Libraries\Voices\Raw\Q1.csv', newline='') as f:
+    reader = csv.reader(f, dialect='excel')
     next(reader)    # Skip header row
     for row in reader:
+        if row == []:
+            break
         Datrow = cDatrow(row[0],row[1])
         Mydat.append(Datrow)
-        # print(row[1])
-        # Mydat.caseid.append(row[0])
-        # Mydat.text.append(row[1])
+
+print( len(Mydat), " input observations read." )
 
 # Check place name matches for each response
 
-for d in Mydat:
+with open( 'D:\DCData\Libraries\Voices\Raw\Q1_recode.csv', 'w', newline='') as csvfile:
 
-    print( '-'*30 )
-    print( d.text )
-            
-    document = language.types.Document(
-        content=d.text,
-        type='PLAIN_TEXT',
-    )
+    fieldnames = [ 'caseid', 'entity', 'DC', 'MC', 'PG', 'FC', 'NV', 'OT' ]
     
-    response = client.analyze_entities(
-        document=document,
-        encoding_type='UTF32',
-    )
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+        
+    for d in Mydat:
 
-    for entity in response.entities:
+        # print( '-'*30 )
+        # print( d.text )
 
-        foundmatch = False;
+        print( "Processing caseid #", d.caseid )
+                
+        document = language.types.Document(
+            content=d.text,
+            type='PLAIN_TEXT',
+        )
+        
+        response = client.analyze_entities(
+            document=document,
+            encoding_type='UTF32',
+        )
 
-        for place in Placealt:
-            for alt in place.alt:
-                if fuzz.ratio( str.upper(entity.name).translate(trantab), alt) > 65:
-                    d.matches[place.label] = True
-                    foundmatch = True
-                    print( entity.name, " // ", place.label, alt, fuzz.ratio( str.upper(entity.name).translate(trantab), alt) )
-                    
-        if not foundmatch:
-            d.matches["OT"] = True
-            print( entity.name, " // ", "OT" )
+        for entity in response.entities:
 
-    print( d.caseid, d.matches )
+            matches = { 'caseid': d.caseid, 'entity': entity.name, "DC": '', "MC": '', "PG": '', "FC": '', "NV": '', "OT": '' }
+
+            foundmatch = False;
+
+            for place in Placealt:
+                for alt in place.alt:
+                    if fuzz.ratio( str.upper(entity.name).translate(trantab), alt) > 70:
+                        matches[place.label] = 'X'
+                        foundmatch = True
+                        # print( entity.name, " // ", place.label, alt, fuzz.ratio( str.upper(entity.name).translate(trantab), alt) )
+                        
+            if not foundmatch:
+                matches["OT"] = 'X'
+                # print( entity.name, " // ", "OT" )
+
+            writer.writerow( matches )
+            # print( matches )
 
     
         
-print( '='*30 )
-for d in Mydat:
-    print( d.caseid, d.matches )
-    
-    # print( d.caseid, d.text, d.dc )
-    # print( response.entities )
-
