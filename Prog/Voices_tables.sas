@@ -232,8 +232,7 @@ data VoicesDMVSurvey2017_recode_0 ;
   IF (PPETHM=1) THEN race = 1;
   IF (PPETHM=2) THEN race = 2;
   IF (PPETHM=4) THEN race = 3;
-  IF (ppracem=4) or (ppracem=5) THEN race = 4;
-  IF (PPETHM=3) or (PPETHM=5) THEN race = 5;
+   
   format race race.;
 
   educ =.;
