@@ -34,13 +34,18 @@ Placealt = [
     cPlacealtitem( "DC", [ "DC", "WASHINGTON DC", "DISTRICT OF COLUMBIA" ] ),
     cPlacealtitem( "PG", [ "PG", "PRINCE GEORGES" ] ),
     cPlacealtitem( "MC", [ "MONTGOMERY COUNTY" ] ),
-    cPlacealtitem( "FC", [ "FAIRFAX COUNTY" ] ),
-    cPlacealtitem( "NV", [ "NORTHERN VIRGINA", "NOVA", "ARLINGTON", "ALEXANDRIA" ] )
+    cPlacealtitem( "FC", [ "FAIRFAX COUNTY", "FAIRFAX" ] ),
+    cPlacealtitem( "NV", [ "NORTHERN VIRGINA", "NOVA", "ARLINGTON", "ALEXANDRIA" ] ),
+    cPlacealtitem( "MD", [ "MD", "MARYLAND" ] ),
+    cPlacealtitem( "VA", [ "VA", "VIRGINIA" ] ),
+    cPlacealtitem( "DMV", [ "DMV", "GREATER DC", "NATIONS CAPITAL", "CAPITAL AREA" ] )
 ]
 
 for x in Placealt:
     print( x.label, x.alt )
 
+# Time program execution
+start_time = time.time()
 
 # Instantiates a Google language services client
 client = language.LanguageServiceClient()
@@ -67,7 +72,7 @@ print( len(Mydat), " input observations read." )
 
 with open(outFile, 'w', newline='') as csvfile:
 
-    fieldnames = [ 'caseid', 'entity', 'DC', 'MC', 'PG', 'FC', 'NV', 'OT' ]
+    fieldnames = [ 'caseid', 'entity', 'DC', 'MC', 'PG', 'FC', 'NV', 'MD', 'VA', 'DMV', 'OT' ]
     
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
@@ -78,7 +83,7 @@ with open(outFile, 'w', newline='') as csvfile:
         # print( d.text )
 
         print( "Processing caseid #", d.caseid )
-        time.sleep(0.1) # 0.1 seconds
+        time.sleep(0.1) # 0.1 seconds delay to avoid Google NLP quota
                 
         document = language.types.Document(
             content=d.text,
@@ -92,16 +97,16 @@ with open(outFile, 'w', newline='') as csvfile:
 
         for entity in response.entities:
 
-            matches = { 'caseid': d.caseid, 'entity': entity.name, "DC": '', "MC": '', "PG": '', "FC": '', "NV": '', "OT": '' }
+            matches = { 'caseid': d.caseid, 'entity': entity.name, 'DC': '', 'MC': '', 'PG': '', 'FC': '', 'NV': '', 'MD': '', 'VA': '', 'DMV': '', 'OT': '' }
 
             foundmatch = False;
 
             for place in Placealt:
                 for alt in place.alt:
-                    if fuzz.ratio( str.upper(entity.name).translate(trantab), alt) > 70:
+                    if fuzz.ratio( str.upper(entity.name).translate(trantab), alt) > 75:
                         matches[place.label] = 'X'
                         foundmatch = True
-                        # print( entity.name, " // ", place.label, alt, fuzz.ratio( str.upper(entity.name).translate(trantab), alt) )
+                        # print( entity.name, " // ", alt, place.label, fuzz.ratio( str.upper(entity.name).translate(trantab), alt) )
                         
             if not foundmatch:
                 matches["OT"] = 'X'
@@ -110,5 +115,4 @@ with open(outFile, 'w', newline='') as csvfile:
             writer.writerow( matches )
             # print( matches )
 
-    
-        
+print("--- %s minutes ---" % ((time.time() - start_time)/60))
