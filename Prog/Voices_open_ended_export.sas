@@ -18,18 +18,31 @@ further processing.
 ** Define libraries **;
 %DCData_lib( Voices )
 
-title1;
-footnote1;
+/** Macro Export_q - Start Definition **/
 
-ods csvall body="L:\Libraries\Voices\Raw\Q1.csv";
-ods listing close;
+%macro Export_q( qvar );
 
-proc print data=Voices.VoicesDMVSurvey2017;
-  id caseid;
-  var q1;
+  %let qvar = %upcase( &qvar );
 
-run;
+  title1;
+  footnote1;
 
-ods csvall close;
-ods listing;
+  ods csvall body="L:\Libraries\Voices\Raw\&qvar..csv";
+  ods listing close;
 
+  proc print data=Voices.VoicesDMVSurvey2017;
+    id caseid;
+    var &qvar;
+
+  run;
+
+  ods csvall close;
+  ods listing;
+
+%mend Export_q;
+
+/** End Macro Definition **/
+
+
+%Export_q( Q1 )
+%Export_q( Q2 )

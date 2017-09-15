@@ -1,6 +1,6 @@
-# Open_ended_q1_test.py
+# Open_ended_q2.py
 # Test use of Google Natural Language Processing for parsing open-ended responses to 
-# VoicesDMV survey, question 1. 
+# VoicesDMV survey, question 2. 
 #
 # P. Tatian
 
@@ -26,8 +26,8 @@ class cPlacealtitem:
         self.alt = alt        
 
 # Input and output files
-inFile = 'L:\Libraries\Voices\Raw\Q1.csv'
-outFile = 'L:\Libraries\Voices\Raw\Q1_recode.csv'
+inFile = 'L:\Libraries\Voices\Raw\Q2.csv'
+outFile = 'L:\Libraries\Voices\Raw\Q2_recode.csv'
 
 # Define place name alternates
 Placealt = [

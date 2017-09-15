@@ -1,4 +1,4 @@
-# Open_ended_q1_test.py
+# Open_ended_q1.py
 # Test use of Google Natural Language Processing for parsing open-ended responses to 
 # VoicesDMV survey, question 1. 
 #
