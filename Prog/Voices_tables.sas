@@ -691,7 +691,7 @@ run;
     Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode Q3_cat_: Q4_cat_: Q5_cat_:
     Q6_: Q7_: Q8_: Q9_: Q10_: Q11 Q12 Q13_: Q14_: Q17_: Q18_: Q19_: Q20_:  dQ21_: Q22_: Q23_: Q24_: 
 	Q25_: Q26_: Q27 Q28_: Q29_: Q30_: Q31 Q32_: Q33_: Q34_: dQ35_: Q36_: phy_health_: ment_health_: 
-	satisf_: worth_: happy_: anxious_: Q39a Q39b Q39c Q39d Q40 thriving suffering struggling Q41a Q41b Q42 Q43_: Q44_: 
+	satisf_: worth_: happy_: anxious_: Q39a Q39b Q39c Q39d Q40 Q41a Q41b thriving suffering struggling Q42 Q43_: Q44_: 
 	Q45_: Q46_: Q47_: Q48_: Q49_: Q50_: Q51_: Q52_: Q53_: Q54_: Q55 Q56_: Q57 Q58_: Q59 Q60_: Q61_: 
 	Q62 Q63_: Q77 Q78_: Q79_: DOV_REL1_: DOV_REL1_: PPEDUC_: DOV_IDEO_: DOV_URBAN_: ppagecat_: PPWORK_: 
 	PPRENT_: PPEDUCAT_: ppagect4_: PPREG4_: PPHOUSE_: PPETHM_: PPHISPAN_: ppracem_: PPMARIT_: DOV_IDEO_: 
@@ -719,7 +719,7 @@ run;
     array a{*} &full_var_list;
     
     do i = 1 to dim( a );
-      a{i} = a{i} * deff;
+      a{i} = a{i} * deff*(1.645); *changed to 90% confidence interval;
     end;
     
     drop i;
@@ -732,7 +732,7 @@ run;
     by &col;
     
     if mean then type = 'Mean';
-    else type = 'SE';
+    else type = 'CI'; *changed from SE;
     
   run;
 
@@ -1001,7 +1001,7 @@ run;
 
   %Make_one_table( 
     col=&col, 
-    var=Q40_:, 
+    var=Q40, 
     text="Q40. Do you have relatives or friends who you can count on to help you when you need them?" 
   )
 
