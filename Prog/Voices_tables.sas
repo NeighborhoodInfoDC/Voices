@@ -232,6 +232,8 @@ data VoicesDMVSurvey2017_recode_0 ;
   IF (PPETHM=1) THEN race = 1;
   IF (PPETHM=2) THEN race = 2;
   IF (PPETHM=4) THEN race = 3;
+  if race=. and PPETHM=3 and PPRACEM in(4, 5) then race = 4; *keeping Asian/PI only if also Non-Hispanic Other;
+  if race=. and PPETHM in (3, 5) then race=5; *all other non-Hispanic other and non-Hispanic 2+ race.; 
    
   format race race.;
 
