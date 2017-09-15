@@ -753,13 +753,25 @@ run;
     col=&col, 
     fmt=comma10.1,
     var=Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode, 
-    text="Q3. How long have you lived in..." 
+    text="Q3-Q5. How long have you lived in..." 
   )
 
   %Make_one_table( 
     col=&col, 
-    var=Q3_cat_: Q4_cat_: Q5_cat_:, 
-    text="Q3. How long have you lived in..." 
+    var=Q3_cat_:, 
+    text="Q3. How long have you lived in the Washington area?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q4_cat_:, 
+    text="Q4. How long have you lived in [city/county]?" 
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q5_cat_:, 
+    text="Q5. How long have you lived in your current home?" 
   )
 
   %Make_one_table( 
