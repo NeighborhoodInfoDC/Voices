@@ -127,9 +127,9 @@ array new3_&j. {*} PPRENT_&j. income_&j. age_&j. phy_health_&j. ment_health_&j. 
 drop k;
 
 *4 categories;
-array var4{*} PPEDUCAT ppagect4 PPREG4 satisf worth happy anxious Q8 Q10 Q18 Q19  /*Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f*/ Q24 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q43 Q47_a Q47_b Q47_c Q48 Q78 ;
+array var4{*} PPEDUCAT ppagect4 satisf worth happy anxious Q8 Q10 Q18 Q19  /*Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f*/ Q24 Q26 Q30_a Q30_b Q32_a Q32_b Q33 Q34 Q43 Q47_a Q47_b Q47_c Q48 Q78 ;
 %do j=1 %to 4; 
-array new4_&j. {*} PPEDUCAT_&j. ppagect4_&j. PPREG4_&j. satisf_&j. worth_&j. happy_&j. anxious_&j. Q8_&j. Q10_&j. Q18_&j. Q19_&j.  /*Q21_a_&j. Q21_b_&j. Q21_c_&j. Q21_d_&j. Q21_e_&j. Q21_f_&j.*/ Q24_&j. Q26_&j. Q30_a_&j. Q30_b_&j. Q32_a_&j. Q32_b_&j. Q33_&j. Q34_&j. Q43_&j. Q47_a_&j. Q47_b_&j. Q47_c_&j. Q48_&j. Q78_&j. ;
+array new4_&j. {*} PPEDUCAT_&j. ppagect4_&j. satisf_&j. worth_&j. happy_&j. anxious_&j. Q8_&j. Q10_&j. Q18_&j. Q19_&j.  /*Q21_a_&j. Q21_b_&j. Q21_c_&j. Q21_d_&j. Q21_e_&j. Q21_f_&j.*/ Q24_&j. Q26_&j. Q30_a_&j. Q30_b_&j. Q32_a_&j. Q32_b_&j. Q33_&j. Q34_&j. Q43_&j. Q47_a_&j. Q47_b_&j. Q47_c_&j. Q48_&j. Q78_&j. ;
       do k=1 to dim( var4 );
 				  new4_&j.{k}=0; 
 				  if var4{k}=&j. then new4_&j.{k}=1; 
@@ -163,13 +163,25 @@ array new6_&j. {*} ppracem_&j. Q54_&j. Q79_&j. PPMARIT_&j. ;
 drop k;
 
 *7 categories;
-array var7{*} Q6 DOV_IDEO DOV_URBAN ppagecat PPWORK ;
+array var7{*} Q6 DOV_IDEO ppagecat PPWORK ;
 %do j=1 %to 7; 
-array new7_&j. {*} Q6_&j. DOV_IDEO_&j. DOV_URBAN_&j. ppagecat_&j. PPWORK_&j. ; 
+array new7_&j. {*} Q6_&j. DOV_IDEO_&j. ppagecat_&j. PPWORK_&j. ; 
       do k=1 to dim( var7 );
 				  new7_&j.{k}=0; 
 				  if var7{k}=&j. then new7_&j.{k}=1; 
 				  if var7{k} in(. -1) then new7_&j.{k}=.;
+      end;
+%end; 
+drop k;
+
+*8 categories;
+array var8{*} DOV_URBAN ;
+%do j=1 %to 8; 
+array new8_&j. {*} DOV_URBAN_&j. ; 
+      do k=1 to dim( var8 );
+				  new8_&j.{k}=0; 
+				  if var8{k}=&j. then new8_&j.{k}=1; 
+				  if var8{k} in(. -1) then new8_&j.{k}=.;
       end;
 %end; 
 drop k;
@@ -478,6 +490,8 @@ format anxious anxious. happy happy. worth worth. satisf satisf.;
    format     Q35_k Q35_K.;
    format     Q35_l Q35_L.;
 
+/*drop the sQ35_: estimation values*/
+drop sQ35_:;
   *keep caseid weight Q35_: sQ35_: dQ35_:;
 
   array q21{*} Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f;
@@ -517,6 +531,9 @@ format anxious anxious. happy happy. worth worth. satisf satisf.;
    format     Q21_d Q21_D.;
    format     Q21_e Q21_E.;
    format     Q21_f Q21_F.;
+
+/*drop the sQ21_: estimation values*/
+drop sQ21_:;
 
   *keep caseid weight q21_: sq21_: dq21_:;
 
