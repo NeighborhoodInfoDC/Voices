@@ -1,4 +1,4 @@
-# Open_ended_q15.py
+# Open_ended_q15_entities.py
 # Test use of Google Natural Language Processing for parsing open-ended responses to 
 # VoicesDMV survey, question 15. 
 #
@@ -9,8 +9,6 @@ import time
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
-from fuzzywuzzy import fuzz
-# from fuzzywuzzy import process
 
 
 class cDatrow:
@@ -26,8 +24,14 @@ class cPlacealtitem:
         self.alt = alt        
 
 # Input and output files
-inFile = 'L:\Libraries\Voices\Raw\Q15.csv'
-outFile = 'L:\Libraries\Voices\Raw\Q15_recode.csv'
+# inFile = 'L:\Libraries\Voices\Raw\Q15.csv'
+# outFile = 'L:\Libraries\Voices\Raw\Q15_recode.csv'
+
+inFile = 'C:\DCData\Libraries\Voices\Raw\Q15.csv'
+outFile = 'C:\DCData\Libraries\Voices\Raw\Q15_entities.csv'
+
+# Time program execution
+start_time = time.time()
 
 # Instantiates a Google language services client
 client = language.LanguageServiceClient()
@@ -50,21 +54,29 @@ with open(inFile, newline='') as f:
 
 print( len(Mydat), " input observations read." )
 
-# Check place name matches for each response
+# Use Google NLP to extract key entities from each response
 
 with open(outFile, 'w', newline='') as csvfile:
 
-    fieldnames = [ 'caseid', 'entity' ]
+    fieldnames = [ 'caseid', 'respnum', 'entity' ]
     
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
+
+    caseidHold = 0
+    respnum = 0
         
     for d in Mydat:
 
-        # print( '-'*30 )
+        if caseidHold == d.caseid:
+            respnum = respnum + 1
+        else:
+            respnum = 1
+            caseidHold = d.caseid
+
+        print( "Processing caseid #", d.caseid, " resp #", respnum )
         # print( d.text )
 
-        print( "Processing caseid #", d.caseid )
         time.sleep(0.1) # 0.1 seconds delay to avoid Google NLP quota
                 
         document = language.types.Document(
@@ -79,8 +91,9 @@ with open(outFile, 'w', newline='') as csvfile:
 
         for entity in response.entities:
 
-            matches = { 'caseid': d.caseid, 'entity': entity.name }
+            row = { 'caseid': d.caseid, 'respnum': respnum, 'entity': entity.name }
 
-            writer.writerow( matches )
-            # print( matches )
+            writer.writerow( row )
+            # print( row )
 
+print("--- %s minutes ---" % ((time.time() - start_time)/60))
