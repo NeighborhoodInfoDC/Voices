@@ -25,7 +25,7 @@ class cPlacealtitem:
 
 # Input and output files
 # inFile = 'L:\Libraries\Voices\Raw\Q15.csv'
-# outFile = 'L:\Libraries\Voices\Raw\Q15_recode.csv'
+# outFile = 'L:\Libraries\Voices\Raw\Q15_entities.csv'
 
 inFile = 'C:\DCData\Libraries\Voices\Raw\Q15.csv'
 outFile = 'C:\DCData\Libraries\Voices\Raw\Q15_entities.csv'
