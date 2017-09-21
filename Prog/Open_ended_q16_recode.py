@@ -1,6 +1,6 @@
-# Open_ended_q15_recode.py
+# Open_ended_q16_recode.py
 # Recode open-ended responses
-# VoicesDMV survey, question 15. 
+# VoicesDMV survey, question 16. 
 #
 # P. Tatian
 
@@ -23,11 +23,11 @@ class cTopicaltitem:
         self.alt = alt        
 
 # Input and output files
-inFile = 'L:\Libraries\Voices\Raw\Q15_entities.csv'
-outFile = 'L:\Libraries\Voices\Raw\Q15_recode.csv'
+inFile = 'L:\Libraries\Voices\Raw\Q16_entities.csv'
+outFile = 'L:\Libraries\Voices\Raw\Q16_recode.csv'
 
-# inFile = 'C:\DCData\Libraries\Voices\Raw\Q15_entities.csv'
-# outFile = 'C:\DCData\Libraries\Voices\Raw\Q15_recode.csv'
+# inFile = 'C:\DCData\Libraries\Voices\Raw\Q16_entities.csv'
+# outFile = 'C:\DCData\Libraries\Voices\Raw\Q16_recode.csv'
 
 # Define place name alternates
 Topicalt = [
@@ -36,52 +36,39 @@ Topicalt = [
                      "LOT", "LOTS", "IDK", "NA", "N/A" ] ),
     cTopicaltitem( "PEOPLE",
                    [ "PEOPLE", "POPULATION", "WOMEN", "MEN", "EDUCATION LEVEL", "POPULACE", "RESIDENTS" ] ),
-    
     cTopicaltitem( "CULTURE",
-                   [ "CULTURE", "FESTIVALS", "CULTURE EVENTS", 
+                   [ "CULTURE", "MUSEUM", "MUSEUMS", "MUSUEMS", "HISTORY", "MONUMENTS", "ARTS", "ART",
+                     "MUSIC", "SMITHSONIAN", "WHITE HOUSE", "SIGHTS", "SIGHTSEEING",
+                     "THEATER", "THEATRE", "THEATERS", "KENNEDY CENTER", "ART GALLERIES",
+                     "FESTIVALS", "TOURIST ATTRACTIONS", "LANDMARKS",
+                     "NATIONAL MALL", "MUSIC VENUES", "TOURIST ATTRACTIONS",
+                     "TOURISM", "CULTURE EVENTS", "GALLERIES", "PERFORMANCES",
+                     "ACCESS MUSEUMS", "AFRICAN AMERICAN MUSEUM", "AIR & SPACE",
+                     "ART GALLERY", "ART GALLERYS", "ART INDUSTRY", "ART MUSEUM", 
+                     "ART MUSEUMS", "ART OPPORTUNITIES", "ART RESOURCES", 
+                     "ARTS AND ENTERTAINMENT", "ARTS CULTURE", "ARTS ENTERTAINMENT MUSEUMS", 
+                     "ARTS SCENE", "ARTS/ CULTURE", "CHERISHED MONUMENTS", "CONCERTS",
                      "CULTERAL", "CULTERS", "CULTIRE", "CULTURAL ACTIVITIES", "CULTURAL CENTER", 
                      "CULTURALS", "CULTURE  MUSEUMS", "CULTURE ACTIVITIES", "CULTURE AVAILABILTY", 
                      "CULTURE AWARENESS OPPORTUNITIES", "CULTURE RANGE", "CULTURY", "CULTUTES",
-                      ] ),
-    cTopicaltitem( "MUSEUMS", 
-                   [ "MUSEUM", "MUSEUMS", "MUSUEMS", "SMITHSONIAN", "ACCESS MUSEUMS", 
-                     "AFRICAN AMERICAN MUSEUM", "AIR & SPACE", "SMITHSONIAN INSTITUTION", "ZOO" ] ),
-    cTopicaltitem( "ARTS", 
-                   [ "ARTS", "ART", "ART GALLERIES", "GALLERIES", "ART GALLERY", "ART GALLERYS", "ART INDUSTRY", "ART MUSEUM", 
-                     "ART MUSEUMS", "ART OPPORTUNITIES", "ART RESOURCES", 
-                     "ARTS AND ENTERTAINMENT", "ARTS CULTURE", "ARTS ENTERTAINMENT MUSEUMS", 
-                     "ARTS SCENE", "ARTS/ CULTURE" ] ),
-    cTopicaltitem( "PERFORM", 
-                   [ "MUSIC", "THEATER", "THEATRE", "THEATERS", "KENNEDY CENTER", 
-                     "MUSIC VENUES", "PERFORMANCES", "CONCERTS", "DANCE", "DANCE SCHOOLS" ] ),
-    cTopicaltitem( "MONUMENTS", 
-                   [ "HISTORY", "MONUMENTS", "WHITE HOUSE", "SIGHTS", "SIGHTSEEING",
-                     "TOURIST ATTRACTIONS", "LANDMARKS", "NATIONAL MALL", "TOURIST ATTRACTIONS",
-                     "TOURISM", "CHERISHED MONUMENTS", "HISTORICAL" ] ),
-
+                     "DANCE", "DANCE SCHOOLS", "HISTORICAL", "SMITHSONIAN INSTITUTION", "ZOO" ] ),
     cTopicaltitem( "ENTERTAINMENT",
-                   [ "ENTERTAINMENT", "ACTIVITIES", "EVENTS", "FUN", "RECREATION", 
-                     "ENTERTAINMENT OPTIONS", "LEISURE ACTIVITIES", "AMUSEMENT PARKS", "AMUSEMENTS",
-                     "ENTERTAINMENT CHOICES" ] ),
-    cTopicaltitem( "FOOD",
-                   [ "FOOD", "FOODS", "RESTAURANTS", "DINING", "FOOD CHOICES", "RESTAURANT SCENE",
+                   [ "ENTERTAINMENT", "FOOD", "FOODS", "ACTIVITIES", "RESTAURANTS",
+                     "EVENTS", "NIGHTLIFE", "NIGHT LIFE", "SPORTS", "DINING",
+                     "FUN", "SPORTS TEAMS", "TEAMS", "RECREATION", "BARS",
+                     "ENTERTAINMENT OPTIONS", "FOOD CHOICES", "RESTAURANT SCENE",
+                     "BASEBALL", "FOOTBALL", "HOCKEY", "REDSKINS", "WIZARDS", "LEISURE ACTIVITIES",
                      "RESTAURANT CHOICES", "DINING OPTIONS", "FOOD SCENE", "FOOD PLACES",
-                     "FOOD VARIETY", "CUISINE", "CUISINE CHOICES", "CUISINES", "DINING  RANGE", 
-                     "DINING CHOICES", "DINING OPPORTUNITIES", "DINING SCENE", "DINING/ENTER TAINMENT",
-                     "SEAFOOD", "RESTARAUNTS", "RESTAURANT OPTIONS", "RESTAURANT VARIETY", 
-                     "RESTERAUNTS", "RESTUARANTS", "RESTURANT" ] ),
-    cTopicaltitem( "BEER",
-                   [ "BEER", "BEER OPTIONS" ] ),
-    cTopicaltitem( "SPORTS",
-                   [ "SPORTS", "SPORTS TEAMS", "TEAMS", "BASEBALL", "FOOTBALL", "HOCKEY", "REDSKINS", 
-                     "WIZARDS", "BASEBALL PARK", "BASEBALL TEAM" ] ),
-    cTopicaltitem( "NIGHTLIFE",
-                   [ "NIGHTLIFE", "NIGHT LIFE", "BARS", "BAR SCENE", "CITY NIGHT LIFE" ] ), 
-                   
+                     "FOOD VARIETY", "AMUSEMENT PARKS", "AMUSEMENTS",
+                     "BAR SCENE", "BASEBALL PARK", "BASEBALL TEAM", "BEER", "BEER OPTIONS",
+                     "CITY NIGHT LIFE", "CUISINE", "CUISINE CHOICES", "CUISINES",
+                     "DINING  RANGE", "DINING CHOICES", "DINING OPPORTUNITIES", "DINING SCENE", "DINING/ENTER TAINMENT",
+                     "SEAFOOD", "ENTERTAINMENT CHOICES",
+                     "RESTARAUNTS", "RESTAURANT OPTIONS", "RESTAURANT VARIETY", "RESTERAUNTS", "RESTUARANTS", "RESTURANT" ] ),
     cTopicaltitem( "LOCATION",
                    [ "LOCATION", "ACCESS", "ACESS", "ACCESSIBILITY", "ACESSABILITY", 
                      "PROXIMITY", "COAST", "EAST COAST", "BALTIMORE", "CITY ACCESSIBILITY",
-                     "CLOSETOEVERYTHING", "COMMUTE DISTANCE", "CLOSENESS" ] ),
+                     "CLOSENESS TO DC", "CLOSETOEVERYTHING", "COMMUTE DISTANCE", "CLOSENESS" ] ),
     cTopicaltitem( "JOBS",
                    [ "JOBS", "JOB", "JOB OPPORTUNITIES", "JOB OPPORTUNITY", "CAREER",
                      "JOB MARKET", "JOB AVAILABILITY", "JOB SECURITY", "WORK",
@@ -137,7 +124,7 @@ Topicalt = [
     cTopicaltitem( "FAMILY",
                    [ "FAMILY", "CHILDREN", "FAMILY MEMBERS", "HUSBAND", "SON", "DAUGHTER", "GRANDCHILDREN", "GRANDCHILD",
                      "RELATIVES" ] ),
-    cTopicaltitem( "DC", [ "DC", "WASHINGTON DC", "CLOSENESS TO DC" ] ),
+    cTopicaltitem( "DC", [ "DC", "WASHINGTON DC" ] ),
     cTopicaltitem( "COSTS", [ "PRICE", "PRICES", "COST", "COST OF LIVING" ] ),
     cTopicaltitem( "POLITICS", [ "PROGRESSIVE", "PROGRESSIVE AREA", "PROGRESSIVE COMMUNITY", "POLITICS", "DEMOCRATS", "LIBERAL" ] ),
     cTopicaltitem( "DIVERSITY",
