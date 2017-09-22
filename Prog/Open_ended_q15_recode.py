@@ -29,7 +29,7 @@ outFile = 'L:\Libraries\Voices\Raw\Q15_recode.csv'
 # inFile = 'C:\DCData\Libraries\Voices\Raw\Q15_entities.csv'
 # outFile = 'C:\DCData\Libraries\Voices\Raw\Q15_recode.csv'
 
-# Define place name alternates
+# Define topic name alternates
 Topicalt = [
     cTopicaltitem( "NOMATCH",
                    [ "THINGS", "OPPORTUNITY", "CENTER", "CENTERS", "SPOTS", "SORTS",
@@ -41,8 +41,7 @@ Topicalt = [
                    [ "CULTURE", "FESTIVALS", "CULTURE EVENTS", 
                      "CULTERAL", "CULTERS", "CULTIRE", "CULTURAL ACTIVITIES", "CULTURAL CENTER", 
                      "CULTURALS", "CULTURE  MUSEUMS", "CULTURE ACTIVITIES", "CULTURE AVAILABILTY", 
-                     "CULTURE AWARENESS OPPORTUNITIES", "CULTURE RANGE", "CULTURY", "CULTUTES",
-                      ] ),
+                     "CULTURE AWARENESS OPPORTUNITIES", "CULTURE RANGE", "CULTURY", "CULTUTES" ] ),
     cTopicaltitem( "MUSEUMS", 
                    [ "MUSEUM", "MUSEUMS", "MUSUEMS", "SMITHSONIAN", "ACCESS MUSEUMS", 
                      "AFRICAN AMERICAN MUSEUM", "AIR & SPACE", "SMITHSONIAN INSTITUTION", "ZOO" ] ),
@@ -69,9 +68,7 @@ Topicalt = [
                      "FOOD VARIETY", "CUISINE", "CUISINE CHOICES", "CUISINES", "DINING  RANGE", 
                      "DINING CHOICES", "DINING OPPORTUNITIES", "DINING SCENE", "DINING/ENTER TAINMENT",
                      "SEAFOOD", "RESTARAUNTS", "RESTAURANT OPTIONS", "RESTAURANT VARIETY", 
-                     "RESTERAUNTS", "RESTUARANTS", "RESTURANT" ] ),
-    cTopicaltitem( "BEER",
-                   [ "BEER", "BEER OPTIONS" ] ),
+                     "RESTERAUNTS", "RESTUARANTS", "RESTURANT", "BEER", "BEER OPTIONS" ] ),
     cTopicaltitem( "SPORTS",
                    [ "SPORTS", "SPORTS TEAMS", "TEAMS", "BASEBALL", "FOOTBALL", "HOCKEY", "REDSKINS", 
                      "WIZARDS", "BASEBALL PARK", "BASEBALL TEAM" ] ),
@@ -88,35 +85,48 @@ Topicalt = [
                      "EMPLOYMENT", "EMPLOYMENT OPPORTUNITIES", "WORK OPPORTUNITIES",
                      "SALARY", "NETWORKING", "UNEMPLOYMENT", "CAREER OPPORTUNITIES", "CAREER OPPORTUNITY",
                      "DEFENSE JOBS", "EMPLOYMENT OPPORTUNITY", "GOVERNMENT JOBS", "SALARIES", "WAGES" ] ),
+
     cTopicaltitem( "TRANSPORTATION",
-                   [ "TRANSPORTATION", "AIRPORTS", "METRO", "TRANSIT", "COMMUTE",
-                     "TRAFFIC", "TRANSPORT", "PUBLIC TRANSIT", "ROADS",
-                     "TRANSPORTATION OPTIONS", "BUSES", "SUBWAY SYSTEM",
-                     "AIRLINE HUB", "AIRPORT ACCESSIBILTY", "AIRPORT SELECTION",
-                     "AMTRAK", "AREA BUS", "BUS", "BUS SERVICE", "BUSSES", "WMATA", "CAR" ] ),
+                   [ "TRANSPORTATION", "COMMUTE", "TRAFFIC", "TRANSPORT", "ROADS",
+                     "TRANSPORTATION OPTIONS", "AMTRAK", "CAR" ] ),
+    cTopicaltitem( "METRO",
+                   [ "METRO", "TRANSIT", "PUBLIC TRANSIT", "SUBWAY SYSTEM", "WMATA" ] ),
+    cTopicaltitem( "BUS",
+                   [ "BUSES", "AREA BUS", "BUS", "BUS SERVICE", "BUSSES" ] ),
+    cTopicaltitem( "AIRPORTS",
+                   [ "AIRPORTS", "AIRLINE HUB", "AIRPORT ACCESSIBILTY", "AIRPORT SELECTION" ] ),
+                     
     cTopicaltitem( "WALKABILITY", [ "WALKABILITY", "WALKING DISTANCE", "WALKABLE", "WALKING" ] ),
+
     cTopicaltitem( "SCHOOLS",
                    [ "SCHOOLS", "SCHOOL", "EDUCATION", "SCHOOL SYSTEM",
                      "UNIVERSITIES", "COLLEGE", "COLLEGES", "EDUCATION SYSTEM", "EDUCATION OPPORTUNITIES" ] ),
+
     cTopicaltitem( "WEATHER", [ "WEATHER", "SEASONS", "WINTERS", "SNOW", "CLIMATE" ] ),
+
     cTopicaltitem( "SHOPPING",
                    [ "SHOPPING", "STORES", "STORE", "SHOPS", "SHOPPING CENTERS",
                      "SHOPPING MALLS", "CLOTHES", "CLOTHING", "MALLS", "RETAIL", "SHOPPING OPTIONS" ] ),
+
     cTopicaltitem( "COMMUNITY",
                    [ "COMMUNITY", "NEIGHBORHOODS", "NEIGHBORS", "CLUBS", "CHURCH",
                      "CHURCHES", "BLACK COMMUNITY", "CHURCH COMMUNITY", "CHURCH FAMILY",
                      "COMMUNITY CENTERS", "COMMUNITY FEEL", "COMMUNITY FEELING", 
                      "COMMUNITY SERVICES", "COMMUNITY SUPPORT", "FRIEND", "FRIENDS" ] ),
+
     cTopicaltitem( "NOTHING", [ "NOTHING", "NONE" ] ),
+
     cTopicaltitem( "CAPITAL",
                    [ "CAPITAL", "CAPITOL", "GOVERNMENT",
                      "NATIONS CAPITAL", "POWER", "CAPITAL CITY", "CONGRESS", "PRESIDENT" ] ),
+
     cTopicaltitem( "LIFE",
                    [ "LIFE", "CITY LIFE", "ATMOSPHERE", "LIVING", "FRIENDLINESS",
                      "CITY FEEL", "DENSITY", "VIBRANCY", "PARTIES", 
                      "CITY CULTURE", "CITY ENVIROMENT", "CITY LIVING", "CITY POPULATION", 
                      "CITY SETTINGS", "LIFESTYLE", "LIFESTYLES", "LIFE STYLE", "CLEANLINESS", "COMFORT",
                      "CONVENIENCE", "CONVIENCE", "MARIJUANA", "MARIJUANA LAWS" ] ),
+
     cTopicaltitem( "NATURE",
                    [ "NATURE", "PARKS", "MOUNTAINS", "SCENERY",
                      "BEACHES", "BEACH", "OCEAN", "SPACE", "TREES", "WATER", "GREEN",
@@ -125,21 +135,30 @@ Topicalt = [
                      "ROCK CREEK PARK", "BEAUTIFUL RIVER", "BEAUTIFUL SCENIC AREAS",
                      "BIKE", "BIKE PATHS", "BIKING", "BIKING TRAILS", "CHERRY BLOSSEMS", "CHERRY BLOSSOMS",
                      "COUNTRYSIDE", "GREEN SPACES", "RIVERS", "SCENARY" ] ),
+
     cTopicaltitem( "ECONOMY", 
                    [ "ECONOMY", "MONEY", "WEALTH", "BUSINESS", "BUSINESS CENTER", "BUSINESS OPPORTUNITIES", "BUSINESSES",
                      "INCOME" ] ),
+
     cTopicaltitem( "SERVICES",
                    [ "SERVICES", "AMENITIES", "HEALTH CARE", "HEALTHCARE", "HOSPITALS",
                      "LIBRARIES", "DOCTORS", "GROCERY STORES", "CITY AMENITIES", "CITY RESOURCES",
                      "DOCTOR AVAILABILITY", "CARE" ] ),
+
     cTopicaltitem( "SAFETY", [ "SAFETY", "SAFE", "SECURITY", "CRIME", "CRIME RATE" ] ),
+
     cTopicaltitem( "HOUSING", [ "HOUSING", "HOMES", "HOME PRICES", "APARTMENT", "APARTMENTS", "HOUSES", "RENT" ] ),    
+
     cTopicaltitem( "FAMILY",
                    [ "FAMILY", "CHILDREN", "FAMILY MEMBERS", "HUSBAND", "SON", "DAUGHTER", "GRANDCHILDREN", "GRANDCHILD",
                      "RELATIVES" ] ),
+
     cTopicaltitem( "DC", [ "DC", "WASHINGTON DC", "CLOSENESS TO DC" ] ),
+
     cTopicaltitem( "COSTS", [ "PRICE", "PRICES", "COST", "COST OF LIVING" ] ),
+
     cTopicaltitem( "POLITICS", [ "PROGRESSIVE", "PROGRESSIVE AREA", "PROGRESSIVE COMMUNITY", "POLITICS", "DEMOCRATS", "LIBERAL" ] ),
+
     cTopicaltitem( "DIVERSITY",
                    [ "DIVERSITY", "CULTURES", "COMMUNITIES", "MELTING POT", "RACES",
                      "COSMOPOLITAN", "COSMOPOLITANISM", "MULTICULTURALISM", "MULTICULTURE",
