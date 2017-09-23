@@ -7,7 +7,7 @@
  Version:  SAS 9.2
  Environment:  Local Windows session (desktop)
  
- Description:  Make standard formats for Voices survey.
+ Description:  Make standard formats for Voices 2017 survey.
 
  Modifications:
 **************************************************************************/
@@ -18,6 +18,7 @@
 %DCData_lib( Voices )
 
 proc format library=Voices;
+
   value region
     1 = 'Washington Area';
   value geo
@@ -49,5 +50,52 @@ proc format library=Voices;
 	value homeown
     0 = 'Not homeowner'  
     1 = 'Homeowner';
+
+	value Q3_cat
+    1 = '0-5'  
+    2 = '5-10'
+    3 = '10-20'  
+    4 = '20-40'
+    5 = '40+';
+	value Q4_cat
+    1 = '0-5'  
+    2 = '5-10'
+    3 = '10-20'  
+    4 = '20-40'
+    5 = '40+';
+	value Q5_cat
+    1 = '0-1'  
+    2 = '1-2'
+    3 = '2-5'  
+    4 = '5-10'
+    5 = '10+';
+	value phy_health
+    1 = '0 days'  
+    2 = '1-13 days'
+    3 = '14-30 days';
+	value ment_health
+    1 = '0 days'  
+    2 = '1-13 days'
+    3 = '14-30 days';
+	value satisf
+    1 = 'Low (0-4)'  
+    2 = 'Medium (5-6)'
+    3 = 'High (7-8)'
+    4 = 'Very high (9-10)';
+	value worth
+    1 = 'Low (0-4)'  
+    2 = 'Medium (5-6)'
+    3 = 'High (7-8)'
+    4 = 'Very high (9-10)';
+	value happy
+    1 = 'Low (0-4)'  
+    2 = 'Medium (5-6)'
+    3 = 'High (7-8)'
+    4 = 'Very high (9-10)';
+	value anxious
+    1 = 'Very low (0-1)'  
+    2 = 'Low (2-3)'
+    3 = 'Medium (4-5)'
+    4 = 'High (6-10)';
 
 run;

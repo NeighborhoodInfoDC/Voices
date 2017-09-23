@@ -1,5 +1,5 @@
 /**************************************************************************
- Program: Voices_tables.sas
+ Program: Labels_var_2017.sas
  Library: Voices
  Project: NeighborhoodInfo DC
  Author: C. Hedman
@@ -12,7 +12,7 @@
  Modifications:
 **************************************************************************/
 
-%macro labels_var;
+%macro Labels_var_2017();
 
 label
 Q10_1 = '1. Stay in your neighborhood'
@@ -29,7 +29,7 @@ Q13_7 = '7. Given money to a local community organization or nonprofit?'
 Q13_8 = '8. Given money to a local political candidate, civic cause, referendum, or ballot initiative?'
 /*Q13_count = ''*/
 Q14_1 = '1. Fraternal groups or service clubs'
-Q14_2 = '2. Veterans’ groups'
+Q14_2 = '2. Veterans'' groups'
 Q14_3 = '3. Hobby, sports or leisure groups '
 Q14_4 = '4. School fraternities or sororities'
 Q14_5 = '5. Nationality or cultural groups'
@@ -285,7 +285,6 @@ Q36_5 = '5. Poor'
 /*Q3_Months = ''*/
 /*Q3_Years = ''*/
 /*Q3_Years_months_recode = ''*/
-Q3_cat = 'Q3_CAT.'
 Q3_cat_1 = '1. 0-5 years '
 Q3_cat_2 = '2. 5-10 years '
 Q3_cat_3 = '3. 10-20 years '
@@ -442,7 +441,6 @@ Q49_3 = '3. Equally'
 /*Q4_Months = ''*/
 /*Q4_Years = ''*/
 /*Q4_Years_months_recode = ''*/
-Q4_cat = 'Q4_CAT.'
 Q4_cat_1 = '1. 0-5 years '
 Q4_cat_2 = '2. 5-10 years '
 Q4_cat_3 = '3. 10-20 years '
@@ -617,6 +615,9 @@ DOV_URBAN_7 = '7. Fairfax City '
 DOV_URBAN_8 = '8. Falls Church City '
 DeviceType = 'DOV: Device Type '
 PPAGE = 'Age '
+age_1 = '1. 18 - 34 years old'
+age_2 = '2. 35 - 64 years old'
+age_3 = '3. 65 and older'
 PPEDUC = 'Education (Highest Degree Received) '
 PPEDUCAT = 'Education (Categorical) '
 PPEDUCAT_1 = '1. Less than high school '
@@ -673,7 +674,7 @@ PPRENT_1 = '1. Owned or being bought by you or someone '
 PPRENT_2 = '2. Rented for cash '
 PPRENT_3 = '3. Occupied without payment of cash rent  '
 ppagecat_1 = '1. 18-24 '
-ppagecat_2 = '2 . 25-34 '
+ppagecat_2 = '2. 25-34 '
 ppagecat_3 = '3. 35-44 '
 ppagecat_4 = '4. 45-54 '
 ppagecat_5 = '5. 55-64 '
@@ -734,4 +735,4 @@ Q21_e = 'e. The availability of arts and cultural opportunities '
 Q21_f = 'f. Access to transportation options '
 
 ;
-%mend;
+%mend Labels_var_2017;
