@@ -21,6 +21,8 @@
 options mprint symbolgen=y;
 %let NUM_LEVELS = 5; 
 
+%let revisions = New file.;
+
 %macro dummies;
 
   *2: PPHHHEAD Q11 Q12  Q13_1 Q13_2 Q13_3 Q13_4 Q13_5 Q13_6 Q13_7 Q13_8 Q14_1 Q14_2 Q14_3 Q14_4 Q14_5 Q14_6 Q14_7 Q14_8 Q14_9 Q14_10 Q27 Q28_1 Q28_2 Q28_3 Q28_4 Q28_5 Q28_6 Q28_7 Q28_8 Q28_9 Q28_10 Q31 Q40  Q42 Q44_a Q44_b Q44_c Q44_d Q44_e Q44_f Q44_g Q44_h Q44_i Q44_j Q44_k Q44_l Q44_m Q44_n Q45_a Q45_b Q45_c Q45_d Q45_e Q45_f Q45_g Q45_h Q45_i Q55 Q57  Q59 Q61_a Q61_b Q61_c Q61_d Q61_e Q61_f Q61_g Q61_h Q61_i Q61_j Q62 Q77
@@ -431,7 +433,8 @@ run;
   outlib=Voices,
   label="VoicesDMV 2017 survey, non-open questions, recode",
   sortby=caseid,
-  revisions=%str(New file.),
+  revisions=%str(&revisions),
+  restrictions=Confidential,
   printobs=0,
   freqvars=Geo Race Educ Income Age Gender Homeown
 )
