@@ -21,19 +21,25 @@
 
 /** Macro Make_one_table - Start Definition **/
 
-%macro Make_one_table( fmt=percent10.1, col=, var=, text= );
+%macro Make_one_table( fmt=npercent., col=, var=, text=, data=Voices_means_se, typefmt=$coltype_pct. );
 
-  proc tabulate data=Voices_means_se format=&fmt noseps missing;
-    class &col type;
+  title2 height=9pt " ";
+  title3 height=9pt &text;
+
+  proc tabulate data=&data format=&fmt noseps missing order=data;
+    class &col;
+    class type / preloadfmt;
     var &var;
     table 
       /** Rows **/
       &var,
       /** Columns **/
       &col=' ' * sum=' ' * type=' '
-      /box = &text
     ;
+    format type &typefmt;
   run;
+  
+  title2;
 
 %mend Make_one_table;
 
@@ -53,18 +59,18 @@
 	satisf_: worth_: happy_: anxious_: Q39a Q39b Q39c Q39d Q40 Q41a Q41b thriving suffering struggling Q42 Q43_: Q44_: 
 	Q45_: Q46_: Q47_: Q48_: Q49_: Q50_: Q51_: Q52_: Q53_: Q54_: Q55 Q56_: Q57 Q58_: Q59 Q60_: Q61_: 
 	Q62 Q63_: Q77 Q78_: Q79_: DOV_REL1_: DOV_REL1_: PPEDUC_: DOV_IDEO_: DOV_URBAN_: ppagecat_: PPWORK_: 
-	PPRENT_: PPEDUCAT_: ppagect4_: PPREG4_: PPHOUSE_: PPETHM_: PPHISPAN_: ppracem_: PPMARIT_: DOV_IDEO_: 
+	PPRENT_: PPEDUCAT_: ppagect4_: PPHOUSE_: PPETHM_: PPHISPAN_: ppracem_: PPMARIT_: DOV_IDEO_: 
 	ppagecat_: PPWORK_: race_:  
   ;
 
-  proc summary data=Voices_2017_nonopen_recode nway;
+  proc summary data=Voices.Voices_2017_nonopen_recode nway;
     class &col;
     var &full_var_list;
     weight weight;
     output out=Voices_means (drop=_type_ _freq_) mean=;
   run;
 
-  proc summary data=Voices_2017_nonopen_recode nway;
+  proc summary data=Voices.Voices_2017_nonopen_recode nway;
     class &col;
     var &full_var_list;
     output out=Voices_se (drop=_type_ _freq_) stderr=;
@@ -100,21 +106,23 @@
   options orientation=landscape;
   options nodate nonumber;
 
-  ods rtf file="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..rtf" style=Pearl;
+  ods rtf file="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..rtf" style=Styles.Voices_style_rtf
+      bodytitle toc_data;
+      
   ods listing close;
   
   title1 "VoicesDMV Survey: &title";
 
   footnote1 height=9pt "Prepared by NeighborhoodInfo DC (www.NeighborhoodInfoDC.org), &fdate..";
-  footnote2 height=9pt j=r '{Page}\~{\field{\*\fldinst{\pard\b\i0\chcbpat8\qc\f1\fs19\cf1{PAGE }\cf0\chcbpat0}}}';
 
   %Make_one_table( 
     col=&col, 
     fmt=comma10.1,
+    typefmt=$coltype_mean.,
     var=Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode, 
     text="Q3-Q5. How long have you lived in..." 
   )
-/**
+
   %Make_one_table( 
     col=&col, 
     var=Q3_cat_:, 
@@ -184,6 +192,7 @@
   %Make_one_table( 
     col=&col, 
 	fmt=comma10.1,
+    typefmt=$coltype_mean.,
     var=Q13_count,
     text="Q13. Count: Have you, yourself, done any of the following in the last 12 months?" 
   )
@@ -197,6 +206,7 @@
   %Make_one_table( 
     col=&col, 
 	fmt=comma10.1,
+    typefmt=$coltype_mean.,
     var=Q14_count,
     text="Q14. Count: Could you tell me whether you are a member of each type?" 
   )
@@ -536,7 +546,7 @@
     var=DOV_IDEO_:, 
     text="Q81. In general, do you think of yourself as…" 
   )
-**/
+
   **add each var**;
 
   ods rtf close;
@@ -553,9 +563,16 @@
 ** Column type format **;
 
 proc format;
-  value $coltype (notsorted)
-    'Mean' = 'Mean'
-    'CI' = 'CI';
+  value $coltype_mean (notsorted)
+    'Mean' = '\qr Mean'
+    'CI' = '\qr +/-';
+  value $coltype_pct (notsorted)
+    'Mean' = '\qr Pct.'
+    'CI' = '\qr +/-';
+  picture npercent (round)
+    low-high = '0000009.9' (mult=1000);
+  value region
+    1 = 'Washington\~Area';
 run;
 
 
@@ -574,8 +591,6 @@ run;
 ** Create tables **;
 
 %Make_all_tables( col=region, title=Tables for Entire Region )
-
-/*
 %Make_all_tables( col=geo, title=Tables by Jurisdiction )
 %Make_all_tables( col=race, title=Tables by Race )
 %Make_all_tables( col=educ, title=Tables by Education )
