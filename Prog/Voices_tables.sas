@@ -247,7 +247,7 @@
     text="Q22. How often do you use services provided by nongovernmental, nonprofit organizations?" 
   )
 
-**check table**;
+
   %Make_one_table( 
     col=&col, 
     var=Q23_:, 
@@ -385,7 +385,7 @@
     var=Q42, 
     text="Q42. In the past year, have you ever felt discriminated against while in the Washington area?" 
   )
-**look into this**;
+
   %Make_one_table( 
     col=&col, 
     var=Q43_:, 
@@ -404,14 +404,14 @@
     text="Q45. In which systems or situations did you experience discrimination?" 
   )
 
-  **look into**;
+
   %Make_one_table( 
     col=&col, 
     var=Q46_a_1-Q46_a_5 Q46_b_1-Q46_b_5 Q46_c_1-Q46_c_5 Q46_d_1-Q46_d_5 Q46_e_1-Q46_e_5 Q46_f_1-Q46_f_5 Q46_g_1-Q46_g_5 Q46_h_1-Q46_h_5 Q46_i_1-Q46_i_5 Q46_j_1-Q46_j_5 Q46_k_1-Q46_k_5  Q46_l_1-Q46_l_5  Q46_m_1-Q46_m_5  Q46_n_1-Q46_n_5  Q46_o_1-Q46_o_5  Q46_p_1-Q46_p_5, 
     text="Q46. How good is the place where you live for different groups of people?" 
   )
 
-  **look into**;
+
   %Make_one_table( 
     col=&col, 
     var=Q47_a_: Q47_b_: Q47_c_:, 
@@ -430,7 +430,7 @@
     text="Q49. Do you think the police in your community treat people of color less favorably, more favorably, or equally to white people?" 
   )
 
-  **look into**;
+ 
   %Make_one_table( 
     col=&col, 
     var=Q50_:, 
@@ -443,7 +443,7 @@
     text="Q51. Do you think the economic conditions in the Washington area are getting better, getting worse, or staying about the same?" 
   )
 
-    **look into**;
+  
   %Make_one_table( 
     col=&col, 
     var=Q52_:, 
@@ -468,7 +468,7 @@
     text="Q55. Have there been times in the past 12 months when you did not have enough money to buy food that you or your family needed?" 
   )
 
-    **look into**;
+  
   %Make_one_table( 
     col=&col, 
     var=Q56_:, 
@@ -480,7 +480,7 @@
     var=Q57, 
     text="Q57. ...did not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
   )
-    **look into**;
+
   %Make_one_table( 
     col=&col, 
     var=Q58_:, 
@@ -492,7 +492,7 @@
     var=Q59, 
     text="Q59. Are you currently working at a paid job?" 
   )
-    **look into**;
+  
   %Make_one_table( 
     col=&col, 
     var=Q60_:, 
@@ -546,8 +546,6 @@
     var=DOV_IDEO_:, 
     text="Q81. In general, do you think of yourself as…" 
   )
-
-  **add each var**;
 
   ods rtf close;
   ods listing;
