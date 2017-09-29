@@ -50,8 +50,8 @@ proc template;
         'StrongFont' = ("Arial",9pt,Bold)
         'EmphasisFont' = ("Arial",9pt,Italic)
         /** Title & footnote fonts **/
-        'TitleFont' = ("Arial",11pt,Bold)
-        'TitleFont2' = ("Arial",11pt,Bold)
+        'TitleFont' = ("Arial",11pt)
+        'TitleFont2' = ("Arial",11pt)
         /** Fixed-width fonts **/
         'FixedEmphasisFont' = ("Courier New, Courier",9pt,Italic)
         'FixedStrongFont' = ("Courier New, Courier",9pt,Bold)

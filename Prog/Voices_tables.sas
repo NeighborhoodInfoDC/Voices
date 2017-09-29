@@ -21,18 +21,46 @@
 
 /** Macro Make_one_table - Start Definition **/
 
-%macro Make_one_table( fmt=npercent., col=, var=, text=, data=Voices_means_se, typefmt=$coltype_pct. );
+%macro Make_one_table( fmt=npercent., col=, total=y, var=, text=, text2=, data=Voices_means_se, typefmt=$coltype_pct. );
+
+  data Table Count;
+  
+    set &data;
+    
+    count = min( of &var );
+    
+    if type = 'Mean' then varsum = sum( of &var );
+    
+    if type = 'N' then output Count;
+    else output Table;
+    
+  run;
+  
+  proc sql noprint;
+    select sum(count) format comma8.0 into :num_obs
+    from Count;
+  quit; 
 
   title2 height=9pt " ";
-  title3 height=9pt &text;
-
-  proc tabulate data=&data format=&fmt noseps missing order=data;
+  title3 height=9pt bold &text;
+  title4 height=9pt bold &text2;
+  
+  footnote1 height=9pt italic "Number of responses = %left(%nrbquote(&num_obs)).";
+  footnote2 height=9pt " ";
+  footnote3 height=9pt italic "Prepared by Urban Institute, &fdate..";
+  
+  proc tabulate data=Table format=&fmt noseps missing order=data;
     class &col;
     class type / preloadfmt;
-    var &var;
+    var &var varsum;
     table 
       /** Rows **/
-      &var,
+      %if %mparam_is_yes( &total ) %then %do;
+        &var varsum='\b Total',
+      %end;
+      %else %do;
+        &var,
+      %end;
       /** Columns **/
       &col=' ' * sum=' ' * type=' '
     ;
@@ -76,6 +104,12 @@
     output out=Voices_se (drop=_type_ _freq_) stderr=;
   run;
 
+  proc summary data=Voices.Voices_2017_nonopen_recode nway;
+    class &col;
+    var &full_var_list;
+    output out=Voices_n (drop=_type_ _freq_) n=;
+  run;
+
   data Voices_se_deff;
 
     merge Voices_se deff_&col;
@@ -93,11 +127,276 @@
 
   data Voices_means_se;
 
-    set Voices_means (in=mean) Voices_se_deff;
+    set Voices_means (in=is_mean) Voices_se_deff (in=is_deff) Voices_n;
     by &col;
     
-    if mean then type = 'Mean';
-    else type = 'CI'; *changed from SE;
+    if is_mean then type = 'Mean';
+    else if is_deff then type = 'CI'; *changed from SE;
+    else type = 'N';
+    
+    label
+      Q20_a_1 = "Never"
+      Q20_a_2 = "Less than once per month"
+      Q20_a_3 = "Monthly"
+      Q20_a_4 = "Weekly"
+      Q20_a_5 = "Daily"
+      Q20_b_1 = "Never"
+      Q20_b_2 = "Less than once per month"
+      Q20_b_3 = "Monthly"
+      Q20_b_4 = "Weekly"
+      Q20_b_5 = "Daily"
+      Q20_c_1 = "Never"
+      Q20_c_2 = "Less than once per month"
+      Q20_c_3 = "Monthly"
+      Q20_c_4 = "Weekly"
+      Q20_c_5 = "Daily"
+      Q20_d_1 = "Never"
+      Q20_d_2 = "Less than once per month"
+      Q20_d_3 = "Monthly"
+      Q20_d_4 = "Weekly"
+      Q20_d_5 = "Daily"
+      Q20_e_1 = "Never"
+      Q20_e_2 = "Less than once per month"
+      Q20_e_3 = "Monthly"
+      Q20_e_4 = "Weekly"
+      Q20_e_5 = "Daily"
+      Q20_f_1 = "Never"
+      Q20_f_2 = "Less than once per month"
+      Q20_f_3 = "Monthly"
+      Q20_f_4 = "Weekly"
+      Q20_f_5 = "Daily"
+      Q20_g_1 = "Never"
+      Q20_g_2 = "Less than once per month"
+      Q20_g_3 = "Monthly"
+      Q20_g_4 = "Weekly"
+      Q20_g_5 = "Daily"
+      Q20_h_1 = "Never"
+      Q20_h_2 = "Less than once per month"
+      Q20_h_3 = "Monthly"
+      Q20_h_4 = "Weekly"
+      Q20_h_5 = "Daily"
+      Q20_i_1 = "Never"
+      Q20_i_2 = "Less than once per month"
+      Q20_i_3 = "Monthly"
+      Q20_i_4 = "Weekly"
+      Q20_i_5 = "Daily"
+      dQ21_a1 = "Excellent"
+      dQ21_a2 = "Good"
+      dQ21_a3 = "Fair"
+      dQ21_a4 = "Poor"
+      dQ21_b1 = "Excellent"
+      dQ21_b2 = "Good"
+      dQ21_b3 = "Fair"
+      dQ21_b4 = "Poor"
+      dQ21_c1 = "Excellent"
+      dQ21_c2 = "Good"
+      dQ21_c3 = "Fair"
+      dQ21_c4 = "Poor"
+      dQ21_d1 = "Excellent"
+      dQ21_d2 = "Good"
+      dQ21_d3 = "Fair"
+      dQ21_d4 = "Poor"
+      dQ21_e1 = "Excellent"
+      dQ21_e2 = "Good"
+      dQ21_e3 = "Fair"
+      dQ21_e4 = "Poor"
+      dQ21_f1 = "Excellent"
+      dQ21_f2 = "Good"
+      dQ21_f3 = "Fair"
+      dQ21_f4 = "Poor"
+      Q30_a_1 = "Excellent"
+      Q30_a_2 = "Good"
+      Q30_a_3 = "Fair"
+      Q30_a_4 = "Poor"
+      Q30_b_1 = "Excellent"
+      Q30_b_2 = "Good"
+      Q30_b_3 = "Fair"
+      Q30_b_4 = "Poor"
+      Q32_a_1 = "Excellent"
+      Q32_a_2 = "Good"
+      Q32_a_3 = "Fair"
+      Q32_a_4 = "Poor"
+      Q32_b_1 = "Excellent"
+      Q32_b_2 = "Good"
+      Q32_b_3 = "Fair"
+      Q32_b_4 = "Poor"
+      dQ35_a1 = "Extremely high priority"
+      dQ35_a2 = "High priority"
+      dQ35_a3 = "Medium priority"
+      dQ35_a4 = "Low priority"
+      dQ35_a5 = "Not a priority at all"
+      dQ35_b1 = "Extremely high priority"
+      dQ35_b2 = "High priority"
+      dQ35_b3 = "Medium priority"
+      dQ35_b4 = "Low priority"
+      dQ35_b5 = "Not a priority at all"
+      dQ35_c1 = "Extremely high priority"
+      dQ35_c2 = "High priority"
+      dQ35_c3 = "Medium priority"
+      dQ35_c4 = "Low priority"
+      dQ35_c5 = "Not a priority at all"
+      dQ35_d1 = "Extremely high priority"
+      dQ35_d2 = "High priority"
+      dQ35_d3 = "Medium priority"
+      dQ35_d4 = "Low priority"
+      dQ35_d5 = "Not a priority at all"
+      dQ35_e1 = "Extremely high priority"
+      dQ35_e2 = "High priority"
+      dQ35_e3 = "Medium priority"
+      dQ35_e4 = "Low priority"
+      dQ35_e5 = "Not a priority at all"
+      dQ35_f1 = "Extremely high priority"
+      dQ35_f2 = "High priority"
+      dQ35_f3 = "Medium priority"
+      dQ35_f4 = "Low priority"
+      dQ35_f5 = "Not a priority at all"
+      dQ35_g1 = "Extremely high priority"
+      dQ35_g2 = "High priority"
+      dQ35_g3 = "Medium priority"
+      dQ35_g4 = "Low priority"
+      dQ35_g5 = "Not a priority at all"
+      dQ35_h1 = "Extremely high priority"
+      dQ35_h2 = "High priority"
+      dQ35_h3 = "Medium priority"
+      dQ35_h4 = "Low priority"
+      dQ35_h5 = "Not a priority at all"
+      dQ35_i1 = "Extremely high priority"
+      dQ35_i2 = "High priority"
+      dQ35_i3 = "Medium priority"
+      dQ35_i4 = "Low priority"
+      dQ35_i5 = "Not a priority at all"
+      dQ35_j1 = "Extremely high priority"
+      dQ35_j2 = "High priority"
+      dQ35_j3 = "Medium priority"
+      dQ35_j4 = "Low priority"
+      dQ35_j5 = "Not a priority at all"
+      dQ35_k1 = "Extremely high priority"
+      dQ35_k2 = "High priority"
+      dQ35_k3 = "Medium priority"
+      dQ35_k4 = "Low priority"
+      dQ35_k5 = "Not a priority at all"
+      dQ35_l1 = "Extremely high priority"
+      dQ35_l2 = "High priority"
+      dQ35_l3 = "Medium priority"
+      dQ35_l4 = "Low priority"
+      dQ35_l5 = "Not a priority at all"
+      Q46_a_1 = "Very good"
+      Q46_a_2 = "Good"
+      Q46_a_3 = "Neither good nor bad"
+      Q46_a_4 = "Bad"
+      Q46_a_5 = "Very bad"
+      Q46_b_1 = "Very good"
+      Q46_b_2 = "Good"
+      Q46_b_3 = "Neither good nor bad"
+      Q46_b_4 = "Bad"
+      Q46_b_5 = "Very bad"
+      Q46_c_1 = "Very good"
+      Q46_c_2 = "Good"
+      Q46_c_3 = "Neither good nor bad"
+      Q46_c_4 = "Bad"
+      Q46_c_5 = "Very bad"
+      Q46_d_1 = "Very good"
+      Q46_d_2 = "Good"
+      Q46_d_3 = "Neither good nor bad"
+      Q46_d_4 = "Bad"
+      Q46_d_5 = "Very bad"
+      Q46_e_1 = "Very good"
+      Q46_e_2 = "Good"
+      Q46_e_3 = "Neither good nor bad"
+      Q46_e_4 = "Bad"
+      Q46_e_5 = "Very bad"
+      Q46_f_1 = "Very good"
+      Q46_f_2 = "Good"
+      Q46_f_3 = "Neither good nor bad"
+      Q46_f_4 = "Bad"
+      Q46_f_5 = "Very bad"
+      Q46_g_1 = "Very good"
+      Q46_g_2 = "Good"
+      Q46_g_3 = "Neither good nor bad"
+      Q46_g_4 = "Bad"
+      Q46_g_5 = "Very bad"
+      Q46_h_1 = "Very good"
+      Q46_h_2 = "Good"
+      Q46_h_3 = "Neither good nor bad"
+      Q46_h_4 = "Bad"
+      Q46_h_5 = "Very bad"
+      Q46_i_1 = "Very good"
+      Q46_i_2 = "Good"
+      Q46_i_3 = "Neither good nor bad"
+      Q46_i_4 = "Bad"
+      Q46_i_5 = "Very bad"
+      Q46_j_1 = "Very good"
+      Q46_j_2 = "Good"
+      Q46_j_3 = "Neither good nor bad"
+      Q46_j_4 = "Bad"
+      Q46_j_5 = "Very bad"
+      Q46_k_1 = "Very good"
+      Q46_k_2 = "Good"
+      Q46_k_3 = "Neither good nor bad"
+      Q46_k_4 = "Bad"
+      Q46_k_5 = "Very bad"
+      Q46_l_1 = "Very good"
+      Q46_l_2 = "Good"
+      Q46_l_3 = "Neither good nor bad"
+      Q46_l_4 = "Bad"
+      Q46_l_5 = "Very bad"
+      Q46_m_1 = "Very good"
+      Q46_m_2 = "Good"
+      Q46_m_3 = "Neither good nor bad"
+      Q46_m_4 = "Bad"
+      Q46_m_5 = "Very bad"
+      Q46_n_1 = "Very good"
+      Q46_n_2 = "Good"
+      Q46_n_3 = "Neither good nor bad"
+      Q46_n_4 = "Bad"
+      Q46_n_5 = "Very bad"
+      Q46_o_1 = "Very good"
+      Q46_o_2 = "Good"
+      Q46_o_3 = "Neither good nor bad"
+      Q46_o_4 = "Bad"
+      Q46_o_5 = "Very bad"
+      Q46_p_1 = "Very good"
+      Q46_p_2 = "Good"
+      Q46_p_3 = "Neither good nor bad"
+      Q46_p_4 = "Bad"
+      Q46_p_5 = "Very bad"
+      Q47_a_1 = "Excellent"
+      Q47_a_2 = "Good"
+      Q47_a_3 = "Fair"
+      Q47_a_4 = "Poor"
+      Q47_b_1 = "Excellent"
+      Q47_b_2 = "Good"
+      Q47_b_3 = "Fair"
+      Q47_b_4 = "Poor"
+      Q47_c_1 = "Excellent"
+      Q47_c_2 = "Good"
+      Q47_c_3 = "Fair"
+      Q47_c_4 = "Poor"
+      Q63_a_1 = "Not a barrier"
+      Q63_a_2 = "Minor barrier"
+      Q63_a_3 = "Major barrier"
+      Q63_b_1 = "Not a barrier"
+      Q63_b_2 = "Minor barrier"
+      Q63_b_3 = "Major barrier"
+      Q63_c_1 = "Not a barrier"
+      Q63_c_2 = "Minor barrier"
+      Q63_c_3 = "Major barrier"
+      Q63_d_1 = "Not a barrier"
+      Q63_d_2 = "Minor barrier"
+      Q63_d_3 = "Major barrier"
+      Q63_e_1 = "Not a barrier"
+      Q63_e_2 = "Minor barrier"
+      Q63_e_3 = "Major barrier"
+      Q63_f_1 = "Not a barrier"
+      Q63_f_2 = "Minor barrier"
+      Q63_f_3 = "Major barrier"
+      Q63_g_1 = "Not a barrier"
+      Q63_g_2 = "Minor barrier"
+      Q63_g_3 = "Major barrier"
+      Q63_h_1 = "Not a barrier"
+      Q63_h_2 = "Minor barrier"
+      Q63_h_3 = "Major barrier"
+  ;
     
   run;
 
@@ -105,20 +404,20 @@
 
   options orientation=landscape;
   options nodate nonumber;
+  options missing='-';
 
   ods rtf file="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..rtf" style=Styles.Voices_style_rtf
       bodytitle toc_data;
       
   ods listing close;
   
-  title1 "VoicesDMV Survey: &title";
-
-  footnote1 height=9pt "Prepared by NeighborhoodInfo DC (www.NeighborhoodInfoDC.org), &fdate..";
+  title1 bold "VoicesDMV Survey: &title // DRAFT: NOT FOR CITATION OR RELEASE";
 
   %Make_one_table( 
     col=&col, 
     fmt=comma10.1,
     typefmt=$coltype_mean.,
+    total=n,
     var=Q3_Years_months_recode Q4_Years_months_recode Q5_Years_months_recode, 
     text="Q3-Q5. How long have you lived in..." 
   )
@@ -173,24 +472,28 @@
 
   %Make_one_table( 
     col=&col, 
+    total=n,
     var=Q11, 
     text="Q11. In the next 12 months, are you likely to move away from the area where you live?" 
   )
 
   %Make_one_table( 
     col=&col, 
+    total=n,
     var=Q12, 
     text="Q12. Are you registered to vote?" 
   )
 
   %Make_one_table( 
     col=&col, 
+    total=n,
     var=Q13_1-Q13_8, 
     text="Q13. Have you, yourself, done any of the following in the last 12 months?" 
   )
 
   %Make_one_table( 
     col=&col, 
+    total=n,
 	fmt=comma10.1,
     typefmt=$coltype_mean.,
     var=Q13_count,
@@ -199,12 +502,14 @@
 
   %Make_one_table( 
     col=&col, 
+    total=n,
     var=Q14_1-Q14_10, 
     text="Q14. Could you tell me whether you are a member of each type?" 
   )
  
   %Make_one_table( 
     col=&col, 
+    total=n,
 	fmt=comma10.1,
     typefmt=$coltype_mean.,
     var=Q14_count,
@@ -231,14 +536,102 @@
 
   %Make_one_table( 
     col=&col, 
-    var=Q20_a_: Q20_b_: Q20_c_: Q20_d_: Q20_e_: Q20_f_: Q20_g_: Q20_h_: Q20_i_: , 
-    text="Q20. In the past year, how often have you had trouble getting to where you need to go because:" 
+    var=Q20_a_:, 
+    text="Q20a. In the past year, how often have you had trouble getting to where you need to go because:",
+    text2="Public transportation was inconvenient"
   )
 
   %Make_one_table( 
     col=&col, 
-    var=dQ21:, 
-    text="Q21. How would you rate these aspects of life in the place where you live?" 
+    var=Q20_b_:, 
+    text="Q20b. In the past year, how often have you had trouble getting to where you need to go because:",
+    text2="You were unable to afford public transportation"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q20_c_:, 
+    text="Q20c. In the past year, how often have you had trouble getting to where you need to go because:",
+    text2="You did not have a car"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q20_d_:, 
+    text="Q20d. In the past year, how often have you had trouble getting to where you need to go because:",
+    text2="You did not have enough money for gas"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q20_e_:, 
+    text="Q20e. In the past year, how often have you had trouble getting to where you need to go because:",
+    text2="You did not have enough money to repair your car"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q20_f_:, 
+    text="Q20f. In the past year, how often have you had trouble getting to where you need to go because:",
+    text2="Of traffic"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q20_g_:, 
+    text="Q20g. In the past year, how often have you had trouble getting to where you need to go because:",
+    text2="Of construction"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q20_h_:, 
+    text="Q20h. In the past year, how often have you had trouble getting to where you need to go because:",
+    text2="Of poor road conditions (e.g., potholes; does not include snow)"
+  )
+  
+  ** SKIP Q20i. Other FOR NOW **;
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ21_a:, 
+    text="Q21a. How would you rate these aspects of life in the place where you live?",
+    text2="As a place to raise children"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ21_b:, 
+    text="Q21b. How would you rate these aspects of life in the place where you live?",
+    text2="The availability of the goods and services that meet your needs (for example, grocery stores, shopping, restaurants, doctors, etc.)"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ21_c:, 
+    text="Q21c. How would you rate these aspects of life in the place where you live?",
+    text2="The overall quality of public schools"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ21_d:, 
+    text="Q21d. How would you rate these aspects of life in the place where you live?",
+    text2="The availability of good jobs"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ21_e:, 
+    text="Q21e. How would you rate these aspects of life in the place where you live?",
+    text2="The availability of arts and cultural opportunities"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ21_f:, 
+    text="Q21f. How would you rate these aspects of life in the place where you live?",
+    text2="Access to transportation options"
   )
 
   %Make_one_table( 
@@ -250,8 +643,9 @@
 **check table**;
   %Make_one_table( 
     col=&col, 
+    total=n,
     var=Q23_:, 
-    text="Q23. Why do you never use services provided by nongovernmental, nonprofit organizations?" 
+    text="Q23. Why do you never use services provided by nongovernmental, nonprofit organizations?"
   )
 
   %Make_one_table( 
@@ -280,6 +674,7 @@
 
   %Make_one_table( 
     col=&col, 
+    total=n,
     var=Q28_:, 
     text="Q28. For what reason(s) did this person have to move?..." 
   )
@@ -292,8 +687,16 @@
 
   %Make_one_table( 
     col=&col, 
-    var=Q30_a_1-Q30_a_4 Q30_b_1-Q30_b_4, 
-    text="Q30. How would you rate the following in [City/County]?..." 
+    var=Q30_a_1-Q30_a_4, 
+    text="Q30a How would you rate the following in [City/County]?...",
+    text2="The leadership of [city/county] officials"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q30_b_1-Q30_b_4, 
+    text="Q30b How would you rate the following in [City/County]?...",
+    text2="The responsiveness of [city/county] government to the needs of residents"
   )
 
   %Make_one_table( 
@@ -304,8 +707,16 @@
 
   %Make_one_table( 
     col=&col, 
-    var=Q32_a_1-Q32_a_4 Q32_b_1-Q32_b_4, 
-    text="Q32. How would you rate the following in the city where you live?" 
+    var=Q32_a_1-Q32_a_4, 
+    text="Q32a. How would you rate the following in the city where you live?",
+    text2="The leadership of elected city officials"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q32_b_1-Q32_b_4, 
+    text="Q32b. How would you rate the following in the city where you live?",
+    text2="The responsiveness of city government to the needs of residents"
   )
 
   %Make_one_table( 
@@ -322,8 +733,86 @@
 
   %Make_one_table( 
     col=&col, 
-    var=dQ35: , 
-    text="Q35. ...priority do you think each of the following should be for the local government in the place where you live?" 
+    var=dQ35_a:, 
+    text="Q35a. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Developing parks and open spaces"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_b:, 
+    text="Q35b. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Maintaining roads, sidewalks, and other basic infrastructure"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_c:, 
+    text="Q35c. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Making it safer to get around by bicycle"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_d:, 
+    text="Q35d. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Protecting people from crime"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_e:, 
+    text="Q35e. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Protecting people from pollution and environmental hazards"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_f:, 
+    text="Q35f. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Making sure all children get a quality education"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_g:, 
+    text="Q35g. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Addressing affordable housing"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_h:, 
+    text="Q35h. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Preventing discrimination"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_i:, 
+    text="Q35i. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Helping poor people"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_j:, 
+    text="Q35j. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Helping the homeless"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_k:, 
+    text="Q35k. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Helping the unemployed"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=dQ35_l:, 
+    text="Q35l. How much of a priority do you think each of the following should be for the local government in the place where you live?",
+    text2="Helping people without health insurance"
   )
 
   %Make_one_table( 
@@ -404,18 +893,137 @@
     text="Q45. In which systems or situations did you experience discrimination?" 
   )
 
-  **look into**;
   %Make_one_table( 
     col=&col, 
-    var=Q46_a_1-Q46_a_5 Q46_b_1-Q46_b_5 Q46_c_1-Q46_c_5 Q46_d_1-Q46_d_5 Q46_e_1-Q46_e_5 Q46_f_1-Q46_f_5 Q46_g_1-Q46_g_5 Q46_h_1-Q46_h_5 Q46_i_1-Q46_i_5 Q46_j_1-Q46_j_5 Q46_k_1-Q46_k_5  Q46_l_1-Q46_l_5  Q46_m_1-Q46_m_5  Q46_n_1-Q46_n_5  Q46_o_1-Q46_o_5  Q46_p_1-Q46_p_5, 
-    text="Q46. How good is the place where you live for different groups of people?" 
+    var=Q46_a_:, 
+    text="Q46a. How good is the place where you live for different groups of people?",
+    text2="Families with children"
   )
 
-  **look into**;
   %Make_one_table( 
     col=&col, 
-    var=Q47_a_: Q47_b_: Q47_c_:, 
-    text="Q47. How would you rate the relations among different racial or ethnic groups..." 
+    var=Q46_b_:, 
+    text="Q46b. How good is the place where you live for different groups of people?",
+    text2="Single adults"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_c_:, 
+    text="Q46c. How good is the place where you live for different groups of people?",
+    text2="Seniors or elderly people"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_d_:, 
+    text="Q46d. How good is the place where you live for different groups of people?",
+    text2="Immigrants from other countries"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_e_:, 
+    text="Q46e. How good is the place where you live for different groups of people?",
+    text2="Racial and ethnic minorities"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_f_:, 
+    text="Q46f. How good is the place where you live for different groups of people?",
+    text2="Religious minorities"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_g_:, 
+    text="Q46g. How good is the place where you live for different groups of people?",
+    text2="Gay, lesbian, and transgender people"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_h_:, 
+    text="Q46h. How good is the place where you live for different groups of people?",
+    text2="Women and girls"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_i_:, 
+    text="Q46i. How good is the place where you live for different groups of people?",
+    text2="Poor people"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_j_:, 
+    text="Q46j. How good is the place where you live for different groups of people?",
+    text2="Working class people"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_k_:, 
+    text="Q46k. How good is the place where you live for different groups of people?",
+    text2="Middle class people"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_l_:, 
+    text="Q46l. How good is the place where you live for different groups of people?",
+    text2="Wealthy people"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_m_:, 
+    text="Q46m. How good is the place where you live for different groups of people?",
+    text2="Non-English speakers"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_n_:, 
+    text="Q46n. How good is the place where you live for different groups of people?",
+    text2="People with disabilities"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_o_:, 
+    text="Q46o. How good is the place where you live for different groups of people?",
+    text2="Renters"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q46_p_:, 
+    text="Q46p. How good is the place where you live for different groups of people?",
+    text2="Homeowners"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q47_a_:, 
+    text="Q47a. How would you rate the relations among different racial or ethnic groups...",
+    text2="In the US as a whole"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q47_b_:, 
+    text="Q47b. How would you rate the relations among different racial or ethnic groups...",
+    text2="In the Washington area"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q47_c_:, 
+    text="Q47c. How would you rate the relations among different racial or ethnic groups...",
+    text2="In the place where you live"
   )
 
   %Make_one_table( 
@@ -513,9 +1121,54 @@
 
   %Make_one_table( 
     col=&col, 
-    var=Q63_a_: Q63_b_: Q63_c_: Q63_d_: Q63_e_: Q63_f_: Q63_g_: Q63_h_:, 
-    text="Q63. How important for you are the following as barriers in finding or keeping a good job?" 
+    var=Q63_a_:, 
+    text="Q63a. How important for you are the following as barriers in finding or keeping a good job?",
+    text2="Access to child care"
   )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q63_b_:, 
+    text="Q63b. How important for you are the following as barriers in finding or keeping a good job?",
+    text2="Access to a car"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q63_c_:, 
+    text="Q63c. How important for you are the following as barriers in finding or keeping a good job?",
+    text2="Convenient public transportation"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q63_d_:, 
+    text="Q63d. How important for you are the following as barriers in finding or keeping a good job?",
+    text2="Level of education or training"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q63_e_:, 
+    text="Q63e. How important for you are the following as barriers in finding or keeping a good job?",
+    text2="Past work experience"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q63_f_:, 
+    text="Q63f. How important for you are the following as barriers in finding or keeping a good job?",
+    text2="Criminal background or past problems with law enforcement"
+  )
+
+  %Make_one_table( 
+    col=&col, 
+    var=Q63_g_:, 
+    text="Q63g. How important for you are the following as barriers in finding or keeping a good job?",
+    text2="Credit history or financial problems"
+  )
+
+  ** SKIP Q63h. Other FOR NOW **;
 
   %Make_one_table( 
     col=&col, 
