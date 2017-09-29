@@ -153,7 +153,7 @@ proc format;
   value $Q16_r_det
     'TRAFFIC' = "Traffic"
     'TAXES' = "Taxes"
-    'TRUMP' = "Donald Trump"
+    /*'TRUMP' = "Donald Trump"*/
     'PARKING' = "Parking"
     'ENTERTAINMENT' = "Entertainment"
     'FOOD' = "Food"
@@ -185,7 +185,7 @@ proc format;
     'SAFETY' = "Crime"
     'HOUSING' = "Housing"
     'DC' = "Washington, DC"
-    'POLITICS' = "Politics"
+    'POLITICS', 'TRUMP' = "Politics"
     'WALKABILITY' = "Walkability"
     'COSTS' = "Cost of living"
     'NOISE' = "Noise"
@@ -224,6 +224,15 @@ proc freq data=Voices_Q16_recode order=freq;
   weight weight;
   tables Q16_recode;  
   format Q16_recode $Q16_r_det.;
+  title2 'All responses';
+run;
+
+proc freq data=Voices_Q16_recode order=freq;
+  where respnum = 1;
+  weight weight;
+  tables Q16_recode;  
+  format Q16_recode $Q16_r_det.;
+  title2 'First response only';
 run;
 
 ** Word cloud export **;
