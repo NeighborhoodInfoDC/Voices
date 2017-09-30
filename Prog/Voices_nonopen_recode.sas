@@ -238,6 +238,18 @@ format anxious anxious. happy happy. worth worth. satisf satisf.;
     suffering = "Respondent is suffering (self evaluation)" 
 	struggling = "Respondent is struggling (self evaluation)";
 
+** six income categories for demographic profile**;
+  income_six =.; 
+  IF (1 <= PPINCIMP <= 7) THEN income_six = 1;
+  IF (8 <= PPINCIMP <= 11) THEN income_six = 2;
+  IF (PPINCIMP =12) or (PPINCIMP =13) THEN income_six = 3;
+  IF (PPINCIMP =14) or (PPINCIMP =15)   THEN income_six = 4;
+  IF (PPINCIMP =16) or (PPINCIMP =17)   THEN income_six = 5;
+  IF (18 <= PPINCIMP <= 21)  THEN income_six = 6;
+
+  label 
+    income_six = "Respondent household income recode(6 category)";
+
   ** Recode questions 3, 4, 5 **;
 
   array a3{*} q3_: q4_: q5_:;
