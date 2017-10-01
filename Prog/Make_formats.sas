@@ -101,7 +101,12 @@ proc format library=Voices;
     1 = '$0-25K'  
     2 = '$25-50K'
     3 = '$50-75K'
-    4 = '$75-100K';
-	5 = '$100-150K';
+    4 = '$75-100K'
+	5 = '$100-150K'
     6 = '$150K+';
 run;
+
+proc catalog catalog=Voices.Formats;
+  contents;
+quit;
+
