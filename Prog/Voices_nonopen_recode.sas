@@ -21,7 +21,7 @@
 options mprint symbolgen=y;
 %let NUM_LEVELS = 5; 
 
-%let revisions = New file.;
+%let revisions = %str(Fix skipped question recode for Q23, Q24, Q31, and Q60.);
 
 %macro dummies;
 
@@ -53,7 +53,8 @@ options mprint symbolgen=y;
   			do k=1 to dim( var3 );
   				  new3_&j.{k}=0; 
   				  if var3{k}=&j. then new3_&j.{k}=1; 
-  				  if var3{k} in(. -1) then new3_&j.{k}=.;
+  				  else if var3{k}=.n then new3_&j.{k}=.n;
+  				  else if var3{k} in(. -1) then new3_&j.{k}=.;
         end;
   %end; 
   drop k;
@@ -165,6 +166,15 @@ data Voices_2017_nonopen_recode_0 ;
 
   ** Assign special missing value .N to non-applicable (skipped) question responses **;
 
+  if q22 not in ( 1 ) then do;
+    array q23{*} q23_1-q23_6;
+    do i = 1 to dim( q23 );
+      q23{i} = .n;
+    end;
+  end;
+  
+  if q22 not in ( 2, 3, 4, 5 ) then q24 = .n;
+  
   if q25 not in ( 1, 2 ) then q26 = .n;
 
   if q27 not in ( 1 ) then do;
@@ -174,6 +184,8 @@ data Voices_2017_nonopen_recode_0 ;
     end;
     q29 = .n;
   end;
+  
+  if dov_urban not in ( 2, 3, 4, 5 ) then q31 = .n;
 
   if q31 not in ( 1 ) then do;
     q32_a = .n;
@@ -197,6 +209,8 @@ data Voices_2017_nonopen_recode_0 ;
   if q57 not in ( 1 ) then q58 = .n;
 
   if q59 not in ( 1 ) then do;
+  
+    q60 = .n;
 
     array q61{*} q61_a--q61_j;
     
@@ -530,11 +544,11 @@ run;
   outlib=Voices,
   label="VoicesDMV 2017 survey, non-open questions, recode",
   sortby=caseid,
-  revisions=%str(&revisions),
+  revisions=&revisions,
   restrictions=Confidential,
   printobs=0,
   freqvars=Geo Race Educ Income Age Gender Homeown 
-  q25 q26 q27 q28_1-q28_10 q29 q31 q32_a q32_b q42 q43 q44_a--q44_n q45_a--q45_i q55 q56 q57 q58 
-  q59 q61_a--q61_j q62 q63_a--q63_h q77 q78
+  q22 q23_1-q23_6 q24 q24_1-q24_4 q25 q26 q27 q28_1-q28_10 q29 dov_urban q31 q32_a q32_b q42 q43 q44_a--q44_n q45_a--q45_i q55 q56 q57 q58 
+  q59 q60 q60_1-q60_5 q61_a--q61_j q62 q63_a--q63_h q77 q78
 )
 

@@ -759,6 +759,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q27, 
     text="Q27. In the past two years, do you know anyone who had to move from the place where they lived in [City/County] to somewhere else for a reason other than their own choice?" 
   )
@@ -797,6 +798,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q31, 
     text="Q31. Do you live in a place that has elected city officials, in addition to county officials?" 
   )
@@ -979,6 +981,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q40, 
     text="Q40. Do you have relatives or friends who you can count on to help you when you need them?" 
   )
@@ -993,6 +996,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q42, 
     text="Q42. In the past year, have you ever felt discriminated against while in the Washington area?" 
   )
@@ -1253,6 +1257,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q59, 
     text="Q59. Are you currently working at a paid job?" 
   )
@@ -1274,6 +1279,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q62, 
     text="Q62. Are you currently looking for work or do you want to find a job?" 
   )
@@ -1339,6 +1345,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q77, 
     text="Q77. Were you born in the United States?" 
   )
