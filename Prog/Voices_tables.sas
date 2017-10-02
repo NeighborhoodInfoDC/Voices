@@ -566,11 +566,12 @@
     text="Q13. Count: Have you, yourself, done any of the following in the last 12 months?" 
   )
 
+  ** Omit Q14_10 (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     total=n,
-    var=Q14_1-Q14_10, 
+    var=Q14_1-Q14_9, 
     text="Q14. Could you tell me whether you are a member of each type?" 
   )
  
@@ -727,11 +728,12 @@
   )
 
 
+  ** Omit Q23_6 (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     total=n,
-    var=Q23_:, 
+    var=Q23_1-Q23_5, 
     text="Q23. Why do you never use services provided by nongovernmental, nonprofit organizations?"
   )
 
@@ -759,6 +761,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q27, 
     text="Q27. In the past two years, do you know anyone who had to move from the place where they lived in [City/County] to somewhere else for a reason other than their own choice?" 
   )
@@ -797,6 +800,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q31, 
     text="Q31. Do you live in a place that has elected city officials, in addition to county officials?" 
   )
@@ -979,6 +983,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q40, 
     text="Q40. Do you have relatives or friends who you can count on to help you when you need them?" 
   )
@@ -993,6 +998,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q42, 
     text="Q42. In the past year, have you ever felt discriminated against while in the Washington area?" 
   )
@@ -1004,17 +1010,21 @@
     text="Q43. In the past year, how often have you felt discriminated against?" 
   )
 
+  ** Omit Q44_n (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
-    var=Q44_:, 
+    total=n,
+    var=Q44_a--Q44_m, 
     text="Q44. For what reasons did you feel discriminated against?" 
   )
 
+  ** Omit Q45_i (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
-    var=Q45_:, 
+    total=n,
+    var=Q45_a--Q45_h, 
     text="Q45. In which systems or situations did you experience discrimination?" 
   )
 
@@ -1224,6 +1234,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q55, 
     text="Q55. Have there been times in the past 12 months when you did not have enough money to buy food that you or your family needed?" 
   )
@@ -1239,6 +1250,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q57, 
     text="Q57. ...did not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
   )
@@ -1253,6 +1265,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q59, 
     text="Q59. Are you currently working at a paid job?" 
   )
@@ -1264,16 +1277,19 @@
     text="Q60. How strongly do you agree that your current job or jobs provide you with the income needed to support you and your family?" 
   )
 
+  ** Omit Q61_j (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
-    var=Q61_:, 
+    total=n,
+    var=Q61_a--Q61_i, 
     text="Q61. Does your current job(s) offer any of the following benefits?" 
   )
 
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q62, 
     text="Q62. Are you currently looking for work or do you want to find a job?" 
   )
@@ -1339,6 +1355,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q77, 
     text="Q77. Were you born in the United States?" 
   )
