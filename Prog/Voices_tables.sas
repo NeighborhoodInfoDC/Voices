@@ -566,11 +566,12 @@
     text="Q13. Count: Have you, yourself, done any of the following in the last 12 months?" 
   )
 
+  ** Omit Q14_10 (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     total=n,
-    var=Q14_1-Q14_10, 
+    var=Q14_1-Q14_9, 
     text="Q14. Could you tell me whether you are a member of each type?" 
   )
  
@@ -727,11 +728,12 @@
   )
 
 
+  ** Omit Q23_6 (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     total=n,
-    var=Q23_:, 
+    var=Q23_1-Q23_5, 
     text="Q23. Why do you never use services provided by nongovernmental, nonprofit organizations?"
   )
 
@@ -1008,17 +1010,21 @@
     text="Q43. In the past year, how often have you felt discriminated against?" 
   )
 
+  ** Omit Q44_n (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
-    var=Q44_:, 
+    total=n,
+    var=Q44_a--Q44_m, 
     text="Q44. For what reasons did you feel discriminated against?" 
   )
 
+  ** Omit Q45_i (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
-    var=Q45_:, 
+    total=n,
+    var=Q45_a--Q45_h, 
     text="Q45. In which systems or situations did you experience discrimination?" 
   )
 
@@ -1228,6 +1234,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q55, 
     text="Q55. Have there been times in the past 12 months when you did not have enough money to buy food that you or your family needed?" 
   )
@@ -1243,6 +1250,7 @@
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
+    total=n,
     var=Q57, 
     text="Q57. ...did not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
   )
@@ -1269,10 +1277,12 @@
     text="Q60. How strongly do you agree that your current job or jobs provide you with the income needed to support you and your family?" 
   )
 
+  ** Omit Q61_j (other) for now **;
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
-    var=Q61_:, 
+    total=n,
+    var=Q61_a--Q61_i, 
     text="Q61. Does your current job(s) offer any of the following benefits?" 
   )
 
