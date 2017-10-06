@@ -46,7 +46,7 @@ merge 1:1 caseid using "L:\Libraries\Voices\Raw\Q1_recode values.dta"
 
 **save final file
 save "L:\Libraries\Voices\Raw\Q1_recode final.dta", replace
-export excel using "L:\Libraries\Voices\Raw\Q1_recode final.xls", firstrow(variables), replace
+export excel using "L:\Libraries\Voices\Raw\Q1_recode final.xls", firstrow(variables) replace
 
 ***Q2 recode***
 **Use raw open eneded file
@@ -75,5 +75,5 @@ merge 1:1 caseid using "L:\Libraries\Voices\Raw\Q2_recode values.dta"
 
 **save final file
 save "L:\Libraries\Voices\Raw\Q2_recode final.dta", replace
-export excel using "L:\Libraries\Voices\Raw\Q2_recode final.xls", firstrow(variables), replace
+export excel using "L:\Libraries\Voices\Raw\Q2_recode final.xls", firstrow(variables) replace
 
