@@ -51,6 +51,21 @@ replace md = 0 if mc==1 & md==1
 replace dc = 0 if dc==1 & dmv==1
 drop _merge
 
+foreach m in dc mc pg fc nv md va dmv ot{
+foreach n in dc mc pg fc nv md va dmv ot{
+tab `m' `n'
+}
+}
+gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
+gen multi = 1 if total_list==2 | total_list==3
+replace multi = 0 if total_list==0 | total_list==1 
+gen no_resp = 1 if total_list==0
+replace no_resp = 0 if total_list>=1 
+
+foreach m in dc mc pg fc nv md va dmv ot multi no_resp{
+sum `m'
+}
+
 **save final file
 save "L:\Libraries\Voices\Raw\Q1_recode final.dta", replace
 export excel using "L:\Libraries\Voices\Raw\Q1_recode final.xls", firstrow(variables) replace
@@ -86,6 +101,22 @@ replace md = 0 if mc==1 & md==1
 **replace DC/DMV
 replace dc = 0 if dc==1 & dmv==1
 drop _merge
+
+foreach m in dc mc pg fc nv md va dmv ot{
+foreach n in dc mc pg fc nv md va dmv ot{
+tab `m' `n'
+}
+}
+
+gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
+gen multi = 1 if total_list==2 | total_list==3
+replace multi = 0 if total_list==0 | total_list==1 
+gen no_resp = 1 if total_list==0
+replace no_resp = 0 if total_list>=1 
+
+foreach m in dc mc pg fc nv md va dmv ot multi no_resp{
+sum `m'
+}
 
 **save final file
 save "L:\Libraries\Voices\Raw\Q2_recode final.dta", replace
