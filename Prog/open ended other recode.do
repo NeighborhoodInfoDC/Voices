@@ -17,6 +17,16 @@ log using "D:\DCDATA\Libraries\Voices\Prog\open ended other recode.log", replace
 * Modifications: 
 */
 
+/*
+**create data files for recode
+foreach x in Q20_Text Q23_Text Q28_Text Q44_Text Q45_Text Q61_Text Q63_Text Q79_Text{
+use "L:\Libraries\Voices\Raw\UrbanInstitute_VoicesDMVSurvey2017_Client_08292017\UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", clear 
+keep `x'
+keep if `x' !=" "
+export excel using "L:\Libraries\Voices\Raw\ `x'.xls", firstrow(variables) replace
+}
+*/
+
 use "L:\Libraries\Voices\Raw\UrbanInstitute_VoicesDMVSurvey2017_Client_08292017\UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", clear 
 
 **Q20 recode
@@ -67,6 +77,13 @@ replace Q20_a = Q20_i if Q20_Text =="Careless incidents caused because of poor s
 replace Q20_a = Q20_i if Q20_Text =="no metro stop" & Q20_a==1
 replace Q20_a = Q20_i if Q20_Text =="Metro" & Q20_a==1
 
+replace Q20_i = . if Q20_Text =="na"
+replace Q20_i = . if Q20_Text =="hyhhhhh"
+replace Q20_i = . if Q20_Text =="no"
+replace Q20_i = . if Q20_Text =="none"
+replace Q20_i = . if Q20_Text =="N/A"
+replace Q20_i = . if Q20_Text =="None"
+
 **recode other to be never
 replace Q20_i= 1 if Q20_Text =="Aggressive Drivers" & Q20_f==1
 replace Q20_i= 1  if Q20_Text =="Accidents" & Q20_f==1
@@ -115,6 +132,7 @@ replace Q20_i= 1 if Q20_Text =="Careless incidents caused because of poor system
 replace Q20_i= 1 if Q20_Text =="no metro stop" & Q20_a==1
 replace Q20_i= 1 if Q20_Text =="Metro" & Q20_a==1
 
+
 **Q23 recode
 replace Q23_2 = 1 if Q23_Text == "I don't know what I don't know."
 replace Q23_2 = 1 if Q23_Text == "dont know any"
@@ -145,6 +163,19 @@ replace Q23_6 = 0 if Q23_Text == "I don't know what services nonprofits provide 
 replace Q23_6 = 0 if Q23_Text == "Don't know about them"
 replace Q23_6 = 0 if Q23_Text == "Doesn't fit with work schedule"
 replace Q23_6 = 0 if Q23_Text == "self reliant"
+
+replace Q23_6 = . if Q23_Text == "I don't entirely understand what you're asking"
+replace Q23_6 = . if Q23_Text == "I am not sure what services you are speaking of"
+replace Q23_6 = . if Q23_Text == "not sure what the question is referring to"
+replace Q23_6 = . if Q23_Text == "Idk"
+replace Q23_6 = . if Q23_Text == "Dnk"
+replace Q23_6 = . if Q23_Text == "Unsure?"
+replace Q23_6 = . if Q23_Text == "not sure"
+replace Q23_6 = . if Q23_Text == "I do not know what services you are referring to"
+replace Q23_6 = . if Q23_Text == "don't understand the question"
+replace Q23_6 = . if Q23_Text == "not sure what you're asking"
+replace Q23_6 = . if Q23_Text == "Not sure what you're referring to."
+
 
 **Q28
 gen Q28_11 = 0
@@ -317,6 +348,9 @@ replace Q44_n=2 if Q44_Text== "hair"
 replace Q44_n=2 if Q44_Text== "Not a minority"
 replace Q44_n=2 if Q44_Text== "Being a non-caucasion in majority white company"
 
+replace Q44_n =. if Q44_Text =="na"
+replace Q44_n =. if Q44_Text =="No"
+
 **Q45
 replace Q45_f = 1 if Q45_Text== "Post office"
 replace Q45_f = 1 if Q45_Text== "Law enforcement"
@@ -365,6 +399,10 @@ replace Q61_j =2 if Q61_Text =="401K"
 replace Q61_j =2 if Q61_Text =="pension"
 replace Q61_j =2 if Q61_Text =="401K"
 
+replace Q61_j =. if Q61_Text =="none"
+replace Q61_j =. if Q61_Text =="None"
+replace Q61_j =. if Q61_Text =="na"
+
 **Q63
 gen Q63_i = .
 replace Q63_i = Q63_h if Q63_Text =="age"
@@ -391,5 +429,20 @@ replace Q63_h = . if Q63_Text =="age"
 replace Q63_h = . if Q63_Text =="age"
 replace Q63_h = . if Q63_Text =="ageism"
 
+replace Q63_h = . if Q63_Text =="none"
+
+
 **Q79
 replace Q79 = 1 if Q79_Text=="Straight"
+replace Q79 = 1 if Q79_Text=="straight"
+replace Q79 = . if Q79_Text=="NYOB"
+replace Q79 = . if Q79_Text=="Prefer not to answer"
+replace Q79 = . if Q79_Text=="why?"
+replace Q79 = . if Q79_Text=="choose not to answer"
+replace Q79 = . if Q79_Text=="Prefer not to answer"
+replace Q79 = . if Q79_Text=="None of your business"
+replace Q79 = . if Q79_Text=="None of your damn business"
+replace Q79 = . if Q79_Text=="none of your business"
+replace Q79 = . if Q79_Text=="Not your business"
+
+save "L:\Libraries\Voices\Raw\UrbanInstitute_VoicesDMVSurvey2017_Client_08292017\UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted recodes.dta", replace 
