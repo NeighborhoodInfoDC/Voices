@@ -17,6 +17,8 @@ log using "D:\DCDATA\Libraries\Voices\Prog\open ended other recode.log", replace
 * Modifications: 
 */
 
+use "L:\Libraries\Voices\Raw\UrbanInstitute_VoicesDMVSurvey2017_Client_08292017\UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted.dta", clear 
+
 **Q20 recode
 replace Q20_f = Q20_i if Q20_Text =="Aggressive Drivers" & Q20_f==1
 replace Q20_f = Q20_i  if Q20_Text =="Accidents" & Q20_f==1
@@ -146,7 +148,7 @@ replace Q23_6 = 0 if Q23_Text == "self reliant"
 
 **Q28
 gen Q28_11 = 0
-label Q28_11 "Military or job transfer/relocation"
+label var Q28_11 "Military or job transfer/relocation"
 
 replace Q28_11 =1 if Q28_Text=="military orders"
 replace Q28_11 =1 if Q28_Text=="Job relocation"
@@ -303,37 +305,91 @@ replace Q28_9 = 0 if Q28_Text=="Got a job in another state"
 replace Q28_9 = 0 if Q28_Text=="New job"
 
 **Q44 
-replace Q44_j=1 if Q44_Text "I'm Deaf"
-replace Q44_f=1 if Q44_Text "looks"
-replace Q44_f=1 if Q44_Text "hair"
-replace Q44_a=1 if Q44_Text "Not a minority"
-replace Q44_a=1 if Q44_Text "Being a non-caucasion in majority white company"
+replace Q44_j=1 if Q44_Text== "I'm Deaf"
+replace Q44_f=1 if Q44_Text== "looks"
+replace Q44_f=1 if Q44_Text== "hair"
+replace Q44_a=1 if Q44_Text== "Not a minority"
+replace Q44_a=1 if Q44_Text== "Being a non-caucasion in majority white company"
 
-replace Q44_n=2 if Q44_Text "I'm Deaf"
-replace Q44_n=2 if Q44_Text "looks"
-replace Q44_n=2 if Q44_Text "hair"
-replace Q44_n=2 if Q44_Text "Not a minority"
-replace Q44_n=2 if Q44_Text "Being a non-caucasion in majority white company"
+replace Q44_n=2 if Q44_Text== "I'm Deaf"
+replace Q44_n=2 if Q44_Text== "looks"
+replace Q44_n=2 if Q44_Text== "hair"
+replace Q44_n=2 if Q44_Text== "Not a minority"
+replace Q44_n=2 if Q44_Text== "Being a non-caucasion in majority white company"
 
 **Q45
-replace Q45_f = 1 if "Post office"
-replace Q45_f = 1 if "Law enforcement"
-replace Q45_f = 1 if "The President and the Congress"
-replace Q45_c = 1 if "in school,because i don't speak spanish"
-replace Q45_h = 1 if "in social situations that recognizer only some minorities as subject to discrimination"
-replace Q45_h = 1 if "Comments by people I don't know"
-replace Q45_a = 1 if "Leaders of my condo association"
-replace Q45_a = 1 if "discrimination from other people who live in my condo association"
-replace Q45_d = 1 if "Work environment"
+replace Q45_f = 1 if Q45_Text== "Post office"
+replace Q45_f = 1 if Q45_Text== "Law enforcement"
+replace Q45_f = 1 if Q45_Text== "The President and the Congress"
+replace Q45_c = 1 if Q45_Text== "in school,because i don't speak spanish"
+replace Q45_h = 1 if Q45_Text== "in social situations that recognizer only some minorities as subject to discrimination"
+replace Q45_h = 1 if Q45_Text== "Comments by people I don't know"
+replace Q45_a = 1 if Q45_Text== "Leaders of my condo association"
+replace Q45_a = 1 if Q45_Text== "discrimination from other people who live in my condo association"
+replace Q45_d = 1 if Q45_Text== "Work environment"
 
-replace Q45_i = 2 if "Post office"
-replace Q45_i = 2 if "Law enforcement"
-replace Q45_i = 2 if "The President and the Congress"
-replace Q45_i = 2 if "in school,because i don't speak spanish"
-replace Q45_i = 2 if "in social situations that recognizer only some minorities as subject to discrimination"
-replace Q45_i = 2 if "Comments by people I don't know"
-replace Q45_i = 2 if "Leaders of my condo association"
-replace Q45_i = 2 if "discrimination from other people who live in my condo association"
-replace Q45_i = 2 if "Work environment"
+replace Q45_i = 2 if Q45_Text== "Post office"
+replace Q45_i = 2 if Q45_Text== "Law enforcement"
+replace Q45_i = 2 if Q45_Text== "The President and the Congress"
+replace Q45_i = 2 if Q45_Text== "in school,because i don't speak spanish"
+replace Q45_i = 2 if Q45_Text== "in social situations that recognizer only some minorities as subject to discrimination"
+replace Q45_i = 2 if Q45_Text== "Comments by people I don't know"
+replace Q45_i = 2 if Q45_Text== "Leaders of my condo association"
+replace Q45_i = 2 if Q45_Text== "discrimination from other people who live in my condo association"
+replace Q45_i = 2 if Q45_Text== "Work environment"
 
+**Q61
+replace Q61_i =1 if Q61_Text =="401k"
+replace Q61_i =1 if Q61_Text =="401k"
+replace Q61_i =1 if Q61_Text =="401k"
+replace Q61_i =1 if Q61_Text =="401K"
+replace Q61_i =1 if Q61_Text =="Pension"
+replace Q61_i =1 if Q61_Text =="Pension"
+replace Q61_i =1 if Q61_Text =="matching contributions, employee purchase program"
+replace Q61_i =1 if Q61_Text =="401k"
+replace Q61_i =1 if Q61_Text =="Receive pension"
+replace Q61_i =1 if Q61_Text =="401K"
+replace Q61_i =1 if Q61_Text =="pension"
+replace Q61_i =1 if Q61_Text =="401K"
 
+replace Q61_j =2 if Q61_Text =="401k"
+replace Q61_j =2 if Q61_Text =="401k"
+replace Q61_j =2 if Q61_Text =="401k"
+replace Q61_j =2 if Q61_Text =="401K"
+replace Q61_j =2 if Q61_Text =="Pension"
+replace Q61_j =2 if Q61_Text =="Pension"
+replace Q61_j =2 if Q61_Text =="matching contributions, employee purchase program"
+replace Q61_j =2 if Q61_Text =="401k"
+replace Q61_j =2 if Q61_Text =="Receive pension"
+replace Q61_j =2 if Q61_Text =="401K"
+replace Q61_j =2 if Q61_Text =="pension"
+replace Q61_j =2 if Q61_Text =="401K"
+
+**Q63
+gen Q63_i = .
+replace Q63_i = Q63_h if Q63_Text =="age"
+replace Q63_i = Q63_h if Q63_Text =="age"
+replace Q63_i = Q63_h if Q63_Text =="age (~50)"
+replace Q63_i = Q63_h if Q63_Text =="Age"
+replace Q63_i = Q63_h if Q63_Text =="Age"
+replace Q63_i = Q63_h if Q63_Text =="Age"
+replace Q63_i = Q63_h if Q63_Text =="my age"
+replace Q63_i = Q63_h if Q63_Text =="Age"
+replace Q63_i = Q63_h if Q63_Text =="age"
+replace Q63_i = Q63_h if Q63_Text =="age"
+replace Q63_i = Q63_h if Q63_Text =="ageism"
+
+replace Q63_h = . if Q63_Text =="age"
+replace Q63_h = . if Q63_Text =="age"
+replace Q63_h = . if Q63_Text =="age (~50)"
+replace Q63_h = . if Q63_Text =="Age"
+replace Q63_h = . if Q63_Text =="Age"
+replace Q63_h = . if Q63_Text =="Age"
+replace Q63_h = . if Q63_Text =="my age"
+replace Q63_h = . if Q63_Text =="Age"
+replace Q63_h = . if Q63_Text =="age"
+replace Q63_h = . if Q63_Text =="age"
+replace Q63_h = . if Q63_Text =="ageism"
+
+**Q79
+replace Q79 = 1 if Q79_Text=="Straight"
