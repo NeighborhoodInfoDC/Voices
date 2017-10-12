@@ -162,6 +162,7 @@ options mprint symbolgen=y;
 proc import datafile= 'L:\Libraries\Voices\Data\Voices_other_response_recodes.csv' replace
 out = Voices_other_response_recodes
 dbms = CSV;
+guessingrows = MAX;
 run;
 
 /*sort data proir to merging*/
@@ -621,7 +622,7 @@ run;
   printobs=0,
   freqvars=Geo Race Educ Income Age Gender Homeown 
   q22 q23_1-q23_6 q24 q24_1-q24_4 q25 q26 q27 q28_1-q28_11 q29 dov_urban q31 q32_a q32_b q42 q43 q44_a--q44_n q45_a--q45_i q55 q56 q57 q58 
-  q59 q60 q60_1-q60_5 q61_a--q61_j q62 q63_a--q63_h q77 q78
+  q59 q60 q60_1-q60_5 q61_a--q61_j q62 q63_a--q63_h q63_i q77 q78
 )
 
 
