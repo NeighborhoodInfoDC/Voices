@@ -445,4 +445,9 @@ replace Q79 = . if Q79_Text=="None of your damn business"
 replace Q79 = . if Q79_Text=="none of your business"
 replace Q79 = . if Q79_Text=="Not your business"
 
-save "L:\Libraries\Voices\Raw\UrbanInstitute_VoicesDMVSurvey2017_Client_08292017\UrbanInstitue_VoicesDMVSurvey2017_Client_STATA_Formatted recodes.dta", replace 
+**Keep only recode variables, drop text response. 
+keep CaseID Q20_* Q23_* Q28_* Q44_* Q45_* Q61_* Q63_* Q79 
+drop Q63_Text Q61_Text Q45_Text Q44_Text Q28_Text Q23_Text Q20_Text
+
+**Export recode dataset as CSV file for SAS program
+export delimited using "L:\Libraries\Voices\Data\Voices_other_response_recodes.csv", nolabel replace

@@ -158,9 +158,41 @@ options mprint symbolgen=y;
 
 %mend dummies; 
 
-data Voices_2017_nonopen_recode_0 ;
+/*Import CSV recode file for other responses and save as SAS file*/
+proc import datafile= 'L:\Libraries\Voices\Data\Voices_other_response_recodes.csv' replace
+out = Voices_other_response_recodes
+dbms = CSV;
+run;
 
-  set Voices.VoicesDMVSurvey2017 (drop=q1 q1_refused q2 q2_refused q15_: q16_:);
+/*sort data proir to merging*/
+Proc sort data=Voices_other_response_recodes out=Voices_other_response_recodes_1;
+	By caseid;
+run; 
+
+Proc sort data=Voices.VoicesDMVSurvey2017 out=Voices_2017_nonopen_recode_0;
+	By caseid;
+run; 
+
+/*Merge open ended other recode*/
+data Voices_2017_nonopen_recode_1;
+	merge Voices_2017_nonopen_recode_0 (drop= Q20_a--Q20_i Q23_1-Q23_6 Q23_Refused Q28_1-Q28_10 Q28_Refused Q44_a--Q44_n Q45_a--Q45_i Q61_a--Q61_j Q63_a--Q63_h Q79) Voices_other_response_recodes;
+	by caseid;
+run;
+
+Proc sort data=Voices_2017_nonopen_recode_1 out=Voices_2017_nonopen_recode_2;
+	By caseid;
+run; 
+
+/*Merge Q1 and Q2 recode*/
+data Voices_2017_nonopen_recode_3;
+	merge Voices_2017_nonopen_recode_2 Voices_2017_q1_q2_recode;
+	by caseid;
+run;
+
+
+data Voices_2017_nonopen_recode_4 ;
+
+  set Voices_2017_nonopen_recode_3 (drop= q15_: q16_:);
   
   %Make_break_vars_2017()
 
@@ -178,7 +210,7 @@ data Voices_2017_nonopen_recode_0 ;
   if q25 not in ( 1, 2 ) then q26 = .n;
 
   if q27 not in ( 1 ) then do;
-    array q28{*} q28_1-q28_10;
+    array q28{*} q28_1-q28_11;
     do i = 1 to dim( q28 );
       q28{i} = .n;
     end;
@@ -528,15 +560,16 @@ run;
 
 
 data Voices_2017_nonopen_recode;
-set Voices_2017_nonopen_recode_0;
+set Voices_2017_nonopen_recode_4;
 
 %dummies; 
 
 %Labels_var_2017()
 
 drop Q14_Text Q23_Text Q23_Refused Q28_Refused Q28_Text Q20_Text Q44_Text Q45_Text Q61_Text Q63_Text Q79_Text; 
-
 run;
+
+
 
 %Finalize_data_set( 
   data=Voices_2017_nonopen_recode,
@@ -548,7 +581,7 @@ run;
   restrictions=Confidential,
   printobs=0,
   freqvars=Geo Race Educ Income Age Gender Homeown 
-  q22 q23_1-q23_6 q24 q24_1-q24_4 q25 q26 q27 q28_1-q28_10 q29 dov_urban q31 q32_a q32_b q42 q43 q44_a--q44_n q45_a--q45_i q55 q56 q57 q58 
+  q22 q23_1-q23_6 q24 q24_1-q24_4 q25 q26 q27 q28_1-q28_11 q29 dov_urban q31 q32_a q32_b q42 q43 q44_a--q44_n q45_a--q45_i q55 q56 q57 q58 
   q59 q60 q60_1-q60_5 q61_a--q61_j q62 q63_a--q63_h q77 q78
 )
 
