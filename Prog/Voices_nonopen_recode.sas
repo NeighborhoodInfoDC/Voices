@@ -158,9 +158,75 @@ options mprint symbolgen=y;
 
 %mend dummies; 
 
-data Voices_2017_nonopen_recode_0 ;
+/*Import CSV recode file for other responses and save as SAS file*/
+proc import datafile= 'L:\Libraries\Voices\Data\Voices_other_response_recodes.csv' replace
+out = Voices_other_response_recodes
+dbms = CSV;
+guessingrows = MAX;
+run;
 
-  set Voices.VoicesDMVSurvey2017 (drop=q1 q1_refused q2 q2_refused q15_: q16_:);
+/*sort data proir to merging*/
+Proc sort data=Voices_other_response_recodes out=Voices_other_response_recodes_1;
+	By caseid;
+run; 
+
+Proc sort data=Voices.VoicesDMVSurvey2017 (drop=q1 q1_refused q2 q2_refused q15_: q16_:) out=Voices_2017_nonopen_recode_0;
+	By caseid;
+run; 
+
+/*Merge open ended other recode*/
+data Voices_2017_nonopen_recode_1;
+	merge 
+	  Voices_2017_nonopen_recode_0 
+	  Voices_other_response_recodes;
+	by caseid;
+	
+    informat _all_ ;
+	
+    format caseid ;
+   format     Q20_a Q20_A.;
+   format     Q20_b Q20_B.;
+   format     Q20_c Q20_C.;
+   format     Q20_d Q20_D.;
+   format     Q20_e Q20_E.;
+   format     Q20_f Q20_F.;
+   format     Q20_g Q20_G.;
+   format     Q20_h Q20_H.;
+   format     Q20_i Q20_I.;
+   format     Q23_1 Q23_1F.;
+   format     Q23_2 Q23_2F.;
+   format     Q23_3 Q23_3F.;
+   format     Q23_4 Q23_4F.;
+   format     Q23_5 Q23_5F.;
+   format     Q23_6 Q23_6F.;
+   format Q23_Refused Q23_REFUSED.;
+   format     Q28_1 Q28_1F.;
+   format     Q28_2 Q28_2F.;
+   format     Q28_3 Q28_3F.;
+   format     Q28_4 Q28_4F.;
+   format     Q28_5 Q28_5F.;
+   format     Q28_6 Q28_6F.;
+   format     Q28_7 Q28_7F.;
+   format     Q28_8 Q28_8F.;
+   format     Q28_9 Q28_9F.;
+   format    Q28_10 Q28_10F.;
+   format Q28_Refused Q28_REFUSED.;
+   format     Q63_a Q63_A.;
+   format     Q63_b Q63_B.;
+   format     Q63_c Q63_C.;
+   format     Q63_d Q63_D.;
+   format     Q63_e Q63_E.;
+   format     Q63_f Q63_F.;
+   format     Q63_g Q63_G.;
+   format     Q63_h Q63_H.;
+   format       Q79 Q79F.;
+
+run;
+
+
+data Voices_2017_nonopen_recode_4 ;
+
+  set Voices_2017_nonopen_recode_1;
   
   %Make_break_vars_2017()
 
@@ -178,7 +244,7 @@ data Voices_2017_nonopen_recode_0 ;
   if q25 not in ( 1, 2 ) then q26 = .n;
 
   if q27 not in ( 1 ) then do;
-    array q28{*} q28_1-q28_10;
+    array q28{*} q28_1-q28_11;
     do i = 1 to dim( q28 );
       q28{i} = .n;
     end;
@@ -528,15 +594,22 @@ run;
 
 
 data Voices_2017_nonopen_recode;
-set Voices_2017_nonopen_recode_0;
+set Voices_2017_nonopen_recode_4;
 
 %dummies; 
 
 %Labels_var_2017()
 
 drop Q14_Text Q23_Text Q23_Refused Q28_Refused Q28_Text Q20_Text Q44_Text Q45_Text Q61_Text Q63_Text Q79_Text; 
-
 run;
+
+
+** Compare changes in current and new version of data set **;
+
+proc compare base=Voices.Voices_2017_nonopen_recode compare=Voices_2017_nonopen_recode listall maxprint=(40,32000);
+  id caseid;
+run;
+
 
 %Finalize_data_set( 
   data=Voices_2017_nonopen_recode,
@@ -548,7 +621,8 @@ run;
   restrictions=Confidential,
   printobs=0,
   freqvars=Geo Race Educ Income Age Gender Homeown 
-  q22 q23_1-q23_6 q24 q24_1-q24_4 q25 q26 q27 q28_1-q28_10 q29 dov_urban q31 q32_a q32_b q42 q43 q44_a--q44_n q45_a--q45_i q55 q56 q57 q58 
-  q59 q60 q60_1-q60_5 q61_a--q61_j q62 q63_a--q63_h q77 q78
+  q22 q23_1-q23_6 q24 q24_1-q24_4 q25 q26 q27 q28_1-q28_11 q29 dov_urban q31 q32_a q32_b q42 q43 q44_a--q44_n q45_a--q45_i q55 q56 q57 q58 
+  q59 q60 q60_1-q60_5 q61_a--q61_j q62 q63_a--q63_h q63_i q77 q78
 )
+
 
