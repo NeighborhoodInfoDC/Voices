@@ -37,7 +37,7 @@ options mprint symbolgen=y;
   *3: PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h
   *4: PPEDUCAT ppagect4 PPREG4 satisf worth happy anxious Q8 Q10 Q18 Q19  Q21_a Q21_b Q21_c Q21_d Q21_e Q21_f Q24 Q26 Q30_a Q30_b Q32_a 
       Q32_b Q33 Q34 Q43 Q47_a Q47_b Q47_c Q48 Q78
-  *5: PPHOUSE PPETHM PPHISPAN race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q22 Q29 Q35_a Q35_b Q35_c Q35_d 
+  *5: PPHOUSE PPETHM race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i Q22 Q29 Q35_a Q35_b Q35_c Q35_d 
       Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l Q36 Q46_a Q46_b Q46_c Q46_d Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l 
       Q46_m Q46_n Q46_o Q46_p Q50 Q52 Q60 
   *6:  ppracem Q23 Q54 Q79 PPMARIT
@@ -80,11 +80,11 @@ options mprint symbolgen=y;
   drop k;
 
   *5 categories;
-  array var5{*} Q3_cat Q4_cat Q5_cat PPHOUSE PPETHM PPHISPAN race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i 
+  array var5{*} Q3_cat Q4_cat Q5_cat PPHOUSE PPETHM race geo Q7 Q9 Q20_a Q20_b Q20_c Q20_d Q20_e Q20_f Q20_g Q20_h Q20_i 
                 Q22 Q29 /*Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l*/ Q36 Q46_a Q46_b Q46_c Q46_d 
                 Q46_e Q46_f Q46_g Q46_h Q46_i Q46_j Q46_k Q46_l Q46_m Q46_n Q46_o Q46_p Q50 Q52 Q60 ;
   %do j=1 %to 5; 
-  array new5_&j. {*} Q3_cat_&j. Q4_cat_&j. Q5_cat_&j. PPHOUSE_&j. PPETHM_&j. PPHISPAN_&j. race_&j. geo_&j. Q7_&j. Q9_&j. 
+  array new5_&j. {*} Q3_cat_&j. Q4_cat_&j. Q5_cat_&j. PPHOUSE_&j. PPETHM_&j. race_&j. geo_&j. Q7_&j. Q9_&j. 
                      Q20_a_&j. Q20_b_&j. Q20_c_&j. Q20_d_&j. Q20_e_&j. Q20_f_&j. Q20_g_&j. Q20_h_&j. Q20_i_&j. Q22_&j. Q29_&j. 
                      /*Q35_a_&j. Q35_b_&j. Q35_c_&j. Q35_d_&j. Q35_e_&j. Q35_f_&j. Q35_g_&j. Q35_h_&j. Q35_i_&j. Q35_j_&j. Q35_k_&j. Q35_l_&j.*/ 
                      Q36_&j. Q46_a_&j. Q46_b_&j. Q46_c_&j. Q46_d_&j. Q46_e_&j. Q46_f_&j. Q46_g_&j. Q46_h_&j. Q46_i_&j. Q46_j_&j. Q46_k_&j. 
