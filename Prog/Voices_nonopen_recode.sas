@@ -46,10 +46,10 @@ options mprint symbolgen=y;
   */
 
   *3 categories;
-  array var3{*} PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h ;
+  array var3{*} PPRENT income age phy_health ment_health Q17 Q25 Q49 Q51 Q53 Q56 Q58 Q63_a Q63_b Q63_c Q63_d Q63_e Q63_f Q63_g Q63_h Q63_i;
   %do j=1 %to 3; 
   array new3_&j. {*} PPRENT_&j. income_&j. age_&j. phy_health_&j. ment_health_&j. Q17_&j. Q25_&j. Q49_&j. Q51_&j. Q53_&j. 
-                     Q56_&j. Q58_&j. Q63_a_&j. Q63_b_&j. Q63_c_&j. Q63_d_&j. Q63_e_&j. Q63_f_&j. Q63_g_&j. Q63_h_&j. ;
+                     Q56_&j. Q58_&j. Q63_a_&j. Q63_b_&j. Q63_c_&j. Q63_d_&j. Q63_e_&j. Q63_f_&j. Q63_g_&j. Q63_h_&j. Q63_i_&j ;
   			do k=1 to dim( var3 );
   				  new3_&j.{k}=0; 
   				  if var3{k}=&j. then new3_&j.{k}=1; 
@@ -182,6 +182,10 @@ data Voices_2017_nonopen_recode_1;
 	by caseid;
 	
     informat _all_ ;
+
+	/*Label added variables*/
+   label Q28_11 = "n. Military or job transfer/relocation";
+   label Q63_i = "Respondent's age";
 	
     format caseid ;
    format     Q20_a Q20_A.;
@@ -210,6 +214,7 @@ data Voices_2017_nonopen_recode_1;
    format     Q28_8 Q28_8F.;
    format     Q28_9 Q28_9F.;
    format    Q28_10 Q28_10F.;
+   format    Q28_11 Q28_10F.;
    format Q28_Refused Q28_REFUSED.;
    format     Q63_a Q63_A.;
    format     Q63_b Q63_B.;
@@ -219,6 +224,7 @@ data Voices_2017_nonopen_recode_1;
    format     Q63_f Q63_F.;
    format     Q63_g Q63_G.;
    format     Q63_h Q63_H.;
+   format     Q63_i Q63_H.;
    format       Q79 Q79F.;
 
 run;
