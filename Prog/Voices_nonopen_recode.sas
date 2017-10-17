@@ -10,6 +10,10 @@
  Description:  Create Voices_2017_nonopen_recode data set with 
  recodes of non-open questions.
 
+ Note: Program utilizes open ended recode file "Voices_other_response_recodes.csv"
+ CSV dataset was created using the STATA program "open ended other recode.do"
+ included in "L:\Libraries\Voices\Prog" folder.
+
  Modifications:
 **************************************************************************/
 
@@ -158,7 +162,9 @@ options mprint symbolgen=y;
 
 %mend dummies; 
 
-/*Import CSV recode file for other responses and save as SAS file*/
+/*Import CSV recode file for other responses and save as SAS file.
+CSV dataset was created using STATA program "open ended other recode.do"
+included in "L:\Libraries\Voices\Prog" folder.*/
 proc import datafile= 'L:\Libraries\Voices\Data\Voices_other_response_recodes.csv' replace
 out = Voices_other_response_recodes
 dbms = CSV;
@@ -166,10 +172,6 @@ guessingrows = MAX;
 run;
 
 /*sort data proir to merging*/
-Proc sort data=Voices_other_response_recodes out=Voices_other_response_recodes_1;
-	By caseid;
-run; 
-
 Proc sort data=Voices.VoicesDMVSurvey2017 (drop=q1 q1_refused q2 q2_refused q15_: q16_:) out=Voices_2017_nonopen_recode_0;
 	By caseid;
 run; 
