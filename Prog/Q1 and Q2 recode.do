@@ -1,8 +1,6 @@
 
 clear
 set more off
-
-*log using "L:\Libraries\Voices\Prog\survey data table generation.log", replace 
 log using "D:\DCDATA\Libraries\Voices\Prog\Q1 and Q2 recode.log", replace 
 
 /* *****************************************************************************
