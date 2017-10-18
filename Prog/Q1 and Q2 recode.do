@@ -56,7 +56,7 @@ tab `m' `n'
 }
 }
 gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
-gen multi = 1 if total_list==2 | total_list==3
+gen multi = 1 if total_list >= 2 
 replace multi = 0 if total_list==0 | total_list==1 
 gen no_resp = 1 if total_list==0
 replace no_resp = 0 if total_list>=1 

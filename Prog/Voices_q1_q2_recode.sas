@@ -32,29 +32,29 @@ data Voices_2017_q1_q2_recode;
 set Voices_2017_q1_q2_recode;
 
   label
-    Q1_1 = "Q1 1. Washington, DC"
-    Q1_2 = "Q1 2. Montgomery County or place within"
-	Q1_3 = "Q1 3. Prince George's County or place within"
-    Q1_4 = "Q1 4. Fairfax County or place within"
-    Q1_5 = "Q1 5. Northern Virigina area outside Fairfax County"
-	Q1_6 = "Q1 6. Maryland, no specific place inside region"
-    Q1_7 = "Q1 7. Viriginia, no specific place inside region"
-    Q1_8 = "Q1 8. DMV, Washington region, Washington area, Washington suburbs"
-	Q1_9 = "Q1 9. Place outside the region"
-    Q1_10 = "Q1 10. Multiple categories listed"
-    Q1_11 = "Q1 11. No place identified"
+    Q1_1 = "Place you would tell Washington area person you are from: Washington, DC"
+    Q1_2 = "Place you would tell Washington area person you are from: Montgomery County or place within"
+	Q1_3 = "Place you would tell Washington area person you are from: Prince George's County or place within"
+    Q1_4 = "Place you would tell Washington area person you are from: Fairfax County or place within"
+    Q1_5 = "Place you would tell Washington area person you are from: Northern Virigina area outside Fairfax County"
+	Q1_6 = "Place you would tell Washington area person you are from: Maryland, no specific place inside region"
+    Q1_7 = "Place you would tell Washington area person you are from: Viriginia, no specific place inside region"
+    Q1_8 = "Place you would tell Washington area person you are from: DMV, Washington (region, area, suburbs)"
+	Q1_9 = "Place you would tell Washington area person you are from: Place outside the region"
+    Q1_10 = "Place you would tell Washington area person you are from: Multiple categories listed"
+    Q1_11 = "Place you would tell Washington area person you are from: No place identified"
 
-    Q2_1 = "Q2 1. Washington, DC"
-    Q2_2 = "Q2 2. Montgomery County or place within"
-	Q2_3 = "Q2 3. Prince George's County or place within"
-    Q2_4 = "Q2 4. Fairfax County or place within"
-    Q2_5 = "Q2 5. Northern Virigina area outside Fairfax County"
-	Q2_6 = "Q2 6. Maryland, no specific place inside region"
-    Q2_7 = "Q2 7. Viriginia, no specific place inside region"
-    Q2_8 = "Q2 8. DMV, Washington region, Washington area, Washington suburbs"
-	Q2_9 = "Q2 9. Place outside the region"
-    Q2_10 = "Q2 10. Multiple categories listed"
-    Q2_11 = "Q2 11. No place identified";
+    Q2_1 = "Place you would tell outsider you are from: Washington, DC"
+    Q2_2 = "Place you would tell outsider you are from: Montgomery County or place within"
+	Q2_3 = "Place you would tell outsider you are from: Prince George's County or place within"
+    Q2_4 = "Place you would tell outsider you are from: Fairfax County or place within"
+    Q2_5 = "Place you would tell outsider you are from: Northern Virigina area outside Fairfax County"
+	Q2_6 = "Place you would tell outsider you are from: Maryland, no specific place inside region"
+    Q2_7 = "Place you would tell outsider you are from: Viriginia, no specific place inside region"
+    Q2_8 = "Place you would tell outsider you are from: DMV, Washington region, Washington area, Washington suburbs"
+	Q2_9 = "Place you would tell outsider you are from: Place outside the region"
+    Q2_10 = "Place you would tell outsider you are from: Multiple categories listed"
+    Q2_11 = "Place you would tell outsider you are from: No place identified";
 
 run;
 
