@@ -56,19 +56,82 @@ data Q15_recode_unq;
   
 run;
 
-data Voices_Q15_recode;
+data Voices_Q15_notyetrecoded (where=(respnum=.))
+	 Voices_Q15_r1 (where=(respnum=1) drop=Q15_Text2 Q15_Text3 )
+	 Voices_Q15_r2 (where=(respnum=2) drop=Q15_Text1 Q15_Text3 )
+	 Voices_Q15_r2 (where=(respnum=3) drop=Q15_Text2 Q15_Text1 );
 
   merge
     Q15_recode_unq 
-    Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent);
+    Voices.VoicesDMVSurvey2017 (keep=caseid Q15_Text1 Q15_Text2 Q15_Text3/*weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent*/);
   by caseid;
 
-   %make_break_vars_2017; 
+   /*%make_break_vars_2017; */
 
   rename recode=Q15_recode;
   
 run;
+data Voices_Q15_alreadyrecoded;
 
+	set Voices_Q15_r1 (rename=(Q15_Text1=Q15_Text))
+		Voices_Q15_r2 (rename=(Q15_Text2=Q15_Text))
+		Voices_Q15_r3 (rename=(Q15_Text3=Q15_Text));
+
+if Q15_recode="CULTURE" and Q15_Text in("Different Cultures" "Different cultures" "Diverse Culture" "Diverse culture" "Diverse cultures" "Diversity of culture" 
+										"Diversity of people and cultutes" "Encountering people from different cultures and backgrounds on a daily basis" 
+										"Enormously diverse culture"  "Ethnic diversity and culture"  "Ethnic neighborhoods/cultures" "Exposure to countless cultures"
+										"I love the diversity and culture." "The blend of different cultures" "The diverse cultures in this city are so interesting." 
+										"The varies Cultures" "Variety of cultures" "Very diverse culture" "different culturals" "diverese cultures" "diverse culture" 
+										"diverse culturee" "diverse cultures" "international culture" "interacting w/people from all cultures" "the culture range"
+										"the many differnt culters" )
+									then Q15_recode="DIVERSITY"; 
+
+if Q15_recode="CULTURE" and Q15_Text in("Political culture" "Liberal culture") then Q15_recode="POLITICS";
+if Q15_recode="CULTURE" and Q15_Text in("Events (rallies, runs, festivals)") then Q15_recode="ENTERTAINMENT";
+if Q15_recode="CULTURE" and Q15_Text in("Food from all cultures available") then Q15_recode="FOOD";
+
+if  Q15_recode="ENTERTAINMENT" and Q15_Text in("Access to cultural activities, museums, theatre" "Access to cultural events" "Access to cultural sites/activities"
+												 "Access to wide range of cultural events/activities" "Availability of cultural events" "Availability of cultural venues and political activities"
+												 "Close to cultural events" "Cultural Activities" "Cultural Events" "Cultural activities" "Cultural activities, museums, etc."
+												 "Cultural activitites" "Cultural events" "Cultural events and activities" "Cultural places and activities" "Cultural sites and events"
+												 "Good cultural activities" "Lots of cultural activities" "Lots of cultural activities available" "close proximity to multiple cultural events"
+												 "close to cultural activities" "close to cultural events" "close to many cultural events" "cultural activites" "cultural activities"
+												 "cultural events" "cultyural events" "cutural events")
+											  then Q15_recode="CULTURE";
+if  Q15_recode="ENTERTAINMENT" and Q15_Text in("Food and entertainment options" "Food and fun") then Q15_recode="FOOD";
+
+run; 
+
+data Voices_Q15_notyetrecoded_1;
+
+	merge Voices_Q15_notyetrecoded (in=a drop=entity fuzzratio Q15_recode respnum)
+		  Voices.VoicesDMVSurvey2017 (keep=caseid Q15_Text1 Q15_Text2 Q15_Text3);
+	if a; 
+	by caseid;
+
+run; 
+proc transpose data=Voices_Q15_notyetrecoded_1 out=Voices_Q15_notyetrecoded_2;
+
+	by caseid;
+	var Q15_Text1 Q15_Text2 Q15_Text3; 
+
+run;
+data Voices_Q15_notyetrecoded_3;
+
+	set Voices_Q15_notyetrecoded_2 (drop=_label_);
+
+	respnum=.;
+	if _name_="Q15_Text1" then respnum=1;
+	if _name_="Q15_Text2" then respnum=2;
+	if _name_="Q15_Text3" then respnum=3;
+
+	Col1=upcase(Col1);
+
+run; 
+
+proc freq data=Voices_Q15_notyetrecoded_3;
+tables col1;
+run; 
 proc format;
 
   value $Q15_r
