@@ -41,8 +41,8 @@ set Voices_2017_q1_q2_recode;
     Q1_7 = "Place you would tell Washington area person you are from: Viriginia, no specific place inside region"
     Q1_8 = "Place you would tell Washington area person you are from: DMV, Washington (region, area, suburbs)"
 	Q1_9 = "Place you would tell Washington area person you are from: Place outside the region"
-    Q1_10 = "Place you would tell Washington area person you are from: Multiple categories listed"
-    Q1_11 = "Place you would tell Washington area person you are from: No place identified"
+    Q1_11 = "Place you would tell Washington area person you are from: Multiple categories listed"
+    Q1_10 = "Place you would tell Washington area person you are from: No place identified"
 
     Q2_1 = "Place you would tell outsider you are from: Washington, DC"
     Q2_2 = "Place you would tell outsider you are from: Montgomery County or place within"
@@ -53,8 +53,8 @@ set Voices_2017_q1_q2_recode;
     Q2_7 = "Place you would tell outsider you are from: Viriginia, no specific place inside region"
     Q2_8 = "Place you would tell outsider you are from: DMV, Washington region, Washington area, Washington suburbs"
 	Q2_9 = "Place you would tell outsider you are from: Place outside the region"
-    Q2_10 = "Place you would tell outsider you are from: Multiple categories listed"
-    Q2_11 = "Place you would tell outsider you are from: No place identified";
+    Q2_11 = "Place you would tell outsider you are from: Multiple categories listed"
+    Q2_10 = "Place you would tell outsider you are from: No place identified";
 
 run;
 
