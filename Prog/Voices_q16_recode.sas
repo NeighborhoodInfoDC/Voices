@@ -139,6 +139,104 @@ run;
 %mend;
 
 %printlist;
+
+data Voices_Q16_newrecode;
+	
+	set Voices_Q16_toreview;
+
+
+	housing=index(Q16_text,"Cost Of Home"); *was costs;
+	housing=housing+index(Q16_text,"Cost Of Hous"); *was costs;
+	housing=housing+index(Q16_text,"Cost Of Apartm"); *was costs;
+	if Q16_Text in("Cost of Living - Rent Is Too High" "Cost Of Rent" "Cost Of Residence" "Prices Of Homes") then housing=1;
+
+	traffic=index(Q16_text,"Commute To Work"); *was jobs;
+
+	life=index(Q16_text,"Focus On Careers"); *was jobs;
+	life=index(Q16_text,"Transient"); *mostly was people;
+	if Q16_Text in("Extremely Performance Driven" "People Too Focused On Work" "People Work Too Much") then life=1;
+
+
+	costs=index(Q16_text,"Cost Of Food"); *was food; 
+	costs=costs+index(Q16_text,"Price Of Food"); *was food;
+	costs=costs+index(Q16_text,"Cost Of Many"); 
+	costs=costs+index(Q16_text,"Price Of Recreation");
+	costs=costs+index(Q16_text,"Expensive City");
+	if Q16_text in("High Price for Food/Utilities/Gas" "Restaurant Too Expensive" "Expensive Entertainment") then costs=1;
+
+	if Q16_text in("Current White House Occupants" "That Orange Cheeto In The White House" "The Guy In The White House"
+					"People In Oval Office") then trump=1;
+
+	*new code-  too many people;
+	many=index(Q16_text,"A Lot Of People");
+	many=many+index(Q16_text,"Amount Of People");
+	many=many+index(Q16_text,"Becoming Overcrowded");
+	many=many+index(Q16_text,"High Population");
+	many=many+index(Q16_text,"Population Density");
+	many=many+index(Q16_text,"Large Population");
+	many=many+index(Q16_text,"Over Population");
+	many=many+index(Q16_text,"Over-Population");
+	many=many+index(Q16_text,"Overcrowding");
+	many=many+index(Q16_text,"Overpopulation");
+	if Q16_text in("Congestion And Crowd" "Congestion Of People" "Congestion/Crowds" "Crowdiness" "Crowdness" "Lots Of People"
+				"Number of People" "So Many People") then many=1;
+
+	*I left "Crowds" as people?...thought of those as more time specific? - like crowds of tourists?";
+
+	*new code - not friendly/rude; 
+	rude=index(Q16_text,"Rude");
+	rude=rude+index(Q16_text,"Rudeness");
+	rude=rude+index(Q16_text,"Disrespectful People");
+	rude=rude+index(Q16_text,"Unfriendly People");
+	rude=rude+index(Q16_text,"Mean People");
+	rude=rude+index(Q16_text,"People Are Mean");
+	rude=rude+index(Q16_text,"People Are Unfriendly");
+	rude=rude+index(Q16_text,"People Aren't Friendly");
+	rude=rude+index(Q16_text,"People Aren't As Nice");
+	rude=rude+index(Q16_text,"People Aren't Nice");
+	rude=rude+index(Q16_text,"People Aren't Very Friendly");
+	if Q16_text in("People Stare" "Less Friendlyness" "People Are Not Friendly" "Ill-Tempered People" "People Not To Friendly"
+					"Some Of The People Are Not As Friendly") then rude=1;
+
+	homeless=index(Q16_text,"Homeless");
+	if Q16_text="People Living Shelters" Then homeless=1;
+	
+	poverty=index(Q16_text,"Could Be More Equitable");
+	if Q16_text in("Poor People") then poverty=1;
+
+	if housing > 0 then Q16_recode='HOUSING';
+	if traffic > 0 then Q16_recode='TRAFFIC';
+	if life > 0 then Q16_recode='LIFE';
+	if COSTS > 0 then Q16_recode='COSTS';
+	if TRUMP > 0 then Q16_recode='TRUMP';
+	if many > 0 then Q16_recode='MANY';
+	if poverty > 0 then Q16_recode='POVERTY';
+	if homeless > 0 then Q16_recode='HOMELESS';
+	if rude > 0 then Q16_recode='RUDE';
+
+If Q16_Text="Cars Running Into Each Other Due To A Lack Of Civility" then Q16_recode="??"; *was traffic;
+
+If Q16_Text in ("People Are Racist" "Racist People" "Racist Black People"
+
+	if Q16_Text in("Bad Rap It Gets From National Politics" "Focus On Federal Politics" "National Politics" 
+					"Local And National Politics Get Mixed Up" "National Politics Now" "Disfunction Of Congress And White House"
+					"Inactive Congressional People") then Q16_recode='CAPITAL';
+
+	if Q16_text in("Would Be Difficult To Evacuate In Certain Events") then Q16_recode='TERROR';
+
+	if Q16_text in("Late Night Events" "No Real Nightlife For Average People") then Q16_recode="NIGHTLIFE";
+
+	if Q16_text in("The Inability To Drive To The Many Monuments In The Area Due To Lack Of Parking.") then Q16_recode='PARKING';
+
+	if Q16_text in("Bad Trasffif/Rude Agressive Drivers" "People Don't Drive Well" "People Can't Drive") then Q16_recode='DRIVERS';
+
+	if Q16_text in("Lack Of Things To Do For Young People") then Q16_recode='ENTERTAINMENT'; *was people;
+
+	if Q16_text in("People Stressing") then Q16_recode='STRESS';
+
+	
+
+
 data Voices_Q16_recode;
 
   merge
