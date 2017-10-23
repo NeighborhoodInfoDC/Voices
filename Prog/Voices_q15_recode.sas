@@ -11,6 +11,7 @@
 create final recoded data set. 
 
  Modifications: 10-18-17 LH replaced break vars code with standard macro. 
+				10-23-17 LH modified recoding from Natural Language Processing
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas";
@@ -62,9 +63,9 @@ data location;
 	where recode = 'LOCATION';
 
 run; 
-proc sort location;
+proc sort data=location;
 
-	by caseid respum;
+	by caseid respnum;
 
 data Q15_recode_unq_1 (drop=recode_l);
 
@@ -129,10 +130,12 @@ run;
 proc freq data=Voices_Q15_toreview;
 tables Q15_Text ;
 where  Q15_recode=&var.;
-Title "Coded as &var"; 
+Title2 "Coded as &var"; 
 
 run;
 %end; 
+
+title2;
 
 %mend;
 
@@ -145,6 +148,7 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			culture=index(Q15_text,"Cultural Activ");
 			culture=culture+index(Q15_text,"Cultural Events");
 			culture=culture+index(Q15_text,"Cultural Sites");
+			culture=culture+index(Q15_text,"Cultural Venues");
 			culture=culture+index(Q15_text,"Cultural Places");
 			culture=culture+index(Q15_text,"Cultyural Events");
 			culture=culture+index(Q15_text,"Cutural Events");
@@ -182,6 +186,9 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			monuments=monuments+index(Q15_text,"Access To Historical And Cult");
 			monuments=monuments+index(Q15_text,"Access To Historical & Cult");
 			monuments=monuments+index(Q15_text,"Access To Historical Sites");
+			monuments=monuments+index(Q15_text,"Access To Historical Loca");
+			monuments=monuments+index(Q15_text,"Proximity To Historical Sites");
+
 
 			jobs=index(Q15_text,"Legal Activities"); *was in entertainment;
 			jobs=jobs+index(Q15_text,"Access To Different Industr"); *was in location;
@@ -278,25 +285,26 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 
 			transpo=index(Q15_text,"Public Transit"); *was metro;
 			if Q15_text in("Nice Transit" "Mass Transit" "Transit" "Easy Travel & Transit" "Calles" "Decent Transporation Links" "Easy To Get Around" "Easy To Travel To Other Places"
-							"Transportstio" "Travel Options" "It's Easy To Get Around") then transpo=1;
+							"Transportstio" "Travel Options" "It's Easy To Get Around" "Ability To Bike To Work" "Access To Transport Options") then transpo=1;
 
 			people=index(Q15_text,"Affluent Communities");
 			people=people+index(Q15_text,"Citizens Are Highly Educated"); 
 			people=people+index(Q15_text,"People With Money"); 
 
 			if culture > 0 then Q15_recode="CULTURE";
-			if politics > 0 then Q15_recode="POLITICS";
-			if capital > 0 then Q15_recode="CAPITAL";
-			if monuments > 0 then Q15_recode="MONUMENTS";
-			if jobs > 0 then Q15_recode="JOBS";
-			if diversity > 0 then Q15_recode="DIVERSITY";
-			if food > 0 then Q15_recode="FOOD";
-			if nightlife > 0 then Q15_recode="NIGHTLIFE";
-			if services > 0 then Q15_recode="SERVICES";
-			if entertain > 0 then Q15_recode="ENTERTAINMENT";
-			if people > 0 then Q15_recode="PEOPLE";
-			if transpo > 0 then Q15_recode="TRANSPORTATION";
-			if metro > 0 then Q15_recode="METRO";
+			else if politics > 0 then Q15_recode="POLITICS";
+			else if capital > 0 then Q15_recode="CAPITAL";
+			else if monuments > 0 then Q15_recode="MONUMENTS";
+			else if jobs > 0 then Q15_recode="JOBS";
+			else if diversity > 0 then Q15_recode="DIVERSITY";
+			else if food > 0 then Q15_recode="FOOD";
+			else if nightlife > 0 then Q15_recode="NIGHTLIFE";
+			else if services > 0 then Q15_recode="SERVICES";
+			else if entertain > 0 then Q15_recode="ENTERTAINMENT";
+			else if people > 0 then Q15_recode="PEOPLE";
+			else if metro > 0 then Q15_recode="METRO";
+			else if transpo > 0 then Q15_recode="TRANSPORTATION";
+			
 
 			if Q15_Text="Networking" then Q15_recode="COMMUNITY"; *was jobs;
 			if Q15_text in("Communities" "In Good Nabourhood" "Convenient Religious Facilities" ) then Q15_recode="COMMUNITY"; 
@@ -312,9 +320,11 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			if Q15_text="Diversity Of Cultural Opportunities" then Q15_recode="CULTURE";*was diversity;
 			if Q15_text in("Cultural Amenities" "Excellent Cultural Amenities") then Q15_recode="CULTURE";*was services;
 			if Q15_text in("Cultural Things" "Cultural Resources" "Cultured" "Culturally Strong" "Cultural/Historical" "Cultural Opportunities" "Excellent Cultural Venues"
-							"Nearby Cultural Facilities" "Free Cultural Opportunities") then Q15_recode="CULTURE";
+							"Nearby Cultural Facilities" "Free Cultural Opportunities" "The Cultural Amenities" "Large Amount Of Many Types Of Culteral And Historical Activities"
+						    ) then Q15_recode="CULTURE";
 
-			if Q15_text="Muesm M" then Q15_recode="MUSEUMS";
+			if Q15_text in ("Muesm M" "Washington Dc Museums" "Access To Museums And Monuments In Dc" "Museums & Activities" "Museums And Activities"
+							"Nice Activities, Museums") then Q15_recode="MUSEUMS";
 
 			if Q15_text in("Ability To Walk To Area Bus And Rest" "Walkable Communities, Good Transit" "Walkable, Fun Neighborhoods" "Walk Every Where") then Q15_recode="WALKABILITY"; 
 
@@ -340,7 +350,8 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			if Q15_text="Prestigious African American Communities" then Q15_recode="PEOPLE"; *was diversity;
 			if Q15_text in("Babes" "Buenas Personas" "Buenas Persona" "Human Quality" "Gilrs" "Everyone Knows Everyone" "Son Personas Unidas") then Q15_recode="PEOPLE";
 
-			if Q15_text in("Beautiful" "Beautiful Areas" "Es Muy Bonito" "El Paisaje" "Green Spaces" "Proximity To Scenic Areas" "Lovely" "Pretty" "The Views" "Tree Lined Streets") then Q15_recode="NATURE";
+			if Q15_text in("Beautiful" "Beautiful Areas" "Es Muy Bonito" "El Paisaje" "Green Spaces" "Proximity To Scenic Areas" "Lovely" "Pretty" "The Views" "Tree Lined Streets"
+							"The Natural Areas Surrounding Dc For Activities") then Q15_recode="NATURE";
 
 			if Q15_text in("Centros Comerciales" "Economically Vabraint" "Employment Rates Seem High" "Entrepreneurial Experience" "Economically Diverse" "Income Ranges") then Q15_recode="ECONOMY";
 
@@ -359,6 +370,25 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 
 
 run;
+
+%macro printlist_new;
+
+%do i=1 %to 35;
+%let var=%scan(&list,&i.," ");
+
+proc freq data=Voices_Q15_newrecode;
+tables Q15_Text ;
+where  Q15_recode=&var.;
+Title2 "Coded as &var"; 
+
+run;
+%end; 
+
+title2;
+
+%mend;
+
+%printlist_new;
 
 proc sort data=Voices_Q15_newrecode;
 	by caseid;
