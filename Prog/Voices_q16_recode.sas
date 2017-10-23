@@ -32,7 +32,7 @@ data Q16_recode_random;
 
   set Q16_recode;
 
-  where recode not in ( '', 'NOMATCH' 'LOCATION');
+  where recode not in ( '', 'NOMATCH' );
   
   r = ranuni( -1 );
   
@@ -56,89 +56,6 @@ data Q16_recode_unq;
   
 run;
 
-data location;
-	
-	set Q16_recode;
-
-	where recode='LOCATION';
-
-run;
-
-proc sort location;
-
-	by caseid respum;
-
-data Q16_recode_unq_1 (drop=recode_l);
-
-	merge Q16_recode_unq (in=a)
-		  location (in=b keep=caseid respnum recode rename=(recode=recode_l));
-	by caseid respnum;
-
-	if recode='' and b=1 then recode=recode_l;
-
-run;
-data Voices_Q16_notyetrecoded (where=(respnum=.) drop=entity fuzzratio Q16_recode )
-	 Voices_Q16_r1 (where=(respnum=1) drop=Q16_Text2 Q16_Text3 )
-	 Voices_Q16_r2 (where=(respnum=2) drop=Q16_Text1 Q16_Text3 )
-	 Voices_Q16_r3 (where=(respnum=3) drop=Q16_Text2 Q16_Text1 );
-
-  merge
-    Q16_recode_unq_1 
-    Voices.VoicesDMVSurvey2017 (keep=caseid Q16_Text1 Q16_Text2 Q16_Text3);
-  by caseid;
-
-  rename recode=Q16_recode;
-  
-run;
-
-proc transpose data=Voices_Q16_notyetrecoded out=Voices_Q16_notyetrecoded_1;
-
-	by caseid;
-	var Q16_Text1 Q16_Text2 Q16_Text3; 
-
-run;
-data Voices_Q16_notyetrecoded_2 (drop=_name_);
-
-	set Voices_Q16_notyetrecoded_1 (drop=_label_);
-
-	respnum=.;
-	if _name_="Q16_Text1" then respnum=1;
-	if _name_="Q16_Text2" then respnum=2;
-	if _name_="Q16_Text3" then respnum=3;
-
-run; 
-data Voices_Q16_toreview;
-
-	set Voices_Q16_r1 (rename=(Q16_Text1=Q16_Text))
-		Voices_Q16_r2 (rename=(Q16_Text2=Q16_Text))
-		Voices_Q16_r3 (rename=(Q16_Text3=Q16_Text))
-		Voices_Q16_notyetrecoded_2(rename=(col1=Q16_Text));
-
-		Q16_text=propcase(Q16_text);
-
-		drop fuzzratio;
-run;
-%let list='TRAFFIC' 'TAXES' 'PARKING' 'ENTERTAINMENT' 'FOOD' 'CULTURE' 'MUSEUMS' 'MONUMENTS' 'PERFORM' 'ARTS' 'SPORTS' 'NIGHTLIFE' 'JOBS' 'PEOPLE' 'LOCATION' 'DIVERSITY'
-		  'TRANSPORTATION' 'BUS' 'METRO' 'AIRPORTS' 'NATURE' 'COMMUNITY' 'SCHOOLS' 'WEATHER' 'LIFE' 'FAMILY' 'SHOPPING' 'SERVICES' 'CAPITAL' 'ECONOMY' 'NOTHING' 'SAFETY'
-		  'HOUSING' 'DC' 'POLITICS' 'TRUMP' 'WALKABILITY' 'COSTS' 'NOISE' 'POLICE' 'POLLUTION' 'POVERTY' 'DRIVERS' 'GENTRIFICATION' 'TRASH' 'DRUGS' 'STRESS' 'CONSTRUCTION' 
-		  'DISCRIMINATION' 'HOMELESSNESS' 'GANGS' 'TOURISTS' 'MONEY' 'BUGS' 'TERROR' 'RATS' '';
-
-%macro printlist;
-
-%do i=1 %to 57;
-%let var=%scan(&list,&i.," ");
-
-proc freq data=Voices_Q16_toreview;
-tables Q16_Text ;
-where  Q16_recode=&var.;
-Title "Coded as &var"; 
-
-run;
-%end; 
-
-%mend;
-
-%printlist;
 data Voices_Q16_recode;
 
   merge
