@@ -90,7 +90,8 @@
     income = "Respondent's HH income"
 	age = "Respondent's age"
     gender = "Respondent's gender"
-    homeown = "Respondent's homeownership status";
+    homeown = "Respondent's homeownership status"
+	 geo = "Respondent's VoicesDMV jurisdiction";
 
 %mend Make_break_vars_2017;
 
