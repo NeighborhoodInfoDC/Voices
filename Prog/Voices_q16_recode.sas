@@ -33,7 +33,7 @@ data Q16_recode_random;
 
   set Q16_recode;
 
-  where recode not in ( '', 'NOMATCH' 'LOCATION');
+  where recode not in ( '', 'NOMATCH' 'LOCATION' );
   
   r = ranuni( -1 );
   
@@ -78,6 +78,7 @@ data Q16_recode_unq_1 (drop=recode_l);
 	if recode='' and b=1 then recode=recode_l;
 
 run;
+
 data Voices_Q16_notyetrecoded (where=(respnum=.) drop=entity fuzzratio Q16_recode )
 	 Voices_Q16_r1 (where=(respnum=1) drop=Q16_Text2 Q16_Text3 )
 	 Voices_Q16_r2 (where=(respnum=2) drop=Q16_Text1 Q16_Text3 )
@@ -395,6 +396,7 @@ data Voices_Q16_recode;
 run;
 
 
+
 proc format;
 
   value $Q16_r
@@ -410,7 +412,7 @@ proc format;
     'SCHOOLS' = "Schools and educational institutions"
     'WEATHER' = "Climate and weather"
     'LIFE' = "Lifestyle"
-    'FAMILY' = "Far from family"
+    'FAMILY' = "Family in area"
     'SHOPPING' = "Shopping options"
     'SERVICES' = "Services and amenities"
     'CAPITAL' = "It's the nation's capital"
