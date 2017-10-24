@@ -11,6 +11,7 @@
 create final recoded data set. 
 
  Modifications: 10/18/17 LH replaced break var code with standard macro.
+ 		10-23-17 LH modified recoding from Natural Language Processing
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas";
@@ -381,12 +382,16 @@ proc sort data=Voices_Q16_newrecode;
 
 data Voices_Q16_recode;
 
-	merge Voices_Q16_newrecode
+	merge Voices_Q16_newrecode (drop=entity)
 		  Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent);
 	by caseid;
 
 		%make_break_vars_2017;
-
+		
+		label respnum="Survey Response Number"
+				  Q16_recode="Q16 recoded response categories: 3 worst things about living in Washington area"
+				  Q16_text="Q16 actual response: 3 worst things about living in Washington area"
+		  ;
 run;
 
 
@@ -489,7 +494,7 @@ proc format;
   outlib=Voices,
   label="VoicesDMV survey, 2017, Q16 recoded responses",
   sortby=caseid respnum,
-  revisions=%str(New file.)
+  revisions=%str(Updated labels.)
 )
 
 proc freq data=Voices_Q16_recode order=freq;
