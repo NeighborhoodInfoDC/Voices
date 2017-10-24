@@ -63,7 +63,7 @@ data location;
 	where recode = 'LOCATION';
 
 run; 
-proc sort data=location;
+proc sort data=location nodupkey;
 
 	by caseid respnum;
 
@@ -481,7 +481,7 @@ proc format;
   outlib=Voices,
   label="VoicesDMV survey, 2017, Q15 recoded responses",
   sortby=caseid respnum,
-  revisions=%str(Added labels.)
+  revisions=%str(Fixed duplicate records.)
 )
 
 proc freq data=Voices_Q15_recode order=freq;
