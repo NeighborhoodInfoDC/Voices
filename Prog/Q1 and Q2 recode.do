@@ -99,8 +99,8 @@ rename md Q1_6
 rename va Q1_7
 rename dmv Q1_8
 rename ot Q1_9
-rename multi Q1_11
-rename no_resp Q1_10
+rename multi Q1_10
+rename no_resp Q1_11
 
 
 **save final file
@@ -192,9 +192,9 @@ replace dmv=1 if same==1 & Q1_8==1
 replace ot=1 if same==1 & Q1_9==1
 
 
-
 gen multi = 1 if total_list >=2
 replace multi = 0 if total_list==0 | total_list==1 
+replace multi = 1 if same==1 & Q1_10==1
 
 gen no_resp = 1 if total_list==0
 replace no_resp = 0 if total_list>=1 
