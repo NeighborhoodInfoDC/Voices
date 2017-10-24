@@ -9,7 +9,7 @@
  
  Description:  Create VoicesDMV survey tables.
 
- Modifications:
+ Modifications: 10/24/17 LH Adjusted macros to accommodate different datasets.
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas";
@@ -1431,12 +1431,29 @@ run;
 
 ** Create tables **;
 
-%Make_all_tables( indata=Voices.Voices_2017_nonopen_recode, list=full_var_list ,col=region, colfmt=region., title=Tables for Entire Region )
-%Make_all_tables( col=geo, colfmt=geo., title=Tables by Jurisdiction )
-%Make_all_tables( col=race, colfmt=race., title=Tables by Race )
-%Make_all_tables( col=educ, colfmt=educ., title=Tables by Education )
-%Make_all_tables( col=income, colfmt=income., title=Tables by Income )
-%Make_all_tables( col=age, colfmt=age., title=Tables by Age )
-%Make_all_tables( col=gender, colfmt=gender., title=Tables by Gender )
-%Make_all_tables( col=homeown, colfmt=homeown., title=Tables by Homeownership Status )
+%let datalists=Voices.Voices_2017_nonopen_recode;
+%let varlists=full_var_list;
+
+%Macro Make_all_tables_all_data;
+
+	%do t=1 %to 1; 
+		%let dl=%scan(&datalists.,&t.," ");
+		%let vl=%scan(&varlists.,&t.," ");
+
+
+			%Make_all_tables( indata=&dl., list=&vl., col=region, colfmt=region., title=Tables for Entire Region )
+			%Make_all_tables( indata=&dl., list=&vl., col=geo, colfmt=geo., title=Tables by Jurisdiction )
+			%Make_all_tables( indata=&dl., list=&vl., col=race, colfmt=race., title=Tables by Race )
+			%Make_all_tables( indata=&dl., list=&vl., col=educ, colfmt=educ., title=Tables by Education )
+			%Make_all_tables( indata=&dl., list=&vl., col=income, colfmt=income., title=Tables by Income )
+			%Make_all_tables( indata=&dl., list=&vl., col=age, colfmt=age., title=Tables by Age )
+			%Make_all_tables( indata=&dl., list=&vl., col=gender, colfmt=gender., title=Tables by Gender )
+			%Make_all_tables( indata=&dl., list=&vl., col=homeown, colfmt=homeown., title=Tables by Homeownership Status )
+	%end;
+
+%mend;
+
+%make_all_tables_all_data; 
+
+			
 
