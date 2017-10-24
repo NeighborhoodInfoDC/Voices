@@ -22,14 +22,23 @@
 /*Import Q1 and Q2 recode CVS file created from output of STATA program 
  "Q1 and Q2 recode.do"*/
 proc import datafile= 'L:\Libraries\Voices\Data\Voices_2017_q1_q2_recode.csv'
-out = Voices_2017_q1_q2_recode
+out = Voices_2017_q1_q2_recode_0
 dbms = CSV
 ;
 
 run;
 
+
+proc sort data=Voices_2017_q1_q2_recode_0;
+	by caseid;
+
 data Voices_2017_q1_q2_recode;
-set Voices_2017_q1_q2_recode;
+	
+	merge 	Voices_2017_q1_q2_recode_0
+		Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent PPT01 PPT25 PPT612 PPT1317);
+	by caseid;
+
+%make_break_vars_2017;
 
   label
     Q1_1 = "Place you would tell Washington area person you are from: Washington, DC"
@@ -41,8 +50,8 @@ set Voices_2017_q1_q2_recode;
     Q1_7 = "Place you would tell Washington area person you are from: Viriginia, no specific place inside region"
     Q1_8 = "Place you would tell Washington area person you are from: DMV, Washington (region, area, suburbs)"
 	Q1_9 = "Place you would tell Washington area person you are from: Place outside the region"
-    Q1_11 = "Place you would tell Washington area person you are from: Multiple categories listed"
-    Q1_10 = "Place you would tell Washington area person you are from: No place identified"
+    Q1_10 = "Place you would tell Washington area person you are from: Multiple categories listed"
+    Q1_11 = "Place you would tell Washington area person you are from: No place identified"
 
     Q2_1 = "Place you would tell outsider you are from: Washington, DC"
     Q2_2 = "Place you would tell outsider you are from: Montgomery County or place within"
@@ -53,8 +62,8 @@ set Voices_2017_q1_q2_recode;
     Q2_7 = "Place you would tell outsider you are from: Viriginia, no specific place inside region"
     Q2_8 = "Place you would tell outsider you are from: DMV, Washington region, Washington area, Washington suburbs"
 	Q2_9 = "Place you would tell outsider you are from: Place outside the region"
-    Q2_11 = "Place you would tell outsider you are from: Multiple categories listed"
-    Q2_10 = "Place you would tell outsider you are from: No place identified";
+    Q2_10 = "Place you would tell outsider you are from: Multiple categories listed"
+    Q2_11 = "Place you would tell outsider you are from: No place identified";
 
 run;
 
