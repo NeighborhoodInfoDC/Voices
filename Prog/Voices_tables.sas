@@ -114,7 +114,7 @@
 	satisf_: worth_: happy_: anxious_: Q39a Q39b Q39c Q39d Q40 Q41a Q41b thriving suffering struggling Q42 Q43_: Q44_: 
 	Q45_: Q46_: Q47_: Q48_: Q49_: Q50_: Q51_: Q52_: Q53_: Q54_: Q55 Q56_: Q57 Q58_: Q59 Q60_: Q61_: 
 	Q62 Q63_: Q77 Q78_: Q79_: DOV_REL1_: DOV_REL1_: PPEDUC_: DOV_IDEO_: DOV_URBAN_: ppagecat_: PPWORK_: 
-	PPRENT_: PPEDUCAT_: ppagect4_: PPHOUSE_: PPETHM_: PPHISPAN_: ppracem_: PPMARIT_: DOV_IDEO_: 
+	PPRENT_: PPEDUCAT_: ppagect4_: PPHOUSE_: PPETHM_: ppracem_: PPMARIT_: DOV_IDEO_: 
 	ppagecat_: PPWORK_: race_:  
   ;
 
