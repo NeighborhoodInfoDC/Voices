@@ -28,8 +28,15 @@ dbms = CSV
 
 run;
 
+
+proc sort data=Voices_2017_q1_q2_recode;
+	by caseid;
+
 data Voices_2017_q1_q2_recode;
-set Voices_2017_q1_q2_recode;
+	merge Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent PPT01 PPT25 PPT612 PPT1317);
+	by caseid;
+
+%make_break_vars_2017;
 
   label
     Q1_1 = "Place you would tell Washington area person you are from: Washington, DC"
