@@ -52,11 +52,7 @@ replace md = 0 if mc==1 & md==1
 replace dc = 0 if dc==1 & dmv==1
 drop _merge
 
-foreach m in dc mc pg fc nv md va dmv ot{
-foreach n in dc mc pg fc nv md va dmv ot{
-tab `m' `n'
-}
-}
+
 gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
 gen multi = 1 if total_list >= 2 
 replace multi = 0 if total_list==0 | total_list==1 
@@ -76,6 +72,11 @@ replace ot=1 if total_list==0 & inlist(Q1,"no where","Nowhere in particular.","E
 replace nv=1 if total_list==0 & inlist(Q1,"falls church","Old town")
 replace ot=1 if total_list==0 & caseid=="538" /*"I would say I am from somewhere other than here. I am not from the area, I came years ago on a whim and have been forced to stay here ever since. I have no roots her.."*/
 replace dmv=1 if total_list==0 & caseid=="2284" /*i"m a local*/
+
+**Create mutually exclusive categories
+foreach n in dc mc pg fc nv md va dmv ot{
+replace `n' = 0 if multi==1
+}
 
 drop total_list
 gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
@@ -98,8 +99,8 @@ rename md Q1_6
 rename va Q1_7
 rename dmv Q1_8
 rename ot Q1_9
-rename multi Q1_11
-rename no_resp Q1_10
+rename multi Q1_10
+rename no_resp Q1_11
 
 
 **save final file
@@ -190,11 +191,10 @@ replace va=1 if same==1 & Q1_7==1
 replace dmv=1 if same==1 & Q1_8==1
 replace ot=1 if same==1 & Q1_9==1
 
-drop total_list
-gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
 
 gen multi = 1 if total_list >=2
 replace multi = 0 if total_list==0 | total_list==1 
+replace multi = 1 if same==1 & Q1_10==1
 
 gen no_resp = 1 if total_list==0
 replace no_resp = 0 if total_list>=1 
@@ -204,6 +204,14 @@ drop same _merge
 foreach m in dc mc pg fc nv md va dmv ot multi no_resp{
 sum `m'
 }
+
+**Create mutually exclusive categories
+foreach n in dc mc pg fc nv md va dmv ot{
+replace `n' = 0 if multi==1
+}
+
+drop total_list
+gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
 
 **relabel variables to follow data labeling conventions
 rename dc Q2_1
