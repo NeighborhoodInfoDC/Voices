@@ -76,48 +76,33 @@ data Q15_recode_unq_1 (drop=recode_l);
 	if recode='' and b=1 then recode=recode_l;
 
 run;
-
-data Voices_Q15_notyetrecoded (where=(respnum=.) drop=entity fuzzratio Q15_recode )
-	 Voices_Q15_r1 (where=(respnum=1) drop=Q15_Text2 Q15_Text3 )
-	 Voices_Q15_r2 (where=(respnum=2) drop=Q15_Text1 Q15_Text3 )
-	 Voices_Q15_r3 (where=(respnum=3) drop=Q15_Text2 Q15_Text1 );
-
-  merge
-    Q15_recode_unq_1 
-    Voices.VoicesDMVSurvey2017 (keep=caseid Q15_Text1 Q15_Text2 Q15_Text3/*weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent*/);
-  by caseid;
-
-  rename recode=Q15_recode;
-  
-run;
-
-proc transpose data=Voices_Q15_notyetrecoded out=Voices_Q15_notyetrecoded_1;
+proc transpose data= Voices.VoicesDMVSurvey2017  out=voices_full_q15;
 
 	by caseid;
 	var Q15_Text1 Q15_Text2 Q15_Text3; 
 
 run;
-data Voices_Q15_notyetrecoded_2 (drop=_name_);
+data voices_full_q15_1 (drop=_name_);
 
-	set Voices_Q15_notyetrecoded_1 (drop=_label_);
+	set voices_full_q15 (drop=_label_);
 
-	respnum=.;
-	if _name_="Q15_Text1" then respnum=1;
-	if _name_="Q15_Text2" then respnum=2;
-	if _name_="Q15_Text3" then respnum=3;
+		respnum=.;
+		if _name_="Q15_Text1" then respnum=1;
+		if _name_="Q15_Text2" then respnum=2;
+		if _name_="Q15_Text3" then respnum=3;
 
+		rename col1=Q15_Text;
 run; 
 data Voices_Q15_toreview;
 
-	set Voices_Q15_r1 (rename=(Q15_Text1=Q15_Text))
-		Voices_Q15_r2 (rename=(Q15_Text2=Q15_Text))
-		Voices_Q15_r3 (rename=(Q15_Text3=Q15_Text))
-		Voices_Q15_notyetrecoded_2(rename=(col1=Q15_Text));
+ 	merge Q15_recode_unq_1 (rename=(recode=Q15_recode) drop=entity fuzzratio )
+    	   voices_full_q15_1 ;
+  	by caseid respnum;
 
-		Q15_text=propcase(Q15_text);
+  		Q15_text=propcase(Q15_text);
 
-		drop fuzzratio;
 run;
+
 %let list='ENTERTAINMENT' 'FOOD' 'CULTURE' 'MUSEUMS' 'MONUMENTS' 'PERFORM' 'ARTS' 'SPORTS' 'NIGHTLIFE' 'JOBS' 'PEOPLE' 'LOCATION' 'DIVERSITY' 'TRANSPORTATION' 'BUS' 'METRO'
     'AIRPORTS' 'NATURE' 'COMMUNITY' 'SCHOOLS' 'WEATHER' 'LIFE' 'FAMILY' 'SHOPPING' 'SERVICES' 'CAPITAL' 'ECONOMY' 'NOTHING' 'SAFETY' 'HOUSING' 'DC' 'POLITICS' 'WALKABILITY'
     'COSTS' '';
@@ -165,6 +150,7 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			politics=politics+index(Q15_text,"Exciting Atmosphere Politically"); *was in life;
 			politics=politics+index(Q15_text,"Liberal/Progressive"); *was in life;
 			politics=politics+index(Q15_text,"Liberal Government"); *was in life;
+			politics=politics+index(Q15_text,"Liberal Population");
 
 			capital=index(Q15_text,"Home Of The Presidents");
 			capital=capital+index(Q15_text,"The Proximity To The Center Of Us House");
@@ -175,6 +161,7 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			capital=capital+index(Q15_text,"Political Events");
 			capital=capital+index(Q15_text,"Being At The Center Of Politics");
 			capital=capital+index(Q15_text,"Being Close To National Politics");
+			capital=capital+index(Q15_text,"National Policy");
 
 			monuments=index(Q15_text,"National History Events");
 			monuments=monuments+index(Q15_text,"Access To Educational/Historical");
@@ -203,6 +190,8 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			diversity=diversity+index(Q15_text,"Diverese Cultu");
 			diversity=diversity+index(Q15_text,"Diversity Of Cultu");
 			diversity=diversity+index(Q15_text,"Diversity Of People");
+			diversity=diversity+index(Q15_text,"Diversity Of Resident");
+			diversity=diversity+index(Q15_text,"Diversity Of Popul");
 			diversity=diversity+index(Q15_text,"Encountering People From Differ");
 			diversity=diversity+index(Q15_text,"Countless Cultu");
 			diversity=diversity+index(Q15_text,"The Culture Range");
@@ -248,11 +237,18 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			diversity=diversity+index(Q15_text,"Diverse Ethnicity");
 			diversity=diversity+index(Q15_text,"Ethnic Neighborhoods/Cultures");
 			diversity=diversity+index(Q15_text,"Very Diverse Neighborhoods");
+			diversity=diversity+index(Q15_text,"Diversity (People)");
+			diversity=diversity+index(Q15_text,"Varitety Of Residents");
+			diversity=diversity+index(Q15_text,"Diverse Demographic");
+			diversity=diversity+index(Q15_text,"Demographically Diverse");
 
 			food=index(Q15_text,"Food From");
 			food=food+index(Q15_text,"Diversity Of Cuisine"); 
 			food=food+index(Q15_text,"Diversity Of Food"); 
-
+			food=food+index(Q15_text,"Diversity Of Restaurants");
+			food=food+index(Q15_text,"Diversity Of Resteraunts");
+			food=food+index(Q15_text,"Great Food In Tremendous Diversity");
+			food=food+index(Q15_text,"Diverse Eating Places")
 
 			nightlife=index(Q15_text,"Dance Clube");
 			nightlife=nightlife+index(Q15_text,"Going To The Clubs");
@@ -271,17 +267,19 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			entertain=index(Q15_text,"Access To Recreational Facilities");
 			entertain=entertain+index(Q15_text,"Access To Recreational Spots");
 			entertain=entertain+index(Q15_text,"Access To Recreation Zone");
+			entertain=entertain+index(Q15_text,"Entertaining Things To Do");
 			if Q15_text="A Lot Of Amusment Parks" then entertain=1;
 			if Q15_text="Bars, Clubs, Music Venues, Variety in Dining" then entertain=1; *was community;
 			if Q15_text in("A Lot Of Things To Do" "A Lot To Do" "All Of The Family Activities Available" "Always Lots To Do" "Entertainment Experience" "It Has Lots Of Stuff To Do"
 							"Boating" "Many Things To Do" "Lots Of Free Things To Do" "Lots Of Fun Stuff For Kids" "Lots Of Stuff To Do" "Lots Of Things To Do" "Lots To Do" "Lots To See"
 							"Places To Go" "Places To See" "Plenty Of Things To Do" "So Many Things To Do" "So Much To Do" "The Attractions" "There Is Entertainment Spritz Thouhout The Dmv"
-							"Things To Do" "Things To See" "Tons Of Things To Do" "Lot To Do" "Movies") then entertain=1; *was not matched;
+							"Things To Do" "Things To See" "Tons Of Things To Do" "Lot To Do" "Movies" "Abundance Of Activities And Amenities") then entertain=1; *was not matched;
 
 			metro=index(Q15_text,"Metro Accesibility");
 			metro=metro+index(Q15_text,"Metro Accessiblity");
 			if Q15_text in("Easy Metro Access" "Metro Access" ) then metro=1;
-			if Q15_recode='' and Q15_Text in("Metro" "Metro Accessible") then metro=1;
+			if Q15_recode='' and Q15_Text in("Metro" "Metro Accessible" "Metro Accessibility" "Metro Accessibility To Most Places" "Metro Accessibility To The City"
+											"Metro Transportation") then metro=1;
 
 			transpo=index(Q15_text,"Public Transit"); *was metro;
 			if Q15_text in("Nice Transit" "Mass Transit" "Transit" "Easy Travel & Transit" "Calles" "Decent Transporation Links" "Easy To Get Around" "Easy To Travel To Other Places"
@@ -296,8 +294,8 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			else if capital > 0 then Q15_recode="CAPITAL";
 			else if monuments > 0 then Q15_recode="MONUMENTS";
 			else if jobs > 0 then Q15_recode="JOBS";
-			else if diversity > 0 then Q15_recode="DIVERSITY";
 			else if food > 0 then Q15_recode="FOOD";
+			else if diversity > 0 then Q15_recode="DIVERSITY";
 			else if nightlife > 0 then Q15_recode="NIGHTLIFE";
 			else if services > 0 then Q15_recode="SERVICES";
 			else if entertain > 0 then Q15_recode="ENTERTAINMENT";
@@ -321,7 +319,7 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			if Q15_text in("Cultural Amenities" "Excellent Cultural Amenities") then Q15_recode="CULTURE";*was services;
 			if Q15_text in("Cultural Things" "Cultural Resources" "Cultured" "Culturally Strong" "Cultural/Historical" "Cultural Opportunities" "Excellent Cultural Venues"
 							"Nearby Cultural Facilities" "Free Cultural Opportunities" "The Cultural Amenities" "Large Amount Of Many Types Of Culteral And Historical Activities"
-						    ) then Q15_recode="CULTURE";
+						    "Cultural Life" "Cultural Vibrancy" "Rich Cultural Life" "Wealth Of Cultural Heritage/Historical Sites") then Q15_recode="CULTURE";
 
 			if Q15_text in ("Muesm M" "Washington Dc Museums" "Access To Museums And Monuments In Dc" "Museums & Activities" "Museums And Activities"
 							"Nice Activities, Museums") then Q15_recode="MUSEUMS";
@@ -338,14 +336,17 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 
 			if Q15_text in("4 Different Weather Patterns" "El Clima" "Few Natural Disasters" "Hot" "The Heat" "The Rain" "Variable Weather Conditions W/O Excess") then Q15_recode="WEATHER";
 
-			if Q15_text in("Affordable" "And It Is Kind Of Not To Pricy" "Cheaper Than New York" "Expensive") then Q15_recode="COSTS";
+			if Q15_text in("Affordable" "And It Is Kind Of Not To Pricy" "Cheaper Than New York" "Expensive" "You Need Money To Live Here" "A Little Cheaper Than California"
+							) then Q15_recode="COSTS";
 
 			if Q15_text in("Area Urbana" "Centrally Located For Travel Abroad" "Close To Big Cities" "Close To City" "Close To DMV" "Close To Everything" "Close To Lots Of Stuff"
 							"Close To Pennsylvania" "Close To Places" "Close To Two Major Cities" "Close To West Virginia" "Close To Work" "Connivence" "Convenient" "Convenient To Everything"
 							"Convient" "Every Thing Is Close" "Everything Is Convient" "Everything Is Close" "Everything Is Close By" "Halfway Between Ca And France"
-							"Access To Other Communities" "It Is Convient" "Its Close To Everything I Need" "Near The City" "Close To Dmv" "Everything In Convient") then Q15_recode="LOCATION";
+							"Access To Other Communities" "It Is Convient" "Its Close To Everything I Need" "Near The City" "Close To Dmv" "Everything In Convient"
+							"Convenience To Many Areas" "Convenience To Nearby Cities" "Convience" "Convnience" "Convenience To Places" "Convenience" "Conveinience"
+							"It Is Very Convenient Living Here" "The Convenience.") then Q15_recode="LOCATION";
 
-			if Q15_text in("Avaiable Facilities" "Excellent Medical Facilities" "Outstanding Medical Facilities") then Q15_recode="SERVICES";
+			if Q15_text in("Avaiable Facilities" "Excellent Medical Facilities" "Outstanding Medical Facilities" "Convenience Of Services") then Q15_recode="SERVICES";
 
 			if Q15_text="Prestigious African American Communities" then Q15_recode="PEOPLE"; *was diversity;
 			if Q15_text in("Babes" "Buenas Personas" "Buenas Persona" "Human Quality" "Gilrs" "Everyone Knows Everyone" "Son Personas Unidas") then Q15_recode="PEOPLE";
@@ -359,14 +360,17 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 							"Good Social Scene" "Happy" "Harmony" "Excited" "Fair" "It Is A Very Adventurous City" "It's Cool" "It's Fun" "It's Nice" "Kindness" "Peaceful" "Quiet"
 							"Unique") then Q15_recode="LIFE";
 
-			if Q15_text in("Cosmopolitan" "Culturally Diverse" "Culturally Diverse." "Diverse" "Good Choices In Diverse Places To Be Around" "Multicultural" "Very Diverse")then Q15_recode="DIVERSITY";
-			if Q15_text in("Eating" "Fresh Fish" "Mumbo Sauce" "Places To Eat") then Q15_recode="FOOD";
+			if Q15_text in("Cosmopolitan" "Culturally Diverse" "Culturally Diverse." "Diverse" "Good Choices In Diverse Places To Be Around" "Multicultural" "Very Diverse"
+				)then Q15_recode="DIVERSITY";
+
+			if Q15_text in("Eating" "Fresh Fish" "Mumbo Sauce" "Places To Eat" "A Lot Of Eateries") then Q15_recode="FOOD";
 			if Q15_text in("First Hand Law Making" "Government Center" "It Is Us Capitol") then Q15_recode="CAPITAL";
 
 			if Q15_text in("Go Go" "Easy Access To Live Theater Performances" "Music Concerts") then Q15_recode="PERFORM";
 			if Q15_text in("Living With My Spouse") then Q15_recode="FAMILY";
 			if Q15_text in("New Developments Are Rising Daily") Then Q15_recode="HOUSING";
 			if Q15_text in("Plenty Of Places To Buy Things Needed") Then Q15_recode="SHOPPING";
+			If Q15_text in("Access To College And Pro Sports") then Q15_recode="SPORTS";
 
 
 run;
