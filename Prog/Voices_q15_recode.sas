@@ -372,8 +372,69 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			if Q15_text in("Plenty Of Places To Buy Things Needed") Then Q15_recode="SHOPPING";
 			If Q15_text in("Access To College And Pro Sports") then Q15_recode="SPORTS";
 
+			/*Carl's additions 10/25/17*/;						
+			if Q15_text in("A City That's Easy To Navigate" "Accessible By Modes Other Than Auto" "Accessible" "Commuting") Then Q15_recode="TRANSPORTATION";			
+			if Q15_text in("A Good Economic City.") Then Q15_recode="ECONOMY";			
+			if Q15_text in("A Beautiful Place To Live" "Air" "Architectural And Natural Beauty" "Beauty Of The Region"
+							"Burke Lake" "City, But Good Outdoorsy Vibe" "Beautiful Area" "Beautiful Area Of Country"
+							"Beautiful Landscaping" "Beautiful Place" "Beautiful Places" "Beautiful In Its Own Weird Way"
+							"Beauty" "Beauty Of Area" "Beauty Of Spring" "Beauty Places" "Beautyful" "Attraction Of Beauty"
+							"Close To Natural Attractions" "County Parks") Then Q15_recode="NATURE";			
+			if Q15_text in("420-Friendly" "Accessibility - Lifestyle" "Active" "Active, Health-Conscious City" "Close To Water Activities (Fishing)"
+							"City Living" "City Like But Homie" "Being A Aprt Of A Pool" "Calm Area" "Calmness" "Bustling" "Busy"
+							"Comfortable" "Comfortable Surroundings" "Comvience" "Conevnience" "Conveinence" "Convence" "Convenient To Everything You Need"
+							"Convenirnce" "Convienebce" "Convienence" "Convince" "Convinent" "Cycling") Then Q15_recode="LIFE";	
+			if Q15_text in("A Little Cheaper Than California" "A Lot Of Free Things To Do" "A Lot Of Things To Do, Many Are Free"
+                           "A Lot To See And Do That Is Free" "A Lot To See/Do For Free" "Cheaper" "Cost Og Living") Then Q15_recode="COSTS";	
+			if Q15_text in("A Lot Of Eateries" "Brunch" "Carry Out" "Chicken") Then Q15_recode="FOOD";	
+			if Q15_text in("A Variety Of Entertaining Things To Do In Virginia" "A Lot Of Different Types Of Things To Do"
+							"Abundant Things To Do" "Activies" "All The Things To Do" "All Ways Something To Do"
+							"Alot Of Things To Do" "Always Fun Things To Do" "Always Something Going On" 
+							"Always Something Happening" "Always Something New To Discover." "Always Something To Do"
+   							"Always Something To Do/Sites To See" "Always Something To See Or Do" "Always Things To Do"
+							"Always Things To Do And Experience" "Amount Of Things To Do" "And There Is Plenty Of Things To Do In The Metropolitan Area"
+							"Availability Of Things To Do" "Big Name Entertainment Comes Here" "Casino") Then Q15_recode="ENTERTAINMENT";	
+			if Q15_text in("Availability Of Decent Metro System") Then Q15_recode="METRO";	
+			if Q15_text in("Botanical Garden") Then Q15_recode="MUSEUMS";
+			if Q15_text in("Able To Walk" "Clarendon Is Walkable") Then Q15_recode="WALKABILITY";	
+			if Q15_text in("A Place Of Importance" "A Sense Of Being Connected To An Important International Venue"
+                           "Ability To Influence National Policy" "Being Near National News" "Being Near The State Department For Which I Work Parttime"
+							"Center Of Action" "Center Of Attention" "Center Of Government Activity" "Center Of National Government" "Center Of The World"
+							"Close To Political Action" "Close To The National Action" "Close To What's Going On In The Nation" "Close To World News"
+							"Close To The Action") Then Q15_recode="CAPITAL";	
+			if Q15_text in("Able To Buy A Home" "Basements") Then Q15_recode="HOUSING";	
+			if Q15_text in("Activism" "Black Leadership") Then Q15_recode="POLITICS";	
+			if Q15_text in("Adequate Shopping Facilities And Competition Between Them." ) Then Q15_recode="SHOPPING";	
+			if Q15_text in("Alot To Do For Families" "Close To My Parents" "Close To Home" "Close To Where I Grew Up") Then Q15_recode="FAMILY";	
+			if Q15_text in("Always Working In The Private Sextor" ) Then Q15_recode="JOBS";
+			if Q15_text in("Absence Of Most Natural Desasters" "County Safety") Then Q15_recode="SAFETY";
+			if Q15_text in("And The Thought Me How To Dab" ) Then Q15_recode="CULTURE";
+			if Q15_text in("Attitudes" "Boyfriend" "Boys" "Chicks" ) Then Q15_recode="PEOPLE";
+			if Q15_text in("Being Only A Few Hours Away From Other Big Cities" "Between Maryland And Virginia" "Center Between Nyc And Orlando"
+							"Central To Other Area Of Interest" "Close Destination" "Close Distance" "Close Places" "Close To A City"
+							"Close To A Great City" "Close To A Lot Of Things" "Close To An International Hub" "Close To Annapolis"
+							"Close To Attractions" "Close To Big City" "Close To Delaware, Maryland And Virginia" "Close To Evertyhing"
+							"Close To Everything I Need" "Close To New York" "Close To Ny" "Close To Other States" "Close To Things"
+							"Close To Many Big Cities" "Close To Lots Of Places" "Close To Larger Cities" "Close To Many Things" "Close To The City"
+							) Then Q15_recode="LOCATION";
+			if Q15_text in("Chocolate City" "Close To Downtown D.C. Tour Attractions") Then Q15_recode="DC";
+			if Q15_text in("Climate - Seasons" ) Then Q15_recode="WEATHER";
+			if Q15_text in("Close To Metro" ) Then Q15_recode="METRO";
+			if Q15_text in("Close To Friedns" ) then Q15_recode="COMMUNITY"; 
+			if Q15_text in("Close To Historic Sites" "Close To Historical Sites" "Cool Historic Sites" "Buildings Of Entrest") then Q15_recode="MONUMENTS"; 
+			if Q15_text in("College Assistance" "Close To My Alma Mater" "Continuing Education Activities") then Q15_recode="SCHOOLS";
+			if Q15_text in("County Financial Support" "County Services" "County Support Activities For Seniors") then Q15_recode="SERVICES"; 
+			if Q15_text in("Better Educated") then Q15_recode="PEOPLE"; 
+			if Q15_text in("Cultural" "Cultural Accesible" "Cultural Advantages" "Cultural And Civic Offerings" "Cultural And Historical Attractions"
+							"Cultural And Historical Venues" "Cultural Areas" "Cultural Aspects" "Cultural Attractions" "Cultural Availabilities"
+							"Cultural Availability" "Cultural Center" "Cultural Environment" "Cultural Experience" "Cultural Experiences" "Cultural Exposure"
+							"Cultural Hub" "Cultural Institutions" "Cultural Offerings" "Cultural Opportunity" "Cultural Options" "Cultural Things To Do"
+							"Cultural Variety" "Cultural/Historical Sites" "Culture - Much Of Which Is Available For Free" "Cutlure") then Q15_recode="CULTURE"; 
+			if Q15_text in("Cultural And Sports Events") then Q15_recode="SPORTS"; 
+
 
 run;
+			
 
 %macro printlist_new;
 
