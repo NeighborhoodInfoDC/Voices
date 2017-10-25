@@ -367,7 +367,7 @@ proc sort data=Voices_Q16_newrecode;
 
 data Voices_Q16_recode;
 
-	merge Voices_Q16_newrecode (drop=entity)
+	merge Voices_Q16_newrecode 
 		  Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent);
 	by caseid;
 

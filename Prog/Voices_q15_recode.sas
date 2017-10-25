@@ -248,7 +248,7 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			food=food+index(Q15_text,"Diversity Of Restaurants");
 			food=food+index(Q15_text,"Diversity Of Resteraunts");
 			food=food+index(Q15_text,"Great Food In Tremendous Diversity");
-			food=food+index(Q15_text,"Diverse Eating Places")
+			food=food+index(Q15_text,"Diverse Eating Places");
 
 			nightlife=index(Q15_text,"Dance Clube");
 			nightlife=nightlife+index(Q15_text,"Going To The Clubs");
@@ -399,7 +399,7 @@ proc sort data=Voices_Q15_newrecode;
 
 data Voices_Q15_recode;
 
-	merge Voices_Q15_newrecode (drop=entity)
+	merge Voices_Q15_newrecode 
 		  Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent);
 	by caseid;
 
