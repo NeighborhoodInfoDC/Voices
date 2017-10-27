@@ -21,13 +21,84 @@
 
 /** Macro Make_one_table - Start Definition **/
 
-%macro Make_one_table( fmt=npercent., col=, colfmt=, total=y, var=, text=, text2=, data=Voices_means_se, typefmt=$coltype_pct. );
+%macro Make_one_table( fmt=npercent., col=, colfmt=, total=y, var=, text=, text2=, vlabel=, data=Voices.Voices_2017_nonopen_recode, typefmt=$coltype_pct. );
 
   %local count rrden num_obs ref_rate;
   
-  data Table Count RRDen;
+  proc summary data=&data. nway;
+    class &col;
+    var &var;
+    weight weight;
+    output out=_Voices_means (drop=_type_ _freq_) mean=;
+  run;
+
+  proc summary data=&data. nway;
+    class &col;
+    var &var;
+    output out=_Voices_se (drop=_type_ _freq_) stderr=;
+  run;
+
+  proc summary data=&data. nway;
+    class &col;
+    var &var;
+    output out=_Voices_n (drop=_type_ _freq_) n=;
+  run;
   
-    set &data;
+  data _Voices_rrden_a;
+  
+    set &data. (keep=&col &var.);
+    
+    array a{*} &var;
+    
+    do i = 1 to dim( a );
+      if a{i} = .n then a{i} = 0;
+      else a{i} = 1;
+    end;
+    
+  run;
+  
+  proc summary data=_Voices_rrden_a nway;
+    class &col;
+    var &var;
+    output out=_Voices_rrden (drop=_type_ _freq_) sum=;
+  run;  
+
+  data _Voices_se_deff;
+
+    merge _Voices_se deff_&col;
+    by &col;
+    
+    array a{*} &var;
+    
+    do i = 1 to dim( a );
+      a{i} = a{i} * deff*(1.645); *changed to 90% confidence interval;
+    end;
+    
+    drop i;
+    
+  run;
+
+  data _Voices_means_se;
+
+    set 
+      _Voices_means (in=is_mean) 
+      _Voices_se_deff (in=is_deff) 
+      _Voices_n (in=is_n) 
+      _Voices_rrden;
+    by &col;
+    
+    length coltype $ 8; 
+    
+    if is_mean then coltype = 'Mean';
+    else if is_deff then coltype = 'CI'; *changed from SE;
+    else if is_n then coltype = 'N';
+    else coltype = 'RRDen';
+    
+  run;
+    
+  data _Voices_table_dat _Voices_table_count _Voices_table_rrden;
+  
+    set _Voices_means_se;
     
     length colfmtlbl $ 250;
     
@@ -36,21 +107,25 @@
     if coltype = 'N' then do;
       count = min( of &var );
       colfmtlbl = trim( put( &col, &colfmt ) ) || ' \line (n=' || trim( left( put( count, comma8.0 ) ) ) || ')';
-      output Count;
+      output _Voices_table_count;
     end;
     else if coltype = 'RRDen' then do;
       rrden = max( of &var );
-      output RRDen;
+      output _Voices_table_rrden;
     end;
-    else output Table;
+    else output _Voices_table_dat;
+    
+    %if %length( &vlabel ) > 0 %then %do;
+      label &vlabel;
+    %end;
     
   run;
   
   proc sql noprint;
     select sum(count) into :count
-    from Count;
+    from _Voices_table_count;
     select sum(rrden) into :rrden
-    from RRDen;
+    from _Voices_table_rrden;
   quit; 
   
   %let num_obs = %left( %nrbquote( %sysfunc( putn( &count, comma8.0 ) ) ) );
@@ -61,7 +136,7 @@
   %Data_to_format(
     FmtLib=work,
     FmtName=colfmt,
-    Data=Count,
+    Data=_Voices_table_count,
     Value=&col,
     Label=colfmtlbl,
     OtherLabel=,
@@ -76,7 +151,7 @@
   footnote2 height=9pt " ";
   footnote3 height=9pt italic "Prepared by Urban Institute, &fdate..";
   
-  proc tabulate data=Table format=&fmt noseps missing order=data;
+  proc tabulate data=_Voices_table_dat format=&fmt noseps missing order=data;
     class &col;
     class coltype / preloadfmt;
     var &var varsum;
@@ -95,6 +170,12 @@
   run;
   
   title2;
+  
+  ** Clean up temporary data sets **;
+
+  proc datasets library=work nolist;
+    delete _Voices_: /memtype=data;
+  quit;
 
 %mend Make_one_table;
 
@@ -118,75 +199,6 @@
   ppagecat_: PPWORK_: race_:  
   ;
 
-  proc summary data=&indata. nway;
-    class &col;
-    var &&&list;
-    weight weight;
-    output out=Voices_means (drop=_type_ _freq_) mean=;
-  run;
-
-  proc summary data=&indata. nway;
-    class &col;
-    var &&&list;
-    output out=Voices_se (drop=_type_ _freq_) stderr=;
-  run;
-
-  proc summary data=&indata. nway;
-    class &col;
-    var &&&list;
-    output out=Voices_n (drop=_type_ _freq_) n=;
-  run;
-  
-  data A;
-  
-    set &indata. (keep=&col &&&list.);
-    
-    array a{*} &&&list;
-    
-    do i = 1 to dim( a );
-      if a{i} = .n then a{i} = 0;
-      else a{i} = 1;
-    end;
-    
-  run;
-  
-  proc summary data=A nway;
-    class &col;
-    var &&&list;
-    output out=Voices_rrden (drop=_type_ _freq_) sum=;
-  run;  
-
-  data Voices_se_deff;
-
-    merge Voices_se deff_&col;
-    by &col;
-    
-    array a{*} &&&list;
-    
-    do i = 1 to dim( a );
-      a{i} = a{i} * deff*(1.645); *changed to 90% confidence interval;
-    end;
-    
-    drop i;
-    
-  run;
-
-  data Voices_means_se;
-
-    set 
-      Voices_means (in=is_mean) 
-      Voices_se_deff (in=is_deff) 
-      Voices_n (in=is_n) 
-      Voices_rrden;
-    by &col;
-    
-    length coltype $ 8; 
-    
-    if is_mean then coltype = 'Mean';
-    else if is_deff then coltype = 'CI'; *changed from SE;
-    else if is_n then coltype = 'N';
-    else coltype = 'RRDen';
-    
   %if &indata.=Voices.Voices_2017_nonopen_recode %then %do;
     label
       Q20_a_1 = "Never"
@@ -467,7 +479,14 @@
   
   title1 bold "VoicesDMV Survey: &title // DRAFT: NOT FOR CITATION OR RELEASE";
 
-  %if &indata.=Voices.Voices_2017_nonopen_recode %then %do;
+      %Make_one_table( 
+        data=Voices.Voices_2017_q1_q2_recode,
+        col=&col, 
+        colfmt=&colfmt,
+        var=Q1_:, 
+        text="Q1. If someone from the Washington area asked you, where would you say you were from?" 
+      )
+
       %Make_one_table( 
         col=&col, 
         colfmt=&colfmt,
@@ -484,7 +503,7 @@
         var=Q3_cat_:, 
         text="Q3. How long have you lived in the Washington area?" 
       )
-
+/****************
       %Make_one_table( 
         col=&col, 
         colfmt=&colfmt,
@@ -607,13 +626,19 @@
         var=Q19_:, 
         text="Q19. How safe do you feel the place where you live is for children?" 
       )
-
+**************/
       %Make_one_table( 
         col=&col, 
         colfmt=&colfmt,
         var=Q20_a_:, 
         text="Q20a. In the past year, how often have you had trouble getting to where you need to go because:",
-        text2="Public transportation was inconvenient"
+        text2="Public transportation was inconvenient",
+        vlabel=
+          Q20_a_1 = "Never"
+          Q20_a_2 = "Less than once per month"
+          Q20_a_3 = "Monthly"
+          Q20_a_4 = "Weekly"
+          Q20_a_5 = "Daily"
       )
 
       %Make_one_table( 
@@ -621,7 +646,13 @@
         colfmt=&colfmt,
         var=Q20_b_:, 
         text="Q20b. In the past year, how often have you had trouble getting to where you need to go because:",
-        text2="You were unable to afford public transportation"
+        text2="You were unable to afford public transportation",
+        vlabel=
+          Q20_b_1 = "Never"
+          Q20_b_2 = "Less than once per month"
+          Q20_b_3 = "Monthly"
+          Q20_b_4 = "Weekly"
+          Q20_b_5 = "Daily"
       )
 
       %Make_one_table( 
@@ -629,9 +660,15 @@
         colfmt=&colfmt,
         var=Q20_c_:, 
         text="Q20c. In the past year, how often have you had trouble getting to where you need to go because:",
-        text2="You did not have a car"
+        text2="You did not have a car",
+        vlabel=
+          Q20_c_1 = "Never"
+          Q20_c_2 = "Less than once per month"
+          Q20_c_3 = "Monthly"
+          Q20_c_4 = "Weekly"
+          Q20_c_5 = "Daily"
       )
-
+/**************
       %Make_one_table( 
         col=&col, 
         colfmt=&colfmt,
@@ -1389,8 +1426,7 @@
         var=DOV_IDEO_:, 
         text="Q81. In general, do you think of yourself as..." 
       )
-  %end;
-
+********************/
   ods rtf close;
   ods listing;
   
@@ -1431,17 +1467,7 @@ run;
 
 ** Create tables **;
 
-%let datalists=Voices.Voices_2017_nonopen_recode;
-%let varlists=full_var_list;
-
-%Macro Make_all_tables_all_data;
-
-  %do t=1 %to 1; 
-    %let dl=%scan(&datalists.,&t.," ");
-    %let vl=%scan(&varlists.,&t.," ");
-
-
-      %Make_all_tables( indata=&dl., list=&vl., col=region, colfmt=region., title=Tables for Entire Region )
+      %Make_all_tables( col=region, colfmt=region., title=Tables for Entire Region )
       /*****
       %Make_all_tables( indata=&dl., list=&vl., col=geo, colfmt=geo., title=Tables by Jurisdiction )
       %Make_all_tables( indata=&dl., list=&vl., col=race, colfmt=race., title=Tables by Race )
@@ -1451,11 +1477,4 @@ run;
       %Make_all_tables( indata=&dl., list=&vl., col=gender, colfmt=gender., title=Tables by Gender )
       %Make_all_tables( indata=&dl., list=&vl., col=homeown, colfmt=homeown., title=Tables by Homeownership Status )
       *****/
-  %end;
-
-%mend;
-
-%make_all_tables_all_data; 
-
-      
 
