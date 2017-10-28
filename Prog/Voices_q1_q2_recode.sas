@@ -35,10 +35,32 @@ proc sort data=Voices_2017_q1_q2_recode_0;
 data Voices_2017_q1_q2_recode;
 	
 	merge 	Voices_2017_q1_q2_recode_0
-		Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent PPT01 PPT25 PPT612 PPT1317);
+		Voices.VoicesDMVSurvey2017 (keep=caseid q1 q2 q1_refused q2_refused weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent PPT01 PPT25 PPT612 PPT1317);
 	by caseid;
 
 %make_break_vars_2017;
+
+  ** Code refused to answer as missing values **;
+  
+  array a_Q1{*} Q1_1-Q1_11;
+  
+  if Q1_refused = -1 then do;
+    
+    do i = 1 to dim( a_Q1 );
+      a_Q1{i} = .;
+    end;
+    
+  end;
+
+  array a_Q2{*} Q2_1-Q2_11;
+  
+  if Q2_refused = -1 then do;
+    
+    do i = 1 to dim( a_Q2 );
+      a_Q2{i} = .;
+    end;
+    
+  end;
 
   label
     Q1_1 = "Place you would tell Washington area person you are from: Washington, DC"
@@ -65,6 +87,11 @@ data Voices_2017_q1_q2_recode;
     Q2_10 = "Place you would tell outsider you are from: Multiple categories listed"
     Q2_11 = "Place you would tell outsider you are from: No place identified";
 
+  format Q1_1-Q1_11 Q2_1-Q2_11 ;
+  informat Q1_1-Q1_11 Q2_1-Q2_11 ;
+  
+  drop i;
+  
 run;
 
 
@@ -74,5 +101,28 @@ run;
   outlib=Voices,
   label="VoicesDMV 2017 survey, questions Q1 and Q2, recode",
   sortby=caseid,
+  freqvars=Q1_refused Q2_refused,
   revisions=%str(New file.)
 )
+
+ods listing close;
+
+ods csvall body="&_dcdata_default_path\Voices\Prog\Voices_q1_final_recode_review.csv";
+
+proc print data=Voices_2017_q1_q2_recode;
+  id caseid;
+  var Q1: ;
+run;
+
+ods csvall close;
+
+ods csvall body="&_dcdata_default_path\Voices\Prog\Voices_q2_final_recode_review.csv";
+
+proc print data=Voices_2017_q1_q2_recode;
+  id caseid;
+  var Q2: ;
+run;
+
+ods csvall close;
+
+ods listing;
