@@ -184,7 +184,9 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			jobs=jobs+index(Q15_text,"Employment Opportunities Related To"); *was in diversity;
 			if Q15_text in("Government Employment" "Internships" "Nice Job Placements" "Work Options" "Excellent Place To Work" "Good Job Environment" "Good Work History" 
 					"Good Pay" "Good Payouts" "Great Place To Work" "Great Work Place" "Great Workforce" "High Employment Rate" "Job Options" "Job Outlook"
-					"Job Prospects" "Job Wages Are High" "Job/Career Opportunities" ) then jobs=1; 
+					"Job Prospects" "Job Wages Are High" "Job/Career Opportunities" "Many Employers" "Professional Opportunities" "Professional Opportunity"
+					"The Job Market/Economy" "Training Programs" "Work Availability" "Emploment Opportunities" "Employers" "Employment Market" "Employment Opportunitiies"
+					) then jobs=1; 
 
 			diversity=index(Q15_text,"Different Cultu");
 			diversity=diversity+index(Q15_text,"Diverse Cultu");
@@ -274,21 +276,22 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			if Q15_text="A Lot Of Amusment Parks" then entertain=1;
 			if Q15_text="Bars, Clubs, Music Venues, Variety in Dining" then entertain=1; *was community;
 			if Q15_text in("A Lot Of Things To Do" "A Lot To Do" "All Of The Family Activities Available" "Always Lots To Do" "Entertainment Experience" "It Has Lots Of Stuff To Do"
-							"Boating" "Many Things To Do" "Lots Of Free Things To Do" "Lots Of Fun Stuff For Kids" "Lots Of Stuff To Do" "Lots Of Things To Do" "Lots To Do" "Lots To See"
-							"Places To Go" "Places To See" "Plenty Of Things To Do" "So Many Things To Do" "So Much To Do" "The Attractions" "There Is Entertainment Spritz Thouhout The Dmv"
-							"Things To Do" "Things To See" "Tons Of Things To Do" "Lot To Do" "Movies" "Abundance Of Activities And Amenities" "Lot Of Things To See" "Lot's Of Things To Do"
-							"Lot's To,see" "Lots Going On" "Lots Of Attractions" "Lots Of Attractions And Things To Do" "Lots Of Free Things To See And Do" "Lots Of Interesting Things To Do"
-							"Lots Of Places To Visit" "Lots Of Things Going On" "Lots Of Things To Do If I Want To Do Them" "Lots Of Things To See" "Lots Of Things To See And Do"
-							"Lots Of Things To See And Do And Participate In" "Lots Of Place Around" "Stuff To Do" "The Many Things To See And Do Here"
-							"The Sight-Seeing" "The Sites" "The Sites You Can Visit" "The Places"  "Plenty Of Variety In Things To Do Or See" "Plenty To Do"
-							"Places To Go And See" "Places To Visit" "Places To Visit Close By" "Six Flags" "Site Seeing" "Sites" "Sight's" "Sightingseeing"
-							"Great Site Seeing Area" "Place To See" "So Many Places To Visit" "So Many Productive Things To Do In The Area." "So Much To See" "So Much To See And Do"
+						"Boating" "Many Things To Do" "Lots Of Free Things To Do" "Lots Of Fun Stuff For Kids" "Lots Of Stuff To Do" "Lots Of Things To Do" "Lots To Do" "Lots To See"
+						"Places To Go" "Places To See" "Plenty Of Things To Do" "So Many Things To Do" "So Much To Do" "The Attractions" "There Is Entertainment Spritz Thouhout The Dmv"
+						"Things To Do" "Things To See" "Tons Of Things To Do" "Lot To Do" "Movies" "Abundance Of Activities And Amenities" "Lot Of Things To See" "Lot's Of Things To Do"
+						"Lot's To,see" "Lots Going On" "Lots Of Attractions" "Lots Of Attractions And Things To Do" "Lots Of Free Things To See And Do" "Lots Of Interesting Things To Do"
+						"Lots Of Places To Visit" "Lots Of Things Going On" "Lots Of Things To Do If I Want To Do Them" "Lots Of Things To See" "Lots Of Things To See And Do"
+						"Lots Of Things To See And Do And Participate In" "Lots Of Place Around" "Stuff To Do" "The Many Things To See And Do Here" "Movie Theaters"
+						"The Sight-Seeing" "The Sites" "The Sites You Can Visit" "The Places"  "Plenty Of Variety In Things To Do Or See" "Plenty To Do"
+						"Places To Go And See" "Places To Visit" "Places To Visit Close By" "Six Flags" "Site Seeing" "Sites" "Sight's" "Sightingseeing"
+						"Great Site Seeing Area" "Place To See" "So Many Places To Visit" "So Many Productive Things To Do In The Area." "So Much To See" "So Much To See And Do"
 						"Something Is Always Going On" "Terrific Attractions (Many Of Them Are Free)" "There Are Always Things To Do" "There Are Hidden Gems To Explore Everywhere"
 						"There Are Lots Of Things To Do Here" "There Are Many Entertainment Venues." "There Are Plenty Of Things To Do" "There Is A Lot Going On." "There Is A Lot To Do And See"
 						"There Is Always Something Happening" "There Is Always Something To Do" "There Is Lot To Do" "There Is So Much To Do" "There's Always Something Going On" "There's Always Something To Do"
 						"There's Always Something To Do." "There's Lots To Do" "Theres So Much To Do" "The Things To Do" "Things Do And See" "Thingss To Do" "Thinhs To Do" "Tons Of Free Things To Do"
 						"Tons To Do" "Varied Attractions" "Variety Of Attractions" "Variety Of Things To Do" "Family Activities" "Festivities" "Interesting Places To Discorver" "Interesting Places To Visit"
-						"Interesting Things To Do" ) then entertain=1;
+						"Interesting Things To Do" "Many Places To Go Have A Good Time" "Many Things To See And Do" "Entertaining" "Entertainment Offering" "Entertainment Venues"
+						"Embassy Galas" "Drum Circles" "Duckpin Bowling") then entertain=1;
 
 			metro=index(Q15_text,"Metro Accesibility");
 			metro=metro+index(Q15_text,"Metro Accessiblity");
@@ -296,14 +299,16 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 			if Q15_recode='' and Q15_Text in("Metro" "Metro Accessible" "Metro Accessibility" "Metro Accessibility To Most Places" "Metro Accessibility To The City"
 							"Dca Metro" "Metro" "Metro Transportation" "Meteo" "Metro Accesessible" "Metro Accesible" "Metro Accessable" "Metro Andbus Good Comunication"
 							"Metro Convience" "Metro Options" "Metro Station" "Metro Subway Availability" "Metro System" "Metro System Availabilty"
-							"Effective Metro System" "Good Metro System" "Subway" "Subways") then metro=1;
+							"Effective Metro System" "Good Metro System" "Subway" "Subways" "Near Metro") then metro=1;
 
 			transpo=index(Q15_text,"Public Transit"); *was metro;
 			if Q15_text in("Nice Transit" "Mass Transit" "Transit" "Easy Travel & Transit" "Calles" "Decent Transporation Links" "Easy To Get Around" "Easy To Travel To Other Places"
 							"Transportstio" "Travel Options" "It's Easy To Get Around" "Ability To Bike To Work" "Access To Transport Options" "Trains"
 							"Local Transit System" "Loads Of Travel Options" "Slug Line" "Somewhat Reliable Transportation Systems" "Transit Systems" "Transportation Access"
 							"Transportation Choices" "Transportation Ease" "Transportation Hub" "Travel" "Travel Convenience" "Travel Hub" "Travel Is Easy" "Good Transportation Network"
-							"You Can Get Around Very Easily, Train, Uber Etc.." "Good Hub For Local, Regional, National And International Travel" "Highway") then transpo=1;
+							"You Can Get Around Very Easily, Train, Uber Etc.." "Good Hub For Local, Regional, National And International Travel" "Highway" "Neigborhood Transportation"
+							"No Driving" "Easy To Get To Most Things" "Easy To Get Around The City" "Easy To Get Elsewhere" "Easy Togo To Many Places" "Easy To Travel Other Places"
+							"Easy To Move Around" "Ease Of Travel" "Decent Roadways")  then transpo=1;
 
 			people=index(Q15_text,"Affluent Communities");
 			people=people+index(Q15_text,"Citizens Are Highly Educated"); 
@@ -346,11 +351,12 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 						    "Cultural Life" "Cultural Vibrancy" "Many Opportunities For Cultural And Educational Experiences" "Lots Of Cultural Things To Do"
 						    "Rich Cultural Life" "Wealth Of Cultural Heritage/Historical Sites" "Lots Of Things To Do Culturally" "The Cultural Assets"
 						   "Plenty Of Cultural Attractions" "Rich Cultural Opportunities" "Social And Cultural Opportunities" "Excellent Cultural Opportunities"
-						   ) then Q15_recode="CULTURE";
+						  "Near Cultural Centers" ) then Q15_recode="CULTURE";
 
 			if Q15_text in ("Muesm M" "Washington Dc Museums" "Access To Museums And In Dc" "Museums & Activities" "Museums And Activities" "Nuseums"
 					"Miseums" "Nice Activities, Museums" "Museam" "Museum/Culture Opportunities" "Musiums" "Musumes" "Muesums" "The National Zoo"
-					"Smithsonian Institute Museums" "The Musemes") then Q15_recode="MUSEUMS";
+					"Smithsonian Institute Museums" "The Musemes" "Library Of Congress" "National Gallery Of Arts" "Near Washington Museums"
+					) then Q15_recode="MUSEUMS";
 
 			if Q15_text in("Very Walkable" "Easy To Walk To Destination" "Easy To Walk To Places I Need To Go" "Ability To Walk To Area Bus And Rest" "Walkable Communities, Good Transit" 
 					"Walkable, Fun Neighborhoods" "Walk Every Where" "Walk" "Walkable Areas" "Walkable City" "Walkibility" "Walkihg" "Walking" "Walking Places"
@@ -362,9 +368,9 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 							"Memorials" "Historic Areas" "Historic Places" "Historic Sites" "Historical" "Historical Attractions" "Historical Places" "Historical Places To Visit"
 							"Historical Significance" "Historical/Cultural Attractions" "Historically Interesting" "Historically Rich" "Historically Significant Venues To Visit" 
 							"History Access" "Mpnument" "Lots Of Historical Places To See"  "Not Far From Historical And Cultural Centers" "Supreme Historical Importance"
-							"The Historical Buildings" "The Historical Sites" "The Washington Monument" "Water Features" "Famous Buildings") then Q15_recode="MONUMENTS";
+							"The Historical Buildings" "The Historical Sites" "The Washington Monument" "Water Features" "Famous Buildings" "Lincoln Memorial") then Q15_recode="MONUMENTS";
 
-			if Q15_text="Clubs/Restaurants" then Q15_recode="NIGHTLIFE";
+			if Q15_text in("Clubs/Restaurants" "Night Scene") then Q15_recode="NIGHTLIFE";
 
 			if Q15_text in("High Quality Public School System" "School District" "Schooling" "Good School And Parks In My Neighborhood" "Good Schools For Children" "Good Schools for Son" "Educationally Strong"
 					"Education Ops In The Area" "Educational" "Educational Experience" "Educational Opportunites" "Educational Opportunities" "Educational Opportunities (Beyond High School)" 
@@ -374,78 +380,85 @@ data Voices_Q15_newrecode (drop=diversity culture politics capital monuments tra
 
 			if Q15_text in("Have Four Seasons" "Four Seasons" "Four Seasons Fully Experienced"  "4 Different Weather Patterns" "El Clima" "Few Natural Disasters" "Hot" "The Heat" "The Rain" "Variable Weather Conditions W/O Excess"
 					"Spring" "Spring And Fall" "Warm And Sunny" "Warm Summers" "Warmer In The Winter" "Warmer Than Ny" "We Get All Four Seasons" "Wheater" "Fall" "It Rarely Snows."
-					)then Q15_recode="WEATHER";
+					"Whether")then Q15_recode="WEATHER";
 
 			if Q15_text in("Affordable" "And It Is Kind Of Not To Pricy" "Cheaper Than New York" "Expensive" "You Need Money To Live Here" "A Little Cheaper Than California"
 						"Expenses" "Lower Grocery Prices" "Not Too Expensive" "Things To Do That Are Free" "It's Cheap" "It's Expensive And That Keeps Out The Riff Raff") then Q15_recode="COSTS";
 
 			if Q15_text in("Area Urbana" "Centrally Located For Travel Abroad" "Close To Big Cities" "Close To City" "Close To DMV" "Close To Everything" "Close To Lots Of Stuff"
-							"Close To Pennsylvania" "Close To Places" "Close To Two Major Cities" "Close To West Virginia" "Close To Work" "Connivence" "Convenient" "Convenient To Everything"
-							"Convient" "Every Thing Is Close" "Everything Is Convient" "Everything Is Close" "Everything Is Close By" "Halfway Between Ca And France"
-							"Access To Other Communities" "It Is Convient" "Its Close To Everything I Need" "Near The City" "Close To Dmv" "Everything In Convient"
-							"Convenience To Many Areas" "Convenience To Nearby Cities" "Convience" "Convnience" "Convenience To Places" "Convenience" "Conveinience"
-							"It Is Very Convenient Living Here" "The Convenience." "Locale" "Locality" "Located Near Some Very Nice Cities I.E. New York, Jersey Shore And Philadelphia"
-							"Locstion" "Lots Of Other Nearby States To Visit" "Short Trip To Many Other Cities" "Things Ar Close By" "Things Are Close" "You Have Three Cities Within A Easy Drive"
-							"You Can Either Live In The Suburbs, City, Or Rural Areas And Be Within Each Within A Matter Of Minutes" "Everything It's Close" "Everything Is Close By My Residence" "Everything Is Convenient"
-							"Everything Is Here" "Everything Is Nearby" "Everything Is Relatively Close (Compared To Larger States)" "Have Everything Around You") then Q15_recode="LOCATION";
+					"Close To Pennsylvania" "Close To Places" "Close To Two Major Cities" "Close To West Virginia" "Close To Work" "Connivence" "Convenient" "Convenient To Everything"
+					"Convient" "Every Thing Is Close" "Everything Is Convient" "Everything Is Close" "Everything Is Close By" "Halfway Between Ca And France"
+					"Access To Other Communities" "It Is Convient" "Its Close To Everything I Need" "Near The City" "Close To Dmv" "Everything In Convient"
+					"Convenience To Many Areas" "Convenience To Nearby Cities" "Convience" "Convnience" "Convenience To Places" "Convenience" "Conveinience"
+					"It Is Very Convenient Living Here" "The Convenience." "Locale" "Locality" "Located Near Some Very Nice Cities I.E. New York, Jersey Shore And Philadelphia"
+					"Locstion" "Lots Of Other Nearby States To Visit" "Short Trip To Many Other Cities" "Things Ar Close By" "Things Are Close" "You Have Three Cities Within A Easy Drive"
+					"You Can Either Live In The Suburbs, City, Or Rural Areas And Be Within Each Within A Matter Of Minutes" "Everything It's Close" "Everything Is Close By My Residence" "Everything Is Convenient"
+					"Everything Is Here" "Everything Is Nearby" "Everything Is Relatively Close (Compared To Larger States)" "Have Everything Around You"
+					"Living Location Options" "Easy And Accessibale") then Q15_recode="LOCATION";
 
 			if Q15_text in("Programs For Seniors" "Lot Of Programs For Seniors" "Rockville Senior Center" "Excellent Medical Facilities And Physicians" "Hospital Care" "Medical Facilities" "Medical Quality"
 					"Avaiable Facilities" "Resources" "Resources And Support" "Excellent Medical Facilities" "Outstanding Medical Facilities" "Convenience Of Services" "Good Medical Facilities" "Good Medical Support"
 					"The Medical Providers I See Are Nearby." "Rich In Community Resources" "Recreational Centers" "Health Care Choices" "Health Facilities" "Quality Medical Facilities"
 					"Supermarkets" "Variety Of Resources" "You Can Get Al The Help That You Need" "You Can Get Help" "You Have An Enormous Amount Of Resources" "Facilities"
 					"Good Facilities" "Good Programs" "Government Programs" "Govermenr Assists" "Great Human Services Resource" "Great Place For Help" "Librariea" "Library" 
-					) then Q15_recode="SERVICES";
+					"Near Market" "Paid Youth Programs" "Early Start Programs") then Q15_recode="SERVICES";
 
 			if Q15_text="Prestigious African American Communities" then Q15_recode="PEOPLE"; *was diversity;
 			if Q15_text in("Successful Black Profesionals" "Babes" "Buenas Personas" "Buenas Persona" "Human Quality" "Gilrs" "Everyone Knows Everyone" "Son Personas Unidas"
 					"High Education Peoples" "High Educational Level" "Highly Educated Citizenry" "Lots Of Educated, Entrepreneurial Types" "Social Opportunities" "Society"
-					"Young Adults" "Young Profess" "Youth" "Everyone Is Friendly") then Q15_recode="PEOPLE";
+					"Young Adults" "Young Profess" "Youth" "Everyone Is Friendly" "Poeple" "Populated Area" "Population Density" "Engaged Citizens") then Q15_recode="PEOPLE";
 
 			if Q15_text in("Beautiful" "Beautiful Areas" "Es Muy Bonito" "El Paisaje" "Green Spaces" "Proximity To Scenic Areas" "Lovely" "Pretty" "The Views" "Tree Lined Streets"
 					"Good Outdoor Spaces" "The Natural Areas Surrounding Dc For Activities" "Recreation Activities" "Recreation Options" "Recreation/Entertainment Opportunities" "Recreational Areas"
 					"Tree" "Recreational Opportunities" "Running Trails" "Scenic" "See The Sky" "Sky" "State Parks" "Sun" "Super Green And Flowery" "Trail System--Good For A City"
 					"Trail Systems" "Variety Of Outdoor Places" "Variety Of Recreational Opportunities" "Excellent Natural Places To Visit" "Flowers" "Foliage" "Grass"
 					"Green Areas" "Green Enviroment" "Greenspace" "Healthy Soil For Gardening" "It Has Many Scenic Views" "It's Beautiful" "It's Beautiful Out Here"
-					"It's Pretty" "It's A Beautiful Place To Live" "It Is Beautiful") then Q15_recode="NATURE";
+					"It's Pretty" "It's A Beautiful Place To Live" "It Is Beautiful" "More Green Spaces Than A Lot Of Metro Area" "National Park System"
+					"Natural Beauty" "Natural Beauty Of D, M, V" "Natural Places Close Enough For Day Trip" "Nature Centers Are Close" "Near Great Falls National Park"
+					"Near The Seashore" "Nearness To C &o Canal Park" "Open Areas" "Outdoor Areas" "Outdoor Recreation Opportunities" "Outdoors Not So Far Away" "Outdoors Opportunities"
+					"Parcs, Geen Spaces" "Park" "Park Land" "Places To Walk" "Places To Walk- Trails" "River Access" "Running" "The Area Is Beautiful") then Q15_recode="NATURE";
 
 			if Q15_text in("Wealth Opportunity" "Relative Economic Stability" "Prosperity" "Income Potential" "Indifferent To Economic Cycles" "Centros Comerciales" "Economically Vabraint" "Employment Rates Seem High" 
-					"Entrepreneurial Experience" "Economically Diverse" "Income Ranges" "Government Contracts" "Government Economy") then Q15_recode="ECONOMY";
+					"Entrepreneurial Experience" "Economically Diverse" "Income Ranges" "Government Contracts" "Government Economy" "Entreprenuership") then Q15_recode="ECONOMY";
 
 			if Q15_text in("Intellectual Climate" "Social Climate" "Ambiente" "Calm" "Chill" "Choice Of Living" "Cool" "Crowded" "Crowd" "Es Muy Calida El Area" "Friendly"
-							"Good Social Scene" "Happy" "Harmony" "Excited" "Fair" "It Is A Very Adventurous City" "It's Cool" "It's Fun" "It's Nice" "Kindness" "Peaceful" "Quiet"
-							"Unique" "Intellectual Opportunities" "Intellectual Rigor" "Intellectual Stimulation" "Intellectually Stimulating" "Weed"
-							"Hip" "Cool Place" "Sophistication" "Southern Charm" "The Style/Way Of Living" "The Vibe (There's Always Something Interesting And Important Happening)"
-							"Young Professional Town" "Fast" "Fast-Paced") then Q15_recode="LIFE";
+					"Good Social Scene" "Happy" "Harmony" "Excited" "Fair" "It Is A Very Adventurous City" "It's Cool" "It's Fun" "It's Nice" "Kindness" "Peaceful" "Quiet"
+					"Unique" "Intellectual Opportunities" "Intellectual Rigor" "Intellectual Stimulation" "Intellectually Stimulating" "Weed"
+					"Hip" "Cool Place" "Sophistication" "Southern Charm" "The Style/Way Of Living" "The Vibe (There's Always Something Interesting And Important Happening)"
+					"Young Professional Town" "Fast" "Fast-Paced" "Liveliness" "Lively" "Lively Area" "Legal Weed" "One Of A Kind Of Place" "Open Mindedness"
+					"Work Life Balance"  "Professional Environment") then Q15_recode="LIFE";
 
 			if Q15_text in("Cosmopolitan" "Culturally Diverse" "Culturally Diverse." "Diverse" "Good Choices In Diverse Places To Be Around" "Multicultural" "Very Diverse"
 				"Multicultural Environment" "Multi Languages" "Mix Cultures" "Cosmopitalian" "Cosmopolitan City" "Cosmopolotism" "Rich Mix Of Nationalities" "This Is A Very Diverse Area."
-				"Ethnic Variety" "International /Diversity Of Population" "International Feeling" "International Flavor" "International Presents")then Q15_recode="DIVERSITY";
+				"Ethnic Variety" "International /Diversity Of Population" "International Feeling" "International Flavor" "International Presents" "National Area/Ethinicly Diverse"
+				"The Ethnic Groups" "Diverse Metropolitan Area" "Diverse Area" "Diverse Citizenship" "Different Ethnicity")then Q15_recode="DIVERSITY";
 
 			if Q15_text in("Good Restzuranrs" "Eateries" "Eating Place" "Eating" "Fresh Fish" "Mumbo Sauce" "Places To Eat" "A Lot Of Eateries" "Maryland Bile Crabs" "Maryland Crabs"
 					"Food Availability" "Food Court" "Food Delivery" "Food Fair" "Food Options" "Food Trucks" "Food Venues" "Vegan Food" "Ethiopian Food"
-					"Lots Option Restaurant" "Lot Of Places To Eat." "Lots Of Places To Eat" "Sushi" '"The First Thing I L"ove About The Washington Area, Is The Food Truck. There's Just So Much Of Them."
+					"Lots Option Restaurant" "Lot Of Places To Eat." "Lots Of Places To Eat" "Sushi" "The First Thing I Love About The Washington Area, Is The Food Truck. There's Just So Much Of Them."
 				"The Mom And Pop Restaurants" "The Large Selection Of Goid Restaurants" "Plenty Of Variety In Places To Eat" "Plenty Of Things To Eat" "Place To Eat"
-				"Great Places To Eat" "Great Restaurahrs" "Red Lobster" "They Have The Best Mamb Sauce" "Variety Of Eating Establishments") then Q15_recode="FOOD";
+				"Great Places To Eat" "Great Restaurahrs" "Red Lobster" "They Have The Best Mamb Sauce" "Variety Of Eating Establishments" "Doughnuts" "Downtown Restaurants"
+				"Diverse Eating Places" "Dinner") then Q15_recode="FOOD";
 					
 			if Q15_text in("Political Center" "The Nation's Eyes Are Focused On This Area" "Hub Of Nation's Governance" "Nation Capitol" "It Were The White House At" "First Hand Law Making" "Government Center"
 					"Political Pulse Of The Nation" "It Is Us Capitol" "Pride In Being At The Center Of The Free World" "The U.S Capitol" "Where Decisions Are Made" "Federal Buildings" 
-					"Federal Gov." "Heartbeat Of The Nation") then Q15_recode="CAPITAL";
+					"Federal Gov." "Heartbeat Of The Nation" "Living In A World Capital" "Near National Politics Center") then Q15_recode="CAPITAL";
 
 			if Q15_text in("The Music Scene" "Lots Of Free Or Affordable Classical Music Listening Opportunities" "Good Theater/Arts Performances" "Go Go" "Easy Access To Live Theater Performances"
 					"Shows" "Music Concerts" "Great Music Scene" "Great Performance Arts" "Having Quality Radio Stations To Listen To" "The Theater Scene" "Theatre Community"
-					"Wolftrap") then Q15_recode="PERFORM";
+					"Wolftrap" "Many Performing Arts" "National Symphony") then Q15_recode="PERFORM";
 					
-			if Q15_text in("Living With My Spouse" "Proximity Tonfamily" "Family Friendly" ) then Q15_recode="FAMILY";
+			if Q15_text in("Living With My Spouse" "Proximity Tonfamily" "Family Friendly" "Most Of My Fanily Is Here" "My Family Is Happy." "My Kids" "My Mother") then Q15_recode="FAMILY";
 			if Q15_text in("New Developments Are Rising Daily" "Housing Programs" "My House" "Property Values Remains Pretty Consistently High" "Real Estate Prices" "Real Estate Values"
-					"Value Of Property") Then Q15_recode="HOUSING";
+					"Value Of Property" "Decent Real Estate Market") Then Q15_recode="HOUSING";
 					
 			if Q15_text in("Plenty Of Places To Buy Things Needed" "Store Locations Are Convenient" "Store Selection" "Numerous Places To Shop" "Plenty Of Shopping Venues"
 					"Shop" "Shopping Choices" "Shopping Is Asseccable" "Shopping Nearby" "Shopping Stores" "Reston Town Center" "Retail Options"
-					"Has Convenient And Good Shopping Places") Then Q15_recode="SHOPPING";
+					"Has Convenient And Good Shopping Places" "Many Corner Stores") Then Q15_recode="SHOPPING";
 			
 			if Q15_text in("Political" "Political Active" "Political Activism Is Strong" "Political Environment" "Political Focus" "Political Hot Pot" "Political Involvement" 
 					"Political Scene" "Political/Social Awareness" "Politically Engaged" "Progressive" "Progressive Outlook" "Public Policy/Public Affairs Focus" "Watching Political Circus"
-					"Fairly Socially Liberal (Despite Current Administration)" "Government Town") then Q15_recode="POLITICS"
+					"Demoratic" "Fairly Socially Liberal (Despite Current Administration)" "Government Town" "Liberal" "Liberal Politically" "Maryland Still Supports The Aca") then Q15_recode="POLITICS"
 					
 			If Q15_text in("Spoert" "Sport" "Sport Events" "Access To College And Pro Sports" "Nationals" "Nats" "Plays/Sporting Events." "Professional & Collegiate Sports"
 					"Washington Capitals" "Washington Nationals" "Washington Redskins") then Q15_recode="SPORTS";
