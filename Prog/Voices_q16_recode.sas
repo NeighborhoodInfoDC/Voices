@@ -138,7 +138,7 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	if Q16_Text in("Cost Of Living - Rent Is Too High" "Cost Of Rent" "Cost Of Residence" "Prices Of Homes" "Price Of Houses" "Property And Cost Of Living Are High"
 					"Very High Cost Of Housin" "High Morgages" "Price Of Property" "Pricey Housing" "Rent Very Expensive" "Condos" "Expensive Apt Complex"
 					"Limited Low Income Housing" "Difficult To Own A Home Due To High Demand And Pricing" "My Wife And I Cannot Afford To Buy A Home Here."
-					) then housing=1;
+					"Cannot Own Land" )then housing=1;
 
 	traffic=traffic+index(Q16_text,"Congested Roads"); 
 	traffic=traffic+index(Q16_text,"Conjestion Roads"); 
@@ -149,17 +149,18 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	traffic=traffic+index(Q16_text,"Congestion In Trying To"); 
 		if Q16_text in("Gridlock" "Growing Gridlock, Traffic-Wise" "Heavy Beltway Traffic" "Highways" "Traffic Is A Nightmare" "Transport Congestion" "Nosy Traffic"
 				"Beltway Traffic" "Car Traffic" "Downtown Traffic" "Traffic" "Traffic Cameras" "Traffic Tickets" "Gridlock On The Road And Subway"
-				) then traffic=1; 
+				"Motorcades" "Busy Streets") then traffic=1; 
 
 	commute=index(Q16_text,"Commute To Work"); *was jobs;
 	commute=commute+index(Q16_text,"Commutes");
 		if Q16_text in("Commute Times" "Commuting" "Commute Times" "Commute" "Comute" "Costly Commute" "Daily Commute" "The Commute" 
-				"Commuter Issues" "Commuting Time" "Commutining Times"  "Travel Times") then commute=1; 
+				"Commuter Issues" "Commuting Time" "Commutining Times"  "Travel Times" "Length Of Commute Time" "Getting To Work"
+				"Morning And Evining Comute") then commute=1; 
 
 	transpo=index(Q16_text,"Public Transit");
 	if Q16_text in("Bad Public Transportation" "Cost Of Public Transportation" "Dismal Public Transportation" "Mass Transit" "Transit" "Cabs" "Streets Need Work"
 			"Unreliable City Transit" "Turning Commuter Routes Into Toll Roads" "Transit Times End Early" "Traveling" "Travel" "Uber" "Toll" "Toll Roads"
-			"Tolls") then transpo=1;
+			"Tolls" "Getting Around" "Getting Into Maryland Over The Bridges" "Bicyclists" "Bike Lanes") then transpo=1;
 
 	metro=index(Q16_text,"Metro/Transportation");
 	metro=metro+index(Q16_text,"Metro Rail And Bus");
@@ -171,7 +172,7 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 					"Metro Changes" "Metro Cut Hours" "Metro Delays" "Metro Difficulties" "Metro Issues" "Metro Needs To Go More Places"
 					"Metro Not Reliable" "Metro Not Reliable Or Available 24/7" "Metro Problems" "Metro Shutdowns" "Metro Times" "Metro Track Work"
 					"Metro Unreliability" "Metro Unreliable" "Metro: It Just Sucks." "Need More Metro Stops" "Not Having 24/7 Metro"
-					"Poor Metro") then metro=1;
+					"Poor Metro" "Crummy Subway") then metro=1;
 
 
 	life=index(Q16_text,"Focus On Careers"); *was jobs;
@@ -179,7 +180,9 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	life=life+index(Q16_text,"Transience"); *mostly was people;
 	if Q16_Text in("Extremely Performance Driven" "People Too Focused On Work" "People Work Too Much" "The Competitve/Money-Grubbing Nature" "Transitory Nature"
 					"Too Much Emphasis On Career And Difficult To Raise A Family" "No One Stays In The Area For Long" "Overly Competitive" "The Competitive Culture"
-					"Social Culture" "Culture" "City Is Being Whitewashed, Losing Its Black Culture." "We Are All Too Focused On Our Careers") then life=1;
+					"Social Culture" "Culture" "City Is Being Whitewashed, Losing Its Black Culture." "We Are All Too Focused On Our Careers"
+					"Trancience" "Transiency" "Very Competitive" "Uptight" "A Lot Of Competition" "Competativeness" "Competitevness" "Competition"
+					"Competitive" "Competitive Attitudes" "Competitiveness" "Apathy" "Chaotic" "Everyone Leaves Eventually") then life=1;
 
 
 	costs=index(Q16_text,"Cost Of Food"); *was food; 
@@ -198,11 +201,14 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 					"Very Expensive Place To Live" "Very Expensive To Live Here." "Very Expensive." "Very Thing Is Expensive" "Way Too Expensive"
 					"Coat Of Livong" "Expensive Daycare" "Expensive Living Standards" "Expensive To Live" "Expensive To Live Here" "Expensive To Live In"
 					"Expensive To Live In This Area" "Expensive, Way Too" "Expensive." "Unaffordable" "Everything Is More Expensive" "Everything Is Too Expensive"
-					"Everything Is Very Expensive") then costs=1;
+					"Everything Is Very Expensive" "Getting Expensive" "Getting Too Expensive" "It Can Be Expensive To Live Here" "It Is Expensive"
+					"It's Become Too Expensive To Live Here." "It's Expensive" "It's Really Expensive" "It's Too Expensive" "It's Very Expensive!" 
+					"Keeping Up With The Jones's" "Most Things Are Expensive" "One Of The Most Expensive Area In The Nation" "Can Be Expensive"
+					"Expences") then costs=1;
 
-	if Q16_text in("Current White House Occupants" "That Orange Cheeto In The White House" "The Guy In The White House"
+	if Q16_text in("Current White House Occupants" "That Orange Cheeto In The White House" "The Guy In The White House" "Ivanka" "Jared" "Prez"
 					"People In Oval Office" "Poisonous Atmosphere Of Current Administration" "Our Present First Family" "President Chump" "President Trump" "The Current President"
-					"The Current President And Political Status" "Trump Is President") then trump=1;
+					"The Current President And Political Status" "Trump Is President" "The Current Administration") then trump=1;
 
 	*new code-  too many people;
 	many=index(Q16_text,"A Lot Of People");
@@ -222,7 +228,10 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 				"To Crowded" "Too Crowded" "Too Many Buildings In Dc" "Congestion; Increasing Development" "Over Development" "Too Much Development" "Too Much New Construction Everywhere"
 				"Overbuilding" "Congestion - Too Many Houses Being Built" "Congestion And Over Development" "To Many Houses" "Too Many Apartment Buildings" "Very Crowded With People And Homes"
 				"Too Crowed, Congested With Rude People" "Congested Areas" "Highly Congested" "Too Much Building Instead Of Renovations" "Too Much Building, Squashing Everything Together Like Sardines"
-				"Too Much High Density Building" "Uncontrolled Growth" "Too Crowded - Gridlock" "Too Crowed") then many=1;
+				"Too Much High Density Building" "Uncontrolled Growth" "Too Crowded - Gridlock" "Too Crowed" "A Little Crowded" "It's Quite Crowded" "It's Very Overcrowded."
+				"Can Be Crowded" "Crouded" "Crowded All The Time" "Crowded Conditions" "Crowded Everything" "Crowded Streets" "Crowdrd"
+				"Crowed" "Everything Is Overcrowded." "Feels Overpopulated" "Getting Congested" "Getting Crowded" "Getting Too Crowded" "Over Building" "Over Crowded" "Over Crowding" "Over Crowed"
+				"Over Populated" "Over-Building" "Overbuilt" "Overcrowdedness" "Overpopulated" "Densely Populated" "Populated" "Populous" "It's Congested") then many=1;
 
 	*I left "Crowds" as people?...thought of those as more time specific? - like crowds of tourists?";
 
@@ -241,7 +250,7 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	rude=rude+index(Q16_text,"Unfriendliness");
 	if Q16_text in("People Stare" "Less Friendlyness" "People Are Not Friendly" "Ill-Tempered People" "People Not To Friendly"
 					"Some Of The People Are Not As Friendly" "The People Could Be Nicer." "Unfriendly And Aggressive People" "Not Friendly" "Unfriendly" "Unfriendly To Stangers"
-					"(Bad)attitudes And General Unfriendlyness Of Locals") then rude=1;
+					"(Bad)attitudes And General Unfriendlyness Of Locals" "Less Nicer" "Big City Rudness") then rude=1;
 
 	*new code - fast pace life;
 	fast=index(Q16_text,"Are Very Rushed");
@@ -252,7 +261,7 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	fast=fast+index(Q16_text,"Hectic");
 	if Q16_text in("Lack Of Time To Live A Life" "Fast Speed Of Life" "Busy" "Busy-Ness" "Its Busy" "Very Busy" "People Are Busy" "Hustle And Bustle"
 			"How Busy It Is" "Face Pace" "Everybody Is In A Rush" "Everyone Is In A Hurry" "Everyone Is Too Busy For What's Most Important"
-			"Everyone Seems Very Busy" "Too Busy" "Too Busy At Times" "Too Busy!" ) then fast=1;
+			"Everyone Seems Very Busy" "Too Busy" "Too Busy At Times" "Too Busy!" "Intensity" 'General "busy"-Ness') then fast=1;
 
 	homeless=index(Q16_text,"Homeless");
 	if Q16_text="People Living Shelters" Then homeless=1;
@@ -261,7 +270,8 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	poverty=poverty+index(Q16_text,"Large Disparity Between The Wealthiest");
 	poverty=poverty+index(Q16_text,"The Wide Disparity From Neighborhood");
 	if Q16_text in("Poor People" "Too Many People Living Under The Goverment Funds" "Class Divisions" "Poor" "Poor Areas" "The Vast Economic Differences In Various Parts Of The Area"
-					"Poor Living Conditions East Of The River" "Huge Gaps Of Standards Of Living" 'Too Many "have Nots" In An Area With So Many "haves"') then poverty=1;
+					"Poor Living Conditions East Of The River" "Huge Gaps Of Standards Of Living" 'Too Many "have Nots" In An Area With So Many "haves"'
+					"Large Gap Between Haves And Have Nots" "Thousands Of Beggars") then poverty=1;
 
 	safety=index(Q16_text,"People Getting Killed");
 	safety=safety+index(Q16_text,"People To Own Weapons");
@@ -313,12 +323,12 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	if Q16_text in("The Inability To Drive To The Many Monuments In The Area Due To Lack Of Parking.") then Q16_recode='PARKING';
 
 	if Q16_text in("Bad Trasffif/Rude Agressive Drivers" "People Don't Drive Well" "People Can't Drive" "Driving" "Bed Drivers"
-			"Diplomat Drivers" "Driver Aggression" "Poor Driving Habits") then Q16_recode='DRIVERS';
+			"Diplomat Drivers" "Driver Aggression" "Poor Driving Habits" "Too Many Accidents" "More Accidents") then Q16_recode='DRIVERS';
 
 	if Q16_text in("Lack Of Things To Do For Young People" "To Many Youth With Nothing To Do") then Q16_recode='ENTERTAINMENT'; *was people, was nothinh;
 
 	if Q16_text in("People Stressing" "The Closer To The City The More Stressed The People" "Stressful Lifestyle" "Stressful" "Busy-Ness And High Stress Of People Living Here"
-					) then Q16_recode='STRESS';
+				"Intensity/Stress Level") then Q16_recode='STRESS';
 
 	if Q16_text in("Starbucks Far Away From Resident Areas For People With No Car") then Q16_recode='SHOPPING';
 
@@ -339,7 +349,8 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 
 	if Q16_text in("Lack Of Cleanlines" "Dirty") then Q16_recode="TRASH";
 
-	if Q16_text in("Gang" "Gang Activity" "Gang Violence" "Gang Violence, Crime" "Gangs And Crime") then Q16_recode="GANGS";
+	if Q16_text in("Gang" "Gang Activity" "Gang Violence" "Gang Violence, Crime" "Gangs And Crime" "Ms 13" "Ms-13"
+			) then Q16_recode="GANGS";
 
 	if Q16_text in("Tourism From D.C." "Tourist Downtown When Trying To Get To/From Work") then Q16_recode="TOURISTS";
 
@@ -352,7 +363,8 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	if Q16_text in("Cold" "It Gets Really Cold At Times" "Rainy" "Very Humid In The Summer" "Weather Variabilty" "Weathet" "Wheather Cold" "Winter" 
 			"Cold Weather" "Cold Winter" "Climate Change" "The Weather - Summer Sucks!" "The Weather Is Majority Of The Time Terrible"
 			"Hot" "Hot And Muggy Summer Days." "High Temporatures In The Summer" "Humid" "Humid Summers" "Humility" "Humility In The Summer"
-			"Sometimes Too Hot And Humid In Summer" "Summer" "Summer Climate" "Too Hot Sometimes" "Bad Winter" "August") then Q16_recode="WEATHER";
+			"Sometimes Too Hot And Humid In Summer" "Summer" "Summer Climate" "Too Hot Sometimes" "Bad Winter" "August" "Global Worming" 
+			"Gray Skies") then Q16_recode="WEATHER";
 
 	if Q16_text in("Drug") then Q16_recode="DRUGS";
 
