@@ -78,12 +78,16 @@ foreach n in dc mc pg fc nv md va dmv ot{
 replace `n' = 0 if multi==1
 }
 
+
 drop total_list
-gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
+gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot + multi
 
 gen no_resp = 1 if total_list==0
 replace no_resp = 0 if total_list>=1  
 
+foreach n in dc mc pg fc nv md va dmv ot multi no_resp{
+replace `n' = . if Q1==""
+}
 
 foreach m in dc mc pg fc nv md va dmv ot multi no_resp{
 sum `m'
@@ -191,27 +195,30 @@ replace va=1 if same==1 & Q1_7==1
 replace dmv=1 if same==1 & Q1_8==1
 replace ot=1 if same==1 & Q1_9==1
 
+drop total_list 
+gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
 
 gen multi = 1 if total_list >=2
 replace multi = 0 if total_list==0 | total_list==1 
 replace multi = 1 if same==1 & Q1_10==1
 
-gen no_resp = 1 if total_list==0
-replace no_resp = 0 if total_list>=1 
-
 drop same _merge
-
-foreach m in dc mc pg fc nv md va dmv ot multi no_resp{
-sum `m'
-}
 
 **Create mutually exclusive categories
 foreach n in dc mc pg fc nv md va dmv ot{
 replace `n' = 0 if multi==1
 }
 
-drop total_list
-gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot
+gen no_resp = 1 if total_list==0
+replace no_resp = 0 if total_list>=1  
+
+foreach n in dc mc pg fc nv md va dmv ot multi no_resp{
+replace `n' = . if Q2==""
+}
+
+foreach m in dc mc pg fc nv md va dmv ot multi no_resp{
+sum `m'
+}
 
 **relabel variables to follow data labeling conventions
 rename dc Q2_1
