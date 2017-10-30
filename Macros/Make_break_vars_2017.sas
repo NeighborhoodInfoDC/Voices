@@ -97,7 +97,8 @@
 	age = "Respondent's age"
     gender = "Respondent's gender"
     homeown = "Respondent's homeownership status"
-    children = "Children present in respondent's household";
+    children = "Children present in respondent's household"
+	 geo = "Respondent's VoicesDMV jurisdiction";
 
 %mend Make_break_vars_2017;
 
