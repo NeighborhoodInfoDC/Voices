@@ -241,6 +241,6 @@ drop Q1 Q2 total_list
 
 save "L:\Libraries\Voices\Raw\Q1_Q2_recode final.dta", replace
 
-export delimited using "L:\Libraries\Voices\Data\Voices_2017_q1_q2_recode.csv", replace
+export delimited using "L:\Libraries\Voices\Raw\Voices_2017_q1_q2_recode.csv", replace
 
 log close
