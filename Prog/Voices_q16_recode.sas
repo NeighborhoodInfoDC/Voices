@@ -160,9 +160,9 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	transpo=index(Q16_text,"Public Transit");
 	if Q16_text in("Bad Public Transportation" "Cost Of Public Transportation" "Dismal Public Transportation" "Mass Transit" "Transit" "Cabs" "Streets Need Work"
 			"Unreliable City Transit" "Turning Commuter Routes Into Toll Roads" "Transit Times End Early" "Traveling" "Travel" "Uber" "Toll" "Toll Roads"
-			"Tolls" "Getting Around" "Getting Into Maryland Over The Bridges" "Bicyclists" "Bike Lanes" "Poor Street Conditions"
+			"Tolls" "Getting Around" "Getting Into Maryland Over The Bridges" "Bicyclists" "Bike Lanes" "Poor Street Conditions" "Older Road/Building Maintenance"
 			"Some Taxi Service" "Streets Need Of Repair" "Streets Needs Repairs" "Streets Are Too Small" "The Roadsare Bad" "The Streets That Are In Constant Disrepair"
-			"Tiny Streets" "I-270" "Hov" "Public Trasportation" "Road Closures" "Lousy Cabs") then transpo=1;
+			"Tiny Streets" "I-270" "Hov" "Public Trasportation" "Road Closures" "Lousy Cabs" "Not Enough Bridges To Get Into And Out Of City") then transpo=1;
 
 	metro=index(Q16_text,"Metro/Transportation");
 	metro=metro+index(Q16_text,"Metro Rail And Bus");
@@ -185,9 +185,9 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 					"Social Culture" "Culture" "City Is Being Whitewashed, Losing Its Black Culture." "We Are All Too Focused On Our Careers"
 					"Trancience" "Transiency" "Very Competitive" "Uptight" "A Lot Of Competition" "Competativeness" "Competitevness" "Competition"
 					"Competitive" "Competitive Attitudes" "Competitiveness" "Apathy" "Chaotic" "Everyone Leaves Eventually" "Stuffy Culture"
-					"Success Driven" "The Pressure To Impress Others Professionally" "Dating" "Dating Scene" "Dating Scene Is Tough"
+					"Success Driven" "The Pressure To Impress Others Professionally" "Dating" "Dating Scene" "Dating Scene Is Tough" "No Work-Life Balance"
 					'Excessive "professionalism"' "Too Little Personal Time When Working" "Work Hours" "Work Too Much" "High Expectations"
-					"High Pressure On Everyone To Succeed" "Preoccupation With Status" "Loss Of Community Sense Of Chocolate City") then life=1;
+					"High Pressure On Everyone To Succeed" "Preoccupation With Status" "Loss Of Community Sense Of Chocolate City" "No One's From Here") then life=1;
 
 
 	costs=index(Q16_text,"Cost Of Food"); *was food; 
@@ -237,7 +237,8 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 				"Can Be Crowded" "Crouded" "Crowded All The Time" "Crowded Conditions" "Crowded Everything" "Crowded Streets" "Crowdrd"
 				"Crowed" "Everything Is Overcrowded." "Feels Overpopulated" "Getting Congested" "Getting Crowded" "Getting Too Crowded" "Over Building" "Over Crowded" "Over Crowding" "Over Crowed"
 				"Over Populated" "Over-Building" "Overbuilt" "Overcrowdedness" "Overpopulated" "Densely Populated" "Populated" "Populous" "It's Congested"
-				"Growing Too Rapidly" "High Rise Growth" "Lots Of Poeple" "Loss Of Public Land To Developers") then many=1;
+				"Growing Too Rapidly" "High Rise Growth" "Lots Of Poeple" "Loss Of Public Land To Developers" "Not Enough Land" "Not Enough Privacy" "Threat Of Higher Buidlings"
+			) then many=1;
 
 	*I left "Crowds" as people?...thought of those as more time specific? - like crowds of tourists?";
 
@@ -256,7 +257,8 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	rude=rude+index(Q16_text,"Unfriendliness");
 	if Q16_text in("People Stare" "Less Friendlyness" "People Are Not Friendly" "Ill-Tempered People" "People Not To Friendly"
 					"Some Of The People Are Not As Friendly" "The People Could Be Nicer." "Unfriendly And Aggressive People" "Not Friendly" "Unfriendly" "Unfriendly To Stangers"
-					"(Bad)attitudes And General Unfriendlyness Of Locals" "Less Nicer" "Big City Rudness" "Person That Hate Over Plople") then rude=1;
+					"(Bad)attitudes And General Unfriendlyness Of Locals" "Less Nicer" "Big City Rudness" "Person That Hate Over Plople"
+					"Not As Friendly/Open As Other Places We've Lived" "Not A Welcoming Place") then rude=1;
 
 	*new code - fast pace life;
 	fast=index(Q16_text,"Are Very Rushed");
@@ -280,7 +282,7 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 					"Poor Living Conditions East Of The River" "Huge Gaps Of Standards Of Living" 'Too Many "have Nots" In An Area With So Many "haves"'
 					"Large Gap Between Haves And Have Nots" "Thousands Of Beggars" "To Many Low Income Places" "Poorer Areas Need Help" "Some Poor Areas"
 					"Some Risky Geographies" "Some Bad Areas" "Economic Stratification"  "Beging" "Growing Gap Between Have And Have Not"
-					"Wide Gulf Between Haves And Have-Nots" "Hood Areas" "Run Down In Several Areas") then poverty=1;
+					"Wide Gulf Between Haves And Have-Nots" "Hood Areas" "Run Down In Several Areas" "Panhandlers") then poverty=1;
 
 	safety=index(Q16_text,"People Getting Killed");
 	safety=safety+index(Q16_text,"People To Own Weapons");
@@ -295,7 +297,7 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	if Q16_text in("Dangerous" "Gun" "Gunshots" "Have A Little Problem With Thieves" "Not Safe" "Robbing" "Thug Fights" "Too Many Fights" "Too Many Kills" "Vilonce" 
 					"You Can Easily Feel Unsafe Depending Where You Are" "Violen E" "Vandalism" "Voilence" "Voliance" "There Are Some Areas That Are Dangerous"
 					"Theifs" "The Stafy" "Thugs" "Some Shootings" "Some Fights" "Stealing" "Crime Is Inceasing" "Criminal Justice System/Correction Facilities"
-					"Danger Place" "Dangerous Area" "Ppl Dieing" "Risk Of Shooting" "Rubbery" "Safety Concerns" "Shootings") then safety=1;
+					"Danger Place" "Dangerous Area" "Ppl Dieing" "Risk Of Shooting" "Rubbery" "Safety Concerns" "Shootings" "Car Thefts" "Cime") then safety=1;
 
 	politics=index(Q16_text,"Proximity To Political Stuff");
 	politics=politics+index(Q16_text,"Political Diversity");
@@ -310,7 +312,9 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 				"Very Very Liberal - You Have To Agree Or Else" "Beltway Isolation" "Beltway Mentality" "Can't Avoid Political Chat No Matter Where You Go" "City Politics"
 				"Political Bias" "Political Cronyism" "Political Divisions" "Political Dysfunction" "Political Environment" "Political Gridlock"
 				"Political Hassles" "Political Homogeneity" "Political News" "Political Situation" "Political Talk" "Political Tensions" "Politically Engaged"
-				"Protesting" "To Democratic" "To Many Political Groups" "Lots Of Protesters") then politics=1;
+				"Protesting" "To Democratic" "To Many Political Groups" "Lots Of Protesters" "Non-Stop Political Discussions/News" "Not An Incredibly Progressive City (Yet)"
+				"Partisanship" "Stressful Political News Constantly" "Surrounded By Political Dolts"
+		) then politics=1;
 
 	if metro > 0 then Q16_recode='METRO';
 	else if housing > 0 then Q16_recode='HOUSING';
@@ -329,61 +333,64 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 	else if fast > 0 then Q16_recode='FAST';
 
 	If Q16_Text in("Everyone" "Cars Running Into Each Other Due To A Lack Of Civility" "Girls" "Poeple" "Some Kids" 
-			"Pretenious @$$holes" "Pretentious Jerks" "Pretentiousness" "Society" "Too Many Assholes" ) then Q16_recode="PEOPLE"; 
+			"Pretenious @$$holes" "Pretentious Jerks" "Pretentiousness" "Society" "Too Many Assholes" "Millennials" "Out Of Town Idiots" "Superficial Social Mores"
+			) then Q16_recode="PEOPLE"; 
 
 	if Q16_Text in("Bad Rap It Gets From National Politics" "Focus On Federal Politics" "National Politics" 
 					"Local And National Politics Get Mixed Up" "National Politics Now" "Disfunction Of Congress And White House"
 					"Inactive Congressional People" "Lack Of Voting Rights For Dc" "Congressional Medling In Dc's Local Government" 
 					"Proximity To Idiots In Dc/Far Removed From The Rest Of The Country In Terms Of Issues" "Federal Government" 
 					"Federal Interference"  "Government Inaction" "Being Unfairly Blamed For Government" "Dependency On The Federal Govt"
-					"Dysfunctional Governments" "Red Tape" "Too Close To Federal Gov't" "Too Close To The White Case In Case Of An Emergency"
-					 ) then Q16_recode='CAPITAL';
+					"Dysfunctional Governments"  "Too Close To Federal Gov't" "Too Close To The White Case In Case Of An Emergency"
+				"Natianl Polotics" "Overreliance On Federal Gvt" "Us Government" "Washington Political 'swamp'") then Q16_recode='CAPITAL';
 
 	if Q16_text in("Would Be Difficult To Evacuate In Certain Events" "National Security" "Potential Of Nuclear Devestation" "Fear Of Nuclear Attack"
-			"Homeland Security Broadcasting Fear" "Risk Of Attack" "Major Nuclear Target") then Q16_recode='TERROR';
+			"Homeland Security Broadcasting Fear" "Risk Of Attack" "Major Nuclear Target" "Nuclear Fallout Zone" "The Fear Of Attack") then Q16_recode='TERROR';
 
 	if Q16_text in("Late Night Events" "No Real Nightlife For Average People" "Clubs Close Early" "Hard To Find Clubs To Party At" "Town Closes Up Early"
-			"Eveyrhting Closes Early") then Q16_recode="NIGHTLIFE";
+			"Eveyrhting Closes Early" "Night Climate" "Night Life Options" "Things Don't Stay Open Very Late" "City Sleeps At Night (Past 2am)") then Q16_recode="NIGHTLIFE";
 
-	if Q16_text in("The Inability To Drive To The Many Monuments In The Area Due To Lack Of Parking.") then Q16_recode='PARKING';
+	if Q16_text in("The Inability To Drive To The Many Monuments In The Area Due To Lack Of Parking." "No Parking" "No Place To Park") then Q16_recode='PARKING';
 
 	if Q16_text in("Bad Trasffif/Rude Agressive Drivers" "People Don't Drive Well" "People Can't Drive" "Driving" "Bed Drivers"
 			"Diplomat Drivers" "Driver Aggression" "Poor Driving Habits" "Too Many Accidents" "More Accidents") then Q16_recode='DRIVERS';
 
-	if Q16_text in("Lack Of Things To Do For Young People" "To Many Youth With Nothing To Do") then Q16_recode='ENTERTAINMENT'; *was people, was nothinh;
+	if Q16_text in("Lack Of Things To Do For Young People" "To Many Youth With Nothing To Do" "No Attraction Park" "Not A Lot Of Festivities"
+					"Not Much Entertainment Areas Found" "Not Much To Do" "Not Much To See"  "Things To Do") then Q16_recode='ENTERTAINMENT'; *was people, was nothinh;
 
 	if Q16_text in("People Stressing" "The Closer To The City The More Stressed The People" "Stressful Lifestyle" "Stressful" "Busy-Ness And High Stress Of People Living Here"
-				"Intensity/Stress Level") then Q16_recode='STRESS';
+				"Intensity/Stress Level" "Not Very Relaxing") then Q16_recode='STRESS';
 
 	if Q16_text in("Starbucks Far Away From Resident Areas For People With No Car") then Q16_recode='SHOPPING';
 
 	if Q16_text in("Housing/School Segregation (Lack Of Diversity In Individual Communities)!" "People Are Racist" "Racist People" "Racist Black People"
 		"Poorer Communities Are Lumped Together" "Increasing Segregation By Income" "Overtly Racist" "Somewhat Segregated"
 			"Racial Discord" "Racial Edge" "Racial/Cultural Tensions" "Racist" "Racists" "Rasicsm" "Rasism"
-			"Segregated" "Seperation Between Everyone" "Lot Of Hating Goes On" "Limited Racial Interactions") then Q16_recode='DISCRIMINATION';
+			"Segregated" "Seperation Between Everyone" "Lot Of Hating Goes On" "Limited Racial Interactions" "White Privledge") then Q16_recode='DISCRIMINATION';
 
-	if Q16_text in("Less Wakable Communities" "Sidewalks") then Q16_recode='WALKABILITY';
+	if Q16_text in("Less Wakable Communities" "Sidewalks" "Not Pedestrian Friendly") then Q16_recode='WALKABILITY';
 
 	if Q16_text in("Limited Communities With Good Schools" "Poor Education For Children" "Public Schools In Dc Need Further Improvement" "Schools Are Not Great The Closer You Get To Dc"
 					"Poor Schools In D.C.") then Q16_recode='SCHOOLS';
 
-	if Q16_text in("Messed Up Communities") then Q16_recode='COMMUNITY';
+	if Q16_text in("Messed Up Communities" "Neibours" "Neighboring Cities" "Neighbprs" "The Lack Of Strong Knit Community") then Q16_recode='COMMUNITY';
 
 	if Q16_text in("Not Enough Commercial Diversity") then Q16_recode='ECONOMY';
 
 	if Q16_text in("Car/Vehicle Tax" "High Taxes (Property And Income)" "Taxes In Dc Proper" "Too Much Laws In Place To Generate Money For The Government"
-					"Taxes On House For Things We Don't Use") then Q16_recode="TAXES";
+					"Taxes On House For Things We Don't Use" "Taxs" "The Car Tax" "Car Tax") then Q16_recode="TAXES";
 
-	if Q16_text in("Lack Of Cleanlines" "Dirty") then Q16_recode="TRASH";
+	if Q16_text in("Lack Of Cleanlines" "Dirty" "Not Clean" "Not Super Clean" "Somewhat Dirty" 
+				"The First Worst Thing About The Washington Are, Is The Dirt That's Sometimes There. There's No Helping It But You Just Gotta Live With It.") then Q16_recode="TRASH";
 
 	if Q16_text in("Gang" "Gang Activity" "Gang Violence" "Gang Violence, Crime" "Gangs And Crime" "Ms 13" "Ms-13"
 			) then Q16_recode="GANGS";
 
-	if Q16_text in("Tourism From D.C." "Tourist Downtown When Trying To Get To/From Work") then Q16_recode="TOURISTS";
+	if Q16_text in("Tourism From D.C." "Tourist Downtown When Trying To Get To/From Work" "Visitors") then Q16_recode="TOURISTS";
 
-	if Q16_text in("Polution Caused By Construction In Reston") then Q16_recode='POLLUTION';
+	if Q16_text in("Polution Caused By Construction In Reston" "Potomac River Dirty" "Water Quality") then Q16_recode='POLLUTION';
 
-	if Q16_text in("Distance From Major Tourist Attractions" "Close To The Nsa" "Hard To Travel" "Convenience" ) then Q16_recode='LOCATION';
+	if Q16_text in("Distance From Major Tourist Attractions" "Close To The Nsa" "Hard To Travel" "Convenience" "Place" "Places Are Too Far" ) then Q16_recode='LOCATION';
 
 	if Q16_text in("Bad Bus Roues" "The Metro Bus System" "Bus Rail Service" "Bus Transportation Is Expensive") then Q16_recode="BUS";
 
@@ -393,24 +400,33 @@ data Voices_Q16_newrecode (drop=metro traffic housing commute transpo life trump
 			"Sometimes Too Hot And Humid In Summer" "Summer" "Summer Climate" "Too Hot Sometimes" "Bad Winter" "August" "Global Worming" 
 			"Gray Skies" "Sun" "Sunlight" "Heat Wave, Usually" "Heat Waves") then Q16_recode="WEATHER";
 
-	if Q16_text in("Drug") then Q16_recode="DRUGS";
+	if Q16_text in("Drug" "Pot Smell Everywhere" "The Drug Epidemic") then Q16_recode="DRUGS";
 
 	if Q16_text in("Garbage Truck Comes During The Night" "To Loud" "Too Loud" "In Dc, Noise From Vip Escort Vehicles" "Sirens Or Ambulances"
-			"Sirens" "Sometimes Loud At Night" "Too Noisy" "Loud" "Loud Noises" "Loud Voice") then Q16_recode="NOISE";
+			"Sirens" "Sometimes Loud At Night" "Too Noisy" "Loud" "Loud Noises" "Loud Voice" "Niose" "Noise Level From Air Planes" "Noisy" "Noisy Airplanes And Helicopters"
+			"Very Loud, Noisy") then Q16_recode="NOISE";
 
 	if Q16_text in("Low Emergency Response Time" "Vehicle Inspection Standards. Dishonest Mechanics Take Advantage Of This System And Con People Out Of Their Money."
-					"Red Tape With Government(Local And Federal)") then Q16_recode="SERVICES";
+					"Red Tape With Government(Local And Federal)" "Old Facilities" 	 "Many Government Regulations" "Red Tape" "Too Much Regulations" "Yearly Safety Inspections"
+			) then Q16_recode="SERVICES";
 
-	if Q16_text in("Not A Lot Of Asians" "Too Many/Different Cultures") then Q16_recode="DIVERSITY";
+	if Q16_text in("Not A Lot Of Asians" "Too Many/Different Cultures" "Not Very Diverse" "Not As Diverse" "Not Speaking A Language Other Than English"
+					"Too Diverse/ No Sense Of Common Identity" "Too Foreign") then Q16_recode="DIVERSITY";
 
-	if Q16_text in("Not Close For Outdoor Stuff" "Lack Of Beach Access" "No Close Beach Access") then Q16_recode="NATURE";
+	if Q16_text in("Not Close For Outdoor Stuff" "Lack Of Beach Access" "No Close Beach Access" "Nature Areas" "Not Enough Wide Open Green Spaces" "Not Much Yard Space"
+					"Not That Scenic" ) then Q16_recode="NATURE";
 
-	if Q16_text in("No Good Asian Food In Dc, Only In Virginia" "Bbq") then Q16_recode="FOOD";
+	if Q16_text in("No Good Asian Food In Dc, Only In Virginia" "Bbq" "No Good Bakeries" "Produce Not Fresh") then Q16_recode="FOOD";
 	
 	if Q16_text in("Rat" "Rodents") then Q16_recode="RATS";
 
 	if Q16_text in("Cleanliness" "The D, M, And The V Seem To Have Trouble Getting Things Done For The Region As A Whole, To Say Nothing Of The Not Nova") then Q16_recode='';
+
+	if Q16_text in("Ticks") then Q16_recode="BUGS";
+	if Q16_text in("The Sports") then Q16_recode="SPORTS";
+	if Q16_text in("The Gogo Music") then Q16_recode="PERFORM";
 	
+	if Q16_text in("City Is Rapidly Changing Due To Priority Given To High End Developers." ) then Q16_recode="GENTRIFICATION";
 run;
 %let list_new='TRAFFIC' 'TAXES' 'PARKING' 'ENTERTAINMENT' 'FOOD' 'CULTURE' 'MUSEUMS' 'MONUMENTS' 'PERFORM' 'ARTS' 'SPORTS' 'NIGHTLIFE' 'JOBS' 'PEOPLE' 'LOCATION' 'DIVERSITY'
 		  'TRANSPORTATION' 'BUS' 'METRO' 'AIRPORTS' 'NATURE' 'COMMUNITY' 'SCHOOLS' 'WEATHER' 'LIFE' 'FAMILY' 'SHOPPING' 'SERVICES' 'CAPITAL' 'ECONOMY' 'NOTHING' 'SAFETY'
