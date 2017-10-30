@@ -214,31 +214,9 @@
     data=Voices.Voices_2017_q1_q2_recode,
     col=&col, 
     colfmt=&colfmt,
-    total=n,
-    var=Q1_1 Q1_2 Q1_3 Q1_4 Q1_5 Q1_6 Q1_7 Q1_8 Q1_9 Q1_10,
-    text="Q1. If someone WHO LIVED IN THE WASHINGTON AREA asked you, where would you say you were from?",
-    text2="Multiple responses per person allowed",
-    vlabel=
-      Q1_1 = "Washington, DC (or neighborhood within DC)"
-      Q1_2 = "Montgomery Co (or place within county)"
-      Q1_3 = "Prince George's Co (or place within county)"
-      Q1_4 = "Fairfax Co (or place within county)"
-      Q1_5 = "Other Northern Virigina (outside Fairfax Co)"
-      Q1_6 = "Maryland (no specific place inside region)"
-      Q1_7 = "Viriginia (no specific place inside region)"
-      Q1_8 = "DMV/Washington region/area/suburbs"
-      Q1_9 = "Somewhere outside DMV"
-      Q1_10 = "Answer did not identify a place"
-  )
-
-  %Make_one_table( 
-    data=Voices.Voices_2017_q1_q2_recode,
-    col=&col, 
-    colfmt=&colfmt,
     total=y,
     var=uQ1_1 uQ1_2 uQ1_3 uQ1_4 uQ1_5 uQ1_6 uQ1_7 uQ1_8 uQ1_9 uQ1_11 uQ1_10,
     text="Q1. If someone WHO LIVED IN THE WASHINGTON AREA asked you, where would you say you were from?",
-    text2="One response per person",
     vlabel=
       uQ1_1 = "Washington, DC (or neighborhood within DC)"
       uQ1_2 = "Montgomery Co (or place within county)"
@@ -277,31 +255,9 @@
     data=Voices.Voices_2017_q1_q2_recode,
     col=&col, 
     colfmt=&colfmt,
-    total=n,
-    var=Q2_1 Q2_2 Q2_3 Q2_4 Q2_5 Q2_6 Q2_7 Q2_8 Q2_9 Q2_10,
-    text="Q2. If someone WHO LIVED OUTSIDE THE WASHINGTON AREA asked you, where would you say you were from?",
-    text2="Multiple responses per person allowed",
-    vlabel=
-      Q2_1 = "Washington, DC (or neighborhood within DC)"
-      Q2_2 = "Montgomery Co (or place within county)"
-      Q2_3 = "Prince George's Co (or place within county)"
-      Q2_4 = "Fairfax Co (or place within county)"
-      Q2_5 = "Other Northern Virigina (outside Fairfax Co)"
-      Q2_6 = "Maryland (no specific place inside region)"
-      Q2_7 = "Viriginia (no specific place inside region)"
-      Q2_8 = "DMV/Washington region/area/suburbs"
-      Q2_9 = "Somewhere outside DMV"
-      Q2_10 = "Answer did not identify a place"
-  )
-
-  %Make_one_table( 
-    data=Voices.Voices_2017_q1_q2_recode,
-    col=&col, 
-    colfmt=&colfmt,
     total=y,
     var=uQ2_1 uQ2_2 uQ2_3 uQ2_4 uQ2_5 uQ2_6 uQ2_7 uQ2_8 uQ2_9 uQ2_11 uQ2_10,
     text="Q2. If someone WHO LIVED OUTSIDE THE WASHINGTON AREA asked you, where would you say you were from?",
-    text2="One response per person",
     vlabel=
       uQ2_1 = "Washington, DC (or neighborhood within DC)"
       uQ2_2 = "Montgomery Co (or place within county)"
