@@ -649,7 +649,9 @@ proc format;
     'TERROR' = "Terror threats"
     'RATS' = "Rats"
 ;
-
+  value $blank
+    ' ' = 'BLANK'
+    other = 'NOT BLANK';
 
 
 
@@ -661,6 +663,34 @@ proc format;
   sortby=caseid respnum,
   revisions=%str(Added vars for tables.)
 )
+
+proc freq data=Voices_Q16_recode;
+  tables Q16_text * Q16_recode / list missing;  
+  format Q16_text $blank. Q16_recode $Q16_r_det.;
+  title2 'CHECK FOR MISSING RECODES: ALL RESPONSES';
+run;
+
+proc freq data=Voices_Q16_recode;
+  where respnum = 1;
+  tables Q16_text * Q16_recode / list missing;  
+  format Q16_text $blank. Q16_recode $Q16_r_det.;
+  title2 'CHECK FOR MISSING RECODES: FIRST RESPONSE ONLY';
+run;
+
+proc print data=Voices_Q16_recode n;
+  where Q16_text = '' and Q16_recode ~= '';
+  id caseid respnum;
+  var Q16_text Q16_recode;
+  title2 'CODED BLANK RESPOSE';
+run;
+
+proc print data=Voices_Q16_recode n;
+  where Q16_text ~= '' and Q16_recode = '';
+  id caseid respnum;
+  var Q16_text;
+  format Q16_text $60.;
+  title2 'UNCODED RESPONSES';
+run;
 
 proc freq data=Voices_Q16_recode order=freq;
   weight weight;

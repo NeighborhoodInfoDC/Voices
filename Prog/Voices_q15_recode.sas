@@ -714,7 +714,9 @@ proc format;
     'POLITICS' = "Political culture"
     'WALKABILITY' = "Walkability"
     'COSTS' = "Cost of living";
-
+  value $blank
+    ' ' = 'BLANK'
+    other = 'NOT BLANK';
 
 
 %Finalize_data_set( 
@@ -725,6 +727,33 @@ proc format;
   sortby=caseid respnum,
   revisions=%str(Added vars for tables.)
 )
+
+proc freq data=Voices_Q15_recode;
+  tables Q15_text * Q15_recode / list missing;  
+  format Q15_text $blank. Q15_recode $Q15_r_det.;
+  title2 'CHECK FOR MISSING RECODES: ALL RESPONSES';
+run;
+
+proc freq data=Voices_Q15_recode;
+  where respnum = 1;
+  tables Q15_text * Q15_recode / list missing;  
+  format Q15_text $blank. Q15_recode $Q15_r_det.;
+  title2 'CHECK FOR MISSING RECODES: FIRST RESPONSE ONLY';
+run;
+
+proc print data=Voices_Q15_recode n;
+  where Q15_text = '' and Q15_recode ~= '';
+  id caseid respnum;
+  var Q15_text Q15_recode;
+  title2 'CODED BLANK RESPOSE';
+run;
+
+proc print data=Voices_Q15_recode n;
+  where Q15_text ~= '' and Q15_recode = '';
+  id caseid respnum;
+  var Q15_text;
+  title2 'UNCODED RESPONSES';
+run;
 
 proc freq data=Voices_Q15_recode order=freq;
   weight weight;
