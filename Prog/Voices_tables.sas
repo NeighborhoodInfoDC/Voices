@@ -211,6 +211,88 @@
   title1 bold "VoicesDMV Survey: &title // DRAFT: NOT FOR CITATION OR RELEASE";
 
   %Make_one_table( 
+    data=Voices.Voices_2017_q1_q2_recode,
+    col=&col, 
+    colfmt=&colfmt,
+    total=y,
+    var=uQ1_1 uQ1_2 uQ1_3 uQ1_4 uQ1_5 uQ1_6 uQ1_7 uQ1_8 uQ1_9 uQ1_11 uQ1_10,
+    text="Q1. If someone WHO LIVED IN THE WASHINGTON AREA asked you, where would you say you were from?",
+    vlabel=
+      uQ1_1 = "Washington, DC (or neighborhood within DC)"
+      uQ1_2 = "Montgomery Co (or place within county)"
+      uQ1_3 = "Prince George's Co (or place within county)"
+      uQ1_4 = "Fairfax Co (or place within county)"
+      uQ1_5 = "Other Northern Virginia (outside Fairfax Co)"
+      uQ1_6 = "Maryland (no specific place inside region)"
+      uQ1_7 = "Virginia (no specific place inside region)"
+      uQ1_8 = "DMV/Washington region/area/suburbs"
+      uQ1_9 = "Somewhere outside DMV"
+      uQ1_10 = "Answer did not identify a place"
+      uQ1_11 = "Answer included multiple places"
+  )
+
+  %Make_one_table( 
+    data=Voices.Voices_2017_q1_q2_recode,
+    col=&col, 
+    colfmt=&colfmt,
+    total=y,
+    var=rQ1_same rQ1_dc rQ1_oth_juris rQ1_dmv rQ1_md rQ1_va rQ1_out rQ1_mult rQ1_none,
+    text="Q1. If someone WHO LIVED IN THE WASHINGTON AREA asked you, where would you say you were from?",
+    text2="Relative to where respondent actually lives",
+    vlabel=
+      rQ1_same = "Same jurisdiction where person lives"
+      rQ1_oth_juris = "Different jurisdiction in DMV (except DC)"
+      rQ1_dc = "Washington, DC (non-DC residents only)"
+      rQ1_md = "Maryland (no specific place inside region)"
+      rQ1_va = "Virginia (no specific place inside region)"
+      rQ1_dmv = "DMV/Washington region/area/suburbs"
+      rQ1_out = "Somewhere outside DMV"
+      rQ1_none = "Answer did not identify a place"
+      rQ1_mult = "Answer included multiple places"
+  )
+
+  %Make_one_table( 
+    data=Voices.Voices_2017_q1_q2_recode,
+    col=&col, 
+    colfmt=&colfmt,
+    total=y,
+    var=uQ2_1 uQ2_2 uQ2_3 uQ2_4 uQ2_5 uQ2_6 uQ2_7 uQ2_8 uQ2_9 uQ2_11 uQ2_10,
+    text="Q2. If someone WHO LIVED OUTSIDE THE WASHINGTON AREA asked you, where would you say you were from?",
+    vlabel=
+      uQ2_1 = "Washington, DC (or neighborhood within DC)"
+      uQ2_2 = "Montgomery Co (or place within county)"
+      uQ2_3 = "Prince George's Co (or place within county)"
+      uQ2_4 = "Fairfax Co (or place within county)"
+      uQ2_5 = "Other Northern Virginia (outside Fairfax Co)"
+      uQ2_6 = "Maryland (no specific place inside region)"
+      uQ2_7 = "Virginia (no specific place inside region)"
+      uQ2_8 = "DMV/Washington region/area/suburbs"
+      uQ2_9 = "Somewhere outside DMV"
+      uQ2_10 = "Answer did not identify a place"
+      uQ2_11 = "Answer included multiple places"
+  )
+
+  %Make_one_table( 
+    data=Voices.Voices_2017_q1_q2_recode,
+    col=&col, 
+    colfmt=&colfmt,
+    total=y,
+    var=rQ2_same rQ2_dc rQ2_oth_juris rQ2_dmv rQ2_md rQ2_va rQ2_out rQ2_mult rQ2_none,
+    text="Q2. If someone WHO LIVED OUTSIDE THE WASHINGTON AREA asked you, where would you say you were from?",
+    text2="Relative to where respondent actually lives",
+    vlabel=
+      rQ2_same = "Same jurisdiction where person lives"
+      rQ2_oth_juris = "Different jurisdiction in DMV (except DC)"
+      rQ2_dc = "Washington, DC (non-DC residents only)"
+      rQ2_md = "Maryland (no specific place inside region)"
+      rQ2_va = "Virginia (no specific place inside region)"
+      rQ2_dmv = "DMV/Washington region/area/suburbs"
+      rQ2_out = "Somewhere outside DMV"
+      rQ2_none = "Answer did not identify a place"
+      rQ2_mult = "Answer included multiple places"
+  )
+
+  %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     fmt=comma10.1,
