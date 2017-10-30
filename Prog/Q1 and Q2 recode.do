@@ -73,10 +73,10 @@ replace nv=1 if total_list==0 & inlist(Q1,"falls church","Old town")
 replace ot=1 if total_list==0 & caseid=="538" /*"I would say I am from somewhere other than here. I am not from the area, I came years ago on a whim and have been forced to stay here ever since. I have no roots her.."*/
 replace dmv=1 if total_list==0 & caseid=="2284" /*i"m a local*/
 
-**Create mutually exclusive categories
+/**Create mutually exclusive categories
 foreach n in dc mc pg fc nv md va dmv ot{
 replace `n' = 0 if multi==1
-}
+}*/
 
 
 drop total_list
@@ -204,10 +204,13 @@ replace multi = 1 if same==1 & Q1_10==1
 
 drop same _merge
 
-**Create mutually exclusive categories
+/**Create mutually exclusive categories
 foreach n in dc mc pg fc nv md va dmv ot{
 replace `n' = 0 if multi==1
-}
+}*/
+
+drop total_list 
+gen total_list = dc + mc + pg + fc + nv + md + va + dmv + ot + multi
 
 gen no_resp = 1 if total_list==0
 replace no_resp = 0 if total_list>=1  
