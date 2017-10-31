@@ -36,7 +36,7 @@ data Voices_2017_q1_q2_recode;
   
   merge
     Voices_2017_q1_q2_recode_0
-    Voices.VoicesDMVSurvey2017 (keep=caseid q1 q2 q1_refused q2_refused weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent PPT01 PPT25 PPT612 PPT1317 PPT01 PPT25 PPT612 PPT1317);
+    Voices.VoicesDMVSurvey2017 (keep=caseid q1 q2 q1_refused q2_refused weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent PPT01 PPT25 PPT612 PPT1317);
   by caseid;
 
   %make_break_vars_2017;
@@ -245,7 +245,7 @@ run;
   label="VoicesDMV 2017 survey, questions Q1 and Q2, recode",
   sortby=caseid,
   freqvars=Q1_refused Q2_refused,
-  revisions=%str(Added Children present in respondents household break variable)
+  revisions=%str(Added children in household break variable.)
 )
 
 ods listing close;
