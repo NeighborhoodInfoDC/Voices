@@ -638,14 +638,14 @@
     colfmt=&colfmt,
     total=n,
     var=Q23_1-Q23_5, 
-    text="Q23. Why do you never use services provided by nongovernmental, nonprofit organizations?"
+    text="Q23. [Persons who never used nonprofit services (Q22)] Why do you never use services provided by nongovernmental, nonprofit organizations?"
   )
 
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     var=Q24_:, 
-    text="Q24. How satisfied are you that the services you receive from nongovernmental, nonprofit organizations meet your needs?" 
+    text="Q24. [Persons who used nonprofit services (Q22)] How satisfied are you that the services you receive from nongovernmental, nonprofit organizations meet your needs?" 
   )
 
   %Make_one_table( 
@@ -1381,7 +1381,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q60_:, 
-    text="Q60. How strongly do you agree that your current job or jobs provide you with the income needed to support you and your family?" 
+    text="Q60. [Persons currently working (Q59)] How strongly do you agree that your current job or jobs provide you with the income needed to support you and your family?" 
   )
 
   ** Omit Q61_j (other) for now **;
@@ -1390,7 +1390,7 @@
     colfmt=&colfmt,
     total=n,
     var=Q61_a--Q61_i, 
-    text="Q61. Does your current job(s) offer any of the following benefits?" 
+    text="Q61. [Persons currently working (Q59)] Does your current job(s) offer any of the following benefits?" 
   )
 
   %Make_one_table( 
@@ -1398,14 +1398,14 @@
     colfmt=&colfmt,
     total=n,
     var=Q62, 
-    text="Q62. Are you currently looking for work or do you want to find a job?" 
+    text="Q62. [Persons currently working (Q59)] Are you currently looking for work or do you want to find a job?" 
   )
 
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     var=Q63_a_:, 
-    text="Q63a. How important for you are the following as barriers in finding or keeping a good job?",
+    text="Q63a. [Persons currently looking for work (Q62)] How important for you are the following as barriers in finding or keeping a good job?",
     text2="Access to child care",
     vlabel=
       Q63_a_1 = "Not a barrier"
@@ -1417,7 +1417,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q63_b_:, 
-    text="Q63b. How important for you are the following as barriers in finding or keeping a good job?",
+    text="Q63b. [Persons currently looking for work (Q62)] How important for you are the following as barriers in finding or keeping a good job?",
     text2="Access to a car",
     vlabel=
       Q63_b_1 = "Not a barrier"
@@ -1429,7 +1429,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q63_c_:, 
-    text="Q63c. How important for you are the following as barriers in finding or keeping a good job?",
+    text="Q63c. [Persons currently looking for work (Q62)] How important for you are the following as barriers in finding or keeping a good job?",
     text2="Convenient public transportation",
     vlabel=
       Q63_c_1 = "Not a barrier"
@@ -1441,7 +1441,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q63_d_:, 
-    text="Q63d. How important for you are the following as barriers in finding or keeping a good job?",
+    text="Q63d. [Persons currently looking for work (Q62)] How important for you are the following as barriers in finding or keeping a good job?",
     text2="Level of education or training",
     vlabel=
       Q63_d_1 = "Not a barrier"
@@ -1453,7 +1453,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q63_e_:, 
-    text="Q63e. How important for you are the following as barriers in finding or keeping a good job?",
+    text="Q63e. [Persons currently looking for work (Q62)] How important for you are the following as barriers in finding or keeping a good job?",
     text2="Past work experience",
     vlabel=
       Q63_e_1 = "Not a barrier"
@@ -1465,7 +1465,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q63_f_:, 
-    text="Q63f. How important for you are the following as barriers in finding or keeping a good job?",
+    text="Q63f. [Persons currently looking for work (Q62)] How important for you are the following as barriers in finding or keeping a good job?",
     text2="Criminal background or past problems with law enforcement",
     vlabel=
       Q63_f_1 = "Not a barrier"
@@ -1477,7 +1477,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q63_g_:, 
-    text="Q63g. How important for you are the following as barriers in finding or keeping a good job?",
+    text="Q63g. [Persons currently looking for work (Q62)] How important for you are the following as barriers in finding or keeping a good job?",
     text2="Credit history or financial problems",
     vlabel=
       Q63_g_1 = "Not a barrier"
@@ -1499,7 +1499,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q78_:, 
-    text="Q78. [citizenship status] Are you...?" 
+    text="Q78. [Persons not born in the U.S. (Q77)] Are you...?" 
   )
 
   %Make_one_table( 
@@ -1560,6 +1560,7 @@ run;
 %Create_deff_2017( var=age )
 %Create_deff_2017( var=gender )
 %Create_deff_2017( var=homeown )
+%Create_deff_2017( var=children )
 
 ** Create tables **;
 
@@ -1571,3 +1572,4 @@ run;
 %Make_all_tables( col=age, colfmt=age., title=Tables by Age )
 %Make_all_tables( col=gender, colfmt=gender., title=Tables by Gender )
 %Make_all_tables( col=homeown, colfmt=homeown., title=Tables by Homeownership Status )
+%Make_all_tables( col=children, colfmt=children., title=Tables by Presence of Children in Household )

@@ -36,7 +36,7 @@ data Voices_2017_q1_q2_recode;
   
   merge
     Voices_2017_q1_q2_recode_0
-    Voices.VoicesDMVSurvey2017 (keep=caseid q1 q2 q1_refused q2_refused weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent PPT01 PPT25 PPT612 PPT1317);
+    Voices.VoicesDMVSurvey2017 (keep=caseid q1 q2 q1_refused q2_refused weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent PPT01 PPT25 PPT612 PPT1317 PPT01 PPT25 PPT612 PPT1317);
   by caseid;
 
   %make_break_vars_2017;
@@ -162,7 +162,7 @@ data Voices_2017_q1_q2_recode;
   label
     Q1_1 = "Place you would tell Washington area person you are from: Washington, DC (multiple resp)"
     Q1_2 = "Place you would tell Washington area person you are from: Montgomery County or place within (multiple resp)"
-    Q1_3 = "Place you would tell Washington area person you are from: Prince George's County or place within (multiple resp)"
+    Q1_3 = "Place you would tell Washington area person you are from: Prince Georges County or place within (multiple resp)"
     Q1_4 = "Place you would tell Washington area person you are from: Fairfax County or place within (multiple resp)"
     Q1_5 = "Place you would tell Washington area person you are from: Northern Virginia area outside Fairfax County (multiple resp)"
     Q1_6 = "Place you would tell Washington area person you are from: Maryland, no specific place inside region (multiple resp)"
@@ -174,7 +174,7 @@ data Voices_2017_q1_q2_recode;
 
     Q2_1 = "Place you would tell outsider you are from: Washington, DC (multiple resp)"
     Q2_2 = "Place you would tell outsider you are from: Montgomery County or place within (multiple resp)"
-    Q2_3 = "Place you would tell outsider you are from: Prince George's County or place within (multiple resp)"
+    Q2_3 = "Place you would tell outsider you are from: Prince Georges County or place within (multiple resp)"
     Q2_4 = "Place you would tell outsider you are from: Fairfax County or place within (multiple resp)"
     Q2_5 = "Place you would tell outsider you are from: Northern Virginia area outside Fairfax County (multiple resp)"
     Q2_6 = "Place you would tell outsider you are from: Maryland, no specific place inside region (multiple resp)"
@@ -186,7 +186,7 @@ data Voices_2017_q1_q2_recode;
 
     uQ1_1 = "Place you would tell Washington area person you are from: Washington, DC (unique resp)"
     uQ1_2 = "Place you would tell Washington area person you are from: Montgomery County or place within (unique resp)"
-    uQ1_3 = "Place you would tell Washington area person you are from: Prince George's County or place within (unique resp)"
+    uQ1_3 = "Place you would tell Washington area person you are from: Prince Georges County or place within (unique resp)"
     uQ1_4 = "Place you would tell Washington area person you are from: Fairfax County or place within (unique resp)"
     uQ1_5 = "Place you would tell Washington area person you are from: Northern Virginia area outside Fairfax County (unique resp)"
     uQ1_6 = "Place you would tell Washington area person you are from: Maryland, no specific place inside region (unique resp)"
@@ -198,7 +198,7 @@ data Voices_2017_q1_q2_recode;
 
     uQ2_1 = "Place you would tell outsider you are from: Washington, DC (unique resp)"
     uQ2_2 = "Place you would tell outsider you are from: Montgomery County or place within (unique resp)"
-    uQ2_3 = "Place you would tell outsider you are from: Prince George's County or place within (unique resp)"
+    uQ2_3 = "Place you would tell outsider you are from: Prince Georges County or place within (unique resp)"
     uQ2_4 = "Place you would tell outsider you are from: Fairfax County or place within (unique resp)"
     uQ2_5 = "Place you would tell outsider you are from: Northern Virginia area outside Fairfax County (unique resp)"
     uQ2_6 = "Place you would tell outsider you are from: Maryland, no specific place inside region (unique resp)"
@@ -245,7 +245,7 @@ run;
   label="VoicesDMV 2017 survey, questions Q1 and Q2, recode",
   sortby=caseid,
   freqvars=Q1_refused Q2_refused,
-  revisions=%str(Revise Q1 Q2 recodings. Add uQ: and rQ: dummy variables.)
+  revisions=%str(Added Children present in respondents household break variable)
 )
 
 ods listing close;
