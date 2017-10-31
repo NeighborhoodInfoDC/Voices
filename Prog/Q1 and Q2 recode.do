@@ -14,17 +14,19 @@ log using "D:\DCDATA\Libraries\Voices\Prog\Q1 and Q2 recode.log", replace
 * Environment: Windows:
 * Description: 
 *
-* Modifications: 
+*Modifications: 10/31/17 LH - replace raw recodes in Excel with PAT versions
 */
 **Use raw open eneded file
 use "L:\Libraries\Voices\Raw\Q1.DTA", clear
 rename CaseID caseid
 /*there is a blank row in Q1.DTA - dropping row*/ 
 drop if caseid=="" 
+destring caseid, replace
 
 **Merge recode dataset
 **"Q1_recode CGH.dta" is the STATA version of "Q1_recode CGH.xls", a munaul recode dataset produced in Excel
-merge 1:m caseid using "L:\Libraries\Voices\Raw\Q1_recode CGH.dta"
+**"Q1_recode CGH_PAT" is the STATA version of "Q1_recode CGH_PAT.xlsx" a manual recode dataset produced in Excel and updates "Q1_recode CGH"
+merge 1:m caseid using "L:\Libraries\Voices\Raw\Q1_recode CGH_PAT.dta"
 
 **replace X with 1, missing with 0
 foreach m in dc mc pg fc nv md va dmv ot{
@@ -41,6 +43,7 @@ save "L:\Libraries\Voices\Raw\Q1_recode values.dta", replace
 **Merge back to original raw file
 use "L:\Libraries\Voices\Raw\Q1.DTA", clear
 rename CaseID caseid
+destring caseid, replace
 merge 1:1 caseid using "L:\Libraries\Voices\Raw\Q1_recode values.dta", keep(match)
 
 **recode multiple response types. 
@@ -70,8 +73,8 @@ replace ot=1 if total_list==0 & inlist(Q1,"Not from here","Not from here.","Lots
 replace ot=1 if total_list==0 & inlist(Q1,"What year?  (I have been a military dependent for most of my life)","everywhere","I would tell them that I'm from everywhere because my family is military.")
 replace ot=1 if total_list==0 & inlist(Q1,"no where","Nowhere in particular.","Everywhere and no where.","Earth","Lots of different places.", "I'm from the states", "all over as I grew up in a military family.") 
 replace nv=1 if total_list==0 & inlist(Q1,"falls church","Old town")
-replace ot=1 if total_list==0 & caseid=="538" /*"I would say I am from somewhere other than here. I am not from the area, I came years ago on a whim and have been forced to stay here ever since. I have no roots her.."*/
-replace dmv=1 if total_list==0 & caseid=="2284" /*i"m a local*/
+replace ot=1 if total_list==0 & caseid==538 /*"I would say I am from somewhere other than here. I am not from the area, I came years ago on a whim and have been forced to stay here ever since. I have no roots her.."*/
+replace dmv=1 if total_list==0 & caseid==2284 /*i"m a local*/
 
 /**Create mutually exclusive categories
 foreach n in dc mc pg fc nv md va dmv ot{
@@ -117,10 +120,12 @@ use "L:\Libraries\Voices\Raw\Q2.DTA", clear
 rename CaseID caseid
 /*there is a blank row in Q2.DTA - dropping row*/ 
 drop if caseid=="" 
+destring caseid, replace
 
 **Merge recode dataset
 **"Q2_recode CGH.dta" is the STATA version of "Q2_recode CGH.xls", a munaul recode dataset produced in Excel
-merge 1:m caseid using "L:\Libraries\Voices\Raw\Q2_recode CGH.dta"
+**"Q2_recode CGH_PAT.dta" is the STATA version of "Q2_recode CGH_PAT.xlsx", a manual recode dataset produced in Excel and update of "Q2_recode CGH"
+merge 1:m caseid using "L:\Libraries\Voices\Raw\Q2_recode CGH_PAT.dta"
 
 **replace X with 1, missing with 0
 foreach m in dc mc pg fc nv md va dmv ot{
@@ -137,6 +142,7 @@ save "L:\Libraries\Voices\Raw\Q2_recode values.dta", replace
 
 use "L:\Libraries\Voices\Raw\Q2.DTA", clear
 rename CaseID caseid
+destring caseid, replace
 merge 1:1 caseid using "L:\Libraries\Voices\Raw\Q2_recode values.dta", keep(match)
 
 **recode multiple response types. 
@@ -183,7 +189,7 @@ replace same=1 if total_list==0 & inlist(Q2,"See my answer to the previous quest
 replace same=1 if total_list==0 & inlist(Q2,"same as previous question","same as prior response","the same thing","I would tell them the same thing that I said from the previous question.")
 replace same=1 if total_list==0 & inlist(Q2,"The same thing I said in the last answer.","My answer would not change.  See previous answer.","I respond the same way as I mentioned in the previous answer.")
 replace same=1 if total_list==0 & inlist(Q2,"See my answer to the previous question.","I would still say the same thing as my last answer.","The same answer as in the previous question.")
-replace same=1 if total_list==0 & caseid=="457" /*exactly the same as in the prior answer, since it's a. true and b. ...*/
+replace same=1 if total_list==0 & caseid==457 /*exactly the same as in the prior answer, since it's a. true and b. ...*/
 
 replace dc=1 if same==1 & Q1_1==1
 replace mc=1 if same==1 & Q1_2==1
