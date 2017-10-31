@@ -478,7 +478,7 @@ proc sort data=Voices_Q16_newrecode;
 data Voices_Q16_recode;
 
 	merge Voices_Q16_newrecode 
-		  Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent);
+		  Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent  PPT01 PPT25 PPT612 PPT1317);
 	by caseid;
 
 		%make_break_vars_2017;
@@ -661,7 +661,7 @@ proc format;
   outlib=Voices,
   label="VoicesDMV survey, 2017, Q16 recoded responses",
   sortby=caseid respnum,
-  revisions=%str(Added vars for tables.)
+  revisions=%str(Added children in household break variable.)
 )
 
 proc freq data=Voices_Q16_recode;

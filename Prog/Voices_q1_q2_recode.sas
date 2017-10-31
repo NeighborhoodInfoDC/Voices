@@ -245,7 +245,7 @@ run;
   label="VoicesDMV 2017 survey, questions Q1 and Q2, recode",
   sortby=caseid,
   freqvars=Q1_refused Q2_refused,
-  revisions=%str(Replaced raw data with PAT version in Stata.)
+  revisions=%str(Added children in household break variable.)
 )
 
 ods listing close;

@@ -74,6 +74,12 @@
   IF (PPRENT=2) or (PPRENT=3)  THEN homeown = 0;
   IF (PPRENT=1) THEN homeown = 1;
   format homeown homeown.;
+
+  children=.;
+  IF (PPT01=0) or (PPT25=0) or (PPT612=0) or (PPT1317=0) THEN children = 0;
+  IF (PPT01>=1) or (PPT25>=1) or (PPT612>=1) or (PPT1317>=1) THEN children = 1;
+  format children children.;
+
 /*
   geo =.;
   IF (dov_urban=1) THEN geo = 1;
@@ -91,6 +97,7 @@
 	age = "Respondent's age"
     gender = "Respondent's gender"
     homeown = "Respondent's homeownership status"
+    children = "Children present in respondent's household"
 	 geo = "Respondent's VoicesDMV jurisdiction";
 
 %mend Make_break_vars_2017;
