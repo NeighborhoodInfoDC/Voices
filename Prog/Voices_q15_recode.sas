@@ -781,7 +781,6 @@ proc summary data=Voices_Q15_recode nway;
   format Q15_recode $Q15_r_det.;
 run;
 
-%File_info( data=A )
 
 data Word_cloud;
 
@@ -795,7 +794,7 @@ data Word_cloud;
   
 run;
 
-filename fexport "D:\DCData\Libraries\Voices\Raw\Voices_q15_recode_wordcloud.txt" lrecl=256;
+filename fexport "&_dcdata_default_path\Voices\Raw\Voices_q15_recode_wordcloud.txt" lrecl=256;
 
 proc export data=Word_cloud
     outfile=fexport
@@ -872,3 +871,4 @@ run;
   sortby=caseid,
   revisions=%str(New file.)
 )
+
