@@ -464,7 +464,7 @@
 	col=&col, 
     colfmt=&colfmt,
     total=n,
-    var=sQ16_3:,
+    var=sQ16_3a sQ16_3b sQ16_3c sQ16_3d sQ16_3f sQ16_3e sQ16_3g sQ16_3h sQ16_3i sQ16_3j sQ16_3k sQ16_3l,
     text="Q16. What are the three worst things about living in the Washington area?",
 	text2="Response given at least once",
     vlabel=
