@@ -217,7 +217,7 @@
     total=y,
     var=uQ1_1 uQ1_2 uQ1_3 uQ1_4 uQ1_5 uQ1_6 uQ1_7 uQ1_8 uQ1_9 uQ1_11 uQ1_10,
     text="Q1. If someone WHO LIVED IN THE WASHINGTON AREA asked you, where would you say you were from?",
-    vlabel=
+  	vlabel=
       uQ1_1 = "Washington, DC (or neighborhood within DC)"
       uQ1_2 = "Montgomery Co (or place within county)"
       uQ1_3 = "Prince George's Co (or place within county)"
@@ -410,6 +410,103 @@
     var=Q14_count,
     text="Q14. Count: Could you tell me whether you are a member of each type?" 
   )
+  
+ %Make_one_table( 
+    data=Voices.Voices_Q15_recode_sum,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=sQ15_3:,
+    text="Q15.What are the three best things about living in the Washington area?",
+	text2="Response given at least once",
+	vlabel=
+     		  sQ15_3a="Food"
+			  sQ15_3b="Entertainment"
+			  sQ15_3c="Jobs"
+			  sQ15_3d="Diversity"
+			  sQ15_3e="Location"
+			  sQ15_3f="Culture"
+			  sQ15_3g="Monuments and history"
+			  sQ15_3h="People"
+			  sQ15_3i="Nature"
+			  sQ15_3j="Museums"
+			  sQ15_3k="Transportation"
+			  sQ15_3l="Schools"
+			  sQ15_3m="Community"
+	)
+
+ %Make_one_table( 
+    data=Voices.Voices_Q15_recode,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=Q15_1e Q15_1c Q15_1f Q15_1b Q15_1a Q15_1d Q15_1j Q15_1g Q15_1h Q15_1k Q15_1i Q15_1l Q15_1m,
+    text="Q15. What are the three best things about living in the Washington area?",
+	text2="First response given",
+    vlabel=
+     		  Q15_1a="Food"
+			  Q15_1b="Entertainment"
+			  Q15_1c="Jobs"
+			  Q15_1d="Diversity"
+			  Q15_1e="Location"
+			  Q15_1f="Culture"
+			  Q15_1g="Monuments and history"
+			  Q15_1h="People"
+			  Q15_1i="Nature"
+			  Q15_1j="Museums"
+			  Q15_1k="Transportation"
+			  Q15_1l="Schools"
+			  Q15_1m="Community"
+	)
+
+  	%Make_one_table( 
+    data=Voices.Voices_Q16_recode_sum,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=sQ16_3a sQ16_3b sQ16_3c sQ16_3d sQ16_3f sQ16_3e sQ16_3g sQ16_3h sQ16_3i sQ16_3j sQ16_3k sQ16_3l,
+    text="Q16. What are the three worst things about living in the Washington area?",
+	text2="Response given at least once",
+    vlabel=
+     		  sQ16_3a="Traffic"
+			  sQ16_3b="Cost of living"
+			  sQ16_3c="Crime and safety"
+			  sQ16_3d="Weather"
+			  sQ16_3e="Politics"
+			  sQ16_3f="People"
+			  sQ16_3g="Housing"
+			  sQ16_3h="Too many people"
+			  sQ16_3i="Transportation"
+			  sQ16_3j="Taxes"
+			  sQ16_3k="METRO"
+			  sQ16_3l="Nothing"
+	)
+
+
+%Make_one_table( 
+    data=Voices.Voices_Q16_recode,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=Q16_1a Q16_1b Q16_1c Q16_1d Q16_1f Q16_1l Q16_1g Q16_1h Q16_1e Q16_1i Q16_1j Q16_1k,
+    text="Q16. What are the three worst things about living in the Washington area?",
+	text2="First response given",
+    vlabel=
+     		  Q16_1a="Traffic"
+			  Q16_1b="Cost of living"
+			  Q16_1c="Crime and safety"
+			  Q16_1d="Weather"
+			  Q16_1e="Politics"
+			  Q16_1f="People"
+			  Q16_1g="Housing"
+			  Q16_1h="Too many people"
+			  Q16_1i="Transportation"
+			  Q16_1j="Taxes"
+			  Q16_1k="METRO"
+			  Q16_1l="Nothing"
+			  
+	)
+
 
   %Make_one_table( 
     col=&col, 
@@ -1522,6 +1619,7 @@
     var=DOV_IDEO_:, 
     text="Q81. In general, do you think of yourself as..." 
   )
+  
 
   ods rtf close;
   ods listing;
