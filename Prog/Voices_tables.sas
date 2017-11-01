@@ -440,7 +440,7 @@
 	col=&col, 
     colfmt=&colfmt,
     total=n,
-    var=Q15_1:,
+    var=Q15_1e Q15_1c Q15_1f Q15_1b Q15_1a Q15_1d Q15_1j Q15_1g Q15_1h Q15_1k Q15_1i Q15_1l Q15_1m,
     text="Q15. What are the three best things about living in the Washington area?",
 	text2="First response given",
     vlabel=
@@ -488,7 +488,7 @@
 	col=&col, 
     colfmt=&colfmt,
     total=n,
-    var=Q16_1:,
+    var=Q16_1a Q16_1b Q16_1c Q16_1d Q16_1f Q16_1l Q16_1g Q16_1h Q16_1e Q16_1i Q16_1j Q16_1k,
     text="Q16. What are the three worst things about living in the Washington area?",
 	text2="First response given",
     vlabel=

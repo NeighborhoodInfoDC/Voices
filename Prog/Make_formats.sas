@@ -105,8 +105,8 @@ proc format library=Voices;
 	5 = '$100-150K'
     6 = '$150K+';
 	value children
-	0 = 'No children'
-	1 = 'Children';
+	0 = 'No children in household'
+	1 = 'With children in household';
 run;
 
 proc catalog catalog=Voices.Formats;
