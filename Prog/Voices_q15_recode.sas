@@ -13,6 +13,7 @@ create final recoded data set.
  Modifications: 10/18/17 LH replaced break vars code with standard macro. 
 		10/23/17 LH modified recoding from Natural Language Processing
 		10/30/17 LH finished recoding and added vars for tables
+		11/01/17 LH added code for case level response
 **************************************************************************/
 
 %include "L:\SAS\Inc\StdLocal.sas";
@@ -40,6 +41,8 @@ data Q15_recode_random;
   
   format _all_ ;
   informat _all_ ;
+
+  if caseid=4001 then respnum=2; *for some reason respnum is 1 in Q15_recode when Q15_text1='' in Voices.VoicesDMVSurvey2017; 
   
 run;
 
@@ -588,10 +591,10 @@ data Voices_Q15_recode;
 		if Q15_recode="MONUMENTS" then Q15_3g=1; else if Q15_recode ~="MONUMENTS" then Q15_3g=0;
 		if Q15_recode="PEOPLE" then Q15_3h=1; else if Q15_recode ~="PEOPLE" then Q15_3h=0;
 		if Q15_recode="NATURE" then Q15_3i=1; else if Q15_recode ~="NATURE" then Q15_3i=0;
-		if Q15_recode="TRANSPORTATION" then Q15_3j=1; else if Q15_recode ~="TRANSPORTATION" then Q15_3j=0;
-		if Q15_recode="COMMUNITY" then Q15_3k=1; else if Q15_recode ~="COMMUNITY" then Q15_3k=0;
-		if Q15_recode="MUSEUMS" then Q15_3l=1; else if Q15_recode ~="MUSEUMS" then Q15_3l=0;
-		if Q15_recode="SCHOOLS" then Q15_3m=1; else if Q15_recode ~="SCHOOLS" then Q15_3m=0;
+		if Q15_recode="MUSEUMS" then Q15_3j=1; else if Q15_recode ~="MUSEUMS" then Q15_3j=0;
+		if Q15_recode in("TRANSPORTATION" "BUS") then Q15_3k=1; else if Q15_recode not in("TRANSPORTATION" "BUS") then Q15_3k=0;
+		if Q15_recode="SCHOOLS" then Q15_3l=1; else if Q15_recode ~="SCHOOLS" then Q15_3l=0;
+		if Q15_recode="COMMUNITY" then Q15_3m=1; else if Q15_recode ~="COMMUNITY" then Q15_3m=0;
 		
 		if Q15_Text='' then do;
 			Q15_3a=.; Q15_3b=.; Q15_3c=.; Q15_3d=.; Q15_3e=.; Q15_3f=.; Q15_3g=.; Q15_3h=.; Q15_3i=.; Q15_3j=.; Q15_3k=.; Q15_3l=.; Q15_3m=.;
@@ -606,11 +609,12 @@ data Voices_Q15_recode;
 			  Q15_3g="Q15 All Responses: Monuments and history"
 			  Q15_3h="Q15 All Responses: People"
 			  Q15_3i="Q15 All Responses: Nature"
-			  Q15_3j="Q15 All Responses: Transportation"
-			  Q15_3k="Q15 All Responses: Community"
-			  Q15_3l="Q15 All Responses: Musuems"
-			  Q15_3m="Q15 All Responses: Schools"
+			  Q15_3j="Q15 All Responses: Musuems"
+			  Q15_3k="Q15 All Responses: Transportation"
+			  Q15_3l="Q15 All Responses: Schools"
+			  Q15_3m="Q15 All Responses: Community"
 			  ;
+
 		if respnum=1 then do;
 			if Q15_recode="FOOD" then Q15_1a=1; else if Q15_recode ~="FOOD" then Q15_1a=0;
 			if Q15_recode="ENTERTAINMENT" then Q15_1b=1; else if Q15_recode ~="ENTERTAINMENT" then Q15_1b=0;
@@ -621,10 +625,10 @@ data Voices_Q15_recode;
 			if Q15_recode="MONUMENTS" then Q15_1g=1; else if Q15_recode ~="MONUMENTS" then Q15_1g=0;
 			if Q15_recode="PEOPLE" then Q15_1h=1; else if Q15_recode ~="PEOPLE" then Q15_1h=0;
 			if Q15_recode="NATURE" then Q15_1i=1; else if Q15_recode ~="NATURE" then Q15_1i=0;
-			if Q15_recode="TRANSPORTATION" then Q15_1j=1; else if Q15_recode ~="TRANSPORTATION" then Q15_1j=0;
-			if Q15_recode="COMMUNITY" then Q15_1k=1; else if Q15_recode ~="COMMUNITY" then Q15_1k=0;
-			if Q15_recode="MUSEUMS" then Q15_1l=1; else if Q15_recode ~="MUSEUMS" then Q15_1l=0;
-			if Q15_recode="SCHOOLS" then Q15_1m=1; else if Q15_recode ~="SCHOOLS" then Q15_1m=0;
+			if Q15_recode="MUSEUMS" then Q15_1j=1; else if Q15_recode ~="MUSEUMS" then Q15_1j=0;
+			if Q15_recode in("TRANSPORTATION" "BUS") then Q15_1k=1; else if Q15_recode not in("TRANSPORTATION" "BUS") then Q15_1k=0;
+			if Q15_recode="SCHOOLS" then Q15_1l=1; else if Q15_recode ~="SCHOOLS" then Q15_1l=0;
+			if Q15_recode="COMMUNITY" then Q15_1m=1; else if Q15_recode ~="COMMUNITY" then Q15_1m=0;
 		end;
 		
 		if Q15_Text='' then do;
@@ -643,10 +647,10 @@ data Voices_Q15_recode;
 			  Q15_1g="Q15 1st Response: Monuments and history"
 			  Q15_1h="Q15 1st Response: People"
 			  Q15_1i="Q15 1st Response: Nature"
-			  Q15_1j="Q15 1st Response: Transportation"
-			  Q15_1k="Q15 1st Response: Community"
-			  Q15_1l="Q15 1st Response: Musuems"
-			  Q15_1m="Q15 1st Response: Schools"
+			  Q15_1j="Q15 1st Response: Musuems"
+			  Q15_1k="Q15 1st Response: Transportation"
+			  Q15_1l="Q15 1st Response: Schools"
+			  Q15_1m="Q15 1st Response: Community"
 			  ;
 run;
 
@@ -725,7 +729,7 @@ proc format;
   outlib=Voices,
   label="VoicesDMV survey, 2017, Q15 recoded responses",
   sortby=caseid respnum,
-  revisions=%str(Added children in household break variable.)
+  revisions=%str(Added bus to transportation Q15_3k, Q15_1k)
 )
 
 proc freq data=Voices_Q15_recode;
@@ -801,3 +805,70 @@ run;
 
 filename fexport clear;
 
+*ADD CODE TO GET # of PEOPLE WHO SAID X*;
+
+proc summary data=voices_Q15_recode;
+	by caseid;
+	var Q15_3: ;
+	output out=voices_Q15_recode_sum_0 sum=;
+run; 
+
+data voices_Q15_recode_sum (drop=Q15: _type_ _freq_);
+	
+	Merge voices_Q15_recode_sum_0
+		  Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent  PPT01 PPT25 PPT612 PPT1317);
+	by caseid;
+
+	%make_break_vars_2017;
+
+	sQ15_3a=.;
+	If Q15_3a > 0 then sQ15_3a=1; if Q15_3a=0 then sQ15_3a=0;
+	sQ15_3b=.;
+	If Q15_3b > 0 then sQ15_3b=1; if Q15_3b=0 then sQ15_3b=0;
+	sQ15_3c=.;
+	If Q15_3c > 0 then sQ15_3c=1; if Q15_3c=0 then sQ15_3c=0;
+	sQ15_3d=.;
+	If Q15_3d > 0 then sQ15_3d=1; if Q15_3d=0 then sQ15_3d=0;
+	sQ15_3e=.;
+	If Q15_3e > 0 then sQ15_3e=1; if Q15_3e=0 then sQ15_3e=0;
+	sQ15_3f=.;
+	If Q15_3f > 0 then sQ15_3f=1; if Q15_3f=0 then sQ15_3f=0;
+	sQ15_3g=.;
+	If Q15_3g > 0 then sQ15_3g=1; if Q15_3g=0 then sQ15_3g=0;
+	sQ15_3h=.;
+	If Q15_3h > 0 then sQ15_3h=1; if Q15_3h=0 then sQ15_3h=0;
+	sQ15_3i=.;
+	If Q15_3i > 0 then sQ15_3i=1; if Q15_3i=0 then sQ15_3i=0;
+	sQ15_3j=.;
+	If Q15_3j > 0 then sQ15_3j=1; if Q15_3j=0 then sQ15_3j=0;
+	sQ15_3k=.;
+	If Q15_3k > 0 then sQ15_3k=1; if Q15_3k=0 then sQ15_3k=0;
+	sQ15_3l=.;
+	If Q15_3l > 0 then sQ15_3l=1; if Q15_3l=0 then sQ15_3l=0;
+	sQ15_3m=.;
+	If Q15_3m > 0 then sQ15_3m=1; if Q15_3m=0 then sQ15_3m=0;
+
+		label sQ15_3a="Q15 Any Response: Food"
+			  sQ15_3b="Q15 Any Response: Entertainment"
+			  sQ15_3c="Q15 Any Response: Jobs"
+			  sQ15_3d="Q15 Any Response: Diversity"
+			  sQ15_3e="Q15 Any Response: Location"
+			  sQ15_3f="Q15 Any Response: Culture"
+			  sQ15_3g="Q15 Any Response: Monuments and history"
+			  sQ15_3h="Q15 Any Response: People"
+			  sQ15_3i="Q15 Any Response: Nature"
+			  sQ15_3j="Q15 Any Response: Museums"
+			  sQ15_3k="Q15 Any Response: Transportation"
+			  sQ15_3l="Q15 Any Response: Schools"
+			  sQ15_3m="Q15 Any Response: Community"
+			  ;
+
+run;
+%Finalize_data_set( 
+  data=voices_Q15_recode_sum,
+  out=voices_Q15_recode_sum,
+  outlib=Voices,
+  label="VoicesDMV survey, 2017, Q15 recoded responses summarized to caseid",
+  sortby=caseid,
+  revisions=%str(New file.)
+)

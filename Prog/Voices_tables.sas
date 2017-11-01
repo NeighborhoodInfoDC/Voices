@@ -217,7 +217,7 @@
     total=y,
     var=uQ1_1 uQ1_2 uQ1_3 uQ1_4 uQ1_5 uQ1_6 uQ1_7 uQ1_8 uQ1_9 uQ1_11 uQ1_10,
     text="Q1. If someone WHO LIVED IN THE WASHINGTON AREA asked you, where would you say you were from?",
-    vlabel=
+  	vlabel=
       uQ1_1 = "Washington, DC (or neighborhood within DC)"
       uQ1_2 = "Montgomery Co (or place within county)"
       uQ1_3 = "Prince George's Co (or place within county)"
@@ -410,6 +410,144 @@
     var=Q14_count,
     text="Q14. Count: Could you tell me whether you are a member of each type?" 
   )
+  
+  %Make_one_table( 
+    data=Voices.Voices_Q15_recode,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=Q15_3:,
+    text="Q15.[All Responses] What are the three best things about living in the Washington area?",
+    vlabel=
+     		  Q15_3a="Food"
+			  Q15_3b="Entertainment"
+			  Q15_3c="Jobs"
+			  Q15_3d="Diversity"
+			  Q15_3e="Location"
+			  Q15_3f="Culture"
+			  Q15_3g="Monuments and history"
+			  Q15_3h="People"
+			  Q15_3i="Nature"
+			  Q15_3j="Musuems"
+			  Q15_3k="Transportation"
+			  Q15_3l="Schools"
+			  Q15_3m="Community"
+	)
+
+ %Make_one_table( 
+    data=Voices.Voices_Q15_recode_sum,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=sQ15_3:,
+    text="Q15.[Any Response] What are the three best things about living in the Washington area?",
+    vlabel=
+     		  sQ15_3a="Food"
+			  sQ15_3b="Entertainment"
+			  sQ15_3c="Jobs"
+			  sQ15_3d="Diversity"
+			  sQ15_3e="Location"
+			  sQ15_3f="Culture"
+			  sQ15_3g="Monuments and history"
+			  sQ15_3h="People"
+			  sQ15_3i="Nature"
+			  sQ15_3j="Musuems"
+			  sQ15_3k="Transportation"
+			  sQ15_3l="Schools"
+			  sQ15_3m="Community"
+	)
+
+ %Make_one_table( 
+    data=Voices.Voices_Q15_recode,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=Q15_1:,
+    text="Q15.[First Response] What are the three best things about living in the Washington area?",
+    vlabel=
+     		  Q15_1a="Food"
+			  Q15_1b="Entertainment"
+			  Q15_1c="Jobs"
+			  Q15_1d="Diversity"
+			  Q15_1e="Location"
+			  Q15_1f="Culture"
+			  Q15_1g="Monuments and history"
+			  Q15_1h="People"
+			  Q15_1i="Nature"
+			  Q15_1j="Musuems"
+			  Q15_1k="Transportation"
+			  Q15_1l="Schools"
+			  Q15_1m="Community"
+	)
+
+   %Make_one_table( 
+    data=Voices.Voices_Q16_recode,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=Q16_3:,
+    text="Q16.[All Responses] What are the three worst things about living in the Washington area?",
+    vlabel=
+     		  Q16_3a="Traffic"
+			  Q16_3b="Cost of living"
+			  Q16_3c="Crime and safety"
+			  Q16_3d="Weather"
+			  Q16_3e="Politics"
+			  Q16_3f="People"
+			  Q16_3g="Housing"
+			  Q16_3h="Too many people"
+			  Q16_3i="Transportation"
+			  Q16_3j="Taxes"
+			  Q16_3k="METRO"
+			  Q16_3l="Nothing"
+	)
+
+	%Make_one_table( 
+    data=Voices.Voices_Q16_recode_sum,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=sQ16_3:,
+    text="Q16.[Any Response] What are the three worst things about living in the Washington area?",
+    vlabel=
+     		  sQ16_3a="Traffic"
+			  sQ16_3b="Cost of living"
+			  sQ16_3c="Crime and safety"
+			  sQ16_3d="Weather"
+			  sQ16_3e="Politics"
+			  sQ16_3f="People"
+			  sQ16_3g="Housing"
+			  sQ16_3h="Too many people"
+			  sQ16_3i="Transportation"
+			  sQ16_3j="Taxes"
+			  sQ16_3k="METRO"
+			  sQ16_3l="Nothing"
+	)
+
+
+%Make_one_table( 
+    data=Voices.Voices_Q16_recode,
+	col=&col, 
+    colfmt=&colfmt,
+    total=n,
+    var=Q16_1:,
+    text="Q16.[First Response] What are the three worst things about living in the Washington area?",
+    vlabel=
+     		  Q16_1a="Traffic"
+			  Q16_1b="Cost of living"
+			  Q16_1c="Crime and safety"
+			  Q16_1d="Weather"
+			  Q16_1e="Politics"
+			  Q16_1f="People"
+			  Q16_1g="Housing"
+			  Q16_1h="Too many people"
+			  Q16_1i="Transportation"
+			  Q16_1j="Taxes"
+			  Q16_1k="METRO"
+			  Q16_1l="Nothing"
+			  
+	)
+
 
   %Make_one_table( 
     col=&col, 
@@ -1522,6 +1660,7 @@
     var=DOV_IDEO_:, 
     text="Q81. In general, do you think of yourself as..." 
   )
+  
 
   ods rtf close;
   ods listing;

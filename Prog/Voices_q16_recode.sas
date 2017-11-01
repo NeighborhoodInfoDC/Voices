@@ -42,6 +42,9 @@ data Q16_recode_random;
   format _all_ ;
   informat _all_ ;
   
+  *two caseids are incorrectly respnum 1 on Q16 recode and have responses for Q16_Text2 only on Voices.VoicesDMVSurvey2017;
+  if caseid=2621 then respnum=2;
+  if caseid=3822 then respnum=2; 
 run;
 
 proc sort data=Q16_recode_random;
@@ -496,7 +499,7 @@ data Voices_Q16_recode;
 		if Q16_recode="PEOPLE" then Q16_3f=1; else if Q16_recode ~="PEOPLE" then Q16_3f=0;
 		if Q16_recode="HOUSING" then Q16_3g=1; else if Q16_recode ~="HOUSING" then Q16_3g=0;
 		if Q16_recode="MANY" then Q16_3h=1; else if Q16_recode ~="MANY" then Q16_3h=0;
-		if Q16_recode="TRANSPORTATION" then Q16_3i=1; else if Q16_recode ~="TRANSPORTATION" then Q16_3i=0;
+		if Q16_recode in("TRANSPORTATION" "BUS") then Q16_3i=1; else if Q16_recode not in("TRANSPORTATION" "BUS") then Q16_3i=0;
 		if Q16_recode="TAXES" then Q16_3j=1; else if Q16_recode ~="TAXES" then Q16_3j=0;
 		if Q16_recode="METRO" then Q16_3k=1; else if Q16_recode ~="METRO" then Q16_3k=0;
 		if Q16_recode="NOTHING" then Q16_3l=1; else if Q16_recode ~="NOTHING" then Q16_3l=0;
@@ -528,7 +531,7 @@ data Voices_Q16_recode;
 			if Q16_recode="PEOPLE" then Q16_1f=1; else if Q16_recode ~="PEOPLE" then Q16_1f=0;
 			if Q16_recode="HOUSING" then Q16_1g=1; else if Q16_recode ~="HOUSING" then Q16_1g=0;
 			if Q16_recode="MANY" then Q16_1h=1; else if Q16_recode ~="MANY" then Q16_1h=0;
-			if Q16_recode="TRANSPORTATION" then Q16_1i=1; else if Q16_recode ~="TRANSPORTATION" then Q16_1i=0;
+			if Q16_recode in("TRANSPORTATION" "BUS") then Q16_1i=1; else if Q16_recode not in("TRANSPORTATION" "BUS") then Q16_1i=0;
 			if Q16_recode="TAXES" then Q16_1j=1; else if Q16_recode ~="TAXES" then Q16_1j=0;
 			if Q16_recode="METRO" then Q16_1k=1; else if Q16_recode ~="METRO" then Q16_1k=0;
 			if Q16_recode="NOTHING" then Q16_1l=1; else if Q16_recode ~="NOTHING" then Q16_1l=0;
@@ -661,7 +664,7 @@ proc format;
   outlib=Voices,
   label="VoicesDMV survey, 2017, Q16 recoded responses",
   sortby=caseid respnum,
-  revisions=%str(Added children in household break variable.)
+  revisions=%str(Added bus to transportation Q16_3i, Q16_1i)
 )
 
 proc freq data=Voices_Q16_recode;
@@ -740,3 +743,69 @@ run;
 
 filename fexport clear;
 
+*ADD CODE TO GET # of PEOPLE WHO SAID X*;
+
+proc summary data=voices_Q16_recode;
+	by caseid;
+	var Q16_3: ;
+	output out=voices_Q16_recode_sum_0 sum=;
+run; 
+
+
+data voices_Q16_recode_sum (drop=Q16: _type_ _freq_);
+	
+	Merge voices_Q16_recode_sum_0
+		  Voices.VoicesDMVSurvey2017 (keep=caseid weight dov_urban ppethm ppracem ppeducat ppincimp ppage ppgender pprent  PPT01 PPT25 PPT612 PPT1317);
+	by caseid;
+
+	%make_break_vars_2017;
+
+	sQ16_3a=.;
+	If Q16_3a > 0 then sQ16_3a=1; if Q16_3a=0 then sQ16_3a=0;
+	sQ16_3b=.;
+	If Q16_3b > 0 then sQ16_3b=1; if Q16_3b=0 then sQ16_3b=0;
+	sQ16_3c=.;
+	If Q16_3c > 0 then sQ16_3c=1; if Q16_3c=0 then sQ16_3c=0;
+	sQ16_3d=.;
+	If Q16_3d > 0 then sQ16_3d=1; if Q16_3d=0 then sQ16_3d=0;
+	sQ16_3e=.;
+	If Q16_3e > 0 then sQ16_3e=1; if Q16_3e=0 then sQ16_3e=0;
+	sQ16_3f=.;
+	If Q16_3f > 0 then sQ16_3f=1; if Q16_3f=0 then sQ16_3f=0;
+	sQ16_3g=.;
+	If Q16_3g > 0 then sQ16_3g=1; if Q16_3g=0 then sQ16_3g=0;
+	sQ16_3h=.;
+	If Q16_3h > 0 then sQ16_3h=1; if Q16_3h=0 then sQ16_3h=0;
+	sQ16_3i=.;
+	If Q16_3i > 0 then sQ16_3i=1; if Q16_3i=0 then sQ16_3i=0;
+	sQ16_3j=.;
+	If Q16_3j > 0 then sQ16_3j=1; if Q16_3j=0 then sQ16_3j=0;
+	sQ16_3k=.;
+	If Q16_3k > 0 then sQ16_3k=1; if Q16_3k=0 then sQ16_3k=0;
+	sQ16_3l=.;
+	If Q16_3l > 0 then sQ16_3l=1; if Q16_3l=0 then sQ16_3l=0;
+	
+		label sQ16_3a="Q16 Any Response: Traffic"
+			  sQ16_3b="Q16 Any Response: Cost of living"
+			  sQ16_3c="Q16 Any Response: Weather"
+			  sQ16_3d="Q16 Any Response: Politics"
+			  sQ16_3e="Q16 Any Response: Location"
+			  sQ16_3f="Q16 Any Response: People"
+			  sQ16_3g="Q16 Any Response: Housing"
+			  sQ16_3h="Q16 Any Response: Too many people"
+			  sQ16_3i="Q16 Any Response: Transportation"
+			  sQ16_3j="Q16 Any Response: Taxes"
+			  sQ16_3k="Q16 Any Response: METRO"
+			  sQ16_3l="Q16 Any Response: Nothing"
+			  ;
+
+run;
+
+%Finalize_data_set( 
+  data=voices_Q16_recode_sum,
+  out=voices_Q16_recode_sum,
+  outlib=Voices,
+  label="VoicesDMV survey, 2017, Q16 recoded responses summarized to caseid",
+  sortby=caseid,
+  revisions=%str(New file.)
+)
