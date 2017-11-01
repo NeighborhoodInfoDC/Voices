@@ -411,37 +411,15 @@
     text="Q14. Count: Could you tell me whether you are a member of each type?" 
   )
   
-  %Make_one_table( 
-    data=Voices.Voices_Q15_recode,
-	col=&col, 
-    colfmt=&colfmt,
-    total=n,
-    var=Q15_3:,
-    text="Q15.[All Responses] What are the three best things about living in the Washington area?",
-    vlabel=
-     		  Q15_3a="Food"
-			  Q15_3b="Entertainment"
-			  Q15_3c="Jobs"
-			  Q15_3d="Diversity"
-			  Q15_3e="Location"
-			  Q15_3f="Culture"
-			  Q15_3g="Monuments and history"
-			  Q15_3h="People"
-			  Q15_3i="Nature"
-			  Q15_3j="Musuems"
-			  Q15_3k="Transportation"
-			  Q15_3l="Schools"
-			  Q15_3m="Community"
-	)
-
  %Make_one_table( 
     data=Voices.Voices_Q15_recode_sum,
 	col=&col, 
     colfmt=&colfmt,
     total=n,
     var=sQ15_3:,
-    text="Q15.[Any Response] What are the three best things about living in the Washington area?",
-    vlabel=
+    text="Q15.What are the three best things about living in the Washington area?",
+	text2="Response given at least once",
+	vlabel=
      		  sQ15_3a="Food"
 			  sQ15_3b="Entertainment"
 			  sQ15_3c="Jobs"
@@ -463,7 +441,8 @@
     colfmt=&colfmt,
     total=n,
     var=Q15_1:,
-    text="Q15.[First Response] What are the three best things about living in the Washington area?",
+    text="Q15. What are the three best things about living in the Washington area?",
+	text2="First response given",
     vlabel=
      		  Q15_1a="Food"
 			  Q15_1b="Entertainment"
@@ -480,35 +459,14 @@
 			  Q15_1m="Community"
 	)
 
-   %Make_one_table( 
-    data=Voices.Voices_Q16_recode,
-	col=&col, 
-    colfmt=&colfmt,
-    total=n,
-    var=Q16_3:,
-    text="Q16.[All Responses] What are the three worst things about living in the Washington area?",
-    vlabel=
-     		  Q16_3a="Traffic"
-			  Q16_3b="Cost of living"
-			  Q16_3c="Crime and safety"
-			  Q16_3d="Weather"
-			  Q16_3e="Politics"
-			  Q16_3f="People"
-			  Q16_3g="Housing"
-			  Q16_3h="Too many people"
-			  Q16_3i="Transportation"
-			  Q16_3j="Taxes"
-			  Q16_3k="METRO"
-			  Q16_3l="Nothing"
-	)
-
-	%Make_one_table( 
+  	%Make_one_table( 
     data=Voices.Voices_Q16_recode_sum,
 	col=&col, 
     colfmt=&colfmt,
     total=n,
     var=sQ16_3:,
-    text="Q16.[Any Response] What are the three worst things about living in the Washington area?",
+    text="Q16. What are the three worst things about living in the Washington area?",
+	text2="Response given at least once",
     vlabel=
      		  sQ16_3a="Traffic"
 			  sQ16_3b="Cost of living"
@@ -531,7 +489,8 @@
     colfmt=&colfmt,
     total=n,
     var=Q16_1:,
-    text="Q16.[First Response] What are the three worst things about living in the Washington area?",
+    text="Q16. What are the three worst things about living in the Washington area?",
+	text2="First response given",
     vlabel=
      		  Q16_1a="Traffic"
 			  Q16_1b="Cost of living"
