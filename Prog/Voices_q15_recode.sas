@@ -609,7 +609,7 @@ data Voices_Q15_recode;
 			  Q15_3g="Q15 All Responses: Monuments and history"
 			  Q15_3h="Q15 All Responses: People"
 			  Q15_3i="Q15 All Responses: Nature"
-			  Q15_3j="Q15 All Responses: Musuems"
+			  Q15_3j="Q15 All Responses: Museums"
 			  Q15_3k="Q15 All Responses: Transportation"
 			  Q15_3l="Q15 All Responses: Schools"
 			  Q15_3m="Q15 All Responses: Community"
@@ -647,7 +647,7 @@ data Voices_Q15_recode;
 			  Q15_1g="Q15 1st Response: Monuments and history"
 			  Q15_1h="Q15 1st Response: People"
 			  Q15_1i="Q15 1st Response: Nature"
-			  Q15_1j="Q15 1st Response: Musuems"
+			  Q15_1j="Q15 1st Response: Museums"
 			  Q15_1k="Q15 1st Response: Transportation"
 			  Q15_1l="Q15 1st Response: Schools"
 			  Q15_1m="Q15 1st Response: Community"
@@ -729,7 +729,7 @@ proc format;
   outlib=Voices,
   label="VoicesDMV survey, 2017, Q15 recoded responses",
   sortby=caseid respnum,
-  revisions=%str(Added bus to transportation Q15_3k, Q15_1k)
+  revisions=%str(Reordered Q15_Xj-m, added bus to Q15_3k, Q15_1k)
 )
 
 proc freq data=Voices_Q15_recode;
