@@ -162,31 +162,11 @@
   title2 &text;
   title3 &text2;
   
-%macro skip;  
   proc print data=_Voices_table_dat noobs label;
     var &col coltype &var;
     format &col colfmt. coltype &typefmt &var &fmt;
   run;
-%mend skip;
     
-  proc tabulate data=_Voices_table_dat format=&fmt noseps missing order=data;
-    class &col;
-    class coltype / preloadfmt;
-    var &var varsum;
-    table 
-      /** Rows **/
-      %if %mparam_is_yes( &total ) %then %do;
-        &var varsum='Total',
-      %end;
-      %else %do;
-        &var,
-      %end;
-      /** Columns **/
-      &col=' ' * sum=' ' * coltype=' '
-    ;
-    format &col colfmt. coltype &typefmt;
-  run;
-
   title1;
   
   ** Clean up temporary data sets **;
@@ -210,7 +190,7 @@
   options nodate nonumber;
   options missing='-';
 
-  ods csvall body="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..csv";
+  ods csvall body="&_dcdata_default_path\Voices\Raw\Voices_tables_&col..csv";
       
   ods listing close;
   
@@ -363,7 +343,7 @@
     var=Q10_:, 
     text="Q10. If you had the choice of where to live, would you rather..." 
   )
-/*************
+
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
@@ -1625,9 +1605,9 @@
     var=DOV_IDEO_:, 
     text="Q81. In general, do you think of yourself as..." 
   )
-*********************/  
 
-  ods rtf close;
+
+  ods csvall close;
   ods listing;
   
   title1;
@@ -1670,7 +1650,6 @@ run;
 
 %Make_all_tables( col=region, colfmt=region., title=Tables for Entire Region )
 %Make_all_tables( col=geo, colfmt=geo., title=Tables by Jurisdiction )
-/*
 %Make_all_tables( col=race, colfmt=race., title=Tables by Race )
 %Make_all_tables( col=educ, colfmt=educ., title=Tables by Education )
 %Make_all_tables( col=income, colfmt=income., title=Tables by Income )
