@@ -9,6 +9,8 @@
  
  Description:  Create VoicesDMV survey tables.
  
+ CSV format for MySidewalk.
+ 
  Program uses two internal macros:
 
  %Make_all_tables()
@@ -117,7 +119,7 @@
     
     if coltype = 'N' then do;
       count = min( of &var );
-      colfmtlbl = trim( put( &col, &colfmt ) ) || ' \line (n=' || trim( left( put( count, comma8.0 ) ) ) || ')';
+      colfmtlbl = trim( put( &col, &colfmt ) ) || ' (n=' || trim( left( put( count, comma8.0 ) ) ) || ')';
       output _Voices_table_count;
     end;
     else if coltype = 'RRDen' then do;
@@ -153,15 +155,20 @@
     OtherLabel=,
     Print=N
   )
+  
+  %if %length( &text2 ) = 0 %then %let text2 = " ";
 
-  title2 height=9pt " ";
-  title3 height=9pt bold &text;
-  title4 height=9pt bold &text2;
+  title1 '================================================================================';
+  title2 &text;
+  title3 &text2;
   
-  footnote1 height=9pt italic "Question refusal rate for eligible respondents = &ref_rate..";
-  footnote2 height=9pt " ";
-  footnote3 height=9pt italic "Prepared by Urban Institute, &fdate..";
-  
+%macro skip;  
+  proc print data=_Voices_table_dat noobs label;
+    var &col coltype &var;
+    format &col colfmt. coltype &typefmt &var &fmt;
+  run;
+%mend skip;
+    
   proc tabulate data=_Voices_table_dat format=&fmt noseps missing order=data;
     class &col;
     class coltype / preloadfmt;
@@ -169,7 +176,7 @@
     table 
       /** Rows **/
       %if %mparam_is_yes( &total ) %then %do;
-        &var varsum='\b Total',
+        &var varsum='Total',
       %end;
       %else %do;
         &var,
@@ -179,8 +186,8 @@
     ;
     format &col colfmt. coltype &typefmt;
   run;
-  
-  title2;
+
+  title1;
   
   ** Clean up temporary data sets **;
 
@@ -203,12 +210,11 @@
   options nodate nonumber;
   options missing='-';
 
-  ods rtf file="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..rtf" style=Styles.Voices_style_rtf
-      bodytitle toc_data;
+  ods csvall body="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..csv";
       
   ods listing close;
   
-  title1 bold "VoicesDMV Survey: &title // DRAFT: NOT FOR CITATION OR RELEASE";
+  title1;
 
   %Make_one_table( 
     data=Voices.Voices_2017_q1_q2_recode,
@@ -357,7 +363,7 @@
     var=Q10_:, 
     text="Q10. If you had the choice of where to live, would you rather..." 
   )
-
+/*************
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
@@ -1619,7 +1625,7 @@
     var=DOV_IDEO_:, 
     text="Q81. In general, do you think of yourself as..." 
   )
-  
+*********************/  
 
   ods rtf close;
   ods listing;
@@ -1636,15 +1642,15 @@
 
 proc format;
   value $coltype_mean (notsorted)
-    'Mean' = '\qr Mean'
-    'CI' = '\qr +/-';
+    'Mean' = 'Mean'
+    'CI' = 'CI';
   value $coltype_pct (notsorted)
-    'Mean' = '\qr Pct.'
-    'CI' = '\qr +/-';
+    'Mean' = 'Pct'
+    'CI' = 'CI';
   picture npercent (round)
     low-high = '0000009.9' (mult=1000);
   value region
-    1 = 'Washington\~Area';
+    1 = 'Washington Area';
 run;
 
 
@@ -1664,6 +1670,7 @@ run;
 
 %Make_all_tables( col=region, colfmt=region., title=Tables for Entire Region )
 %Make_all_tables( col=geo, colfmt=geo., title=Tables by Jurisdiction )
+/*
 %Make_all_tables( col=race, colfmt=race., title=Tables by Race )
 %Make_all_tables( col=educ, colfmt=educ., title=Tables by Education )
 %Make_all_tables( col=income, colfmt=income., title=Tables by Income )
