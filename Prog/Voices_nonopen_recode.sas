@@ -25,7 +25,7 @@
 options mprint symbolgen=y;
 %let NUM_LEVELS = 5; 
 
-%let revisions = %str(Fix skipped question recode for Q23, Q24, Q31, and Q60.);
+%let revisions = %str(Clean up variable labels.);
 
 %macro dummies;
 
@@ -327,7 +327,7 @@ data Voices_2017_nonopen_recode_4 ;
 drop j;
 
   label
-    Q13_count = "Count of civic engagement activities(0-8)"
+    Q13_count = "Count of civic engagement activities (0-8)"
     Q14_count = "Count of civic org memberships (0-10)";
 
   phy_health =.;
