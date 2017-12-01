@@ -153,12 +153,12 @@
     OtherLabel=,
     Print=N
   )
-
-  title2 height=9pt " ";
-  title3 height=9pt bold &text;
-  title4 height=9pt bold &text2;
   
-  footnote1 height=9pt italic "Question refusal rate for eligible respondents = &ref_rate..";
+  title2 height=11pt " ";
+  title3 height=11pt bold &text;
+  title4 height=11pt bold color=cx95ac3b &text2;
+  
+  footnote1 height=9pt italic "Question refusal rate for eligible respondents = &ref_rate.. +/- column is credibility interval for response.";
   footnote2 height=9pt " ";
   footnote3 height=9pt italic "Prepared by Urban Institute, &fdate..";
   
@@ -203,12 +203,12 @@
   options nodate nonumber;
   options missing='-';
 
-  ods rtf file="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..rtf" style=Styles.Voices_style_rtf
-      bodytitle toc_data;
-      
   ods listing close;
   
-  title1 bold "VoicesDMV Survey: &title // DRAFT: NOT FOR CITATION OR RELEASE";
+  ods rtf file="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..rtf" style=Styles.Voices_style_rtf
+      bodytitle;
+      
+  title1 height=14pt bold "2017 VOICESDMV SURVEY: %upcase(&title)";
 
   %Make_one_table( 
     data=Voices.Voices_2017_q1_q2_recode,
@@ -1100,7 +1100,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q43_:, 
-    text="Q43. In the past year, how often have you felt discriminated against?" 
+    text="Q43. [Persons who experienced discrimination (Q42)] In the past year, how often have you felt discriminated against?" 
   )
 
   ** Omit Q44_n (other) for now **;
@@ -1109,7 +1109,7 @@
     colfmt=&colfmt,
     total=n,
     var=Q44_a--Q44_m, 
-    text="Q44. For what reasons did you feel discriminated against?" 
+    text="Q44. [Persons who experienced discrimination (Q42)] For what reasons did you feel discriminated against?" 
   )
 
   ** Omit Q45_i (other) for now **;
@@ -1118,7 +1118,7 @@
     colfmt=&colfmt,
     total=n,
     var=Q45_a--Q45_h, 
-    text="Q45. In which systems or situations did you experience discrimination?" 
+    text="Q45. [Persons who experienced discrimination (Q42)] In which systems or situations did you experience discrimination?" 
   )
 
   %Make_one_table( 
@@ -1619,7 +1619,6 @@
     var=DOV_IDEO_:, 
     text="Q81. In general, do you think of yourself as..." 
   )
-  
 
   ods rtf close;
   ods listing;
@@ -1662,12 +1661,12 @@ run;
 
 ** Create tables **;
 
-%Make_all_tables( col=region, colfmt=region., title=Tables for Entire Region )
-%Make_all_tables( col=geo, colfmt=geo., title=Tables by Jurisdiction )
-%Make_all_tables( col=race, colfmt=race., title=Tables by Race )
-%Make_all_tables( col=educ, colfmt=educ., title=Tables by Education )
-%Make_all_tables( col=income, colfmt=income., title=Tables by Income )
-%Make_all_tables( col=age, colfmt=age., title=Tables by Age )
-%Make_all_tables( col=gender, colfmt=gender., title=Tables by Gender )
-%Make_all_tables( col=homeown, colfmt=homeown., title=Tables by Homeownership Status )
-%Make_all_tables( col=children, colfmt=children., title=Tables by Presence of Children in Household )
+%Make_all_tables( col=region, colfmt=region., title=Summary Tables for Entire Region )
+%Make_all_tables( col=geo, colfmt=geo., title=Summary Tables by Jurisdiction )
+%Make_all_tables( col=race, colfmt=race., title=Summary Tables by Race )
+%Make_all_tables( col=educ, colfmt=educ., title=Summary Tables by Education )
+%Make_all_tables( col=income, colfmt=income., title=Summary Tables by Income )
+%Make_all_tables( col=age, colfmt=age., title=Summary Tables by Age )
+%Make_all_tables( col=gender, colfmt=gender., title=Summary Tables by Gender )
+%Make_all_tables( col=homeown, colfmt=homeown., title=Summary Tables by Homeownership Status )
+%Make_all_tables( col=children, colfmt=children., title=Summary Tables by Presence of Children in Household )
