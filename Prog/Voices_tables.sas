@@ -153,12 +153,12 @@
     OtherLabel=,
     Print=N
   )
-
-  title2 height=9pt " ";
-  title3 height=9pt bold &text;
-  title4 height=9pt bold &text2;
   
-  footnote1 height=9pt italic "Question refusal rate for eligible respondents = &ref_rate..";
+  title2 height=11pt " ";
+  title3 height=11pt bold &text;
+  title4 height=11pt bold color=cx95ac3b &text2;
+  
+  footnote1 height=9pt italic "Question refusal rate for eligible respondents = &ref_rate.. +/- column is credibility interval for response.";
   footnote2 height=9pt " ";
   footnote3 height=9pt italic "Prepared by Urban Institute, &fdate..";
   
@@ -203,12 +203,12 @@
   options nodate nonumber;
   options missing='-';
 
-  ods rtf file="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..rtf" style=Styles.Voices_style_rtf
-      bodytitle toc_data;
-      
   ods listing close;
   
-  title1 bold "VoicesDMV Survey: &title // DRAFT: NOT FOR CITATION OR RELEASE";
+  ods rtf file="&_dcdata_default_path\Voices\Prog\Voices_tables_&col..rtf" style=Styles.Voices_style_rtf
+      bodytitle;
+      
+  title1 height=14pt bold "2017 VOICESDMV SURVEY: %upcase(&title)";
 
   %Make_one_table( 
     data=Voices.Voices_2017_q1_q2_recode,
@@ -348,7 +348,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q9_:, 
-    text="Q9. How likely are you to recommend [City/County] to a friend or co-worker as a place to live?" 
+    text="Q9. How likely are you to recommend [city/county] to a friend or co-worker as a place to live?" 
   )
 
   %Make_one_table( 
@@ -764,7 +764,7 @@
     colfmt=&colfmt,
     total=n,
     var=Q27, 
-    text="Q27. In the past two years, do you know anyone who had to move from the place where they lived in [City/County] to somewhere else for a reason other than their own choice?" 
+    text="Q27. In the past two years, do you know anyone who had to move from the place where they lived in [city/county] to somewhere else for a reason other than their own choice?" 
   )
 
   %Make_one_table( 
@@ -772,21 +772,21 @@
     colfmt=&colfmt,
     total=n,
     var=Q28_:, 
-    text="Q28. For what reason(s) did this person have to move?" 
+    text="Q28. [Persons who had to move (Q27)] For what reason(s) did this person have to move?" 
   )
 
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     var=Q29_:, 
-    text="Q29. Do you know where this person moved to?" 
+    text="Q29. [Persons who had to move (Q27)] Do you know where this person moved to?" 
   )
 
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     var=Q30_a_1-Q30_a_4, 
-    text="Q30a How would you rate the following in [City/County]?...",
+    text="Q30a How would you rate the following in [city/county]?...",
     text2="The leadership of [city/county] officials",
     vlabel=
       Q30_a_1 = "Excellent"
@@ -799,7 +799,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q30_b_1-Q30_b_4, 
-    text="Q30b How would you rate the following in [City/County]?...",
+    text="Q30b How would you rate the following in [city/county]?...",
     text2="The responsiveness of [city/county] government to the needs of residents",
     vlabel=
       Q30_b_1 = "Excellent"
@@ -820,7 +820,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q32_a_1-Q32_a_4, 
-    text="Q32a. How would you rate the following in the city where you live?",
+    text="Q32a. [Lives in a place that has elected city officials (Q31)] How would you rate the following in the city where you live?",
     text2="The leadership of elected city officials",
     vlabel=
       Q32_a_1 = "Excellent"
@@ -833,7 +833,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q32_b_1-Q32_b_4, 
-    text="Q32b. How would you rate the following in the city where you live?",
+    text="Q32b. [Lives in a place that has elected city officials (Q31)] How would you rate the following in the city where you live?",
     text2="The responsiveness of city government to the needs of residents",
     vlabel=
       Q32_b_1 = "Excellent"
@@ -1100,7 +1100,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q43_:, 
-    text="Q43. In the past year, how often have you felt discriminated against?" 
+    text="Q43. [Persons who experienced discrimination (Q42)] In the past year, how often have you felt discriminated against?" 
   )
 
   ** Omit Q44_n (other) for now **;
@@ -1109,7 +1109,7 @@
     colfmt=&colfmt,
     total=n,
     var=Q44_a--Q44_m, 
-    text="Q44. For what reasons did you feel discriminated against?" 
+    text="Q44. [Persons who experienced discrimination (Q42)] For what reasons did you feel discriminated against?" 
   )
 
   ** Omit Q45_i (other) for now **;
@@ -1118,7 +1118,7 @@
     colfmt=&colfmt,
     total=n,
     var=Q45_a--Q45_h, 
-    text="Q45. In which systems or situations did you experience discrimination?" 
+    text="Q45. [Persons who experienced discrimination (Q42)] In which systems or situations did you experience discrimination?" 
   )
 
   %Make_one_table( 
@@ -1448,7 +1448,7 @@
     col=&col, 
     colfmt=&colfmt,
     var=Q56_:, 
-    text="Q56. How often in the past 12 months did you not have enough money to buy food that you or your family needed?" 
+    text="Q56. [Did not have enough money to buy food (Q55)] How often in the past 12 months did you not have enough money to buy food that you or your family needed?" 
   )
 
   %Make_one_table( 
@@ -1456,14 +1456,14 @@
     colfmt=&colfmt,
     total=n,
     var=Q57, 
-    text="Q57. ...did not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
+    text="Q57. Have there been times in the past 12 months when you did not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
   )
 
   %Make_one_table( 
     col=&col, 
     colfmt=&colfmt,
     var=Q58_:, 
-    text="Q58. ...did you not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
+    text="Q58. [Did not have enough money for housing (Q57)] Have there been times in the past 12 months when you did not have enough money to pay the rent, mortgage, or utilities for housing for you or your family?" 
   )
 
   %Make_one_table( 
@@ -1495,7 +1495,7 @@
     colfmt=&colfmt,
     total=n,
     var=Q62, 
-    text="Q62. [Persons currently working (Q59)] Are you currently looking for work or do you want to find a job?" 
+    text="Q62. [Persons not currently working (Q59)] Are you currently looking for work or do you want to find a job?" 
   )
 
   %Make_one_table( 
@@ -1619,7 +1619,6 @@
     var=DOV_IDEO_:, 
     text="Q81. In general, do you think of yourself as..." 
   )
-  
 
   ods rtf close;
   ods listing;
@@ -1662,12 +1661,12 @@ run;
 
 ** Create tables **;
 
-%Make_all_tables( col=region, colfmt=region., title=Tables for Entire Region )
-%Make_all_tables( col=geo, colfmt=geo., title=Tables by Jurisdiction )
-%Make_all_tables( col=race, colfmt=race., title=Tables by Race )
-%Make_all_tables( col=educ, colfmt=educ., title=Tables by Education )
-%Make_all_tables( col=income, colfmt=income., title=Tables by Income )
-%Make_all_tables( col=age, colfmt=age., title=Tables by Age )
-%Make_all_tables( col=gender, colfmt=gender., title=Tables by Gender )
-%Make_all_tables( col=homeown, colfmt=homeown., title=Tables by Homeownership Status )
-%Make_all_tables( col=children, colfmt=children., title=Tables by Presence of Children in Household )
+%Make_all_tables( col=region, colfmt=region., title=Summary Tables for Entire Region )
+%Make_all_tables( col=geo, colfmt=geo., title=Summary Tables by Jurisdiction )
+%Make_all_tables( col=race, colfmt=race., title=Summary Tables by Race )
+%Make_all_tables( col=educ, colfmt=educ., title=Summary Tables by Education )
+%Make_all_tables( col=income, colfmt=income., title=Summary Tables by Income )
+%Make_all_tables( col=age, colfmt=age., title=Summary Tables by Age )
+%Make_all_tables( col=gender, colfmt=gender., title=Summary Tables by Gender )
+%Make_all_tables( col=homeown, colfmt=homeown., title=Summary Tables by Homeownership Status )
+%Make_all_tables( col=children, colfmt=children., title=Summary Tables by Presence of Children in Household )
