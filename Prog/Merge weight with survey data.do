@@ -8,7 +8,7 @@ set trace off			// Disable debugger
 set matsize 11000		// Define matrix size 
 set maxvar 32767, perm  // Define max variables
 set scheme s1color, perm //Define color scheme for graphs
-log using "L:\Libraries\Voices\Prog\Merge replicate weights with voices_2017_nonopen_recode.log", replace 
+log using "D:\DCDATA\Libraries\Voices\Prog\Merge replicate weights with voices_2017_nonopen_recode.log", replace 
 *****************************************************************************
 * 
 * Program: 5 jurisdictional comparison tables.do
@@ -27,9 +27,9 @@ log using "L:\Libraries\Voices\Prog\Merge replicate weights with voices_2017_non
 **------------------------------------------------------------------------------
 global surveytdata "L:\Libraries\Voices\Data\voices_2017_nonopen_recode"
 global repweights "L:\Libraries\Voices\Raw\VoicesDMVSurvey2017_replicatewts"
-global dodir "`L:\Libraries\Voices\Prog"
-global project "L:\Libraries\Voices"
-global output "L:\Libraries\Voices\Data"
+global dodir "`D:\DCDATA\Libraries\Voices\Prog"
+global project "D:\DCDATA\Libraries\Voices"
+global output "D:\DCDATA\Libraries\Voices\Data"
 
 global time : di %tcCCYYNNDD!_HHMMSS clock("`c(current_date)'`c(current_time)'","DMYhms")
 global date: display %td_CCYYNNDD date(c(current_date), "DMY")
