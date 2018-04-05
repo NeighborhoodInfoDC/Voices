@@ -1,6 +1,6 @@
 clear
 set more off
-log using "L:\Libraries\Voices\Prog\5 Jurisdiction Brief Survey data table generation.log", replace 
+log using "D:\DCDATA\Libraries\Voices\Prog\5 Jurisdiction Brief Survey data table generation.log", replace 
 
 /* *****************************************************************************
 * 
@@ -20,8 +20,8 @@ log using "L:\Libraries\Voices\Prog\5 Jurisdiction Brief Survey data table gener
 di c(current_date)
 di c(current_time)
 
-global data "D:\Users\ysu\Desktop\voicessurvey\test\merged_test"
-global tables "D:\Users\ysu\Desktop\voicessurvey\test"
+global data "D:\DCDATA\Libraries\Voices\data\voices_2017_nonopen_recode_replicateweighted"
+global tables "D:\DCDATA\Libraries\Voices\Prog"
 global section1 "Q9_table"
 global section2 "Q52_table Q55_table Q57_table Q27_table Q28_1_table Q28_4_table"
 global section3 "Q42_table Q44_a_table Q44_b_table Q44_c_table Q44_i_table Q49_table"
@@ -29,7 +29,7 @@ global section4 "Q22_table"
 
 use "${data}.dta", clear
 
-** recode question variables
+/** recode question variables
 *Q9
 gen Q9_table = "Extremely likely" if Q9==1
 replace Q9_table = "Likely" if Q9==2
@@ -118,45 +118,51 @@ replace Q22_table= "Refused" if Q22==-1
 gen Jurisdictions = "Washington DC" if geo ==1
 replace Jurisdictions = "Prince George's County" if geo ==2
 replace Jurisdictions = "Montgomery County" if geo ==3
-replace Jurisdictions = "Fairfax County" if geo ==4 | geo ==7 |geo ==8
+replace Jurisdictions = "Fairfax County" if geo ==4 | geo ==7 |geo ==8 ****this is not correct
 replace Jurisdictions = "Northern VA" if geo ==5 | geo ==6
+*/
+
+******YIPENG _ RECODE the next section USING NUMERIC VARIABLES - as in the Q39A_7Plus
 
 *section 1
-gen Q39A_7plus = "7 or Higher" if Q39A>=7
-replace Q39A_7plus = "6 or Lower" if Q39A<7
-replace Q39A_7plus = "Refused" if Q39A==-1
+gen Q39A_7plus = 1 if Q39A>=7
+replace Q39A_7plus = 0 if Q39A<7
+replace Q39A_7plus = . if Q39A==-1
 label var Q39A_7plus "Rating of Life Satisfaction Higher Than 7"
 
 
-gen Q21_a_goodplus = "Good or Excellent" if Q21_a<=2
-replace Q21_a_goodplus ="Fair or Poor" if Q21_a>=3
-replace Q21_a_goodplus ="Refused" if Q21_a==-1
+gen Q21_a_goodplus = 1 if Q21_a<=2
+replace Q21_a_goodplus =0 if Q21_a>=3
+replace Q21_a_goodplus =. if Q21_a==-1
 label var Q21_a_goodplus "Good or Excellent Place to Raise Children"
 
-gen Q21_b_goodplus ="Good or Excellent" if Q21_b<=2
-replace Q21_b_goodplus ="Fair or Poor" if Q21_b>=3
-replace Q21_b_goodplus ="Refused" if Q21_b==-1
+gen Q21_b_goodplus =1 if Q21_b<=2
+replace Q21_b_goodplus =0 if Q21_b>=3
+replace Q21_b_goodplus =. if Q21_b==-1
 label var Q21_b_goodplus "The availability of the goods and services that meet your needs is good or excellent"
 
-gen Q21_c_goodplus ="Good or Excellent" if Q21_c<=2
-replace Q21_c_goodplus ="Fair or Poor" if Q21_c>=3
-replace Q21_c_goodplus ="Refused" if Q21_c==-1
+gen Q21_c_goodplus =1 if Q21_c<=2
+replace Q21_c_goodplus =0 if Q21_c>=3
+replace Q21_c_goodplus =. if Q21_c==-1
 label var Q21_c_goodplus "The overall quality of public schools is good or excellent"
 
-gen Q21_d_goodplus ="Good or Excellent" if Q21_d<=2
-replace Q21_d_goodplus ="Fair or Poor" if Q21_d>=3
-replace Q21_d_goodplus ="Refused" if Q21_d==-1
+gen Q21_d_goodplus =1 if Q21_d<=2
+replace Q21_d_goodplus =0 if Q21_d>=3
+replace Q21_d_goodplus =. if Q21_d==-1
 label var Q21_d_goodplus "The availability of good jobs is good or excellent"
 
-gen Q21_e_goodplus ="Good or Excellent" if Q21_e<=2
-replace Q21_e_goodplus ="Fair or Poor" if Q21_e>=3
-replace Q21_e_goodplus ="Refused" if Q21_e==-1
+gen Q21_e_goodplus =1 if Q21_e<=2
+replace Q21_e_goodplus =0 if Q21_e>=3
+replace Q21_e_goodplus =. if Q21_e==-1
 label var Q21_e_goodplus "The availability of arts and cultural opportunities is good or excellent"
 
-gen Q21_f_goodplus ="Good or Excellent" if Q21_f<=2
-replace Q21_f_goodplus ="Fair or Poor" if Q21_f>=3
-replace Q21_f_goodplus ="Refused" if Q21_f==-1
+gen Q21_f_goodplus =1 if Q21_f<=2
+replace Q21_f_goodplus =0 if Q21_f>=3
+replace Q21_f_goodplus =. if Q21_f==-1
 label var Q21_f_goodplus "Access to transportation options is good or excellent"
+
+label define GE 1 "Good or Excellent" 0 "Fair or Poor", replace
+label values Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus GE
 
 *section 2
 gen Q54_lessthan2 = "Less than 2 months" if Q54 ==1| Q54==2
@@ -200,11 +206,12 @@ replace Q33_littleorno ="Great or moderate influence" if Q33<=2
 replace Q33_littleorno ="Refused" if Q33==-1
 label var Q33_littleorno "I have little or no influence at all over local government decision making"
 
+label define GEO 1 "DC" 2 "Prince George's Co" 3 "Montgomery Co" 4 "Fairfax Co" 5 "Other NoVA", replace
 svyset [iw=weight], jkrweight(weight_rep1-weight_rep60) vce(linearized)
 
 /*output tables for questions in Section 1: Wellbeing and Satisfaction with DMV*/
-tabout Q39A_7plus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", replace  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-tabout Q9_table Jurisdictions using "${tables}\section1 tables Jurisdictions_test.xls", replace c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
+tabout Q39A_7plus geo using "${tables}\section1 tables Jurisdictions.xls", replace  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
+tabout Q9 geo using "${tables}\section1 tables Jurisdictions_test.xls", replace c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
 tabout Q21_a_goodplus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
 tabout Q21_b_goodplus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
 tabout Q21_c_goodplus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
