@@ -22,10 +22,10 @@ di c(current_time)
 
 global data "D:\DCDATA\Libraries\Voices\data\voices_2017_nonopen_recode_replicateweighted"
 global tables "D:\DCDATA\Libraries\Voices\Prog"
-global section1 "Q9_table"
-global section2 "Q52_table Q55_table Q57_table Q27_table Q28_1_table Q28_4_table"
-global section3 "Q42_table Q44_a_table Q44_b_table Q44_c_table Q44_i_table Q49_table"
-global section4 "Q22_table"
+global section1 "Q9"
+global section2 "Q52 Q55 Q57 Q27 Q28_1 Q28_4"
+global section3 "Q42 Q44_a Q44_b Q44_c Q44_i Q49"
+global section4 "Q22"
 
 use "${data}.dta", clear
 
@@ -122,14 +122,36 @@ replace Jurisdictions = "Fairfax County" if geo ==4 | geo ==7 |geo ==8 ****this 
 replace Jurisdictions = "Northern VA" if geo ==5 | geo ==6
 */
 
+**label existing questions
+
+*Q55 Q57 Q27
+label define foodhousing 1 "Yes" 0 "No" -1 "Refused", replace
+label values Q55 foodhousing
+label values Q57 foodhousing
+label values Q27 foodhousing
+
+*Q42
+label define QS42 1 "Yes" 0 "No" , replace
+label values Q42 QS42
+
+*Q44_a Q44_b Q44_c Q44_i
+label define QS44 1 "Yes" 0 "No" .n "Skipped", replace
+label values Q44_a QS44
+label values Q44_b QS44
+label values Q44_c QS44
+label values Q44_i QS44
+
 ******YIPENG _ RECODE the next section USING NUMERIC VARIABLES - as in the Q39A_7Plus
 
 *section 1
+/*for some reason stata returns the replace is invalid, but it works for other recoding?
 gen Q39A_7plus = 1 if Q39A>=7
 replace Q39A_7plus = 0 if Q39A<7
 replace Q39A_7plus = . if Q39A==-1
 label var Q39A_7plus "Rating of Life Satisfaction Higher Than 7"
-
+label define lifesatisfaction 1 "7 or Higher" 0 "Below Seven", -1 "Refused", replace
+label values Q39A_7plus lifesatisfaction
+*/
 
 gen Q21_a_goodplus = 1 if Q21_a<=2
 replace Q21_a_goodplus =0 if Q21_a>=3
@@ -165,22 +187,28 @@ label define GE 1 "Good or Excellent" 0 "Fair or Poor", replace
 label values Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus GE
 
 *section 2
-gen Q54_lessthan2 = "Less than 2 months" if Q54 ==1| Q54==2
-replace Q54_lessthan2 = "More than 2 months" if Q54>2
-replace Q54_lessthan2= "Refused" if Q43==-1
+gen Q54_lessthan2 = 1 if Q54 ==1| Q54==2
+replace Q54_lessthan2 = 0 if Q54>2
+replace Q54_lessthan2= -1 if Q43==-1
 label var Q54_lessthan2 "Could continue to live as today for less than 2 months if lost all current sources of income"
 
+label define lostinc 1 "Less than 2 months" 0 "More than 2 months" -1 "Refused", replace
+label values Q54_lessthan2 lostinc
+
 *section 3
-gen Q47_c_goodplus = "Good or Excellent" if Q47_c == 1| Q47_c == 2
-replace Q47_c_goodplus = "Fair or Poor or Refuse" if Q47_c >2
-replace Q47_c_goodplus = "Refused" if Q47_c ==-1
+gen Q47_c_goodplus = 1 if Q47_c == 1| Q47_c == 2
+replace Q47_c_goodplus = 0 if Q47_c >2
+replace Q47_c_goodplus = -1 if Q47_c ==-1
 label var Q47_c_goodplus "The relations among different racial or ethnic group at where I live is good or excellent"
 
-*section 4 still need to figure out the label part
+label define racerelation 1 "Good or Excellent" 0 "Fair or Poor" -1 "Refused", replace
+label values Q47_c_goodplus racerelation
+
+*section 4 
 foreach subquestion in Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l {
-gen `subquestion'_highpriorityplus = "High or extremely high priority" if `subquestion'==1|`subquestion'==2
-replace `subquestion'_highpriorityplus = "Median, low or no priority at all" if `subquestion'==3| `subquestion'==4|`subquestion'==5
-replace `subquestion'_highpriorityplus="Refused" if `subquestion'==-1|`subquestion'==.
+gen `subquestion'_highpriorityplus = 1 if `subquestion'==1|`subquestion'==2
+replace `subquestion'_highpriorityplus = 0 if `subquestion'==3| `subquestion'==4|`subquestion'==5
+replace `subquestion'_highpriorityplus=-1 if `subquestion'==-1|`subquestion'==.
 }
 label var Q35_a_highpriorityplus "Developing parks and open spaces should be high or extremely high priority to local government"
 label var Q35_b_highpriorityplus "Maintaining roads, sidewalks, and other basic infrastructure should be high or extremely high priority to local government"
@@ -194,50 +222,100 @@ label var Q35_i_highpriorityplus "Helping poor people should be high or extremel
 label var Q35_j_highpriorityplus "Helping the homeless should be high or extremely high priority to local government"
 label var Q35_k_highpriorityplus "Helping the unemployed should be high or extremely high priority to local government"
 label var Q35_l_highpriorityplus "Helping people without health insurance should be high or extremely high priority to local government"
+label define priorities 1 "High or extremely high priority" 0 "Median, low or no priority at all" -1 "Refused", replace
+foreach subquestion in Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l {
+label values `subquestion'_highpriorityplus priorities
+}
 
-
-gen Q34_fairplus = "Fair amount or great deal" if Q34==1|Q34==2
-replace Q34_fairplus = "Not very much or non at all" if Q34>=3
-replace Q34_fairplus = "Refused" if Q34==-1
+gen Q34_fairplus = 1 if Q34==1|Q34==2
+replace Q34_fairplus = 2 if Q34>=3
+replace Q34_fairplus = -1 if Q34==-1
 label var Q34_fairplus "I trust in the local government where I live a fair amount or great deal when it comes to handling local problems"
+label define QS34 1 "Fair amount or great deal" 2 "Not very much or non at all" -1 "Refused", replace
+label values Q34_fairplus QS34
 
-gen Q33_littleorno ="Little or no influence" if Q33==3|Q33==4
-replace Q33_littleorno ="Great or moderate influence" if Q33<=2
-replace Q33_littleorno ="Refused" if Q33==-1
+gen Q33_littleorno =1 if Q33==3|Q33==4
+replace Q33_littleorno =0  if Q33<=2
+replace Q33_littleorno =-1 if Q33==-1
 label var Q33_littleorno "I have little or no influence at all over local government decision making"
+label define QS33 1 "Little or no influence" 0 "Great or moderate influence" -1 "Refused", replace
+label values Q33_littleorno QS33
 
-label define GEO 1 "DC" 2 "Prince George's Co" 3 "Montgomery Co" 4 "Fairfax Co" 5 "Other NoVA", replace
+/*Output tables*/
 svyset [iw=weight], jkrweight(weight_rep1-weight_rep60) vce(linearized)
 
-/*output tables for questions in Section 1: Wellbeing and Satisfaction with DMV*/
-tabout Q39A_7plus geo using "${tables}\section1 tables Jurisdictions.xls", replace  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-tabout Q9 geo using "${tables}\section1 tables Jurisdictions_test.xls", replace c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-tabout Q21_a_goodplus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-tabout Q21_b_goodplus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-tabout Q21_c_goodplus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-tabout Q21_d_goodplus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-tabout Q21_e_goodplus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-tabout Q21_f_goodplus Jurisdictions using "${tables}\section1 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
+levelsof geo, local(Jurisdictions)
 
 
-/*output tables for questions in Section 2: Economic Security and Inclusion*/
-tabout Q54_lessthan2 Jurisdictions using "${tables}\section2 tables Jurisdictions.xls", replace  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-foreach x in "${section2}"{
-tabout `x' Jurisdictions using "${tables}\section2 tables Jurisdictions.xls", append c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
+
+
+foreach G in `Jurisdictions' {
+* when I added a line break for the next line the code stopped working?
+svy,vce(jackknife):mean Q9 Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_d Q49 Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno  Q22 if geo==`G'
+*get mean
+mata b=st_matrix("e(b)")'
+mata b
+
+mata se=sqrt(diagonal(st_matrix("e(V)")))
+mata se
+
+
+* Send b, se back to stata
+mata st_matrix("b",b)
+mata st_matrix("se",se) 
+
+*could create another mata var to calculate CI here then output all three
+
+
+mata res=b,se
+
+*Send the matrix to stata as a variable named result; list the matrix:
+
+mata st_matrix("result",res)
+matrix list result
+
+*Then this code writes the matrix result to a spreadsheet in excel:
+
+putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction Tables_test, sheet(`G') modify
+putexcel b1=("`G'") /*need to edit for loop*/
+putexcel c1=("se")
+putexcel b2=matrix(result[.,1..2])
+
 }
 
-/*outut tables for questions in Section 3: Social Inclusion*/
-tabout Q47_c_goodplus Jurisdictions using "${tables}\section3 tables Jurisdictions.xls", replace  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-foreach x in "${section3}"{
-tabout `x' Jurisdictions using "${tables}\section3 tables Jurisdictions.xls", append  c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-}
+mata: mata clear
+
+*for region output on each file
+
+svy,vce(jackknife):mean Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus 
+
+*get mean
+mata b=st_matrix("e(b)")'
+mata b
+
+mata se=sqrt(diagonal(st_matrix("e(V)")))
+mata se
+
+* Send b, se back to stata
+mata st_matrix("b",b)
+mata st_matrix("se",se) 
 
 
-/*output tables for questions in Section 4: Making Change Happen*/
-tabout Q35_a_highpriorityplus Jurisdictions using "${tables}\section4 tables Jurisdictions.xls", replace c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-foreach x in Q35_b_highpriorityplus Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno Q22_table {
-tabout `x' Jurisdictions using "${tables}\section4 tables Jurisdictions.xls", append c(col se ci) svy percent pop npos(lab) f(2 2) clab(Row_% SE 95%_CI)
-}
+mata res=b,se
+
+*Send the matrix to stata as a variable named result; list the matrix:
+
+mata st_matrix("result",res)
+matrix list result
+
+*Then this code writes the matrix result to a spreadsheet in excel:
+
+putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction Tables_test, sheet(DMV) modify
+putexcel e1=("DMV")
+putexcel f1=("se")
+putexcel e2=matrix(result[.,1..2])
+
+mata: mata clear
 
 
 log close
