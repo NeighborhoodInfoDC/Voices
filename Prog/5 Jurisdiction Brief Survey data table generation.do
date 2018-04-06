@@ -144,14 +144,12 @@ label values Q44_i QS44
 ******YIPENG _ RECODE the next section USING NUMERIC VARIABLES - as in the Q39A_7Plus
 
 *section 1
-/*for some reason stata returns the replace is invalid, but it works for other recoding?
 gen Q39A_7plus = 1 if Q39A>=7
 replace Q39A_7plus = 0 if Q39A<7
 replace Q39A_7plus = . if Q39A==-1
 label var Q39A_7plus "Rating of Life Satisfaction Higher Than 7"
-label define lifesatisfaction 1 "7 or Higher" 0 "Below Seven", -1 "Refused", replace
+label define lifesatisfaction 1 "7 or Higher" 0 "Below Seven" 
 label values Q39A_7plus lifesatisfaction
-*/
 
 gen Q21_a_goodplus = 1 if Q21_a<=2
 replace Q21_a_goodplus =0 if Q21_a>=3
@@ -251,6 +249,8 @@ levelsof geo, local(Jurisdictions)
 
 foreach G in `Jurisdictions' {
 * when I added a line break for the next line the code stopped working?
+
+di "means for geo=`G'" 
 svy,vce(jackknife):mean Q9 Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_d Q49 Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno  Q22 if geo==`G'
 *get mean
 mata b=st_matrix("e(b)")'
@@ -265,9 +265,11 @@ mata st_matrix("b",b)
 mata st_matrix("se",se) 
 
 *could create another mata var to calculate CI here then output all three
+*add n's 
+mata n=st_matrix("e(_N)")'
+mata n
 
-
-mata res=b,se
+mata res=b,se, n
 
 *Send the matrix to stata as a variable named result; list the matrix:
 
@@ -275,8 +277,8 @@ mata st_matrix("result",res)
 matrix list result
 
 *Then this code writes the matrix result to a spreadsheet in excel:
-
-putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction Tables_test, sheet(`G') modify
+* add new column for Ns - 
+putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction_Tables_test, sheet(`G') modify
 putexcel b1=("`G'") /*need to edit for loop*/
 putexcel c1=("se")
 putexcel b2=matrix(result[.,1..2])
@@ -300,8 +302,11 @@ mata se
 mata st_matrix("b",b)
 mata st_matrix("se",se) 
 
+*add n's 
+mata n=st_matrix("e(_N)")'
+mata n
 
-mata res=b,se
+mata res=b,se, n
 
 *Send the matrix to stata as a variable named result; list the matrix:
 
@@ -309,8 +314,9 @@ mata st_matrix("result",res)
 matrix list result
 
 *Then this code writes the matrix result to a spreadsheet in excel:
+* add new column for Ns - 
 
-putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction Tables_test, sheet(DMV) modify
+putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction_Tables_test, sheet(DMV) modify
 putexcel e1=("DMV")
 putexcel f1=("se")
 putexcel e2=matrix(result[.,1..2])
