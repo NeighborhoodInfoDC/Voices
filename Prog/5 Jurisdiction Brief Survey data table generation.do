@@ -30,17 +30,14 @@ global section4 "Q22"
 use "${data}.dta", clear
 
 
-**label existing questions
+**label existing questions - no recoding required
 
-*Q55 Q57 Q27
-label define foodhousing 1 "Yes" 0 "No", replace
-label values Q55 foodhousing
-label values Q57 foodhousing
-label values Q27 foodhousing
-
-*Q42 has already been labeled, but the mean result is 1? 
-*label define QS42 1 "Yes" 0 "No", replace
-*label values Q42 QS42
+*Q55 Q57 Q27 Q42
+label define YesNo 1 "Yes" 0 "No", replace
+label values Q55 YesNo
+label values Q57 YesNo
+label values Q27 YesNo
+label values Q42 YesNo
 
 
 *Q44_a Q44_b Q44_c Q44_i
@@ -50,15 +47,26 @@ label values Q44_b QS44
 label values Q44_c QS44
 label values Q44_i QS44
 
-******YIPENG _ RECODE the next section USING NUMERIC VARIABLES - as in the Q39A_7Plus
-
-*section 1
+****section 1
 gen Q39A_7plus = 1 if Q39A>=7
 replace Q39A_7plus = 0 if Q39A<7
 replace Q39A_7plus = . if Q39A==-1
 label var Q39A_7plus "Rating of Life Satisfaction Higher Than 7"
 label define lifesatisfaction 1 "7 or Higher" 0 "Below Seven" 
 label values Q39A_7plus lifesatisfaction
+
+gen Q9_rectolive=1 if Q9==1|Q9==2
+replace Q9_rectolive=0 if Q9==3|Q9==4|Q9==5
+replace Q9_rectolive=. if Q9==-1
+label var Q9_rectolive "Likely to recommend this Jurisdiction to a friend or co-worker as a place to live"
+label define QS9 1 "Extremely likely or likely" 0 "Neither likely nor unlikely, unlikely, not at all likely", replace
+label value Q9_rectolive QS9
+
+gen Q10_stay=1 if Q10==1|Q10==2
+replace Q10_stay=0 if Q10==3|Q10==4
+label var Q10_stay "If I had the choice, I would rather stay in my jurisdiction"
+label define QS10 1 "Stay in my jurisdiction" 0 "Move to another jurisdiction", replace
+label value Q10_stay QS10
 
 gen Q21_a_goodplus = 1 if Q21_a<=2
 replace Q21_a_goodplus =0 if Q21_a>=3
@@ -93,7 +101,14 @@ label var Q21_f_goodplus "Access to transportation options is good or excellent"
 label define GE 1 "Good or Excellent" 0 "Fair or Poor", replace
 label values Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus GE
 
-*section 2
+*****section 2
+gen Q52_comfortable=1 if Q52==1
+replace Q52_comfortable=0 if Q52>=2
+replace Q52_comfortable=. if Q52==-1
+label var Q52_comfortable "How well are you managing financially"
+label define QS52 1 "Living comfortably" 0 "Doing alrigh, just getting by, finding it difficult or very difficult", replace
+label value Q52_comfortable QS52
+
 gen Q54_lessthan2 = 1 if Q54 ==1| Q54==2
 replace Q54_lessthan2 = 0 if Q54>2
 replace Q54_lessthan2=. if Q43==-1
@@ -102,7 +117,9 @@ label var Q54_lessthan2 "Could continue to live as today for less than 2 months 
 label define lostinc 1 "Less than 2 months" 0 "More than 2 months", replace
 label values Q54_lessthan2 lostinc
 
-*section 3
+*Q55, Q57 (food and housing insecurity) and Q27, Q28_1, Q28_4 (had to move)- already correctly defined as Yes/No). 
+
+****section 3
 gen Q47_c_goodplus = 1 if Q47_c == 1| Q47_c == 2
 replace Q47_c_goodplus = 0 if Q47_c >2
 replace Q47_c_goodplus =. if Q47_c ==-1
@@ -111,7 +128,31 @@ label var Q47_c_goodplus "The relations among different racial or ethnic group a
 label define racerelation 1 "Good or Excellent" 0 "Fair or Poor", replace
 label values Q47_c_goodplus racerelation
 
-*section 4 
+*Q42 (discrimination) no recode needed
+*Q44_a Q44_b Q44_C Q44_i no recode needed - discrimination by...
+
+gen Q49_less=1 if Q49==1
+replace Q49_less=0 if Q49==2|Q49==3
+replace Q49_less=. if Q49==-1
+label var Q49_less "Do you think police in your community treat people of color..."
+label define QS49 1 "Less favorably to white people" 0 "Equally or more favorably to white people", replace
+label value Q49_less QS49
+
+gen Q49_more=1 if Q49==2
+replace Q49_more=0 if Q49==1|Q49==3
+replace Q49_more=. if Q49==-1
+label var Q49_more "Do you think police in your community treat people of color..."
+label define QS49m 1 "More favorably to white people" 0 "Equally or less favorably to white people", replace
+label value Q49_more QS49m
+
+gen Q49_eq=1 if Q49==3
+replace Q49_eq=0 if Q49==1|Q49==2
+replace Q49_eq=. if Q49==-1
+label var Q49_eq "Do you think police in your community treat people of color..."
+label define QS49e 1 "Equally to white people" 0 "Either more or less favorably to white people", replace
+label value Q49_eq QS49e
+
+*****section 4 
 foreach subquestion in Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l {
 gen `subquestion'_highpriorityplus = 1 if `subquestion'==1|`subquestion'==2
 replace `subquestion'_highpriorityplus = 0 if `subquestion'==3| `subquestion'==4|`subquestion'==5
@@ -129,7 +170,7 @@ label var Q35_i_highpriorityplus "Helping poor people should be high or extremel
 label var Q35_j_highpriorityplus "Helping the homeless should be high or extremely high priority to local government"
 label var Q35_k_highpriorityplus "Helping the unemployed should be high or extremely high priority to local government"
 label var Q35_l_highpriorityplus "Helping people without health insurance should be high or extremely high priority to local government"
-label define priorities 1 "High or extremely high priority" 0 "Median, low or no priority at all", replace
+label define priorities 1 "High or extremely high priority" 0 "Medium, low, or no priority at all", replace
 foreach subquestion in Q35_a Q35_b Q35_c Q35_d Q35_e Q35_f Q35_g Q35_h Q35_i Q35_j Q35_k Q35_l {
 label values `subquestion'_highpriorityplus priorities
 }
@@ -148,40 +189,13 @@ label var Q33_littleorno "I have little or no influence at all over local govern
 label define QS33 1 "Little or no influence" 0 "Great or moderate influence", replace
 label values Q33_littleorno QS33
 
-*recode some more variables based on the table output
-
-gen Q9_rectolive=1 if Q9==1|Q9==2
-replace Q9_rectolive=0 if Q9==3|Q9==4|Q9==5
-replace Q9_rectolive=. if Q9==-1
-label var Q9_rectolive "Likely to recommend this Jurisdiction to a friend or co-worker as a place to live"
-label define QS9 1 "Extremely likely or likely" 0 "Neither likely nor unlikely, unlikely, not at all likely", replace
-label value Q9_rectolive QS9
-
-gen Q10_stay=1 if Q10==1
-replace Q10_stay=0 if Q10==2|Q10==3|Q10==4
-label var Q10_stay "If I had the choice, I would rather stay in my neighborhood"
-label define QS10 1 "Stay in my neighborhood" 0 "Move to another neighborhood", replace
-label value Q10_stay QS10
-
 gen Q22_onceayear=1 if Q22==2|Q22==3|Q22==4
-replace  Q22_onceayear=0 if Q22==1|Q22==-1
-label var Q22_onceayear "Use nonprofit services at least once a year"
-label define QS22 1 "At least once a year" 0 "Never or refused", replace
+replace  Q22_onceayear=0 if Q22==1
+replace Q22_onceayear=. if Q22==-1
+label var Q22_onceayear "Use services provided by nonprofits at least once a year"
+label define QS22 1 "At least once a year" 0 "Never", replace
 label value Q22_onceayear QS22
 
-gen Q49_color=1 if Q49==1
-replace Q49_color=0 if Q49==2|Q49==3
-replace Q49_color=. if Q49==-1
-label var Q49_color "Do you think police in your community treate people of color less favorably"
-label define QS49 1 "less favorably to white people" 0 "Equally or more favorable to white people", replace
-label value Q49_color QS49
-
-gen Q52_comfortable=1 if Q52==1
-replace Q52_comfortable=0 if Q52>=2
-replace Q52_comfortable=. if Q52==-1
-label var Q52_comfortable "How well are you managing financially"
-label define QS52 1 "Living comfortably" 0 "Doing alrigh, just getting by, finding it difficult or very difficult", replace
-label value Q52_comfortable QS52
 
 
 /*Output tables*/
@@ -196,7 +210,7 @@ foreach G in `Jurisdictions' {
 * when I added a line break for the next line the code stopped working?
 
 di "means for geo=`G'" 
-svy,vce(jackknife):mean Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_d Q49_color Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno  Q22_onceayear if geo==`G'
+svy,vce(jackknife):mean Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno  Q22_onceayear if geo==`G'
 *get mean
 mata b=st_matrix("e(b)")'
 mata b
@@ -235,7 +249,7 @@ mata: mata clear
 
 *for region output on each file
 
-svy,vce(jackknife):mean Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_d Q49_color Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno Q22_onceayear
+svy,vce(jackknife):mean Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno Q22_onceayear
 
 *get mean
 mata b=st_matrix("e(b)")'
