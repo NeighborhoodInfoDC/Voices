@@ -239,7 +239,7 @@ local r=2
 
 	*Then this code writes the matrix result to a spreadsheet in excel:
 	* add new column for Ns - 
-	putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction_Tables_test, sheet(`G') modify
+	putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction_Tables, sheet(`G') modify
 	putexcel b1=("`G'")
 	putexcel c1=("SE")
 	putexcel d1=("#N")
@@ -281,7 +281,7 @@ matrix list result
 *Then this code writes the matrix result to a spreadsheet in excel:
 * add new column for Ns - 
 
-putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction_Tables_test, sheet(DMV) modify
+putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction_Tables, sheet(DMV) modify
 putexcel b1=("DMV")
 putexcel c1=("SE")
 putexcel d1=("#N")
