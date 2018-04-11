@@ -212,7 +212,7 @@ di "means for geo=`G'"
 *start to put result at row 2
 local r=2
 
-	foreach var in Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52_comfortable Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno  Q22_onceayear{
+	foreach var in Q39A_7plus Q9_rectolive Q10_stay Q21_b_goodplus Q21_e_goodplus Q21_f_goodplus Q21_d_goodplus Q21_a_goodplus Q21_c_goodplus Q52_comfortable Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_d_highpriorityplus Q35_f_highpriorityplus  Q35_b_highpriorityplus Q35_h_highpriorityplus Q35_e_highpriorityplus Q35_l_highpriorityplus Q35_g_highpriorityplus  Q35_j_highpriorityplus Q35_i_highpriorityplus Q35_k_highpriorityplus Q35_a_highpriorityplus Q35_c_highpriorityplus Q34_fairplus Q33_littleorno  Q22_onceayear{
 	svy, subpop(if geo==`G') vce(jackknife):mean `var' 
 	*get mean
 	mata b=st_matrix("e(b)")'
@@ -252,7 +252,7 @@ mata: mata clear
 
 *for region output on each file
 local r=2
-foreach var in Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52_comfortable Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno Q22_onceayear {
+foreach var in Q39A_7plus Q9_rectolive Q10_stay Q21_b_goodplus Q21_e_goodplus Q21_f_goodplus Q21_d_goodplus Q21_a_goodplus Q21_c_goodplus Q52_comfortable Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_d_highpriorityplus Q35_f_highpriorityplus  Q35_b_highpriorityplus Q35_h_highpriorityplus Q35_e_highpriorityplus Q35_l_highpriorityplus Q35_g_highpriorityplus  Q35_j_highpriorityplus Q35_i_highpriorityplus Q35_k_highpriorityplus Q35_a_highpriorityplus Q35_c_highpriorityplus Q34_fairplus Q33_littleorno Q22_onceayear {
 
 svy,vce(jackknife):mean `var'
 
