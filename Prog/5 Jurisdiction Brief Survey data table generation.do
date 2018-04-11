@@ -198,26 +198,28 @@ label value Q22_onceayear QS22
 
 
 
-/*Output tables*/
+/*Output tables for each Jurisdiction*/
 svyset [iw=weight], jkrweight(weight_rep1-weight_rep60) vce(linearized)
 
 levelsof geo, local(Jurisdictions)
 
 
-
-
 foreach G in `Jurisdictions' {
-* when I added a line break for the next line the code stopped working?
+
 
 di "means for geo=`G'" 
-svy,vce(jackknife):mean Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno  Q22_onceayear if geo==`G'
+
+*start to put result at row 2
+local r=2
+
+foreach var in Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno  Q22_onceayear{ 
+svy,vce(jackknife):mean var if geo==`G'
 *get mean
 mata b=st_matrix("e(b)")'
 mata b
 
 mata se=sqrt(diagonal(st_matrix("e(V)")))
 mata se
-
 
 * Send b, se back to stata
 mata st_matrix("b",b)
@@ -238,18 +240,21 @@ matrix list result
 *Then this code writes the matrix result to a spreadsheet in excel:
 * add new column for Ns - 
 putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction_Tables_test, sheet(`G') modify
-putexcel b1=("`G'") /*need to edit for loop*/
-putexcel c1=("se")
-putexcel d1=("#responses")
-putexcel b2=matrix(result[.,1..3])
-
+putexcel b1=("`G'")
+putexcel c1=("SE")
+putexcel d1=("#N")
+putexcel b`r'=matrix(result[.,1..3])
+local r=`r'+1
+}
 }
 
 mata: mata clear
 
 *for region output on each file
+local r=2
+foreach var in Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno Q22_onceayear {
 
-svy,vce(jackknife):mean Q39A_7plus Q9_rectolive Q10_stay Q21_a_goodplus Q21_b_goodplus Q21_c_goodplus Q21_d_goodplus Q21_e_goodplus Q21_f_goodplus Q52 Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_a_highpriorityplus Q35_b_highpriorityplus  Q35_c_highpriorityplus Q35_d_highpriorityplus Q35_e_highpriorityplus Q35_f_highpriorityplus Q35_g_highpriorityplus Q35_h_highpriorityplus  Q35_i_highpriorityplus Q35_j_highpriorityplus Q35_k_highpriorityplus Q35_l_highpriorityplus Q34_fairplus Q33_littleorno Q22_onceayear
+svy,vce(jackknife):mean `var'
 
 *get mean
 mata b=st_matrix("e(b)")'
@@ -277,11 +282,12 @@ matrix list result
 * add new column for Ns - 
 
 putexcel set d:\dcdata\libraries\voices\prog\temp\Jurisdiction_Tables_test, sheet(DMV) modify
-putexcel e1=("DMV")
-putexcel f1=("se")
-putexcel g1=("#responses")
-putexcel e2=matrix(result[.,1..3])
-
+putexcel b1=("DMV")
+putexcel c1=("SE")
+putexcel d1=("#N")
+putexcel b`r'=matrix(result[.,1..3])
+local r=`r'+1
+}
 mata: mata clear
 
 
