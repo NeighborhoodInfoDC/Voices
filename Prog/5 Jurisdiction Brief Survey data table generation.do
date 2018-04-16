@@ -203,7 +203,6 @@ svyset [iw=weight], jkrweight(weight_rep1-weight_rep60) vce(linearized)
 
 levelsof geo, local(Jurisdictions)
 
-
 foreach G in `Jurisdictions' {
 
 
@@ -239,7 +238,7 @@ local r=2
 
 	*Then this code writes the matrix result to a spreadsheet in excel:
 	* add new column for Ns - 
-	putexcel set d:\dcdata\libraries\voices\prog\Jurisdiction_Tables, sheet(`G') modify
+	putexcel set d:\dcdata\libraries\voices\prog\Jurisdiction_Tables_update, sheet(`G') modify
 	putexcel b1=("`G'")
 	putexcel c1=("SE")
 	putexcel d1=("#N")
@@ -281,7 +280,7 @@ matrix list result
 *Then this code writes the matrix result to a spreadsheet in excel:
 * add new column for Ns - 
 
-putexcel set d:\dcdata\libraries\voices\prog\Jurisdiction_Tables, sheet(DMV) modify
+putexcel set d:\dcdata\libraries\voices\prog\Jurisdiction_Tables_update, sheet(DMV) modify
 putexcel b1=("DMV")
 putexcel c1=("SE")
 putexcel d1=("#N")
@@ -289,6 +288,52 @@ putexcel b`r'=matrix(result[.,1..3])
 local r=`r'+1
 }
 mata: mata clear
+
+*Calculating DMV excluding area of interest
+
+foreach G in `Jurisdictions' {
+
+
+di "means for geo=`G'" 
+
+*start to put result at row 2
+local r=2
+
+	foreach var in Q39A_7plus Q9_rectolive Q10_stay Q21_b_goodplus Q21_e_goodplus Q21_f_goodplus Q21_d_goodplus Q21_a_goodplus Q21_c_goodplus Q52_comfortable Q54_lessthan2 Q55 Q57 Q27 Q28_1 Q28_4 Q47_c_goodplus Q42 Q44_a Q44_b Q44_c Q44_i Q49_less Q49_more Q49_eq Q35_d_highpriorityplus Q35_f_highpriorityplus  Q35_b_highpriorityplus Q35_h_highpriorityplus Q35_e_highpriorityplus Q35_l_highpriorityplus Q35_g_highpriorityplus  Q35_j_highpriorityplus Q35_i_highpriorityplus Q35_k_highpriorityplus Q35_a_highpriorityplus Q35_c_highpriorityplus Q34_fairplus Q33_littleorno  Q22_onceayear{
+	svy, subpop(if geo!=`G') vce(jackknife):mean `var' 
+	*get mean
+	mata b=st_matrix("e(b)")'
+	mata b
+
+	mata se=sqrt(diagonal(st_matrix("e(V)")))
+	mata se
+
+	* Send b, se back to stata
+	mata st_matrix("b",b)
+	mata st_matrix("se",se) 
+
+	*could create another mata var to calculate CI here then output all three
+	*add n's 
+	mata n=st_matrix("e(_N)")'
+	mata n
+
+	mata res=b,se, n
+
+	*Send the matrix to stata as a variable named result; list the matrix:
+
+	mata st_matrix("result",res)
+	matrix list result
+
+	*Then this code writes the matrix result to a spreadsheet in excel:
+	* add new column for Ns - 
+	putexcel set d:\dcdata\libraries\voices\prog\Jurisdiction_Tables_update, sheet(Excluding`G') modify
+	putexcel b1=("DMV-`G'")
+	putexcel c1=("SE")
+	putexcel d1=("#N")
+	putexcel b`r'=matrix(result[.,1..3])
+	local r=`r'+1
+	}
+}
 
 
 log close
